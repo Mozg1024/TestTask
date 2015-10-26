@@ -1,0 +1,22 @@
+{
+  "name": "testtask",
+  "version": "0.0.1",
+  "homepage": "https://github.com/Mozg1024/TestTask",
+  "authors": [
+    "Aleksey Prokofiev <Aleksei_Prokofev@epam.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "devDependencies": {
+    "jquery": "~2.1.4",
+    "font-awesome": "fontawesome#~4.4.0",
+    "normalize-css": "normalize.css#~3.0.3"
+  }
+}

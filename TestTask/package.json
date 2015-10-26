@@ -1,0 +1,12 @@
+{
+  "name": "testtask",
+  "version": "0.0.1",
+  "description": "",
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-less": "^3.0.3",
+    "gulp-rigger": "^0.5.8"
+  }
+}
