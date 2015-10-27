@@ -1,6 +1,7 @@
 'use strict';
 
 var gulp = require('gulp'),
+    debug = require('gulp-debug'),
     watch = require('gulp-watch'),
     prefixer = require('gulp-autoprefixer'),
     less = require('gulp-less'),
@@ -26,7 +27,7 @@ var path = {
         fonts: ['src/content/fonts/**/*.*', 'bower_components/font-awesome/fonts/*.*']
     },
     watch: {
-        html: 'src/index.html',
+        html: 'src/**/*.html',
         js: 'src/scripts/**/*.js',
         style: 'src/**/*.less',
         img: 'src/content/images/**/*.*',
@@ -51,9 +52,10 @@ gulp.task('clean', function (cb) {
 
 gulp.task('eslint', function () {
     gulp.src(path.watch.js)
+        .pipe(debug())
         .pipe(eslint())
         .pipe(eslint.format())
-        .pipe(eslint.failOnError());
+        .pipe(eslint.failAfterError());
 });
 
 gulp.task('html:build', function () {
