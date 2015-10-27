@@ -3,45 +3,41 @@
 var gulp = require('gulp'),
     watch = require('gulp-watch'),
     prefixer = require('gulp-autoprefixer'),
-    uglify = require('gulp-uglify'),
-    sass = require('gulp-sass'),
-    sourcemaps = require('gulp-sourcemaps'),
+    less = require('gulp-less'),
     rigger = require('gulp-rigger'),
-    cssmin = require('gulp-minify-css'),
-    imagemin = require('gulp-imagemin'),
-    pngquant = require('imagemin-pngquant'),
+    eslint = require('gulp-eslint'),
     rimraf = require('rimraf'),
-    browserSync = require("browser-sync"),
+    browserSync = require('browser-sync'),
     reload = browserSync.reload;
 
 var path = {
     build: {
         html: 'build/',
-        js: 'build/js/',
+        js: 'build/scripts/',
         css: 'build/css/',
         img: 'build/images/',
         fonts: 'build/fonts/'
     },
     src: {
-        html: 'src/**/*.html',
-        js: 'src/Scripts/main.js',
-        style: 'src/Content/styles/main.scss',
-        img: 'src/Content/images/**/*.*',
-        fonts: ['src/Content/fonts/**/*.*', 'bower_components/bootstrap/fonts/*.*', 'bower_components/font-awesome/fonts/*.*']
+        html: 'src/index.html',
+        js: 'src/scripts/main.js',
+        style: 'src/content/styles/main.less',
+        img: 'src/content/images/**/*.*',
+        fonts: ['src/content/fonts/**/*.*', 'bower_components/font-awesome/fonts/*.*']
     },
     watch: {
-        html: 'src/**/*.html',
-        js: 'src/**/*.js',
-        style: 'src/**/*.scss',
-        img: 'src/Content/images/**/*.*',
-        fonts: 'src/Content/fonts/**/*.*'
+        html: 'src/index.html',
+        js: 'src/scripts/**/*.js',
+        style: 'src/**/*.less',
+        img: 'src/content/images/**/*.*',
+        fonts: 'src/content/fonts/**/*.*'
     },
     clean: './build'
 };
 
 var config = {
     server: {
-        baseDir: "./build"
+        baseDir: './build'
     }
 };
 
@@ -53,6 +49,13 @@ gulp.task('clean', function (cb) {
     rimraf(path.clean, cb);
 });
 
+gulp.task('eslint', function () {
+    gulp.src(path.watch.js)
+        .pipe(eslint())
+        .pipe(eslint.format())
+        .pipe(eslint.failOnError());
+});
+
 gulp.task('html:build', function () {
     gulp.src(path.src.html)
         .pipe(rigger())
@@ -60,49 +63,30 @@ gulp.task('html:build', function () {
         .pipe(reload({ stream: true }));
 });
 
-gulp.task('js:build', function () {
+gulp.task('js:build', ['eslint'], function () {
     gulp.src(path.src.js)
         .pipe(rigger())
-        //.pipe(sourcemaps.init())
-        //.pipe(uglify())
-        //.pipe(sourcemaps.write())
         .pipe(gulp.dest(path.build.js))
         .pipe(reload({ stream: true }));
 });
 
 gulp.task('style:build', function () {
     gulp.src(path.src.style)
-        .pipe(sourcemaps.init())
-        .pipe(sass({
-            includePaths: ['src/Content/styles/'],
-            outputStyle: 'compressed',
-            sourceMap: true,
-            errLogToConsole: true
-        }))
+        .pipe(less())
         .pipe(prefixer())
-        .pipe(cssmin({
-            rebase: false
-        }))
-        .pipe(sourcemaps.write())
         .pipe(gulp.dest(path.build.css))
         .pipe(reload({ stream: true }));
 });
 
 gulp.task('image:build', function () {
     gulp.src(path.src.img)
-        .pipe(imagemin({
-            progressive: true,
-            svgoPlugins: [{ removeViewBox: false }],
-            use: [pngquant()],
-            interlaced: true
-        }))
         .pipe(gulp.dest(path.build.img))
         .pipe(reload({ stream: true }));
 });
 
 gulp.task('fonts:build', function () {
     gulp.src(path.src.fonts)
-        .pipe(gulp.dest(path.build.fonts))
+        .pipe(gulp.dest(path.build.fonts));
 });
 
 gulp.task('build', [
