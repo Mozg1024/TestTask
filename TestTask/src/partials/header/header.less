@@ -1,28 +1,39 @@
-﻿@import "../../content/styles/variables/colors";
+@import "../../content/styles/variables/colors";
 
 .sec-header {
     height: 60px;
-    line-height: 60px;
-    font-size: 25px;
-    padding: 0 25px;
-    font-family: 'Oswald Regular';
+    border: 1px solid black;
     text-transform: uppercase;
+    font-family: 'Oswald Regular';
     text-decoration: none;
 
     button {
         text-transform: uppercase;
+        font-family: 'Oswald Regular';
+    }
+}
+
+.nav-bar {
+    width: 1200px;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.logo {
+    height: 100%;
+    a {
+        height: 100%;
+        display: flex;
+        align-items: center;
     }
 }
 
 .menu {
-    list-style: none;
-
+    height: 100%;
     li {
-        display: inline;
-
+        display: inline-block;
         a {
             color: @graphite;
-            text-decoration: none
         }
     }
 }
