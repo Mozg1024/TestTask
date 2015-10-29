@@ -2219,6 +2219,9 @@ table {
   float: left;
 }
 /*Common*/
+body {
+  overflow: hidden;
+}
 a {
   text-decoration: none;
 }
@@ -2228,6 +2231,7 @@ a {
   text-transform: uppercase;
   font-family: "Oswald Regular";
   padding: 12px 30px;
+  cursor: pointer;
 }
 .icon:after {
   content: "";
@@ -2251,7 +2255,7 @@ a {
 }
 /*Partials*/
 .sec-header {
-  height: 60px;
+  height: 84px;
   text-transform: uppercase;
   font-family: 'Oswald Regular';
   font-size: 19px;
@@ -2284,9 +2288,40 @@ a {
   display: inline-block;
 }
 .menu li a {
-  line-height: 60px;
+  line-height: 84px;
   color: #464547;
+}
+.menu li a:hover {
+  color: #1A9CB0;
 }
 .menu li + li {
   padding-left: 40px;
+}
+.sec-aspot {
+  background: url("/images/backgrounds/aspot.png") no-repeat;
+  background-size: cover;
+  text-align: center;
+  padding: 70px 0 0 0;
+  font-family: "Source Sans Pro Semibold";
+  color: #FFFFFF;
+}
+.sec-aspot h5 {
+  padding: 3px 0;
+  font-size: 17px;
+  text-transform: uppercase;
+}
+.sec-aspot .divider {
+  height: 1px;
+  width: 100%;
+  background-color: #FFFFFF;
+  opacity: 0.3;
+  margin: 70px 0 60px 0;
+}
+.sec-aspot h1 {
+  padding: 3px 0;
+  margin: 0 30px 0 0;
+  font-family: "Oswald Bold";
+  font-size: 130px;
+  text-transform: uppercase;
+  letter-spacing: -5px;
 }

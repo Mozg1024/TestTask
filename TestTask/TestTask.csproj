@@ -182,6 +182,7 @@
     <Content Include="src\content\images\icons\arrow-down.png" />
     <Content Include="src\content\images\icons\arrow-right.png" />
     <Content Include="src\content\images\icons\favicon.ico" />
+    <Content Include="src\content\images\logos\aspot-logo.png" />
     <Content Include="src\content\images\logos\header-logo.png" />
     <Content Include="src\content\styles\main.less" />
     <Content Include="src\content\styles\variables\colors.less" />
@@ -268,6 +269,7 @@
     <Content Include="src\content\fonts\font-sourcesanspro\sourcesanspro-semibold.woff" />
     <Content Include="src\content\styles\variables\font-paths.less" />
     <Content Include="src\content\styles\common.less" />
+    <Content Include="src\partials\aspot\aspot.html" />
     <Content Include="src\partials\header\header.less" />
     <Content Include="src\content\styles\mixins\mixins.less" />
     <Content Include="bower_components\reset-css\.bower.json" />
@@ -307,6 +309,7 @@
     <Content Include="build\fonts\font-sourcesanspro\sourcesanspro-semibold.ttf" />
     <Content Include="build\fonts\font-sourcesanspro\sourcesanspro-semibold.woff" />
     <Content Include="src\content\styles\variables\sizes.less" />
+    <Content Include="src\partials\aspot\aspot.less" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

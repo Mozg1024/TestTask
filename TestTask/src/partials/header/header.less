@@ -1,5 +1,5 @@
-@import "../../content/styles/variables/colors";
-@import "../../content/styles/variables/sizes";
+@import "../../content/styles/variables/colors.less";
+@import "../../content/styles/variables/sizes.less";
 
 .sec-header {
     height: @sec-header-height;
@@ -35,6 +35,9 @@
         a {
             line-height: @sec-header-height;
             color: @graphite;
+        }
+        a:hover {
+            color: @dark-blue;
         }
     }
     li+li {
