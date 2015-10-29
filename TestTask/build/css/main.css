@@ -2223,7 +2223,27 @@ a {
   text-decoration: none;
 }
 .btn {
+  display: inline-block;
   border: none;
+  text-transform: uppercase;
+  font-family: "Oswald Regular";
+  padding: 12px 30px;
+}
+.icon:after {
+  content: "";
+  display: inline-block;
+}
+.icon.arrow-right:after {
+  width: 20px;
+  height: 15px;
+  background: url("/images/icons/arrow-right.png") no-repeat;
+  background-position: left center;
+}
+.icon.arrow-down:after {
+  width: 18px;
+  height: 15px;
+  background: url("/images/icons/arrow-down.png") no-repeat;
+  background-position: left center;
 }
 .btn.lime-green {
   background-color: #A3C644;
@@ -2232,14 +2252,14 @@ a {
 /*Partials*/
 .sec-header {
   height: 60px;
-  border: 1px solid black;
   text-transform: uppercase;
   font-family: 'Oswald Regular';
+  font-size: 19px;
   text-decoration: none;
 }
-.sec-header button {
-  text-transform: uppercase;
-  font-family: 'Oswald Regular';
+.sec-header:after {
+  content: "";
+  clear: both;
 }
 .nav-bar {
   width: 1200px;
@@ -2260,12 +2280,13 @@ a {
       -ms-flex-align: center;
           align-items: center;
 }
-.menu {
-  height: 100%;
-}
 .menu li {
   display: inline-block;
 }
 .menu li a {
+  line-height: 60px;
   color: #464547;
+}
+.menu li + li {
+  padding-left: 40px;
 }

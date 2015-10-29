@@ -5,7 +5,30 @@ a {
 }
 
 .btn {
+    display: inline-block;
     border: none;
+    text-transform: uppercase;
+    font-family: "Oswald Regular";
+    padding: 12px 30px;
+}
+
+.icon {
+    &:after {
+        content: "";
+        display: inline-block;
+    }
+    &.arrow-right:after {
+        width: 20px;
+        height: 15px;
+        background: url("/images/icons/arrow-right.png") no-repeat;
+        background-position: left center;
+    }
+    &.arrow-down:after {
+        width: 18px;
+        height: 15px;
+        background: url("/images/icons/arrow-down.png") no-repeat;
+        background-position: left center;
+    }
 }
 
 .btn.lime-green {

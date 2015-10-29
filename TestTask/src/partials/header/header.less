@@ -1,20 +1,21 @@
 @import "../../content/styles/variables/colors";
+@import "../../content/styles/variables/sizes";
 
 .sec-header {
-    height: 60px;
-    border: 1px solid black;
+    height: @sec-header-height;
     text-transform: uppercase;
     font-family: 'Oswald Regular';
+    font-size: 19px;
     text-decoration: none;
 
-    button {
-        text-transform: uppercase;
-        font-family: 'Oswald Regular';
+    &:after {
+        content: "";
+        clear: both;
     }
 }
 
 .nav-bar {
-    width: 1200px;
+    width: @nav-bar-width;
     height: 100%;
     margin: 0 auto;
 }
@@ -29,11 +30,14 @@
 }
 
 .menu {
-    height: 100%;
     li {
         display: inline-block;
         a {
+            line-height: @sec-header-height;
             color: @graphite;
         }
+    }
+    li+li {
+        padding-left: 40px;
     }
 }

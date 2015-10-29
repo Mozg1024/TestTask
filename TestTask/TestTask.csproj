@@ -162,6 +162,7 @@
     <Content Include="build\fonts\font-sourcesanspro\sourcesanspro-regular.svg" />
     <Content Include="build\fonts\font-sourcesanspro\sourcesanspro-semibold.svg" />
     <Content Include="build\fonts\fontawesome-webfont.svg" />
+    <Content Include="build\images\backgrounds\aspot.png" />
     <Content Include="build\images\icons\favicon.ico" />
     <Content Include="build\images\logos\header-logo.png" />
     <Content Include="build\images\logos\header-logo.svg" />
@@ -177,6 +178,9 @@
     <Content Include="src\content\fonts\font-sourcesanspro\sourcesanspro-light.svg" />
     <Content Include="src\content\fonts\font-sourcesanspro\sourcesanspro-regular.svg" />
     <Content Include="src\content\fonts\font-sourcesanspro\sourcesanspro-semibold.svg" />
+    <Content Include="src\content\images\backgrounds\aspot.png" />
+    <Content Include="src\content\images\icons\arrow-down.png" />
+    <Content Include="src\content\images\icons\arrow-right.png" />
     <Content Include="src\content\images\icons\favicon.ico" />
     <Content Include="src\content\images\logos\header-logo.png" />
     <Content Include="src\content\styles\main.less" />
@@ -302,6 +306,7 @@
     <Content Include="build\fonts\font-sourcesanspro\sourcesanspro-semibold.otf" />
     <Content Include="build\fonts\font-sourcesanspro\sourcesanspro-semibold.ttf" />
     <Content Include="build\fonts\font-sourcesanspro\sourcesanspro-semibold.woff" />
+    <Content Include="src\content\styles\variables\sizes.less" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
