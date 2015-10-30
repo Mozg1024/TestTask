@@ -2218,12 +2218,22 @@ table {
 .left {
   float: left;
 }
+.clearfix:after {
+  content: "";
+  clear: both;
+}
 /*Common*/
 body {
-  overflow: hidden;
+  /*overflow: hidden;*/
+  font-family: "Source Sans Pro Regular";
+  font-size: 30px;
 }
 a {
   text-decoration: none;
+}
+.wrapper {
+  width: 1200px;
+  margin: 0 auto;
 }
 .btn {
   display: inline-block;
@@ -2232,6 +2242,10 @@ a {
   font-family: "Oswald Regular";
   padding: 12px 30px;
   cursor: pointer;
+}
+.btn.lime-green {
+  background-color: #A3C644;
+  color: #FFFFFF;
 }
 .icon:after {
   content: "";
@@ -2249,10 +2263,6 @@ a {
   background: url("/images/icons/arrow-down.png") no-repeat;
   background-position: left center;
 }
-.btn.lime-green {
-  background-color: #A3C644;
-  color: #FFFFFF;
-}
 /*Partials*/
 .sec-header {
   height: 84px;
@@ -2260,10 +2270,6 @@ a {
   font-family: 'Oswald Regular';
   font-size: 19px;
   text-decoration: none;
-}
-.sec-header:after {
-  content: "";
-  clear: both;
 }
 .nav-bar {
   width: 1200px;
@@ -2302,20 +2308,26 @@ a {
   background-size: cover;
   text-align: center;
   padding: 70px 0 0 0;
-  font-family: "Source Sans Pro Semibold";
   color: #FFFFFF;
 }
 .sec-aspot h5 {
   padding: 3px 0;
   font-size: 17px;
   text-transform: uppercase;
+  font-family: "Source Sans Pro Semibold";
 }
 .sec-aspot .divider {
+  margin: 70px 0 60px 0;
   height: 1px;
   width: 100%;
   background-color: #FFFFFF;
   opacity: 0.3;
-  margin: 70px 0 60px 0;
+}
+.sec-aspot p {
+  width: 860px;
+  margin: 22px auto;
+  line-height: 40px;
+  letter-spacing: -1.2px;
 }
 .sec-aspot h1 {
   padding: 3px 0;

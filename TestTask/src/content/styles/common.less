@@ -1,11 +1,18 @@
 @import "variables/colors.less";
 
 body {
-    overflow: hidden;
+    /*overflow: hidden;*/
+    font-family: "Source Sans Pro Regular";
+    font-size: 30px;
 }
 
 a {
     text-decoration: none;
+}
+
+.wrapper {
+    width: @wrapper-width;
+    margin: 0 auto;
 }
 
 .btn {
@@ -15,6 +22,11 @@ a {
     font-family: "Oswald Regular";
     padding: 12px 30px;
     cursor: pointer;
+}
+
+.btn.lime-green {
+    background-color: @lime-green;
+    color: @white;
 }
 
 .icon {
@@ -34,9 +46,4 @@ a {
         background: url("/images/icons/arrow-down.png") no-repeat;
         background-position: left center;
     }
-}
-
-.btn.lime-green {
-    background-color: @lime-green;
-    color: @white;
 }
