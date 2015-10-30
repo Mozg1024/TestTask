@@ -2224,7 +2224,6 @@ table {
 }
 /*Common*/
 body {
-  /*overflow: hidden;*/
   font-family: "Source Sans Pro Regular";
   font-size: 30px;
 }
@@ -2240,10 +2239,21 @@ a {
   border: none;
   text-transform: uppercase;
   font-family: "Oswald Regular";
+  font-size: 19px;
   padding: 12px 30px;
   cursor: pointer;
 }
 .btn.lime-green {
+  background-color: #A3C644;
+  color: #FFFFFF;
+}
+.btn-addon {
+  display: inline-block;
+  border: none;
+  padding: 12px 30px;
+  cursor: pointer;
+}
+.btn-addon.lime-green {
   background-color: #A3C644;
   color: #FFFFFF;
 }
@@ -2262,6 +2272,33 @@ a {
   height: 15px;
   background: url("/images/icons/arrow-down.png") no-repeat;
   background-position: left center;
+}
+.label {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 40px;
+}
+.label .label-left-part {
+  position: absolute;
+  left: 0;
+  width: calc(50% - 20px);
+  border-top: 20px solid transparent;
+  border-right: 20px solid transparent;
+}
+.label .label-left-part.blue {
+  border-bottom: 20px solid #39C2D7;
+}
+.label .label-right-part {
+  position: absolute;
+  right: 0;
+  width: calc(50% - 20px);
+  border-top: 20px solid transparent;
+  border-left: 20px solid transparent;
+  border-bottom: 20px solid #39C2D7;
+}
+.label .label-right-part.blue {
+  border-bottom: 20px solid #39C2D7;
 }
 /*Partials*/
 .sec-header {
@@ -2310,6 +2347,14 @@ a {
   padding: 70px 0 0 0;
   color: #FFFFFF;
 }
+.sec-aspot h1 {
+  padding: 3px 0;
+  margin: 0 30px 0 0;
+  font-family: "Oswald Bold";
+  font-size: 130px;
+  text-transform: uppercase;
+  letter-spacing: -5px;
+}
 .sec-aspot h5 {
   padding: 3px 0;
   font-size: 17px;
@@ -2328,12 +2373,4 @@ a {
   margin: 22px auto;
   line-height: 40px;
   letter-spacing: -1.2px;
-}
-.sec-aspot h1 {
-  padding: 3px 0;
-  margin: 0 30px 0 0;
-  font-family: "Oswald Bold";
-  font-size: 130px;
-  text-transform: uppercase;
-  letter-spacing: -5px;
 }
