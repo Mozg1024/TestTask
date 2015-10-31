@@ -2247,15 +2247,21 @@ a {
   background-color: #A3C644;
   color: #FFFFFF;
 }
-.btn-addon {
-  display: inline-block;
-  border: none;
-  padding: 12px 30px;
-  cursor: pointer;
+.btn.lime-green:hover {
+  background-color: #7F993A;
 }
-.btn-addon.lime-green {
-  background-color: #A3C644;
-  color: #FFFFFF;
+.btn-addon-arrow-right {
+  position: relative;
+}
+.btn-addon-arrow-right:after {
+  content: "";
+  position: absolute;
+  cursor: pointer;
+  display: inline-block;
+  width: 36px;
+  height: 43px;
+  background: #7F993A url("/images/icons/arrow-right.png") no-repeat;
+  background-position: center center;
 }
 .icon:after {
   content: "";
@@ -2373,4 +2379,7 @@ a {
   margin: 22px auto;
   line-height: 40px;
   letter-spacing: -1.2px;
+}
+.sec-aspot .reg-button {
+  margin: 56px 36px 125px 0;
 }

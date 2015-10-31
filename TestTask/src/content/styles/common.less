@@ -23,23 +23,27 @@ a {
     font-size: 19px;
     padding: 12px 30px;
     cursor: pointer;
+    &.lime-green {
+        background-color: @lime-green;
+        color: @white;
+        &:hover {
+            background-color: @dark-lime-green;
+        }
+    }
 }
 
-.btn.lime-green {
-    background-color: @lime-green;
-    color: @white;
-}
-
-.btn-addon {
-    display: inline-block;
-    border: none;
-    padding: 12px 30px;
-    cursor: pointer;
-}
-
-.btn-addon.lime-green {
-    background-color: @lime-green;
-    color: @white;
+.btn-addon-arrow-right {
+    position: relative;
+    &:after {
+        content: "";
+        position: absolute;
+        cursor: pointer;
+        display: inline-block;
+        width: 36px;
+        height: 43px;
+        background: @dark-lime-green url("/images/icons/arrow-right.png") no-repeat;
+        background-position: center center;
+    }
 }
 
 .icon {
