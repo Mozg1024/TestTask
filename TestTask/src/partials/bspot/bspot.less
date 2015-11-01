@@ -1,0 +1,86 @@
+﻿@import "../../content/styles/variables/colors.less";
+@import "../../content/styles/variables/sizes.less";
+
+.sec-bspot {
+    background-color: @blue;
+    text-align: center;
+    padding: 70px 0 0 0;
+    color: @white;
+
+    p {
+        margin: 36px auto;
+        font-size: 26px;
+        line-height: 34px;
+    }
+
+    .tbl {
+        font-size: 0;
+        margin: 95px 0 0 0;
+    }
+
+    .col1 {
+        width: ~"calc(33% - 2px)";
+        display: inline-block;
+        float: left;
+        border-left: 1px solid rgba(255, 255, 255, 0.3);
+        border-right: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .col2 {
+        width: ~"calc(34% - 1px)";
+        display: inline-block;
+        float: left;
+        border-left: 1px solid rgba(255, 255, 255, 0.3);
+        border-right: 1px solid rgba(255, 255, 255, 0.3);
+        margin: 0 0 0 -1px;
+    }
+
+    .col3 {
+        width: ~"calc(33% - 1px)";
+        display: inline-block;
+        float: left;
+        border-left: 1px solid rgba(255, 255, 255, 0.3);
+        border-right: 1px solid rgba(255, 255, 255, 0.3);
+        margin: 0 0 0 -1px;
+    }
+
+    .row-1 {
+        height: @sec-bspot-row-height;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+        border-top: 1px solid rgba(255, 255, 255, 0.3);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .row-2 {
+        height: @sec-bspot-row-height * 2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+        border-top: 1px solid rgba(255, 255, 255, 0.3);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .row-3 {
+        height: @sec-bspot-row-height * 3;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+        border-top: 1px solid rgba(255, 255, 255, 0.3);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .row-4 {
+        height: @sec-bspot-row-height * 4;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+        border-top: 1px solid rgba(255, 255, 255, 0.3);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    }
+}

@@ -150,7 +150,6 @@
     <Content Include="bower_components\jquery\src\var\support.js" />
     <Content Include="bower_components\jquery\src\var\toString.js" />
     <Content Include="bower_components\jquery\src\wrap.js" />
-    <Content Include="bower_components\normalize-css\normalize.css" />
     <Content Include="bower_components\reset-css\reset.css" />
     <Content Include="build\css\main.css" />
     <Content Include="build\fonts\font-oswald\oswald-bold.svg" />
@@ -163,10 +162,18 @@
     <Content Include="build\fonts\font-sourcesanspro\sourcesanspro-semibold.svg" />
     <Content Include="build\fonts\fontawesome-webfont.svg" />
     <Content Include="build\images\backgrounds\aspot.png" />
+    <Content Include="build\images\icons\arrow-down.png" />
+    <Content Include="build\images\icons\arrow-right.png" />
+    <Content Include="build\images\icons\bspot\1-day.png" />
+    <Content Include="build\images\icons\bspot\1-workshop.png" />
+    <Content Include="build\images\icons\bspot\11expert-panelists.png" />
+    <Content Include="build\images\icons\bspot\40-presentations.png" />
+    <Content Include="build\images\icons\bspot\400-visitors.png" />
+    <Content Include="build\images\icons\bspot\42-speakers.png" />
+    <Content Include="build\images\icons\bspot\5-tracks.png" />
     <Content Include="build\images\icons\favicon.ico" />
+    <Content Include="build\images\logos\aspot-logo.png" />
     <Content Include="build\images\logos\header-logo.png" />
-    <Content Include="build\images\logos\header-logo.svg" />
-    <Content Include="build\images\logos\logo.png" />
     <Content Include="build\index.html" />
     <Content Include="build\scripts\main.js" />
     <Content Include="package.json" />
@@ -181,6 +188,13 @@
     <Content Include="src\content\images\backgrounds\aspot.png" />
     <Content Include="src\content\images\icons\arrow-down.png" />
     <Content Include="src\content\images\icons\arrow-right.png" />
+    <Content Include="src\content\images\icons\bspot\1-day.png" />
+    <Content Include="src\content\images\icons\bspot\1-workshop.png" />
+    <Content Include="src\content\images\icons\bspot\11expert-panelists.png" />
+    <Content Include="src\content\images\icons\bspot\40-presentations.png" />
+    <Content Include="src\content\images\icons\bspot\400-visitors.png" />
+    <Content Include="src\content\images\icons\bspot\42-speakers.png" />
+    <Content Include="src\content\images\icons\bspot\5-tracks.png" />
     <Content Include="src\content\images\icons\favicon.ico" />
     <Content Include="src\content\images\logos\aspot-logo.png" />
     <Content Include="src\content\images\logos\header-logo.png" />
@@ -225,10 +239,6 @@
     <Content Include="bower_components\jquery\bower.json" />
     <Content Include="bower_components\jquery\dist\jquery.min.map" />
     <Content Include="bower_components\jquery\src\sizzle\dist\sizzle.min.map" />
-    <Content Include="bower_components\normalize-css\.bower.json" />
-    <Content Include="bower_components\normalize-css\bower.json" />
-    <Content Include="bower_components\normalize-css\LICENSE.md" />
-    <Content Include="bower_components\normalize-css\README.md" />
     <Content Include="build\fonts\fontawesome-webfont.eot" />
     <Content Include="build\fonts\fontawesome-webfont.ttf" />
     <Content Include="build\fonts\fontawesome-webfont.woff" />
@@ -270,6 +280,7 @@
     <Content Include="src\content\styles\variables\font-paths.less" />
     <Content Include="src\content\styles\common.less" />
     <Content Include="src\partials\aspot\aspot.html" />
+    <Content Include="src\partials\bspot\bspot.html" />
     <Content Include="src\partials\header\header.less" />
     <Content Include="src\content\styles\mixins\mixins.less" />
     <Content Include="bower_components\reset-css\.bower.json" />
@@ -310,6 +321,7 @@
     <Content Include="build\fonts\font-sourcesanspro\sourcesanspro-semibold.woff" />
     <Content Include="src\content\styles\variables\sizes.less" />
     <Content Include="src\partials\aspot\aspot.less" />
+    <Content Include="src\partials\bspot\bspot.less" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
