@@ -19,7 +19,7 @@
 <body>
 
     <header class="sec-header">
-        <div class="nav-bar clearfix">
+        <div class="wrapper clearfix">
     
             <div class="logo left">
                 <a href="#">
@@ -44,35 +44,61 @@
                     <a href="#">Sign in</a>
                 </li>
                 <li>
-                    <div class="btn lime-green">
-                        <i class="icon arrow-down"></i>
+                    <button id="header-reg-btn" class="btn lime-green">
+                        <i class="icon arrow-right"></i>
                         Register
-                    </div>
+                    </button>
                 </li>
             </ul>
     
         </div>
     </header>
+    <div id="reg-form-container" class="sec-registation hidden" style="display: none;">
+        <div class="wrapper clearfix">
+            <i id="reg-form-close-btn" class="icon close clickable right"></i>
+        </div>
+    
+        <div class="sec-registation-header">
+            <h3>Registration</h3>
+        </div>
+    
+        <p>Please use your EPAM credentials to register for this event.</p>
+    
+        <form class="sec-registation-form">
+            <div class="input-fields">
+                <input type="text" placeholder="Name*"/>
+                <input type="text" placeholder="Surname*"/>
+                <input type="text" placeholder="Title*"/>
+                <input type="text" placeholder="Email*"/>
+            </div>
+            <div class="submit-button">
+                <button class="btn lime-green">
+                    Submit
+                </button>
+                <button class="btn-addon-arrow-right"></button>
+            </div>
+        </form>
+    </div>
     <div class="sec-aspot">
-        <img src="/images/logos/aspot-logo.png" alt="SEC Fall 2014" />
+        <img src="/images/logos/aspot-logo.png" alt="SEC Fall 2014"/>
     
         <h5>EPAM Software Engineering Conference</h5>
     
         <div class="divider"></div>
     
-        <h1>Dig In To Big Data</h1>
+        <h1 class="main-header">Dig In To Big Data</h1>
     
-        <p>
+        <p class="main-description">
             Learn the ins and outs of data - BI, Data Science, Sharepoint, Hadoop,<br/>
             and more - at EPAM's largest software engineering conference.
         </p>
     
         <div class="reg-button">
-            <div class="btn lime-green">
+            <button class="btn lime-green">
                 Register
-            </div>
-            <div class="btn-addon-arrow-right">
-            </div>
+            </button>
+            <button class="btn-addon-arrow-right">
+            </button>
         </div>
     
         <div class="label">
@@ -84,7 +110,7 @@
     
         <h3>St. Petersburg | November 22, 2014</h3>
     
-        <p>
+        <p class="main-description">
             Join us in St. Petersburg on November 22, 2014<br/>
             for the EPAM Engineering Conference. Network and brainstorm with the smartest<br/>
             engineers in the world, discovering new ways to solve the latest challenges in the<br/>

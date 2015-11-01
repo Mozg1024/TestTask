@@ -1,5 +1,6 @@
 @import "variables/colors.less";
 @import "variables/sizes.less";
+@import "mixins/mixins.less";
 
 body {
     font-family: "Source Sans Pro Regular";
@@ -10,44 +11,62 @@ a {
 }
 
 h1 {
-    padding: 3px 0;
-    font-family: "Oswald Bold";
+    .h-common();
     font-size: 130px;
-    text-transform: uppercase;
     letter-spacing: -5px;
 }
 
 h3 {
-    padding: 3px 0;
-    font-family: "Oswald Bold";
+    .h-common();
     font-size: 38px;
-    text-transform: uppercase;
 }
 
 h5 {
-    padding: 3px 0;
+    .h-common(@font: "Source Sans Pro Semibold");
     font-size: 17px;
-    text-transform: uppercase;
-    font-family: "Source Sans Pro Semibold";
 }
 
+.right {
+    float: right;
+}
+
+.left {
+    float: left;
+}
+
+.clearfix {
+    &:after {
+      content: " ";
+      display: table;
+      clear: both;
+    }
+}
+
+.clickable {
+    cursor: pointer;
+}
 
 .wrapper {
     width: @wrapper-width;
+    height: 100%;
     margin: 0 auto;
 }
 
 .btn {
-    display: inline-block;
-    border: none;
+    .btn-common();
     text-transform: uppercase;
+    text-align: center;
+    white-space: nowrap;
     font-family: "Oswald Regular";
     font-size: 19px;
+    line-height: 1;
     padding: 12px 30px;
-    cursor: pointer;
+    background: none;
+
     &.lime-green {
         background-color: @lime-green;
         color: @white;
+
         &:hover {
             background-color: @dark-green;
         }
@@ -55,11 +74,10 @@ h5 {
 }
 
 .btn-addon-arrow-right {
-    cursor: pointer;
-    display: inline-block;
+    .btn-common();
+    padding: 29px 0 14px 0;
     vertical-align: bottom;
     width: 36px;
-    height: 43px;
     background: @dark-green url("/images/icons/arrow-right.png") no-repeat;
     background-position: center center;
 }
@@ -69,16 +87,25 @@ h5 {
         content: "";
         display: inline-block;
     }
+
     &.arrow-right:after {
-        width: 20px;
+        width: 18px;
         height: 15px;
         background: url("/images/icons/arrow-right.png") no-repeat;
         background-position: left center;
     }
+
     &.arrow-down:after {
         width: 18px;
         height: 15px;
         background: url("/images/icons/arrow-down.png") no-repeat;
+        background-position: left center;
+    }
+
+    &.close:after {
+        width: 31px;
+        height: 31px;
+        background: url("/images/icons/close.png") no-repeat;
         background-position: left center;
     }
 }
@@ -87,25 +114,29 @@ h5 {
     position: relative;
     display: block;
     width: 100%;
-    height: 40px;
+    height: @label-height * 2;
+
     .label-left-part {
         position: absolute;
         left: 0;
-        width: ~"calc(50% - 20px)";
-        border-top: 20px solid transparent;
-        border-right: 20px solid transparent;
+        width: ~"calc(50% - " @label-height ~")";
+        border-top: @label-height solid transparent;
+        border-right: @label-height solid transparent;
+
         &.blue {
-            border-bottom: 21px solid @blue;
+            border-bottom: @label-height + 1px solid @blue;
         }
     }
+
     .label-right-part {
         position: absolute;
         right: 0;
-        width: ~"calc(50% - 20px)";
-        border-top: 20px solid transparent;
-        border-left: 20px solid transparent;
+        width: ~"calc(50% - " @label-height ~")";
+        border-top: @label-height solid transparent;
+        border-left: @label-height solid transparent;
+
         &.blue {
-            border-bottom: 21px solid @blue;
+            border-bottom: @label-height + 1px solid @blue;
         }
     }
 }

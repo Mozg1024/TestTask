@@ -1,7 +1,10 @@
 {
-	"extends": "eslint:recommended",
+    "extends": "eslint:recommended",
+    "globals": {
+        "$": false,
+        "SECApp": false
+    },
 	"rules": {
-		"brace-style": [ 2, "stroustrup", { "allowSingleLine": true } ],
 		"comma-style": [ 2, "last" ],
 		"default-case": 2,
 		"dot-location": [ 2, "property" ],

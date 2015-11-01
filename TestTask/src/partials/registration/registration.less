@@ -1,0 +1,32 @@
+﻿@import "../../content/styles/variables/colors.less";
+@import "../../content/styles/variables/sizes.less";
+@import "../../content/styles/mixins/mixins.less";
+
+.sec-registation {
+    padding: 20px 0 70px 0;
+    background-color: @graphite;
+    color: @white;
+    text-align: center;
+    font-size: 24px;
+
+    .sec-registation-header {
+        padding: 18px 0;
+    }
+
+    .sec-registation-form {
+        .input-fields {
+            margin: 35px 0;
+        }
+
+        input {
+            padding: 17px 14px 14px 13px;
+            width: 240px;
+            font-size: 14px;
+            margin: 3px;
+        }
+
+        .submit-button {
+            .remove-space-between-blocks();
+        }
+    }
+}

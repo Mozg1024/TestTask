@@ -9208,3 +9208,79 @@ if ( typeof noGlobal === strundefined ) {
 return jQuery;
 
 }));
+
+/*global SECApp:true*/
+
+'use strict';
+
+var SECApp = {};
+
+(function () {
+    SECApp.constants = {};
+
+    SECApp.wrappers = {
+        $headerRegBtn: $('#header-reg-btn'),
+        $regFormContainer: $('#reg-form-container'),
+        $regFormCloseBtn: $('#reg-form-close-btn')
+    };
+
+    SECApp.controllers = {
+        regForm: {}
+    };
+}());
+'use strict';
+
+(function () {
+    SECApp.controllers.regForm.show = regFormShow;
+    SECApp.controllers.regForm.hide = regFormHide;
+    SECApp.controllers.regForm.toggle = regFormToggle;
+
+    function regFormShow() {
+        SECApp.wrappers.$regFormContainer
+            .stop(true, true)
+            .slideDown()
+            .removeClass('hidden')
+            .trigger('SECApp.regForm.shown');
+    }
+    function regFormHide() {
+        SECApp.wrappers.$regFormContainer
+            .stop(true, true)
+            .slideUp()
+            .addClass('hidden')
+            .trigger('SECApp.regForm.hidden');
+    }
+
+    function regFormToggle() {
+        if (SECApp.wrappers.$regFormContainer.hasClass('hidden')) {
+            SECApp.controllers.regForm.show();
+        } else {
+            SECApp.controllers.regForm.hide();
+        }
+    }
+}());
+'use strict';
+
+(function () {
+    SECApp.wrappers.$regFormContainer.on('SECApp.regForm.shown', setIconArrowDown);
+    SECApp.wrappers.$regFormContainer.on('SECApp.regForm.hidden', setIconArrowRight);
+
+    function setIconArrowDown() {
+        var $icon = SECApp.wrappers.$headerRegBtn.find('.icon');
+
+        $icon.removeClass('arrow-right');
+        $icon.addClass('arrow-down');
+    }
+
+    function setIconArrowRight() {
+        var $icon = SECApp.wrappers.$headerRegBtn.find('.icon');
+
+        $icon.removeClass('arrow-down');
+        $icon.addClass('arrow-right');
+    }
+}());
+'use strict';
+
+(function () {
+    SECApp.wrappers.$regFormCloseBtn.on('click', SECApp.controllers.regForm.hide);
+    SECApp.wrappers.$headerRegBtn.on('click', SECApp.controllers.regForm.toggle);
+}());

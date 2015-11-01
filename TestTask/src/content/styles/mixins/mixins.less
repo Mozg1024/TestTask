@@ -1,15 +1,36 @@
-.right {
-    float: right;
+@import "../variables/sizes.less";
+
+.h-common(@font: "Oswald Bold") {
+    padding: 3px 0;
+    text-transform: uppercase;
+    font-family: @font;
 }
 
-.left {
-    float: left;
+.btn-common() {
+    cursor: pointer;
+    display: inline-block;
+    border: none;
+    outline: none;
 }
 
-.clearfix {
-    &:after {
-      content: " ";
-      display: table;
-      clear: both;
-    }
+.remove-space-between-blocks() {
+    font-size: 0;
+}
+
+.col-common() {
+    display: inline-block;
+    vertical-align:top;
+    border-left: 1px solid rgba(255, 255, 255, 0.3);
+    border-right: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.rows(@number) {
+    height: @sec-bspot-row-height * @number;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+
 }

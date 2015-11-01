@@ -195,6 +195,7 @@
     <Content Include="src\content\images\icons\bspot\400-visitors.png" />
     <Content Include="src\content\images\icons\bspot\42-speakers.png" />
     <Content Include="src\content\images\icons\bspot\5-tracks.png" />
+    <Content Include="src\content\images\icons\close.png" />
     <Content Include="src\content\images\icons\favicon.ico" />
     <Content Include="src\content\images\logos\aspot-logo.png" />
     <Content Include="src\content\images\logos\header-logo.png" />
@@ -322,6 +323,7 @@
     <Content Include="src\content\styles\variables\sizes.less" />
     <Content Include="src\partials\aspot\aspot.less" />
     <Content Include="src\partials\bspot\bspot.less" />
+    <Content Include="src\partials\registration\registration.less" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -333,7 +335,12 @@
     <Content Include="gulpfile.js" />
     <Content Include="src\index.html" />
     <Content Include="src\partials\header\header.html" />
+    <Content Include="src\partials\registration\registration.html" />
+    <Content Include="src\scripts\SECApp\controllers\header\header.js" />
+    <Content Include="src\scripts\SECApp\controllers\init.js" />
+    <Content Include="src\scripts\SECApp\controllers\regForm\regForm.js" />
     <Content Include="src\scripts\main.js" />
+    <Content Include="src\scripts\SECApp\init.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

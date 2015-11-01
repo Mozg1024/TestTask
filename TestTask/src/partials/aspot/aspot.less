@@ -1,5 +1,6 @@
 ﻿@import "../../content/styles/variables/colors.less";
 @import "../../content/styles/variables/sizes.less";
+@import "../../content/styles/mixins/mixins.less";
 
 .sec-aspot {
     background: url("/images/backgrounds/aspot.png") no-repeat;
@@ -8,11 +9,11 @@
     padding: 70px 0 0 0;
     color: @white;
 
-    h1 {
+    .main-header {
         margin: 0 30px 0 0;
     }
 
-    p {
+    .main-description {
         margin: 22px auto;
         font-size: 30px;
         line-height: 40px;
@@ -27,7 +28,7 @@
     }
 
     .reg-button {
-        font-size: 0;
+        .remove-space-between-blocks();
         margin: 58px 0 122px 0;
     }
 }

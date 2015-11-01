@@ -2212,6 +2212,32 @@ table {
   font-style: normal;
 }
 /*Mixins*/
+/*Common*/
+body {
+  font-family: "Source Sans Pro Regular";
+}
+a {
+  text-decoration: none;
+}
+h1 {
+  padding: 3px 0;
+  text-transform: uppercase;
+  font-family: "Oswald Bold";
+  font-size: 130px;
+  letter-spacing: -5px;
+}
+h3 {
+  padding: 3px 0;
+  text-transform: uppercase;
+  font-family: "Oswald Bold";
+  font-size: 38px;
+}
+h5 {
+  padding: 3px 0;
+  text-transform: uppercase;
+  font-family: "Source Sans Pro Semibold";
+  font-size: 17px;
+}
 .right {
   float: right;
 }
@@ -2223,44 +2249,27 @@ table {
   display: table;
   clear: both;
 }
-/*Common*/
-body {
-  font-family: "Source Sans Pro Regular";
-}
-a {
-  text-decoration: none;
-}
-h1 {
-  padding: 3px 0;
-  font-family: "Oswald Bold";
-  font-size: 130px;
-  text-transform: uppercase;
-  letter-spacing: -5px;
-}
-h3 {
-  padding: 3px 0;
-  font-family: "Oswald Bold";
-  font-size: 38px;
-  text-transform: uppercase;
-}
-h5 {
-  padding: 3px 0;
-  font-size: 17px;
-  text-transform: uppercase;
-  font-family: "Source Sans Pro Semibold";
+.clickable {
+  cursor: pointer;
 }
 .wrapper {
   width: 1200px;
+  height: 100%;
   margin: 0 auto;
 }
 .btn {
+  cursor: pointer;
   display: inline-block;
   border: none;
+  outline: none;
   text-transform: uppercase;
+  text-align: center;
+  white-space: nowrap;
   font-family: "Oswald Regular";
   font-size: 19px;
+  line-height: 1;
   padding: 12px 30px;
-  cursor: pointer;
+  background: none;
 }
 .btn.lime-green {
   background-color: #A3C644;
@@ -2272,9 +2281,11 @@ h5 {
 .btn-addon-arrow-right {
   cursor: pointer;
   display: inline-block;
+  border: none;
+  outline: none;
+  padding: 29px 0 14px 0;
   vertical-align: bottom;
   width: 36px;
-  height: 43px;
   background: #7F993A url("/images/icons/arrow-right.png") no-repeat;
   background-position: center center;
 }
@@ -2283,7 +2294,7 @@ h5 {
   display: inline-block;
 }
 .icon.arrow-right:after {
-  width: 20px;
+  width: 18px;
   height: 15px;
   background: url("/images/icons/arrow-right.png") no-repeat;
   background-position: left center;
@@ -2292,6 +2303,12 @@ h5 {
   width: 18px;
   height: 15px;
   background: url("/images/icons/arrow-down.png") no-repeat;
+  background-position: left center;
+}
+.icon.close:after {
+  width: 31px;
+  height: 31px;
+  background: url("/images/icons/close.png") no-repeat;
   background-position: left center;
 }
 .label {
@@ -2303,7 +2320,7 @@ h5 {
 .label .label-left-part {
   position: absolute;
   left: 0;
-  width: calc(50% - 20px);
+  width: calc(50% -  20px );
   border-top: 20px solid transparent;
   border-right: 20px solid transparent;
 }
@@ -2313,7 +2330,7 @@ h5 {
 .label .label-right-part {
   position: absolute;
   right: 0;
-  width: calc(50% - 20px);
+  width: calc(50% -  20px );
   border-top: 20px solid transparent;
   border-left: 20px solid transparent;
 }
@@ -2328,15 +2345,10 @@ h5 {
   font-size: 19px;
   text-decoration: none;
 }
-.nav-bar {
-  width: 1200px;
-  height: 100%;
-  margin: 0 auto;
-}
-.logo {
+.sec-header .logo {
   height: 100%;
 }
-.logo a {
+.sec-header .logo a {
   height: 100%;
   display: -webkit-box;
   display: -webkit-flex;
@@ -2347,18 +2359,40 @@ h5 {
       -ms-flex-align: center;
           align-items: center;
 }
-.menu li {
+.sec-header .menu li {
   display: inline-block;
 }
-.menu li a {
+.sec-header .menu li a {
   line-height: 84px;
   color: #464547;
 }
-.menu li a:hover {
+.sec-header .menu li a:hover {
   color: #1A9CB0;
 }
-.menu li + li {
+.sec-header .menu li + li {
   padding-left: 40px;
+}
+.sec-registation {
+  padding: 20px 0 70px 0;
+  background-color: #464547;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 24px;
+}
+.sec-registation .sec-registation-header {
+  padding: 18px 0;
+}
+.sec-registation .sec-registation-form .input-fields {
+  margin: 35px 0;
+}
+.sec-registation .sec-registation-form input {
+  padding: 17px 14px 14px 13px;
+  width: 240px;
+  font-size: 14px;
+  margin: 3px;
+}
+.sec-registation .sec-registation-form .submit-button {
+  font-size: 0;
 }
 .sec-aspot {
   background: url("/images/backgrounds/aspot.png") no-repeat;
@@ -2367,10 +2401,10 @@ h5 {
   padding: 70px 0 0 0;
   color: #FFFFFF;
 }
-.sec-aspot h1 {
+.sec-aspot .main-header {
   margin: 0 30px 0 0;
 }
-.sec-aspot p {
+.sec-aspot .main-description {
   margin: 22px auto;
   font-size: 30px;
   line-height: 40px;
@@ -2392,7 +2426,7 @@ h5 {
   padding: 70px 0 0 0;
   color: #FFFFFF;
 }
-.sec-bspot p {
+.sec-bspot .main-description {
   margin: 36px auto;
   font-size: 26px;
   line-height: 34px;
@@ -2400,28 +2434,29 @@ h5 {
 .sec-bspot .tbl {
   font-size: 0;
   margin: 95px 0 0 0;
+  white-space: nowrap;
 }
 .sec-bspot .col1 {
-  width: calc(33% - 2px);
   display: inline-block;
-  float: left;
+  vertical-align: top;
   border-left: 1px solid rgba(255, 255, 255, 0.3);
   border-right: 1px solid rgba(255, 255, 255, 0.3);
+  width: calc(33% - 1px);
 }
 .sec-bspot .col2 {
-  width: calc(34% - 1px);
   display: inline-block;
-  float: left;
+  vertical-align: top;
   border-left: 1px solid rgba(255, 255, 255, 0.3);
   border-right: 1px solid rgba(255, 255, 255, 0.3);
+  width: calc(34% - 2px);
   margin: 0 0 0 -1px;
 }
 .sec-bspot .col3 {
-  width: calc(33% - 1px);
   display: inline-block;
-  float: left;
+  vertical-align: top;
   border-left: 1px solid rgba(255, 255, 255, 0.3);
   border-right: 1px solid rgba(255, 255, 255, 0.3);
+  width: calc(33% - 2px);
   margin: 0 0 0 -1px;
 }
 .sec-bspot .row-1 {
