@@ -18,9 +18,21 @@
         .cell {
             .col-common();
             width: 25%;
-            padding: 11px;
+            padding: @sec-speakers-cell-padding;
             box-sizing: border-box;
             position: relative;
+            overflow: hidden;
+
+            &:hover {
+                .bottom-title {
+                    display: none;
+                }
+
+                .speaker-description {
+                    transition: all 0.4s linear;
+                    .block-absolute(@sec-speakers-cell-padding, @sec-speakers-cell-padding, @sec-speakers-cell-padding, @sec-speakers-cell-padding);
+                }
+            }
 
             img {
                 width: 100%;
@@ -28,39 +40,36 @@
             }
 
             .bottom-title {
-                position: absolute;
-                bottom: 11px;
-                left: 11px;
-                right: 11px;
-                background-color: rgba(0, 0, 0, 0.6);
-                color: @white;
                 padding: 15px 0 17px 0;
+                .block-absolute(none, @sec-speakers-cell-padding, @sec-speakers-cell-padding, @sec-speakers-cell-padding);
+                background-color: @fade-color;
+                color: @white;
                 font-family: 'Source Sans Pro Bold';
                 font-size: 20px;
-                text-overflow: ellipsis;
-                max-height: 30%;
+                .text-ellipsis();
+            }
+
+            .speaker-description {
+                padding-top: 40%;
+                .block-absolute(100%, @sec-speakers-cell-padding, 0, @sec-speakers-cell-padding);
+                background-color: @fade-color;
                 overflow: hidden;
-                white-space: nowrap;
             }
 
             .speaker-name {
-                position: absolute;
-                top: 11px;
-                left: 11px;
-                right: 11px;
-                bottom: 50%;
-                background-color: rgba(0, 0, 0, 0.6);
+                margin: 8px 0;
                 color: @white;
                 font-family: 'Source Sans Pro Bold';
-                font-size: 20px;
-                text-overflow: ellipsis;
-                overflow: hidden;
-                white-space: nowrap;
-                vertical-align: bottom;
+                font-size: 22px;
+                .text-ellipsis();
             }
 
             .speaker-position {
-
+                color: @blue;
+                font-family: 'Oswald Regular';
+                font-size: 17px;
+                line-height: 20px;
+                .text-ellipsis();
             }
         }
     }

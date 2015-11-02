@@ -12,11 +12,15 @@ var SECApp = {};
         $regFormContainer: $('#reg-form-container'),
         $regFormCloseBtn: $('#reg-form-close-btn'),
         $secCarousel: $('#sec-carousel'),
-        $aspotRegBtn: $('#aspot-reg-button')
+        $aspotRegBtn: $('#aspot-reg-button'),
+        $secSpeakers: $('#sec-speakers'),
+        $secSpeakersStage1: $('#sec-speakers-stage1'),
+        $secSpeakersStage2: $('#sec-speakers-stage2')
     };
 
     SECApp.controllers = {
         regForm: {},
-        carousel: {}
+        carousel: {},
+        speakers: {}
     };
 }());

@@ -181,6 +181,7 @@
     <Content Include="build\images\icons\favicon.ico" />
     <Content Include="build\images\logos\aspot-logo.png" />
     <Content Include="build\images\logos\header-logo.png" />
+    <Content Include="build\images\photos\speaker.png" />
     <Content Include="build\index.html" />
     <Content Include="build\scripts\main.js" />
     <Content Include="package.json" />
@@ -296,6 +297,7 @@
     <Content Include="src\content\styles\common\main.less" />
     <Content Include="src\partials\aspot\aspot.html" />
     <Content Include="src\partials\bspot\bspot.html" />
+    <Content Include="src\partials\carousel\carousel.html" />
     <Content Include="src\partials\event\event.html" />
     <Content Include="src\partials\footer\footer.html" />
     <Content Include="src\partials\header\header.less" />
@@ -344,7 +346,7 @@
     <Content Include="src\content\styles\common\btn.less" />
     <Content Include="src\content\styles\common\icon.less" />
     <Content Include="src\content\styles\common\label.less" />
-    <Content Include="src\content\styles\common\carousel.less" />
+    <Content Include="src\partials\carousel\carousel.less" />
     <Content Include="src\partials\event\event.less" />
     <Content Include="src\partials\speakers\speakers.html" />
     <Content Include="src\partials\video\video.less" />
@@ -367,9 +369,9 @@
     <Content Include="src\partials\video\video.html" />
     <Content Include="src\scripts\SECApp\controllers\carousel\carousel.js" />
     <Content Include="src\scripts\SECApp\controllers\header\header.js" />
-    <Content Include="src\scripts\SECApp\controllers\init.js" />
     <Content Include="src\scripts\SECApp\controllers\regForm\regForm.js" />
     <Content Include="src\scripts\main.js" />
+    <Content Include="src\scripts\SECApp\controllers\speakers\speakers.js" />
     <Content Include="src\scripts\SECApp\init.js" />
     <Content Include="Web.config" />
   </ItemGroup>

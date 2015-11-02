@@ -9223,12 +9223,16 @@ var SECApp = {};
         $regFormContainer: $('#reg-form-container'),
         $regFormCloseBtn: $('#reg-form-close-btn'),
         $secCarousel: $('#sec-carousel'),
-        $aspotRegBtn: $('#aspot-reg-button')
+        $aspotRegBtn: $('#aspot-reg-button'),
+        $secSpeakers: $('#sec-speakers'),
+        $secSpeakersStage1: $('#sec-speakers-stage1'),
+        $secSpeakersStage2: $('#sec-speakers-stage2')
     };
 
     SECApp.controllers = {
         regForm: {},
-        carousel: {}
+        carousel: {},
+        speakers: {}
     };
 }());
 'use strict';
@@ -9237,6 +9241,10 @@ var SECApp = {};
     SECApp.controllers.regForm.show = regFormShow;
     SECApp.controllers.regForm.hide = regFormHide;
     SECApp.controllers.regForm.toggle = regFormToggle;
+
+    SECApp.wrappers.$regFormCloseBtn.on('click', SECApp.controllers.regForm.hide);
+    SECApp.wrappers.$headerRegBtn.on('mouseup', SECApp.controllers.regForm.toggle);
+    SECApp.wrappers.$aspotRegBtn.on('click', SECApp.controllers.regForm.show);
 
     function regFormShow() {
         SECApp.wrappers.$regFormContainer
@@ -9313,20 +9321,62 @@ var SECApp = {};
 
     function carouselSlideNext() {
         SECApp.controllers.carousel.findSlides();
-        SECApp.controllers.carousel.$activeSlide.removeClass('active');
-        SECApp.controllers.carousel.$nextSlide.addClass('active');
+        SECApp.controllers.carousel.$activeSlide
+            .hide()
+            .removeClass('active');
+        SECApp.controllers.carousel.$nextSlide
+            .addClass('active')
+            .fadeIn()
+            .show();
     }
 
     function carouselSlidePrev() {
         SECApp.controllers.carousel.findSlides();
-        SECApp.controllers.carousel.$activeSlide.removeClass('active');
-        SECApp.controllers.carousel.$prevSlide.addClass('active');
+        SECApp.controllers.carousel.$activeSlide
+            .hide()
+            .removeClass('active');
+        SECApp.controllers.carousel.$prevSlide
+            .addClass('active')
+            .fadeIn()
+            .show();
     }
 }());
 'use strict';
 
 (function () {
-    SECApp.wrappers.$regFormCloseBtn.on('click', SECApp.controllers.regForm.hide);
-    SECApp.wrappers.$headerRegBtn.on('click', SECApp.controllers.regForm.toggle);
-    SECApp.wrappers.$aspotRegBtn.on('click', SECApp.controllers.regForm.show);
+    SECApp.controllers.speakers.showStage1 = showStage1;
+    SECApp.controllers.speakers.showStage2 = showStage2;
+    SECApp.controllers.speakers.toggleStages = toggleStages;
+
+    SECApp.wrappers.$secSpeakers.on('mouseup', SECApp.controllers.speakers.toggleStages);
+
+    function showStage1() {
+        SECApp.wrappers.$secSpeakersStage1
+            .stop(true, true)
+            .slideDown()
+            .removeClass('hidden');
+        SECApp.wrappers.$secSpeakersStage2
+            .stop(true, true)
+            .slideUp()
+            .addClass('hidden');
+    }
+
+    function showStage2() {
+        SECApp.wrappers.$secSpeakersStage2
+            .stop(true, true)
+            .slideDown()
+            .removeClass('hidden');
+        SECApp.wrappers.$secSpeakersStage1
+            .stop(true, true)
+            .slideUp()
+            .addClass('hidden');
+    }
+
+    function toggleStages() {
+        if (SECApp.wrappers.$secSpeakersStage1.hasClass('hidden')) {
+            SECApp.controllers.speakers.showStage1();
+        } else {
+            SECApp.controllers.speakers.showStage2();
+        }
+    }
 }());

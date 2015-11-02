@@ -29,13 +29,23 @@
 
     function carouselSlideNext() {
         SECApp.controllers.carousel.findSlides();
-        SECApp.controllers.carousel.$activeSlide.removeClass('active');
-        SECApp.controllers.carousel.$nextSlide.addClass('active');
+        SECApp.controllers.carousel.$activeSlide
+            .hide()
+            .removeClass('active');
+        SECApp.controllers.carousel.$nextSlide
+            .addClass('active')
+            .fadeIn()
+            .show();
     }
 
     function carouselSlidePrev() {
         SECApp.controllers.carousel.findSlides();
-        SECApp.controllers.carousel.$activeSlide.removeClass('active');
-        SECApp.controllers.carousel.$prevSlide.addClass('active');
+        SECApp.controllers.carousel.$activeSlide
+            .hide()
+            .removeClass('active');
+        SECApp.controllers.carousel.$prevSlide
+            .addClass('active')
+            .fadeIn()
+            .show();
     }
 }());

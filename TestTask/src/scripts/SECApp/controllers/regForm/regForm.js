@@ -5,6 +5,10 @@
     SECApp.controllers.regForm.hide = regFormHide;
     SECApp.controllers.regForm.toggle = regFormToggle;
 
+    SECApp.wrappers.$regFormCloseBtn.on('click', SECApp.controllers.regForm.hide);
+    SECApp.wrappers.$headerRegBtn.on('mouseup', SECApp.controllers.regForm.toggle);
+    SECApp.wrappers.$aspotRegBtn.on('click', SECApp.controllers.regForm.show);
+
     function regFormShow() {
         SECApp.wrappers.$regFormContainer
             .stop(true, true)

@@ -4,4 +4,4 @@
 //= SECApp/controllers/regForm/regForm.js
 //= SECApp/controllers/header/header.js
 //= SECApp/controllers/carousel/carousel.js
-//= SECApp/controllers/init.js
+//= SECApp/controllers/speakers/speakers.js
