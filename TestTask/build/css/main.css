@@ -2230,7 +2230,7 @@ h3 {
   padding: 3px 0;
   text-transform: uppercase;
   font-family: "Oswald Bold";
-  font-size: 38px;
+  font-size: 37px;
 }
 h5 {
   padding: 3px 0;
@@ -2327,6 +2327,9 @@ h5 {
 .label .label-left-part.blue {
   border-bottom: 21px solid #39C2D7;
 }
+.label .label-left-part.graphite {
+  border-bottom: 21px solid #464547;
+}
 .label .label-right-part {
   position: absolute;
   right: 0;
@@ -2336,6 +2339,9 @@ h5 {
 }
 .label .label-right-part.blue {
   border-bottom: 21px solid #39C2D7;
+}
+.label .label-right-part.graphite {
+  border-bottom: 21px solid #464547;
 }
 .sec-carousel {
   position: relative;
@@ -2373,6 +2379,8 @@ h5 {
   font-family: 'Oswald Regular';
   font-size: 19px;
   text-decoration: none;
+  background-color: #FFFFFF;
+  color: #464547;
 }
 .sec-header .logo {
   height: 100%;
@@ -2393,7 +2401,6 @@ h5 {
 }
 .sec-header .menu li a {
   line-height: 84px;
-  color: #464547;
 }
 .sec-header .menu li a:hover {
   color: #1A9CB0;
@@ -2403,10 +2410,10 @@ h5 {
 }
 .sec-registation {
   padding: 20px 0 70px 0;
-  background-color: #464547;
-  color: #FFFFFF;
-  text-align: center;
   font-size: 24px;
+  text-align: center;
+  color: #FFFFFF;
+  background-color: #464547;
 }
 .sec-registation .sec-registation-header {
   padding: 18px 0;
@@ -2424,11 +2431,11 @@ h5 {
   font-size: 0;
 }
 .sec-aspot {
+  padding: 70px 0 0 0;
+  text-align: center;
+  color: #FFFFFF;
   background: url("/images/backgrounds/aspot.png") no-repeat;
   background-size: cover;
-  text-align: center;
-  padding: 70px 0 0 0;
-  color: #FFFFFF;
 }
 .sec-aspot .main-header {
   margin: 0 30px 0 0;
@@ -2451,10 +2458,10 @@ h5 {
   margin: 30px 0 125px 0;
 }
 .sec-bspot {
-  background-color: #39C2D7;
+  padding: 68px 0 0 0;
   text-align: center;
-  padding: 67px 0 0 0;
   color: #FFFFFF;
+  background-color: #39C2D7;
 }
 .sec-bspot .main-description {
   margin: 36px auto;
@@ -2560,4 +2567,50 @@ h5 {
   box-sizing: border-box;
   border-top: 1px solid rgba(255, 255, 255, 0.3);
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+.sec-event {
+  padding: 94px 0 0 0;
+  text-align: center;
+  color: #464547;
+  background-color: #FFFFFF;
+}
+.sec-event .main-description {
+  margin: 36px auto;
+  font-size: 26px;
+  line-height: 34px;
+}
+.sec-event .tbl {
+  font-size: 0;
+  margin: 95px 0 80px 0;
+  white-space: nowrap;
+}
+.sec-event .col1 {
+  display: inline-block;
+  vertical-align: top;
+  border-left: none;
+  border-right: 1px solid #CCCCCC;
+  width: calc(33% - 1px);
+}
+.sec-event .col2 {
+  display: inline-block;
+  vertical-align: top;
+  border-left: none;
+  border-right: 1px solid #CCCCCC;
+  width: calc(34% - 1px);
+}
+.sec-event .col3 {
+  display: inline-block;
+  vertical-align: top;
+  border-left: none;
+  border-right: none;
+  width: calc(33%);
+}
+.sec-video {
+  padding: 74px 0 0 0;
+  text-align: center;
+  color: #39C2D7;
+  background-color: #464547;
+}
+.sec-video .youtube-wrapper {
+  padding: 65px 0 50px 0;
 }

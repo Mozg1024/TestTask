@@ -171,6 +171,9 @@
     <Content Include="build\images\icons\bspot\400-visitors.png" />
     <Content Include="build\images\icons\bspot\42-speakers.png" />
     <Content Include="build\images\icons\bspot\5-tracks.png" />
+    <Content Include="build\images\icons\chevron-left.png" />
+    <Content Include="build\images\icons\chevron-right.png" />
+    <Content Include="build\images\icons\close.png" />
     <Content Include="build\images\icons\favicon.ico" />
     <Content Include="build\images\logos\aspot-logo.png" />
     <Content Include="build\images\logos\header-logo.png" />
@@ -198,6 +201,9 @@
     <Content Include="src\content\images\icons\chevron-left.png" />
     <Content Include="src\content\images\icons\chevron-right.png" />
     <Content Include="src\content\images\icons\close.png" />
+    <Content Include="src\content\images\icons\event\1.png" />
+    <Content Include="src\content\images\icons\event\2.png" />
+    <Content Include="src\content\images\icons\event\3.png" />
     <Content Include="src\content\images\icons\favicon.ico" />
     <Content Include="src\content\images\logos\aspot-logo.png" />
     <Content Include="src\content\images\logos\header-logo.png" />
@@ -284,6 +290,7 @@
     <Content Include="src\content\styles\common\main.less" />
     <Content Include="src\partials\aspot\aspot.html" />
     <Content Include="src\partials\bspot\bspot.html" />
+    <Content Include="src\partials\event\event.html" />
     <Content Include="src\partials\header\header.less" />
     <Content Include="src\content\styles\mixins\mixins.less" />
     <Content Include="bower_components\reset-css\.bower.json" />
@@ -330,6 +337,8 @@
     <Content Include="src\content\styles\common\icon.less" />
     <Content Include="src\content\styles\common\label.less" />
     <Content Include="src\content\styles\common\carousel.less" />
+    <Content Include="src\partials\event\event.less" />
+    <Content Include="src\partials\video\video.less" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -342,6 +351,7 @@
     <Content Include="src\index.html" />
     <Content Include="src\partials\header\header.html" />
     <Content Include="src\partials\registration\registration.html" />
+    <Content Include="src\partials\video\video.html" />
     <Content Include="src\scripts\SECApp\controllers\carousel\carousel.js" />
     <Content Include="src\scripts\SECApp\controllers\header\header.js" />
     <Content Include="src\scripts\SECApp\controllers\init.js" />

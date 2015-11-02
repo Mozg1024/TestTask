@@ -1,0 +1,37 @@
+@import "../../content/styles/variables/colors.less";
+@import "../../content/styles/mixins/mixins.less";
+@import "../../content/styles/variables/sizes.less";
+
+.sec-event {
+    padding: 94px 0 0 0;
+    text-align: center;
+    color: @graphite;
+    background-color: @white;
+
+    .main-description {
+        margin: 36px auto;
+        font-size: 26px;
+        line-height: 34px;
+    }
+
+    .tbl {
+        .remove-space-between-blocks();
+        margin: 95px 0 80px 0;
+        white-space: nowrap;
+    }
+
+    .col1 {
+        .col-common(@border-right: @sec-event-tbl-border);
+        width: ~"calc(33% - 1px)";
+    }
+
+    .col2 {
+        .col-common(@border-right: @sec-event-tbl-border);
+        width: ~"calc(34% - 1px)";
+    }
+
+    .col3 {
+        .col-common();
+        width: ~"calc(33%)";
+    }
+}

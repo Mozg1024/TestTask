@@ -3,10 +3,10 @@
 @import "../../content/styles/mixins/mixins.less";
 
 .sec-bspot {
-    background-color: @blue;
+    padding: 68px 0 0 0;
     text-align: center;
-    padding: 67px 0 0 0;
     color: @white;
+    background-color: @blue;
 
     .main-description {
         margin: 36px auto;
@@ -21,18 +21,18 @@
     }
 
     .col1 {
-        .col-common();
+        .col-common(@border-left: @sec-bspot-tbl-border-left, @border-right: @sec-bspot-tbl-border-right);
         width: ~"calc(33% - 1px)";
     }
 
     .col2 {
-        .col-common();
+        .col-common(@border-left: @sec-bspot-tbl-border-left, @border-right: @sec-bspot-tbl-border-right);
         width: ~"calc(34% - 2px)";
         margin: 0 0 0 -1px;
     }
 
     .col3 {
-        .col-common();
+        .col-common(@border-left: @sec-bspot-tbl-border-left, @border-right: @sec-bspot-tbl-border-right);
         width: ~"calc(33% - 2px)";
         margin: 0 0 0 -1px;
     }
