@@ -1,0 +1,32 @@
+﻿@import "../variables/colors.less";
+@import "../mixins/mixins.less";
+
+.btn {
+    .btn-common();
+    text-transform: uppercase;
+    text-align: center;
+    white-space: nowrap;
+    font-family: "Oswald Regular";
+    font-size: 19px;
+    line-height: 1;
+    padding: 12px 30px;
+    background: none;
+
+    &.lime-green {
+        background-color: @lime-green;
+        color: @white;
+
+        &:hover {
+            background-color: @dark-green;
+        }
+    }
+}
+
+.btn-addon-arrow-right {
+    .btn-common();
+    padding: 29px 0 14px 0;
+    vertical-align: bottom;
+    width: 36px;
+    background: @dark-green url("/images/icons/arrow-right.png") no-repeat;
+    background-position: center center;
+}

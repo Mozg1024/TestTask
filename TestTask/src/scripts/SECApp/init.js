@@ -10,10 +10,13 @@ var SECApp = {};
     SECApp.wrappers = {
         $headerRegBtn: $('#header-reg-btn'),
         $regFormContainer: $('#reg-form-container'),
-        $regFormCloseBtn: $('#reg-form-close-btn')
+        $regFormCloseBtn: $('#reg-form-close-btn'),
+        $secCarousel: $('#sec-carousel'),
+        $aspotRegBtn: $('#aspot-reg-button')
     };
 
     SECApp.controllers = {
-        regForm: {}
+        regForm: {},
+        carousel: {}
     };
 }());

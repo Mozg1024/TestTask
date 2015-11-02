@@ -1,0 +1,32 @@
+﻿@import "../mixins/mixins.less";
+
+.sec-carousel {
+    position: relative;
+
+    .inner-list{
+        .item {
+            display: none;
+            &.active {
+                display: inline-block;
+            }
+        }
+    }
+
+    .prev-control{
+        .carousel-control();
+        left: 0;
+
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+    }
+
+    .next-control {
+        .carousel-control();
+        right: 0;
+
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+    }
+}

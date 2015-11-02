@@ -1,0 +1,53 @@
+@import "../variables/colors.less";
+@import "../variables/sizes.less";
+@import "../mixins/mixins.less";
+
+body {
+    font-family: "Source Sans Pro Regular";
+}
+
+a {
+    text-decoration: none;
+}
+
+h1 {
+    .h-common();
+    font-size: 130px;
+    letter-spacing: -5px;
+}
+
+h3 {
+    .h-common();
+    font-size: 38px;
+}
+
+h5 {
+    .h-common(@font: "Source Sans Pro Semibold");
+    font-size: 17px;
+}
+
+.right {
+    float: right;
+}
+
+.left {
+    float: left;
+}
+
+.clearfix {
+    &:after {
+      content: " ";
+      display: table;
+      clear: both;
+    }
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.wrapper {
+    width: @wrapper-width;
+    height: 100%;
+    margin: 0 auto;
+}

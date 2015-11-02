@@ -2212,7 +2212,7 @@ table {
   font-style: normal;
 }
 /*Mixins*/
-/*Common*/
+/*Commons*/
 body {
   font-family: "Source Sans Pro Regular";
 }
@@ -2337,6 +2337,35 @@ h5 {
 .label .label-right-part.blue {
   border-bottom: 21px solid #39C2D7;
 }
+.sec-carousel {
+  position: relative;
+}
+.sec-carousel .inner-list .item {
+  display: none;
+}
+.sec-carousel .inner-list .item.active {
+  display: inline-block;
+}
+.sec-carousel .prev-control {
+  padding: 12px 26px;
+  cursor: pointer;
+  position: absolute;
+  top: calc(50% - 28px);
+  left: 0;
+}
+.sec-carousel .prev-control:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.sec-carousel .next-control {
+  padding: 12px 26px;
+  cursor: pointer;
+  position: absolute;
+  top: calc(50% - 28px);
+  right: 0;
+}
+.sec-carousel .next-control:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
 /*Partials*/
 .sec-header {
   height: 84px;
@@ -2405,7 +2434,7 @@ h5 {
   margin: 0 30px 0 0;
 }
 .sec-aspot .main-description {
-  margin: 22px auto;
+  margin: 25px auto;
   font-size: 30px;
   line-height: 40px;
 }
@@ -2418,12 +2447,13 @@ h5 {
 }
 .sec-aspot .reg-button {
   font-size: 0;
-  margin: 58px 0 122px 0;
+  display: inline-block;
+  margin: 30px 0 125px 0;
 }
 .sec-bspot {
   background-color: #39C2D7;
   text-align: center;
-  padding: 70px 0 0 0;
+  padding: 67px 0 0 0;
   color: #FFFFFF;
 }
 .sec-bspot .main-description {

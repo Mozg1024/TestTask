@@ -1,0 +1,33 @@
+﻿@import "../variables/sizes.less";
+@import "../variables/colors.less";
+
+.label {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: @label-height * 2;
+
+    .label-left-part {
+        position: absolute;
+        left: 0;
+        width: ~"calc(50% - " @label-height ~")";
+        border-top: @label-height solid transparent;
+        border-right: @label-height solid transparent;
+
+        &.blue {
+            border-bottom: @label-height + 1px solid @blue;
+        }
+    }
+
+    .label-right-part {
+        position: absolute;
+        right: 0;
+        width: ~"calc(50% - " @label-height ~")";
+        border-top: @label-height solid transparent;
+        border-left: @label-height solid transparent;
+
+        &.blue {
+            border-bottom: @label-height + 1px solid @blue;
+        }
+    }
+}

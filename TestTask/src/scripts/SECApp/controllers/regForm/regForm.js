@@ -12,6 +12,7 @@
             .removeClass('hidden')
             .trigger('SECApp.regForm.shown');
     }
+
     function regFormHide() {
         SECApp.wrappers.$regFormContainer
             .stop(true, true)
