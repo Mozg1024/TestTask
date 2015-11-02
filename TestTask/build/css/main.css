@@ -2311,6 +2311,13 @@ h5 {
   background: url("/images/icons/close.png") no-repeat;
   background-position: left center;
 }
+.divider {
+  margin: 70px 0 60px 0;
+  height: 1px;
+  width: 100%;
+  background-color: #FFFFFF;
+  opacity: 0.3;
+}
 .label {
   position: relative;
   display: block;
@@ -2443,15 +2450,8 @@ h5 {
 }
 .sec-aspot .main-description {
   margin: 25px auto;
-  font-size: 30px;
+  font-size: 29px;
   line-height: 40px;
-}
-.sec-aspot .divider {
-  margin: 70px 0 60px 0;
-  height: 1px;
-  width: 100%;
-  background-color: #FFFFFF;
-  opacity: 0.3;
 }
 .sec-aspot .reg-button {
   font-size: 0;
@@ -2625,6 +2625,54 @@ h5 {
   margin: 36px auto;
   font-size: 26px;
   line-height: 34px;
+}
+.sec-speakers .tbl {
+  font-size: 0;
+  margin: 42px -10px 34px -10px;
+}
+.sec-speakers .tbl .cell {
+  display: inline-block;
+  vertical-align: top;
+  border-left: none;
+  border-right: none;
+  width: 25%;
+  padding: 11px;
+  box-sizing: border-box;
+  position: relative;
+}
+.sec-speakers .tbl .cell img {
+  width: 100%;
+  height: auto;
+}
+.sec-speakers .tbl .cell .bottom-title {
+  position: absolute;
+  bottom: 11px;
+  left: 11px;
+  right: 11px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #FFFFFF;
+  padding: 15px 0 17px 0;
+  font-family: 'Source Sans Pro Bold';
+  font-size: 20px;
+  text-overflow: ellipsis;
+  max-height: 30%;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.sec-speakers .tbl .cell .speaker-name {
+  position: absolute;
+  top: 11px;
+  left: 11px;
+  right: 11px;
+  bottom: 50%;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #FFFFFF;
+  font-family: 'Source Sans Pro Bold';
+  font-size: 20px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  vertical-align: bottom;
 }
 .sec-join-us {
   padding: 147px 0 111px 0;

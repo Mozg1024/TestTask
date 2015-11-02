@@ -1,4 +1,5 @@
 @import "../../content/styles/variables/colors.less";
+@import "../../content/styles/mixins/mixins.less";
 
 .sec-join-us {
     padding: 147px 0 111px 0;
@@ -12,8 +13,6 @@
     }
 
     .main-description {
-        margin: 36px auto;
-        font-size: 26px;
-        line-height: 34px;
+        .main-description(@sec-join-us-main-description-margin, @sec-join-us-main-description-font-size, @sec-join-us-main-description-line-height);
     }
 }

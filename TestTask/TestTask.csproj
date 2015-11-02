@@ -212,6 +212,7 @@
     <Content Include="src\content\images\icons\favicon.ico" />
     <Content Include="src\content\images\logos\aspot-logo.png" />
     <Content Include="src\content\images\logos\header-logo.png" />
+    <Content Include="src\content\images\photos\speaker.png" />
     <Content Include="src\content\styles\main.less" />
     <Content Include="src\content\styles\variables\colors.less" />
     <Content Include="bower_components\font-awesome\.bower.json" />
@@ -350,6 +351,7 @@
     <Content Include="src\partials\speakers\speakers.less" />
     <Content Include="src\partials\join-us\join-us.less" />
     <Content Include="src\partials\footer\footer.less" />
+    <Content Include="src\content\styles\common\divider.less" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
