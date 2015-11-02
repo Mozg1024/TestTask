@@ -2400,6 +2400,7 @@ h5 {
   display: inline-block;
 }
 .sec-header .menu li a {
+  color: #464547;
   line-height: 84px;
 }
 .sec-header .menu li a:hover {
@@ -2606,11 +2607,54 @@ h5 {
   width: calc(33%);
 }
 .sec-video {
-  padding: 74px 0 0 0;
+  padding: 74px 0 33px 0;
   text-align: center;
   color: #39C2D7;
   background-color: #464547;
 }
 .sec-video .youtube-wrapper {
-  padding: 65px 0 50px 0;
+  padding: 65px 0;
+}
+.sec-speakers {
+  padding: 94px 0 55px 0;
+  text-align: center;
+  color: #464547;
+  background-color: #FFFFFF;
+}
+.sec-speakers .main-description {
+  margin: 36px auto;
+  font-size: 26px;
+  line-height: 34px;
+}
+.sec-join-us {
+  padding: 147px 0 111px 0;
+  text-align: center;
+  color: #FFFFFF;
+  background: url("/images/backgrounds/join-us.png") no-repeat;
+  background-size: cover;
+}
+.sec-join-us .main-header {
+  margin: 0 30px 0 0;
+}
+.sec-join-us .main-description {
+  margin: 36px auto;
+  font-size: 26px;
+  line-height: 34px;
+}
+.sec-footer {
+  padding: 20px 0;
+  text-align: center;
+  color: #FFFFFF;
+  background-color: #464547;
+}
+.sec-footer p {
+  display: inline-block;
+  padding: 0 10px;
+}
+.sec-footer p + p {
+  border-left: 1px solid #FFFFFF;
+}
+.sec-footer a {
+  text-decoration: none;
+  color: #7F993A;
 }

@@ -162,6 +162,7 @@
     <Content Include="build\fonts\font-sourcesanspro\sourcesanspro-semibold.svg" />
     <Content Include="build\fonts\fontawesome-webfont.svg" />
     <Content Include="build\images\backgrounds\aspot.png" />
+    <Content Include="build\images\backgrounds\join-us.png" />
     <Content Include="build\images\icons\arrow-down.png" />
     <Content Include="build\images\icons\arrow-right.png" />
     <Content Include="build\images\icons\bspot\1-day.png" />
@@ -174,6 +175,9 @@
     <Content Include="build\images\icons\chevron-left.png" />
     <Content Include="build\images\icons\chevron-right.png" />
     <Content Include="build\images\icons\close.png" />
+    <Content Include="build\images\icons\event\1.png" />
+    <Content Include="build\images\icons\event\2.png" />
+    <Content Include="build\images\icons\event\3.png" />
     <Content Include="build\images\icons\favicon.ico" />
     <Content Include="build\images\logos\aspot-logo.png" />
     <Content Include="build\images\logos\header-logo.png" />
@@ -189,6 +193,7 @@
     <Content Include="src\content\fonts\font-sourcesanspro\sourcesanspro-regular.svg" />
     <Content Include="src\content\fonts\font-sourcesanspro\sourcesanspro-semibold.svg" />
     <Content Include="src\content\images\backgrounds\aspot.png" />
+    <Content Include="src\content\images\backgrounds\join-us.png" />
     <Content Include="src\content\images\icons\arrow-down.png" />
     <Content Include="src\content\images\icons\arrow-right.png" />
     <Content Include="src\content\images\icons\bspot\1-day.png" />
@@ -291,6 +296,7 @@
     <Content Include="src\partials\aspot\aspot.html" />
     <Content Include="src\partials\bspot\bspot.html" />
     <Content Include="src\partials\event\event.html" />
+    <Content Include="src\partials\footer\footer.html" />
     <Content Include="src\partials\header\header.less" />
     <Content Include="src\content\styles\mixins\mixins.less" />
     <Content Include="bower_components\reset-css\.bower.json" />
@@ -332,13 +338,18 @@
     <Content Include="src\content\styles\variables\sizes.less" />
     <Content Include="src\partials\aspot\aspot.less" />
     <Content Include="src\partials\bspot\bspot.less" />
+    <Content Include="src\partials\join-us\join-us.html" />
     <Content Include="src\partials\registration\registration.less" />
     <Content Include="src\content\styles\common\btn.less" />
     <Content Include="src\content\styles\common\icon.less" />
     <Content Include="src\content\styles\common\label.less" />
     <Content Include="src\content\styles\common\carousel.less" />
     <Content Include="src\partials\event\event.less" />
+    <Content Include="src\partials\speakers\speakers.html" />
     <Content Include="src\partials\video\video.less" />
+    <Content Include="src\partials\speakers\speakers.less" />
+    <Content Include="src\partials\join-us\join-us.less" />
+    <Content Include="src\partials\footer\footer.less" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
