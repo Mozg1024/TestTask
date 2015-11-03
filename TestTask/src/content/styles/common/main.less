@@ -22,9 +22,18 @@ h3 {
     font-size: 37px;
 }
 
+h4 {
+    .h-common(@font: 'Source Sans Pro Bold';);
+    font-size: 21px;
+}
+
 h5 {
     .h-common(@font: "Source Sans Pro Semibold");
     font-size: 17px;
+}
+
+.remove-space-between-blocks {
+    font-size: 0;
 }
 
 .right {
@@ -54,8 +63,25 @@ h5 {
     overflow: hidden;
 }
 
-@media screen and (max-width: @mobile-max-width) {
+@media screen and (max-width: @mbl-max-width) {
     .wrapper {
         width: 100%;
+    }
+
+    h1 {
+        font-size: 57px;
+        letter-spacing: -1px;
+    }
+
+    h3 {
+        font-size: 28px;
+    }
+
+    h4 {
+        font-size: 19px;
+    }
+
+    h5 {
+        font-size: 13px;
     }
 }

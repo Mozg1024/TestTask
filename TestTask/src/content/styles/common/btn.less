@@ -24,9 +24,23 @@
 
 .btn-addon-arrow-right {
     .btn-common();
-    padding: 29px 0 14px 0;
+    padding: 43px 0 0 0;
     vertical-align: bottom;
     width: 36px;
-    background: @dark-green url("/images/icons/arrow-right.png") no-repeat;
+    background: @dark-green url("../images/icons/arrow-right.png") no-repeat;
     background-position: center center;
+}
+
+
+
+
+@media screen and (max-width: @mbl-max-width) {
+    .btn {
+        padding: 15px 20px;
+        background: none;
+    }
+
+    .btn-addon-arrow-right {
+        padding: 49px 0 0 0;
+    }
 }

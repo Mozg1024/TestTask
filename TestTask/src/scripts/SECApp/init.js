@@ -5,7 +5,11 @@
 var SECApp = {};
 
 (function () {
-    SECApp.constants = {};
+    SECApp.constants = {
+        carouselDelay: 5000,
+        eventRegFormShown: 'SECApp.regForm.shown',
+        eventRegFormHidden: 'SECApp.regForm.hidden'
+    };
 
     SECApp.wrappers = {
         $headerRegBtn: $('#header-reg-btn'),

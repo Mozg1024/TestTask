@@ -1,20 +1,22 @@
 'use strict';
 
 (function () {
-    SECApp.controllers.regForm.show = regFormShow;
-    SECApp.controllers.regForm.hide = regFormHide;
-    SECApp.controllers.regForm.toggle = regFormToggle;
+    var ctrlAlias = SECApp.controllers.regForm;
 
-    SECApp.wrappers.$regFormCloseBtn.on('click', SECApp.controllers.regForm.hide);
-    SECApp.wrappers.$headerRegBtn.on('mouseup', SECApp.controllers.regForm.toggle);
-    SECApp.wrappers.$aspotRegBtn.on('click', SECApp.controllers.regForm.show);
+    ctrlAlias.show = regFormShow;
+    ctrlAlias.hide = regFormHide;
+    ctrlAlias.toggle = regFormToggle;
+
+    SECApp.wrappers.$regFormCloseBtn.on('click', ctrlAlias.hide);
+    SECApp.wrappers.$headerRegBtn.on('mouseup', ctrlAlias.toggle);
+    SECApp.wrappers.$aspotRegBtn.on('click', ctrlAlias.show);
 
     function regFormShow() {
         SECApp.wrappers.$regFormContainer
             .stop(true, true)
             .slideDown()
             .removeClass('hidden')
-            .trigger('SECApp.regForm.shown');
+            .trigger(SECApp.constants.eventRegFormShown);
     }
 
     function regFormHide() {
@@ -22,14 +24,14 @@
             .stop(true, true)
             .slideUp()
             .addClass('hidden')
-            .trigger('SECApp.regForm.hidden');
+            .trigger(SECApp.constants.eventRegFormHidden);
     }
 
     function regFormToggle() {
         if (SECApp.wrappers.$regFormContainer.hasClass('hidden')) {
-            SECApp.controllers.regForm.show();
+            ctrlAlias.show();
         } else {
-            SECApp.controllers.regForm.hide();
+            ctrlAlias.hide();
         }
     }
 }());

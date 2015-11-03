@@ -1,4 +1,5 @@
 @import "../../content/styles/variables/colors.less";
+@import "../../content/styles/variables/sizes.less";
 
 .sec-footer {
     padding: 20px 0;
@@ -8,9 +9,10 @@
 
     p {
         display: inline-block;
+        line-height: 19px;
         padding: 0 10px;
     }
-    
+
     p+p {
         border-left: 1px solid @white;
     }
@@ -18,5 +20,20 @@
     a {
         text-decoration: none;
         color: @dark-green;
+    }
+}
+
+@media screen and (max-width: @mbl-max-width) {
+    .sec-footer {
+        padding: 15px 50px;
+
+        p {
+            display: inline-block;
+            padding: 3px 10px;
+        }
+
+        p+p {
+            border-left: none;
+        }
     }
 }

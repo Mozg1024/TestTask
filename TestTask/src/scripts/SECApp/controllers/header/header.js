@@ -1,8 +1,10 @@
 'use strict';
 
 (function () {
-    SECApp.wrappers.$regFormContainer.on('SECApp.regForm.shown', setIconArrowDown);
-    SECApp.wrappers.$regFormContainer.on('SECApp.regForm.hidden', setIconArrowRight);
+    var wrpAlias = SECApp.wrappers.$regFormContainer;
+
+    wrpAlias.on(SECApp.constants.eventRegFormShown, setIconArrowDown);
+    wrpAlias.on(SECApp.constants.eventRegFormHidden, setIconArrowRight);
 
     function setIconArrowDown() {
         var $icon = SECApp.wrappers.$headerRegBtn.find('.icon');

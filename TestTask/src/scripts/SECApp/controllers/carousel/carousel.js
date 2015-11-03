@@ -1,48 +1,53 @@
 'use strict';
 
 (function () {
-    SECApp.controllers.carousel.findSlides = carouselFindSlides;
-    SECApp.controllers.carousel.slidePrev = carouselSlidePrev;
-    SECApp.controllers.carousel.slideNext = carouselSlideNext;
+    var ctrlAlias = SECApp.controllers.carousel,
+        wrpAlias = SECApp.wrappers.$secCarousel;
 
-    SECApp.controllers.carousel.$prevBtn = SECApp.wrappers.$secCarousel.find('.prev-control');
-    SECApp.controllers.carousel.$nextBtn = SECApp.wrappers.$secCarousel.find('.next-control');
+    ctrlAlias.findSlides = carouselFindSlides;
+    ctrlAlias.slidePrev = carouselSlidePrev;
+    ctrlAlias.slideNext = carouselSlideNext;
 
-    SECApp.controllers.carousel.$prevBtn.on('mouseup', SECApp.controllers.carousel.slidePrev);
-    SECApp.controllers.carousel.$nextBtn.on('mouseup', SECApp.controllers.carousel.slideNext);
+    ctrlAlias.$prevBtn = wrpAlias.find('.prev-control');
+    ctrlAlias.$nextBtn = wrpAlias.find('.next-control');
+
+    ctrlAlias.$prevBtn.on('mouseup', ctrlAlias.slidePrev);
+    ctrlAlias.$nextBtn.on('mouseup', ctrlAlias.slideNext);
+
+    ctrlAlias.timer = setInterval(ctrlAlias.slideNext, SECApp.constants.carouselDelay);
 
     function carouselFindSlides() {
-        var $items = SECApp.wrappers.$secCarousel.find('.item'),
+        var $items = wrpAlias.find('.item'),
             $item,
             i;
 
         for (i = 0; i < $items.length; i++) {
             $item = $($items[i]);
             if ($item.hasClass('active')) {
-                SECApp.controllers.carousel.$activeSlide = $item;
-                SECApp.controllers.carousel.$prevSlide = $($items[($items.length + i - 1) % $items.length]);
-                SECApp.controllers.carousel.$nextSlide = $($items[(i + 1) % $items.length]);
+                ctrlAlias.$activeSlide = $item;
+                ctrlAlias.$prevSlide = $($items[($items.length + i - 1) % $items.length]);
+                ctrlAlias.$nextSlide = $($items[(i + 1) % $items.length]);
                 break;
             }
         }
     }
 
     function carouselSlideNext() {
-        SECApp.controllers.carousel.findSlides();
-        SECApp.controllers.carousel.$activeSlide
+        ctrlAlias.findSlides();
+        ctrlAlias.$activeSlide
             .hide()
             .removeClass('active');
-        SECApp.controllers.carousel.$nextSlide
+        ctrlAlias.$nextSlide
             .addClass('active')
             .fadeIn();
     }
 
     function carouselSlidePrev() {
-        SECApp.controllers.carousel.findSlides();
-        SECApp.controllers.carousel.$activeSlide
+        ctrlAlias.findSlides();
+        ctrlAlias.$activeSlide
             .hide()
             .removeClass('active');
-        SECApp.controllers.carousel.$prevSlide
+        ctrlAlias.$prevSlide
             .addClass('active')
             .fadeIn();
     }

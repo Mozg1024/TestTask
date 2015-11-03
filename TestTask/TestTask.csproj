@@ -207,9 +207,9 @@
     <Content Include="src\content\images\icons\chevron-left.png" />
     <Content Include="src\content\images\icons\chevron-right.png" />
     <Content Include="src\content\images\icons\close.png" />
-    <Content Include="src\content\images\icons\event\1.png" />
-    <Content Include="src\content\images\icons\event\2.png" />
-    <Content Include="src\content\images\icons\event\3.png" />
+    <Content Include="src\content\images\icons\event\build-icon.png" />
+    <Content Include="src\content\images\icons\event\inform-icon.png" />
+    <Content Include="src\content\images\icons\event\share-icon.png" />
     <Content Include="src\content\images\icons\favicon.ico" />
     <Content Include="src\content\images\logos\aspot-logo.png" />
     <Content Include="src\content\images\logos\header-logo.png" />

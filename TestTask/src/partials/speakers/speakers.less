@@ -2,21 +2,21 @@
 @import "../../content/styles/mixins/mixins.less";
 
 .sec-speakers {
-    padding: 94px 0 55px 0;
+    padding: 92px 0 55px 0;
     text-align: center;
     color: @graphite;
     background-color: @white;
 
     .main-description {
-        .main-description(@sec-speakers-main-description-margin, @sec-speakers-main-description-font-size, @sec-speakers-main-description-line-height);
+        .main-description(@sec-speakers-main-description-margin-vert, @sec-speakers-main-description-margin-hor, @sec-speakers-main-description-font-size, @sec-speakers-main-description-line-height);
     }
 
     .tbl {
-        .remove-space-between-blocks();
-        margin: 42px -10px 34px -10px;
+        margin: 42px -@sec-speakers-cell-padding 34px -@sec-speakers-cell-padding;
 
         .cell {
-            .col-common();
+            display: inline-block;
+            vertical-align: top;
             width: 25%;
             padding: @sec-speakers-cell-padding;
             box-sizing: border-box;
@@ -70,6 +70,70 @@
                 font-size: 17px;
                 line-height: 20px;
                 .text-ellipsis();
+            }
+        }
+    }
+}
+
+@media screen and (max-width: @mbl-max-width) {
+    .sec-speakers {
+        padding: 44px 0 20px 0;
+
+        .main-description {
+            .main-description(@mbl-sec-speakers-main-description-margin-vert, @mbl-sec-speakers-main-description-margin-hor, @mbl-sec-speakers-main-description-font-size, @mbl-sec-speakers-main-description-line-height);
+            margin-bottom: 24px;
+        }
+
+        .stage2 {
+            width: 87%;
+            margin: 0 auto;
+        }
+
+        .tbl {
+            margin: 15px -@mbl-sec-speakers-cell-padding 24px -@mbl-sec-speakers-cell-padding;
+
+            .cell {
+                width: 50%;
+                padding: @mbl-sec-speakers-cell-padding;
+                box-sizing: border-box;
+                position: relative;
+                overflow: hidden;
+
+                &:hover {
+                    .bottom-title {
+                        display: none;
+                    }
+
+                    .speaker-description {
+                        transition: all 0.4s linear;
+                        .block-absolute(@mbl-sec-speakers-cell-padding, @mbl-sec-speakers-cell-padding, @mbl-sec-speakers-cell-padding, @mbl-sec-speakers-cell-padding);
+                    }
+                }
+
+                img {
+                    width: 100%;
+                    height: auto;
+                }
+
+                .bottom-title {
+                    padding: 10px 0 10px 0;
+                    .block-absolute(none, @mbl-sec-speakers-cell-padding, @mbl-sec-speakers-cell-padding, @mbl-sec-speakers-cell-padding);
+                    font-size: 14px;
+                }
+
+                .speaker-description {
+                    padding-top: 25%;
+                    .block-absolute(100%, @mbl-sec-speakers-cell-padding, 0, @mbl-sec-speakers-cell-padding);
+                }
+
+                .speaker-name {
+                    font-size: 14px;
+                }
+
+                .speaker-position {
+                    font-size: 14px;
+                    line-height: 18px;
+                }
             }
         }
     }

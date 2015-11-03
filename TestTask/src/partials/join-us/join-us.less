@@ -2,17 +2,31 @@
 @import "../../content/styles/mixins/mixins.less";
 
 .sec-join-us {
-    padding: 147px 0 111px 0;
+    padding: 148px 0 148px 0;
     text-align: center;
     color: @white;
-    background: url("/images/backgrounds/join-us.png") no-repeat;
+    background: url("../images/backgrounds/join-us.png") no-repeat;
     background-size: cover;
 
     .main-header {
-        margin: 0 30px 0 0;
+        margin: 0 0 35px 0;
     }
 
     .main-description {
-        .main-description(@sec-join-us-main-description-margin, @sec-join-us-main-description-font-size, @sec-join-us-main-description-line-height);
+        .main-description(@sec-join-us-main-description-margin-vert, @sec-join-us-main-description-margin-hor, @sec-join-us-main-description-font-size, @sec-join-us-main-description-line-height);
+    }
+}
+
+@media screen and (max-width: @mbl-max-width) {
+    .sec-join-us {
+        padding: 45px 0 45px 0;
+
+        .main-header {
+            margin: 0 45px 18px 45px;
+        }
+
+        .main-description {
+            .main-description(@mbl-sec-join-us-main-description-margin-vert, @mbl-sec-join-us-main-description-margin-hor, @mbl-sec-join-us-main-description-font-size, @mbl-sec-join-us-main-description-line-height);
+        }
     }
 }

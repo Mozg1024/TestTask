@@ -9,30 +9,34 @@
     background-color: @blue;
 
     .main-description {
-        .main-description(@sec-bspot-main-description-margin, @sec-bspot-main-description-font-size, @sec-bspot-main-description-line-height);
+        .main-description(@sec-bspot-main-description-margin-vert, @sec-bspot-main-description-margin-hor, @sec-bspot-main-description-font-size, @sec-bspot-main-description-line-height);
     }
 
     .tbl {
-        .remove-space-between-blocks();
         margin: 95px 0 0 0;
         white-space: nowrap;
     }
 
+    .cell {
+        border: @sec-bspot-cell-border;
+    }
+
+    .col {
+        display: inline-block;
+        vertical-align:top;
+        margin: 0 auto;
+    }
+
     .col1 {
-        .col-common(@border-left: @sec-bspot-tbl-border-left, @border-right: @sec-bspot-tbl-border-right);
-        width: ~"calc(33% - 1px)";
+        width: 33%;
     }
 
     .col2 {
-        .col-common(@border-left: @sec-bspot-tbl-border-left, @border-right: @sec-bspot-tbl-border-right);
-        width: ~"calc(34% - 2px)";
-        margin: 0 0 0 -1px;
+        width: 34%;
     }
 
     .col3 {
-        .col-common(@border-left: @sec-bspot-tbl-border-left, @border-right: @sec-bspot-tbl-border-right);
-        width: ~"calc(33% - 2px)";
-        margin: 0 0 0 -1px;
+        width: 33%;
     }
 
     .row-1 {
@@ -49,5 +53,37 @@
 
     .row-4 {
         .rows(4);
+    }
+}
+
+@media screen and (max-width: @mbl-max-width) {
+    .sec-bspot {
+        padding: 25px 0 0 0;
+
+        .main-description {
+            .main-description(@mbl-sec-bspot-main-description-margin-vert, @mbl-sec-bspot-main-description-margin-hor, @mbl-sec-bspot-main-description-font-size, @mbl-sec-bspot-main-description-line-height);
+        }
+
+        .tbl {
+            margin: 45px 0 0 0;
+        }
+
+        .cell {
+            height: 98px;
+            padding: 20px;
+
+            img {
+                height: auto;
+                max-height: 100%;
+                width: auto;
+                max-width: 100%;
+            }
+        }
+
+        .col {
+            display: block;
+            min-width: @mbl-min-width;
+            width: 40%;
+        }
     }
 }

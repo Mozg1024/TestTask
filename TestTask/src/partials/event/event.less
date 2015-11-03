@@ -9,27 +9,65 @@
     background-color: @white;
 
     .main-description {
-        .main-description(@sec-event-main-description-margin, @sec-event-main-description-font-size, @sec-event-main-description-line-height);
+        .main-description(@sec-event-main-description-margin-vert, @sec-event-main-description-margin-hor, @sec-event-main-description-font-size, @sec-event-main-description-line-height);
     }
 
     .tbl {
-        .remove-space-between-blocks();
-        margin: 95px 0 80px 0;
-        white-space: nowrap;
+        margin: 95px 0 62px 0;
+
+        .description {
+            color: @dark-green;
+            margin: 15px 25%;
+        }
     }
 
-    .col1 {
-        .col-common(@border-right: @sec-event-tbl-border);
-        width: ~"calc(33% - 1px)";
+    .col {
+        box-sizing: border-box;
+        display: inline-block;
+        vertical-align: top;
+        width: 33%;
     }
 
     .col2 {
-        .col-common(@border-right: @sec-event-tbl-border);
-        width: ~"calc(34% - 1px)";
+        border-left: @sec-event-tbl-border;
+        border-right: @sec-event-tbl-border;
+        width: 34%;
     }
+}
 
-    .col3 {
-        .col-common();
-        width: ~"calc(33%)";
+@media screen and (max-width: @mbl-max-width) {
+    .sec-event {
+        padding: 43px 0 0 0;
+
+        .main-description {
+            .main-description(@mbl-sec-event-main-description-margin-vert, @mbl-sec-event-main-description-margin-hor, @mbl-sec-event-main-description-font-size, @mbl-sec-event-main-description-line-height);
+            margin-bottom: 4px;
+        }
+
+        .tbl {
+            margin: 0 0 -13px 0;
+
+            .description {
+                margin: 12px 35px 35px 35px;
+            }
+        }
+
+        .col {
+            display: block;
+            min-width: @mbl-min-width - 40px;
+            width: 40%;
+            margin: 0 auto;
+            padding: 40px 0 0 0;
+
+            .icon {
+                width: 32%;
+            }
+        }
+
+        .col2 {
+            border: none;
+            border-top: @sec-event-tbl-border;
+            border-bottom: @sec-event-tbl-border;
+        }
     }
 }

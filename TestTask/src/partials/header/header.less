@@ -38,16 +38,36 @@
             padding-left: @sec-header-menu-items-interval;
         }
     }
+
+    .mbl-menu-icon {
+        display: none;
+    }
 }
 
-@media screen and (max-width: @mobile-max-width) {
+@media screen and (max-width: @mbl-max-width) {
     .sec-header {
-        height: 50px;
+        height: @mbl-sec-header-height;
+
         .logo {
             img {
                 width: 75%;
                 margin: 0 0 0 20px;
             }
+        }
+
+        .menu {
+            display: none;
+        }
+
+        .mbl-menu-icon {
+            background-color: @graphite;
+            color: @white;
+            height: @mbl-sec-header-height;
+            width: @mbl-sec-header-height;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
         }
     }
 }
