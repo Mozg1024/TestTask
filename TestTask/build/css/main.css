@@ -2215,7 +2215,6 @@ table {
 /*Commons*/
 body {
   font-family: "Source Sans Pro Regular";
-  min-width: 320px;
 }
 a {
   text-decoration: none;
@@ -2269,6 +2268,9 @@ h5 {
   overflow: hidden;
 }
 @media screen and (max-width: 1242px) {
+  body {
+    padding-top: 50px;
+  }
   .wrapper {
     width: 100%;
   }
@@ -2417,6 +2419,9 @@ h5 {
       -ms-flex-align: center;
           align-items: center;
 }
+.sec-header .menu {
+  float: right;
+}
 .sec-header .menu li {
   display: inline-block;
 }
@@ -2436,6 +2441,13 @@ h5 {
 @media screen and (max-width: 1242px) {
   .sec-header {
     height: 50px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    color: #FFFFFF;
+    font-size: 24px;
   }
   .sec-header .logo img {
     width: 75%;
@@ -2443,8 +2455,40 @@ h5 {
   }
   .sec-header .menu {
     display: none;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 50px;
+  }
+  .sec-header .menu li {
+    display: block;
+    z-index: 9999;
+    background-color: #464547;
+    color: #FFFFFF;
+    text-align: center;
+  }
+  .sec-header .menu li a {
+    color: #FFFFFF;
+    line-height: 60px;
+  }
+  .sec-header .menu li a:hover {
+    color: #1A9CB0;
+  }
+  .sec-header .menu li .btn {
+    width: 100%;
+    font-size: 24px;
+    line-height: 30px;
+  }
+  .sec-header .menu li .btn .icon:after {
+    height: 19px;
+  }
+  .sec-header .menu li + li {
+    padding-left: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
   }
   .sec-header .mbl-menu-icon {
+    position: fixed;
+    right: 0;
     background-color: #464547;
     color: #FFFFFF;
     height: 50px;
@@ -2482,6 +2526,35 @@ h5 {
   width: 240px;
   font-size: 14px;
   margin: 3px;
+}
+@media screen and (max-width: 1242px) {
+  .sec-registation {
+    padding: 20px 0 70px 0;
+    font-size: 24px;
+    text-align: center;
+    color: #FFFFFF;
+    background-color: #464547;
+  }
+  .sec-registation .close {
+    display: none;
+  }
+  .sec-registation .description {
+    font-size: 17px;
+    line-height: 20px;
+    padding: 0 20px;
+  }
+  .sec-registation .sec-registation-header {
+    padding: 15px 0;
+  }
+  .sec-registation .sec-registation-form .input-fields {
+    margin: 35px 0;
+  }
+  .sec-registation .sec-registation-form input {
+    padding: 17px 14px 14px 13px;
+    width: 240px;
+    font-size: 14px;
+    margin: 3px;
+  }
 }
 .sec-carousel {
   position: relative;

@@ -4,7 +4,6 @@
 
 body {
     font-family: "Source Sans Pro Regular";
-    min-width: 320px;
 }
 
 a {
@@ -64,6 +63,10 @@ h5 {
 }
 
 @media screen and (max-width: @mbl-max-width) {
+    body {
+        padding-top: @mbl-sec-header-height;
+    }
+
     .wrapper {
         width: 100%;
     }

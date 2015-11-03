@@ -175,9 +175,9 @@
     <Content Include="build\images\icons\chevron-left.png" />
     <Content Include="build\images\icons\chevron-right.png" />
     <Content Include="build\images\icons\close.png" />
-    <Content Include="build\images\icons\event\1.png" />
-    <Content Include="build\images\icons\event\2.png" />
-    <Content Include="build\images\icons\event\3.png" />
+    <Content Include="build\images\icons\event\build-icon.png" />
+    <Content Include="build\images\icons\event\inform-icon.png" />
+    <Content Include="build\images\icons\event\share-icon.png" />
     <Content Include="build\images\icons\favicon.ico" />
     <Content Include="build\images\logos\aspot-logo.png" />
     <Content Include="build\images\logos\header-logo.png" />

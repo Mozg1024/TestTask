@@ -21,6 +21,8 @@
     }
 
     .menu {
+        float: right;
+
         li {
             display: inline-block;
 
@@ -47,6 +49,13 @@
 @media screen and (max-width: @mbl-max-width) {
     .sec-header {
         height: @mbl-sec-header-height;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 9999;
+        color: @white;
+        font-size: @mbl-sec-header-font-height;
 
         .logo {
             img {
@@ -57,9 +66,47 @@
 
         .menu {
             display: none;
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: @mbl-sec-header-height;
+
+            li {
+                display: block;
+                z-index: 9999;
+                background-color: @graphite;
+                color: @white;
+                text-align: center;
+
+                a {
+                    color: @white;
+                    line-height: @mbl-sec-header-menu-item-height;
+                }
+
+                a:hover {
+                    color: @dark-blue;
+                }
+
+                .btn {
+                    width: 100%;
+                    font-size: @mbl-sec-header-font-height;
+                    line-height: 30px;
+
+                    .icon:after {
+                        height: 19px;
+                    }
+                }
+            }
+
+            li+li {
+                padding-left: 0;
+                border-top: 1px solid rgba(255, 255, 255, 0.3);
+            }
         }
 
         .mbl-menu-icon {
+            position: fixed;
+            right: 0;
             background-color: @graphite;
             color: @white;
             height: @mbl-sec-header-height;
