@@ -2215,6 +2215,7 @@ table {
 /*Commons*/
 body {
   font-family: "Source Sans Pro Regular";
+  min-width: 320px;
 }
 a {
   text-decoration: none;
@@ -2256,6 +2257,12 @@ h5 {
   width: 1200px;
   height: 100%;
   margin: 0 auto;
+  overflow: hidden;
+}
+@media screen and (max-width: 1242px) {
+  .wrapper {
+    width: 100%;
+  }
 }
 .btn {
   cursor: pointer;
@@ -2386,6 +2393,15 @@ h5 {
 }
 .sec-header .menu li + li {
   padding-left: 40px;
+}
+@media screen and (max-width: 1242px) {
+  .sec-header {
+    height: 50px;
+  }
+  .sec-header .logo img {
+    width: 75%;
+    margin: 0 0 0 20px;
+  }
 }
 .sec-registation {
   padding: 20px 0 70px 0;
@@ -2610,7 +2626,21 @@ h5 {
   background-color: #464547;
 }
 .sec-video .youtube-wrapper {
-  padding: 65px 0;
+  margin: 65px auto;
+  width: 64%;
+}
+.sec-video .youtube-wrapper .iframe-wrapper {
+  position: relative;
+  padding-bottom: 53.75%;
+  padding-top: 25px;
+  height: 0;
+}
+.sec-video .youtube-wrapper .iframe-wrapper .iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 .sec-speakers {
   padding: 94px 0 55px 0;

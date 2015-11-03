@@ -34,8 +34,7 @@
             .removeClass('active');
         SECApp.controllers.carousel.$nextSlide
             .addClass('active')
-            .fadeIn()
-            .show();
+            .fadeIn();
     }
 
     function carouselSlidePrev() {
@@ -45,7 +44,6 @@
             .removeClass('active');
         SECApp.controllers.carousel.$prevSlide
             .addClass('active')
-            .fadeIn()
-            .show();
+            .fadeIn();
     }
 }());

@@ -4,6 +4,7 @@
 
 body {
     font-family: "Source Sans Pro Regular";
+    min-width: 320px;
 }
 
 a {
@@ -50,4 +51,11 @@ h5 {
     width: @wrapper-width;
     height: 100%;
     margin: 0 auto;
+    overflow: hidden;
+}
+
+@media screen and (max-width: @mobile-max-width) {
+    .wrapper {
+        width: 100%;
+    }
 }
