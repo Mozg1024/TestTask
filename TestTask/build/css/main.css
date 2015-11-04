@@ -2454,11 +2454,19 @@ h5 {
     margin: 0 0 0 20px;
   }
   .sec-header .menu {
-    display: none;
     position: fixed;
     left: 0;
     right: 0;
     top: 50px;
+  }
+  .sec-header .menu:after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    bottom: -9999px;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.6);
   }
   .sec-header .menu li {
     display: block;
@@ -2522,38 +2530,34 @@ h5 {
   margin: 35px 0;
 }
 .sec-registation .sec-registation-form input {
-  padding: 17px 14px 14px 13px;
+  box-sizing: border-box;
+  padding: 17px 13px 14px 13px;
   width: 240px;
   font-size: 14px;
   margin: 3px;
 }
 @media screen and (max-width: 1242px) {
   .sec-registation {
-    padding: 20px 0 70px 0;
-    font-size: 24px;
-    text-align: center;
-    color: #FFFFFF;
-    background-color: #464547;
+    padding: 20px 20px 50px 20px;
   }
   .sec-registation .close {
     display: none;
   }
   .sec-registation .description {
-    font-size: 17px;
-    line-height: 20px;
-    padding: 0 20px;
+    font-size: 18px;
+    line-height: 24px;
+    padding: 2px 10px;
   }
   .sec-registation .sec-registation-header {
     padding: 15px 0;
   }
   .sec-registation .sec-registation-form .input-fields {
-    margin: 35px 0;
+    margin: 10px 0 20px 0;
   }
   .sec-registation .sec-registation-form input {
-    padding: 17px 14px 14px 13px;
-    width: 240px;
-    font-size: 14px;
-    margin: 3px;
+    padding: 17px 12px 13px 12px;
+    margin: 10px 0;
+    width: 100%;
   }
 }
 .sec-carousel {

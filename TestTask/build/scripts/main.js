@@ -9219,11 +9219,15 @@ var SECApp = {};
     SECApp.constants = {
         carouselDelay: 5000,
         eventRegFormShown: 'SECApp.regForm.shown',
-        eventRegFormHidden: 'SECApp.regForm.hidden'
+        eventRegFormHidden: 'SECApp.regForm.hidden',
+        eventHeaderMenuShown: 'SECApp.header.menuShown',
+        eventHeaderMenuHidden: 'SECApp.header.menuHidden'
     };
 
     SECApp.wrappers = {
         $headerRegBtn: $('#header-reg-btn'),
+        $headerMenu: $('#mbl-header-menu'),
+        $headerMenuIcon: $('#mbl-menu-icon'),
         $regFormContainer: $('#reg-form-container'),
         $regFormCloseBtn: $('#reg-form-close-btn'),
         $secCarousel: $('#sec-carousel'),
@@ -9234,6 +9238,7 @@ var SECApp = {};
     };
 
     SECApp.controllers = {
+        header: {},
         regForm: {},
         carousel: {},
         speakers: {}
@@ -9242,18 +9247,19 @@ var SECApp = {};
 'use strict';
 
 (function () {
-    var ctrlAlias = SECApp.controllers.regForm;
+    var regForm = SECApp.controllers.regForm,
+        $regFormContainer = SECApp.wrappers.$regFormContainer;
 
-    ctrlAlias.show = regFormShow;
-    ctrlAlias.hide = regFormHide;
-    ctrlAlias.toggle = regFormToggle;
+    regForm.show = regFormShow;
+    regForm.hide = regFormHide;
+    regForm.toggle = regFormToggle;
 
-    SECApp.wrappers.$regFormCloseBtn.on('click', ctrlAlias.hide);
-    SECApp.wrappers.$headerRegBtn.on('mouseup', ctrlAlias.toggle);
-    SECApp.wrappers.$aspotRegBtn.on('click', ctrlAlias.show);
+    SECApp.wrappers.$regFormCloseBtn.on('click', regForm.hide);
+    SECApp.wrappers.$headerRegBtn.on('mouseup', regForm.toggle);
+    SECApp.wrappers.$aspotRegBtn.on('click', regForm.show);
 
     function regFormShow() {
-        SECApp.wrappers.$regFormContainer
+        $regFormContainer
             .stop(true, true)
             .slideDown()
             .removeClass('hidden')
@@ -9261,7 +9267,7 @@ var SECApp = {};
     }
 
     function regFormHide() {
-        SECApp.wrappers.$regFormContainer
+        $regFormContainer
             .stop(true, true)
             .slideUp()
             .addClass('hidden')
@@ -9269,20 +9275,30 @@ var SECApp = {};
     }
 
     function regFormToggle() {
-        if (SECApp.wrappers.$regFormContainer.hasClass('hidden')) {
-            ctrlAlias.show();
+        if ($regFormContainer.hasClass('hidden')) {
+            regForm.show();
         } else {
-            ctrlAlias.hide();
+            regForm.hide();
         }
     }
 }());
 'use strict';
 
 (function () {
-    var wrpAlias = SECApp.wrappers.$regFormContainer;
+    var header = SECApp.controllers.header,
+        $headerMenu = SECApp.wrappers.$headerMenu,
+        $headerMenuIcon = SECApp.wrappers.$headerMenuIcon,
+        $regFormContainer = SECApp.wrappers.$regFormContainer;
 
-    wrpAlias.on(SECApp.constants.eventRegFormShown, setIconArrowDown);
-    wrpAlias.on(SECApp.constants.eventRegFormHidden, setIconArrowRight);
+    header.menuShow = headerMenuShow;
+    header.menuHide = headerMenuHide;
+    header.menuToggle = headerMenuToggle;
+
+    $regFormContainer.on(SECApp.constants.eventRegFormShown, setIconArrowDown);
+    $regFormContainer.on(SECApp.constants.eventRegFormHidden, setIconArrowRight);
+    $headerMenu.on(SECApp.constants.eventHeaderMenuShown, setIconClose);
+    $headerMenu.on(SECApp.constants.eventHeaderMenuHidden, setIconBars);
+    $headerMenuIcon.on('click', header.menuToggle);
 
     function setIconArrowDown() {
         var $icon = SECApp.wrappers.$headerRegBtn.find('.icon');
@@ -9297,57 +9313,91 @@ var SECApp = {};
         $icon.removeClass('arrow-down');
         $icon.addClass('arrow-right');
     }
+
+    function setIconBars() {
+        $headerMenuIcon.removeClass('fa-close');
+        $headerMenuIcon.addClass('fa-bars');
+    }
+
+    function setIconClose() {
+        $headerMenuIcon.removeClass('fa-bars');
+        $headerMenuIcon.addClass('fa-close');
+    }
+
+    function headerMenuShow() {
+        $headerMenu
+            .stop(true, true)
+            .slideDown()
+            .removeClass('hidden')
+            .trigger(SECApp.constants.eventHeaderMenuShown);
+    }
+
+    function headerMenuHide() {
+        $headerMenu
+            .stop(true, true)
+            .slideUp()
+            .addClass('hidden')
+            .trigger(SECApp.constants.eventHeaderMenuHidden);
+    }
+
+    function headerMenuToggle() {
+        if ($headerMenu.hasClass('hidden')) {
+            header.menuShow();
+        } else {
+            header.menuHide();
+        }
+    }
 }());
 'use strict';
 
 (function () {
-    var ctrlAlias = SECApp.controllers.carousel,
-        wrpAlias = SECApp.wrappers.$secCarousel;
+    var carousel = SECApp.controllers.carousel,
+        $secCarousel = SECApp.wrappers.$secCarousel;
 
-    ctrlAlias.findSlides = carouselFindSlides;
-    ctrlAlias.slidePrev = carouselSlidePrev;
-    ctrlAlias.slideNext = carouselSlideNext;
+    carousel.findSlides = carouselFindSlides;
+    carousel.slidePrev = carouselSlidePrev;
+    carousel.slideNext = carouselSlideNext;
 
-    ctrlAlias.$prevBtn = wrpAlias.find('.prev-control');
-    ctrlAlias.$nextBtn = wrpAlias.find('.next-control');
+    carousel.$prevBtn = $secCarousel.find('.prev-control');
+    carousel.$nextBtn = $secCarousel.find('.next-control');
 
-    ctrlAlias.$prevBtn.on('mouseup', ctrlAlias.slidePrev);
-    ctrlAlias.$nextBtn.on('mouseup', ctrlAlias.slideNext);
+    carousel.$prevBtn.on('mouseup', carousel.slidePrev);
+    carousel.$nextBtn.on('mouseup', carousel.slideNext);
 
-    ctrlAlias.timer = setInterval(ctrlAlias.slideNext, SECApp.constants.carouselDelay);
+    carousel.timer = setInterval(carousel.slideNext, SECApp.constants.carouselDelay);
 
     function carouselFindSlides() {
-        var $items = wrpAlias.find('.item'),
+        var $items = $secCarousel.find('.item'),
             $item,
             i;
 
         for (i = 0; i < $items.length; i++) {
             $item = $($items[i]);
             if ($item.hasClass('active')) {
-                ctrlAlias.$activeSlide = $item;
-                ctrlAlias.$prevSlide = $($items[($items.length + i - 1) % $items.length]);
-                ctrlAlias.$nextSlide = $($items[(i + 1) % $items.length]);
+                carousel.$activeSlide = $item;
+                carousel.$prevSlide = $($items[($items.length + i - 1) % $items.length]);
+                carousel.$nextSlide = $($items[(i + 1) % $items.length]);
                 break;
             }
         }
     }
 
     function carouselSlideNext() {
-        ctrlAlias.findSlides();
-        ctrlAlias.$activeSlide
+        carousel.findSlides();
+        carousel.$activeSlide
             .hide()
             .removeClass('active');
-        ctrlAlias.$nextSlide
+        carousel.$nextSlide
             .addClass('active')
             .fadeIn();
     }
 
     function carouselSlidePrev() {
-        ctrlAlias.findSlides();
-        ctrlAlias.$activeSlide
+        carousel.findSlides();
+        carousel.$activeSlide
             .hide()
             .removeClass('active');
-        ctrlAlias.$prevSlide
+        carousel.$prevSlide
             .addClass('active')
             .fadeIn();
     }
@@ -9355,39 +9405,43 @@ var SECApp = {};
 'use strict';
 
 (function () {
-    SECApp.controllers.speakers.showStage1 = showStage1;
-    SECApp.controllers.speakers.showStage2 = showStage2;
-    SECApp.controllers.speakers.toggleStages = toggleStages;
+    var speakers = SECApp.controllers.speakers,
+        $secSpeakersStage1 = SECApp.wrappers.$secSpeakersStage1,
+        $secSpeakersStage2 = SECApp.wrappers.$secSpeakersStage2;
 
-    SECApp.wrappers.$secSpeakers.on('mouseup', SECApp.controllers.speakers.toggleStages);
+    speakers.showStage1 = showStage1;
+    speakers.showStage2 = showStage2;
+    speakers.toggleStages = toggleStages;
+
+    SECApp.wrappers.$secSpeakers.on('mouseup', speakers.toggleStages);
 
     function showStage1() {
-        SECApp.wrappers.$secSpeakersStage1
+        $secSpeakersStage1
             .stop(true, true)
             .slideDown()
             .removeClass('hidden');
-        SECApp.wrappers.$secSpeakersStage2
+        $secSpeakersStage2
             .stop(true, true)
             .slideUp()
             .addClass('hidden');
     }
 
     function showStage2() {
-        SECApp.wrappers.$secSpeakersStage2
+        $secSpeakersStage2
             .stop(true, true)
             .slideDown()
             .removeClass('hidden');
-        SECApp.wrappers.$secSpeakersStage1
+        $secSpeakersStage1
             .stop(true, true)
             .slideUp()
             .addClass('hidden');
     }
 
     function toggleStages() {
-        if (SECApp.wrappers.$secSpeakersStage1.hasClass('hidden')) {
-            SECApp.controllers.speakers.showStage1();
+        if ($secSpeakersStage1.hasClass('hidden')) {
+            speakers.showStage1();
         } else {
-            SECApp.controllers.speakers.showStage2();
+            speakers.showStage2();
         }
     }
 }());

@@ -65,11 +65,20 @@
         }
 
         .menu {
-            display: none;
             position: fixed;
             left: 0;
             right: 0;
             top: @mbl-sec-header-height;
+
+            &:after {
+                content: '';
+                position: absolute;
+                top: 100%;
+                bottom: -9999px;
+                left: 0;
+                right: 0;
+                background-color: @fade-color;
+            }
 
             li {
                 display: block;

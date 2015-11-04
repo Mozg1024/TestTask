@@ -8,11 +8,15 @@ var SECApp = {};
     SECApp.constants = {
         carouselDelay: 5000,
         eventRegFormShown: 'SECApp.regForm.shown',
-        eventRegFormHidden: 'SECApp.regForm.hidden'
+        eventRegFormHidden: 'SECApp.regForm.hidden',
+        eventHeaderMenuShown: 'SECApp.header.menuShown',
+        eventHeaderMenuHidden: 'SECApp.header.menuHidden'
     };
 
     SECApp.wrappers = {
         $headerRegBtn: $('#header-reg-btn'),
+        $headerMenu: $('#mbl-header-menu'),
+        $headerMenuIcon: $('#mbl-menu-icon'),
         $regFormContainer: $('#reg-form-container'),
         $regFormCloseBtn: $('#reg-form-close-btn'),
         $secCarousel: $('#sec-carousel'),
@@ -23,6 +27,7 @@ var SECApp = {};
     };
 
     SECApp.controllers = {
+        header: {},
         regForm: {},
         carousel: {},
         speakers: {}

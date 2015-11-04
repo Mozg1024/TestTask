@@ -1,53 +1,53 @@
 'use strict';
 
 (function () {
-    var ctrlAlias = SECApp.controllers.carousel,
-        wrpAlias = SECApp.wrappers.$secCarousel;
+    var carousel = SECApp.controllers.carousel,
+        $secCarousel = SECApp.wrappers.$secCarousel;
 
-    ctrlAlias.findSlides = carouselFindSlides;
-    ctrlAlias.slidePrev = carouselSlidePrev;
-    ctrlAlias.slideNext = carouselSlideNext;
+    carousel.findSlides = carouselFindSlides;
+    carousel.slidePrev = carouselSlidePrev;
+    carousel.slideNext = carouselSlideNext;
 
-    ctrlAlias.$prevBtn = wrpAlias.find('.prev-control');
-    ctrlAlias.$nextBtn = wrpAlias.find('.next-control');
+    carousel.$prevBtn = $secCarousel.find('.prev-control');
+    carousel.$nextBtn = $secCarousel.find('.next-control');
 
-    ctrlAlias.$prevBtn.on('mouseup', ctrlAlias.slidePrev);
-    ctrlAlias.$nextBtn.on('mouseup', ctrlAlias.slideNext);
+    carousel.$prevBtn.on('mouseup', carousel.slidePrev);
+    carousel.$nextBtn.on('mouseup', carousel.slideNext);
 
-    ctrlAlias.timer = setInterval(ctrlAlias.slideNext, SECApp.constants.carouselDelay);
+    carousel.timer = setInterval(carousel.slideNext, SECApp.constants.carouselDelay);
 
     function carouselFindSlides() {
-        var $items = wrpAlias.find('.item'),
+        var $items = $secCarousel.find('.item'),
             $item,
             i;
 
         for (i = 0; i < $items.length; i++) {
             $item = $($items[i]);
             if ($item.hasClass('active')) {
-                ctrlAlias.$activeSlide = $item;
-                ctrlAlias.$prevSlide = $($items[($items.length + i - 1) % $items.length]);
-                ctrlAlias.$nextSlide = $($items[(i + 1) % $items.length]);
+                carousel.$activeSlide = $item;
+                carousel.$prevSlide = $($items[($items.length + i - 1) % $items.length]);
+                carousel.$nextSlide = $($items[(i + 1) % $items.length]);
                 break;
             }
         }
     }
 
     function carouselSlideNext() {
-        ctrlAlias.findSlides();
-        ctrlAlias.$activeSlide
+        carousel.findSlides();
+        carousel.$activeSlide
             .hide()
             .removeClass('active');
-        ctrlAlias.$nextSlide
+        carousel.$nextSlide
             .addClass('active')
             .fadeIn();
     }
 
     function carouselSlidePrev() {
-        ctrlAlias.findSlides();
-        ctrlAlias.$activeSlide
+        carousel.findSlides();
+        carousel.$activeSlide
             .hide()
             .removeClass('active');
-        ctrlAlias.$prevSlide
+        carousel.$prevSlide
             .addClass('active')
             .fadeIn();
     }
