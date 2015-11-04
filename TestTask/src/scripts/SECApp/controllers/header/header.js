@@ -43,16 +43,24 @@
     function headerMenuShow() {
         $headerMenu
             .stop(true, true)
-            .slideDown()
-            .removeClass('hidden')
+            .slideDown({
+                complete: function () {
+                    $headerMenu.removeClass('hidden');
+                    $headerMenu.css('display', '');
+                }
+            })
             .trigger(SECApp.constants.eventHeaderMenuShown);
     }
 
     function headerMenuHide() {
         $headerMenu
             .stop(true, true)
-            .slideUp()
-            .addClass('hidden')
+            .slideUp({
+                complete: function () {
+                    $headerMenu.addClass('hidden');
+                    $headerMenu.css('display', '');
+                }
+            })
             .trigger(SECApp.constants.eventHeaderMenuHidden);
     }
 

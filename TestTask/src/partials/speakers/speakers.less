@@ -95,24 +95,11 @@
             .cell {
                 width: 50%;
                 padding: @mbl-sec-speakers-cell-padding;
-                box-sizing: border-box;
-                position: relative;
-                overflow: hidden;
 
                 &:hover {
-                    .bottom-title {
-                        display: none;
-                    }
-
                     .speaker-description {
-                        transition: all 0.4s linear;
                         .block-absolute(@mbl-sec-speakers-cell-padding, @mbl-sec-speakers-cell-padding, @mbl-sec-speakers-cell-padding, @mbl-sec-speakers-cell-padding);
                     }
-                }
-
-                img {
-                    width: 100%;
-                    height: auto;
                 }
 
                 .bottom-title {

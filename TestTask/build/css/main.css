@@ -2435,16 +2435,19 @@ h5 {
 .sec-header .menu li + li {
   padding-left: 40px;
 }
+.sec-header .hidden {
+  display: block;
+}
 .sec-header .mbl-menu-icon {
   display: none;
 }
 @media screen and (max-width: 1242px) {
   .sec-header {
-    height: 50px;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
+    height: 50px;
     z-index: 9999;
     color: #FFFFFF;
     font-size: 24px;
@@ -2463,14 +2466,13 @@ h5 {
     content: '';
     position: absolute;
     top: 100%;
+    right: 0;
     bottom: -9999px;
     left: 0;
-    right: 0;
     background-color: rgba(0, 0, 0, 0.6);
   }
   .sec-header .menu li {
     display: block;
-    z-index: 9999;
     background-color: #464547;
     color: #FFFFFF;
     text-align: center;
@@ -2478,9 +2480,6 @@ h5 {
   .sec-header .menu li a {
     color: #FFFFFF;
     line-height: 60px;
-  }
-  .sec-header .menu li a:hover {
-    color: #1A9CB0;
   }
   .sec-header .menu li .btn {
     width: 100%;
@@ -2493,6 +2492,9 @@ h5 {
   .sec-header .menu li + li {
     padding-left: 0;
     border-top: 1px solid rgba(255, 255, 255, 0.3);
+  }
+  .sec-header .hidden {
+    display: none;
   }
   .sec-header .mbl-menu-icon {
     position: fixed;
@@ -2650,15 +2652,10 @@ h5 {
   display: inline-block;
   vertical-align: top;
   margin: 0 auto;
-}
-.sec-bspot .col1 {
   width: 33%;
 }
 .sec-bspot .col2 {
   width: 34%;
-}
-.sec-bspot .col3 {
-  width: 33%;
 }
 .sec-bspot .row-1 {
   height: 73px;
@@ -2785,6 +2782,7 @@ h5 {
   width: 33%;
 }
 .sec-event .col2 {
+  border: none;
   border-left: 1px solid #CCCCCC;
   border-right: 1px solid #CCCCCC;
   width: 34%;
@@ -2955,25 +2953,13 @@ h5 {
   .sec-speakers .tbl .cell {
     width: 50%;
     padding: 5px;
-    box-sizing: border-box;
-    position: relative;
-    overflow: hidden;
-  }
-  .sec-speakers .tbl .cell:hover .bottom-title {
-    display: none;
   }
   .sec-speakers .tbl .cell:hover .speaker-description {
-    -webkit-transition: all 0.4s linear;
-            transition: all 0.4s linear;
     position: absolute;
     top: 5px;
     right: 5px;
     bottom: 5px;
     left: 5px;
-  }
-  .sec-speakers .tbl .cell img {
-    width: 100%;
-    height: auto;
   }
   .sec-speakers .tbl .cell .bottom-title {
     padding: 10px 0 10px 0;

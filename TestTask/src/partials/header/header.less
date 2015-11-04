@@ -1,5 +1,6 @@
 @import "../../content/styles/variables/colors.less";
 @import "../../content/styles/variables/sizes.less";
+@import "../../content/styles/mixins/mixins.less";
 
 .sec-header {
     height: @sec-header-height;
@@ -41,6 +42,10 @@
         }
     }
 
+    .hidden {
+        display: block;
+    }
+
     .mbl-menu-icon {
         display: none;
     }
@@ -48,11 +53,11 @@
 
 @media screen and (max-width: @mbl-max-width) {
     .sec-header {
-        height: @mbl-sec-header-height;
         position: fixed;
         top: 0;
         left: 0;
         right: 0;
+        height: @mbl-sec-header-height;
         z-index: 9999;
         color: @white;
         font-size: @mbl-sec-header-font-height;
@@ -72,17 +77,12 @@
 
             &:after {
                 content: '';
-                position: absolute;
-                top: 100%;
-                bottom: -9999px;
-                left: 0;
-                right: 0;
+                .block-absolute(@top: 100%, @right: 0, @bottom: -9999px, @left: 0);
                 background-color: @fade-color;
             }
 
             li {
                 display: block;
-                z-index: 9999;
                 background-color: @graphite;
                 color: @white;
                 text-align: center;
@@ -90,10 +90,6 @@
                 a {
                     color: @white;
                     line-height: @mbl-sec-header-menu-item-height;
-                }
-
-                a:hover {
-                    color: @dark-blue;
                 }
 
                 .btn {
@@ -111,6 +107,10 @@
                 padding-left: 0;
                 border-top: 1px solid rgba(255, 255, 255, 0.3);
             }
+        }
+
+        .hidden {
+            display: none;
         }
 
         .mbl-menu-icon {
