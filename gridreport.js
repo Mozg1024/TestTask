@@ -1210,222 +1210,6 @@ gridReport.model.Response.prototype.isSuccess = function() {
 gridReport.model.Response.prototype.hasData = function() {
   return this.data != undefined;
 };
-goog.provide("gridReport.model.GridEvents");
-gridReport.model.GridEvents = {columnEditActivated:"columnEditActivated", columnInsertActivated:"columnInsertActivated", columnAdded:"columnAdded", columnRemoved:"columnRemoved", columnTimeseriesChartClicked:"columnTimeseriesChartClicked", columnParametersVisibilityChanged:"columnParametersVisibilityChanged", rowSelected:"rowSelected", rowUnselected:"rowUnselected", beforeColumnSort:"beforeColumnSort", sortChanged:"sortChanged", columnResized:"columnResized", columnReordered:"columnReordered", columnDataLoaded:"columnDataLoaded", 
-createExpressionActivated:"createExpressionActivated", maxRowsCountExceeded:"maxRowsCountExceeded", gridReportError:"gridReportError", screenResolved:"screenResolved", identifiersExcluded:"identifiersExcluded", identifiersIncluded:"identifiersIncluded", formatSaved:"GridEvents_FormatSaved", resize:"GridEvents_resize", loadingStarted:"GridEvents_LoadingStarted", loadingEnded:"GridEvents_LoadingEnded", newStateApplied:"GridEvents_StateApplied", columnActionCanceled:"GridEvents_columnActionCanceled", 
-stateChanged:"GridEvents_stateChanged", componentStateChanged:"GridEvents_ComponentStateChanged", templateLoadingStarted:"GridEvents_TemplateLoadingStarted", templateLoadingEnded:"GridEvents_TemplateLoadingEnded", templateCreated:"GridEvents_TemplateCreated", startLoadingRows:"GridEvents_StartLoadingRows", endLoadingRows:"GridEvents_EndLoadingRows", rowsAdded:"GridEvent_RowsAdded", rowsRemoved:"GridEvent_RowsRemoved", templateDeleted:"GridEvent_TemplateDeleted", templateRenamed:"GridEvent_TemplateDeleted", 
-groupingApplied:"GridEvent_GroupingApplied", globalParametersApplied:"GridEvent_GlobalParametersApplied", groupingComponentRegistered:"GridEvent_GroupingComponentRegistered", templateSelectorComponentRegistered:"GridEvent_TemplateSelectorComponentRegistered", exclusionsComponentRegistered:"GridEvent_ExclusionsComponentRegistered", statisticsComponentRegistered:"GridEvent_StatisticsComponentRegistered", gridComponentRegistered:"GridEvent_GridComponentRegistered", primaryRowKeyChanged:"GridEvent_PrimaryRowKeyChanged", 
-statisticsApplied:"GridEvent_StatisticsApplied", groupExpanded:"GridEvent_GroupExpanded", groupCollapsed:"GridEvent_GroupCollapsed", allGroupsExpanded:"GridEvent_AllGroupsExpanded", allGroupsCollapsed:"GridEvent_AllGroupsCollapsed", groupsStateRestored:"GridEvent_GroupsStateRestored", themeChanged:"GridEvent_ThemeChanged", showMoreSearchResultsSelected:"GridEvent_ShowMoreSearchResultsSelected", transposed:"GridEvent_Transposed", beginTranspose:"GridEvent_BeginTranspose", exportAllAsFormulaToExcel:"GridEvent_ExportAllAsFormulaToExcel", 
-exportSelectedAsFormulaToExcel:"GridEvent_ExportSelectedAsFormulaToExcel", exportAllAsValuesToExcel:"GridEvent_ExportAllAsValuesToExcel", exportSelectedAsValuesToExcel:"GridEvent_ExportSelectedAsValuesToExcel", exportAllToQuoteObject:"GridEvent_ExportAllToQuoteObject", exportSelectedToQuoteObject:"GridEvent_ExportSelectedToQuoteObject", exportAllToList:"GridEvent_EportAllToList", exportSelectedToList:"GridEvent_ExportSelectedToList", exportAllToExistingList:"GridEvent_ExportAllToExistingList", exportSelectedToExistingList:"GridEvent_ExportSelectedToExistingList", 
-columnInfoClicked:"GridEvent_ColumnInfoClicked", columnChartClicked:"GridEvent_ColumnChartClicked", excludeRows:"GridEvent_ExcludeRows", beginGroupApply:"GridEvent_GroupingEnabled", beginAdvancedSort:"GridEvent_AdvancedSortEnabled", mfrAdded:"GridEvent_MFR_Added", templateSelectorTemplateSelected:"GridEvent_TemplateSelectorTemplateSelected", templateManagerTemplateSelected:"GridEvent_TemplateManagerTemplateSelected", displayOptionsChanged:"GridEvent_DisplayOptionsChanged", heatMapChanged:"GridEvent_HeatMapChanged", 
-templateSelectorComponentInitialized:"GridEvent_TemplateSelectorComponentInitialized", columnFilterResultsClicked:"GridEvent_ColumnFilterResultsClicked", columnFilterApplied:"GridEvent_ColumnFilterApplied", columnFiltersRemoved:"GridEvent_ColumnFiltersRemoved", highlightedRowKeyChanged:"GridEvent_HighlightedRowKeyChanged", templateImported:"GridEvent_TemplateImported", columnSelected:"GridEvent_ColumnSelected", groupRowRightClicked:"GridEvent_GroupRowRightClicked", printLandscape:"GridEvent_PrintLandscape", 
-printPortrait:"GridEvent_PrintPortrait", exportToPdfLandscape:"GridEvent_ExportToPdfLandscape", exportToPdfPortrait:"GridEvent_ExportToPdfPortrait", qdipTextChanged:"GridEvent_QdipTextChanged"};
-goog.provide("gridReport.Module");
-gridReport.Module = angular.module("gridReport", ["scr.RootModule", "LocalStorageModule", "pascalprecht.translate", "ui.bootstrap", "excelExporter", "ngGrid", "pdfExporter", "ngAnimate"]);
-gridReport.Module.constant("gfDefaultCalculationName", "None");
-gridReport.Module.constant("gfGroupableColumnsLabels", {"TR.HeadquartersRegion":"Region of Headquarters", "TR.HeadquartersCountry":"Country of Headquarters", "TR.ExchangeCountry":"Country of Exchange", "TR.TRBCBusinessSector":"TRBC Business Sector Name", "TR.TRBCEconomicSector":"TRBC Economic Sector Name", "TR.TRBCIndustryGroup":"TRBC Industry Group Name", "TR.TRBCIndustry":"TRBC Industry Name", "TR.GICSSector":"GICS Sector Name", "TR.GICSIndustryGroup":"GICS Industry Group Name", "TR.GICSIndustry":"GICS Industry Name", 
-"TR.GICSSubIndustry":"GICS Sub-Industry Name"});
-gridReport.Module.constant("gfColumnSources", {UDIP:"UDIP", QDIP:"QDIP"});
-gridReport.Module.constant("gfAggregateRestrictions", [{text:"Current Universe", id:"univ"}, {text:"All Companies", id:"EquityAll"}, {text:"List / Portfolio / Index ...", id:"PWHEADER"}]);
-gridReport.Module.constant("gfDefaultToolbarState", null);
-gridReport.Module.config(["$translateProvider", function($translateProvider) {
-  $translateProvider.translations("en-US", gridReport.localization.en);
-  $translateProvider.translations("ja-JP", gridReport.localization.ja);
-  $translateProvider.translations("zh-CN", gridReport.localization.zh);
-}]);
-gridReport.Module.factory("peValueFormatting", ["gfValueFormatting", function(gfValueFormatting) {
-  return gfValueFormatting;
-}]);
-gridReport.Module.config(["$httpProvider", function($httpProvider) {
-  if (!$httpProvider.defaults.headers.get) {
-    $httpProvider.defaults.headers.get = {};
-  }
-  $httpProvider.defaults.headers.get["If-Modified-Since"] = "Mon, 26 Jul 1997 05:00:00 GMT";
-  $httpProvider.defaults.headers.get["Cache-Control"] = "no-cache";
-  $httpProvider.defaults.headers.get["Pragma"] = "no-cache";
-}]);
-goog.exportSymbol("gridReport", gridReport);
-goog.provide("gridReport.services.StatisticsExclusions");
-goog.require("gridReport.Module");
-goog.require("gridReport.model.GridEvents");
-gridReport.Module.factory("gfStatisticsExclusions", ["gfEventsAggregator", function(gfEventsAggregator) {
-  function createService(id) {
-    var exclusions = {};
-    var excludedIdentifiers = [];
-    function isExclusionsNotChanged(identifiers) {
-      return excludedIdentifiers.length == identifiers.length && (_.difference(excludedIdentifiers, identifiers).length == 0 && _.difference(identifiers, excludedIdentifiers).length == 0);
-    }
-    var service = {};
-    service.isHidden = function(identifier) {
-      return!!exclusions[identifier];
-    };
-    service.setExclusions = function(identifiers) {
-      if (isExclusionsNotChanged(identifiers)) {
-        return;
-      }
-      excludedIdentifiers = identifiers;
-      exclusions = _.reduce(identifiers, function(map, item) {
-        map[item] = true;
-        return map;
-      }, {});
-      gfEventsAggregator.getChildAggregator(id).raiseEvent(gridReport.model.GridEvents.identifiersExcluded, identifiers, gridReport.model.ExclusionsTypes.StatisticsExclusions);
-    };
-    service.getExcludedIdentifiers = function() {
-      return excludedIdentifiers;
-    };
-    service.exclude = function(identifiers) {
-      var addedToExclusion = _.difference(identifiers, excludedIdentifiers);
-      if (addedToExclusion.length == 0) {
-        return addedToExclusion;
-      }
-      service.setExclusions(_.union(excludedIdentifiers, addedToExclusion));
-      return addedToExclusion;
-    };
-    service.removeFromExcluded = function(identifiers) {
-      service.setExclusions(_.difference(excludedIdentifiers, identifiers));
-    };
-    service.filterExclusions = function(identifiers) {
-      var currentExclusions = _.sortBy(excludedIdentifiers);
-      var identifiersToExclude = _.sortBy(_.intersection(excludedIdentifiers, identifiers));
-      if (_.isEqual(currentExclusions, identifiersToExclude)) {
-        return;
-      }
-      service.setExclusions(_.intersection(excludedIdentifiers, identifiers));
-    };
-    return service;
-  }
-  var services = {};
-  return{instance:function(gridInstanceId) {
-    if (!services[gridInstanceId]) {
-      services[gridInstanceId] = createService(gridInstanceId);
-    }
-    return services[gridInstanceId];
-  }, clear:function(gridInstanceId) {
-    if (services[gridInstanceId]) {
-      delete services[gridInstanceId];
-    }
-  }};
-}]);
-goog.provide("gridReport.directives.NumberInputDirective");
-gridReport.Module.directive("gfNumberInput", ["$translate", function($translate) {
-  return{restrict:"E", scope:{value:"=", max:"=", min:"=", placeholder:"=?", isEnabled:"="}, template:"<input gf-number-input-format " + 'ng-disabled="{{!isEnabled}}"' + 'class="gf-number-input" ' + 'type="text" ' + 'gf-decimals="2" ' + 'gf-min="min" ' + 'gf-max="max" ' + 'ng-attr-placeholder="{{placeholder}}" ' + 'ng-model="value"></input>', link:function(scope) {
-    scope.placeholder = scope.placeholder || $translate.instant("INPUT_NUMBER");
-  }};
-}]);
-goog.provide("gridReport.localization.zh");
-gridReport.localization = gridReport.localization || {};
-gridReport.localization.zh = {TOGGLE:"\u5207\u6362", GROUPING:"\u5206\u7ec4", PRECISION:"\u7cbe\u786e\u5ea6", DEFAULT:"\u9ed8\u8ba4\u503c", FORMAT_NO_SYMBOLS:"0", FORMAT_ONE_SYMBOLS:"0.0", FORMAT_TWO_SYMBOLS:"0.00", FORMAT_THREE_SYMBOLS:"0.000", FORMAT_FOUR_SYMBOLS:"0.0000", STATISTICS:"\u7edf\u8ba1\u6570\u636e", ADD_COLUMN:"\u6dfb\u52a0\u5217", EDIT_COLUMN:"\u7f16\u8f91", REMOVE_COLUMN:"\u5220\u9664", RENAME_COLUMN:"\u91cd\u547d\u540d", REVERT_RENAMING:"\u64a4\u9500\u91cd\u547d\u540d", PIN:"\u9501\u5b9a\u5217", 
-UNPIN:"\u89e3\u9664\u5217\u9501\u5b9a", HIDE_PARAMETERS:"\u9690\u85cf\u53c2\u6570", SHOW_PARAMETERS:"\u663e\u793a\u53c2\u6570", SELECT_ALL:"\u5168\u9009", DESELECT_ALL:"\u53d6\u6d88\u5168\u9009", UNGROUP:"\u89e3\u9664\u5206\u7ec4", NEW:"\u65b0\u5efa", OBJECT_MANAGER:"\u5bf9\u8c61\u7ba1\u7406\u5668", SAVE:"\u4fdd\u5b58", REVERT:"\u64a4\u9500", EXCLUDE:"\u4e0d\u5305\u62ec", INCLUDE:"\u5305\u62ec", ADDITIONAL_ACTIONS:"\u5176\u4ed6\u64cd\u4f5c", ACTIONS:"\u64cd\u4f5c", ADD_ALL_TO_LIST:"\u5c06\u6240\u6709\u6dfb\u52a0\u5230\u5217\u8868", 
-ADD_SELECTED_TO_LIST:"\u5c06\u9009\u4e2d\u6dfb\u52a0\u5230\u5217\u8868", WARNING:"\u8b66\u544a", OK:"\u786e\u5b9a", CANCEL:"\u53d6\u6d88", DONT_ASK_AGAIN:"\u4e0d\u518d\u8be2\u95ee", RECALL:"\u53d6\u6d88", CLOSE:"\u5173\u95ed", PERSONAL:"\u4e2a\u4eba\u6a21\u677f", GLOBAL:"Thomson Reuters \u6a21\u677f", RECENT:"\u6700\u8fd1\u7684\u6a21\u677f", CUSTOM_EXPRESSIONS:"\u81ea\u5b9a\u4e49\u8868\u8fbe\u5f0f", FORMAT_WAS_CHANGED_CONFIRMATION:"\u60a8\u8981\u4fdd\u5b58\u5bf9'{{name}}'\u7684\u66f4\u6539\u5417\uff1f", 
-RESULTS_WITH_COUNT:"\u7ed3\u679c ({{count}})", EXCLUDED_WITH_COUNT:"\u5df2\u6392\u9664 ({{count}})", ALL_SECURITIES_WITH_COUNT:"\u6240\u6709\u8bc1\u5238\u6570 ({{count}})", IDENTIFIERS_ADDED_WITH_COUNT_INFO_MSG:"\u6dfb\u52a0\u5230\u4f8b\u5916\u7684 {{count}}\u4e2a\u6807\u8bc6\u7b26\u3002", IDENTIFIERS_REMOVED_WITH_COUNT_INFO_MSG:"\u4ece\u4f8b\u5916\u4e2d\u5220\u9664\u7684 {{count}} \u4e2a\u6807\u8bc6\u7b26\u3002", FORMAT_WILL_BE_REVERTED_CONFIRMATION:"\u683c\u5f0f\u5c06\u6062\u590d\u81f3\u5176\u521d\u59cb\u72b6\u6001\u3002", 
-SEARCH:"\u641c\u7d22", NAME:"\u540d\u79f0", NUMBER_OF_FIELDS:"\u5b57\u6bb5\u6570", SHARP:"\u6570\u91cf", FIELD_NAME:"\u5b57\u6bb5\u540d\u79f0", PREVIEW:"\u9884\u89c8", LAST_MODIFIED:"\u6700\u65b0\u4fee\u6539\u65f6\u95f4", IDENTIFIER:"\u6807\u8bc6\u7b26", ERROR:"\u9519\u8bef", INFORMATION:"\u4fe1\u606f", GROUPED_BY:"\u5206\u7ec4\u65b9\u5f0f\uff1a", SUM:"\u603b\u503c", AVERAGE:"\u5e73\u5747\u503c", MEDIAN:"\u4e2d\u4f4d\u6570", SERVER_SIDE:"\u670d\u52a1\u5668\u7aef", NONE:"\u65e0", TEMPLATE_MANAGER:"\u6a21\u677f\u7ba1\u7406\u5668", 
-REPORT_TEMPLATE_MANAGER:"\u62a5\u544a\u6a21\u677f\u7ba1\u7406\u5668", SERVICE_UNAVAILABLE:"\u670d\u52a1\u4e0d\u53ef\u7528\u3002", UNABLE_TO_LOAD_TEMPLATE:"\u65e0\u6cd5\u52a0\u8f7d\u6a21\u677f\u3002", UNABLE_TO_LOAD_GLOBAL_TEMPLATES:"\u65e0\u6cd5\u52a0\u8f7d\u5168\u7403\u6a21\u677f\u3002", UNABLE_TO_SAVE_TEMPLATE:"\u65e0\u6cd5\u4fdd\u5b58\u6a21\u677f\u3002", UNABLE_TO_LOAD_PERSONAL_TEMPLATES:"\u65e0\u6cd5\u52a0\u8f7d\u4e2a\u4eba\u6a21\u677f\u3002", UNABLE_TO_DELETE_TEMPLATE:"\u65e0\u6cd5\u5220\u9664\u6a21\u677f\u3002", 
-UNABLE_TO_RENAME_TEMPLATE:"\u65e0\u6cd5\u91cd\u547d\u540d\u6a21\u677f\u3002", UNABLE_TO_COPY_TEMPLATE:"\u65e0\u6cd5\u590d\u5236\u6a21\u677f\u3002", INVALID_CHARACTER:"\u65e0\u6548\u5b57\u7b26", NAME_IS_REQUIRED:"\u540d\u79f0\u4e3a\u5fc5\u586b\u9879\u3002", NEW_TEMPLATE:"\u65b0\u5efa\u6a21\u677f", SAVE_TEMPLATE:"\u4fdd\u5b58\u6a21\u677f", SERVICE_UNAVAILABLE_RESUBMIT_YOUR_REQUEST:"\u670d\u52a1\u4e0d\u53ef\u7528\uff0c\u8bf7\u91cd\u65b0\u63d0\u4ea4\u60a8\u7684\u8bf7\u6c42\u3002", FAILED_TO_RESOLVE_UNIVERSE:"\u89e3\u6790\u6837\u672c\u5931\u8d25\u3002", 
-THERE_ARE_NO_ITEMS_TO_DISPLAY:"\u6ca1\u6709\u8981\u663e\u793a\u7684\u9879\u76ee\u3002", MAX_ROWS_COUNT_EXCEEDED_INDUSTRY_MESSAGE:"\u9009\u5b9a\u7684\u6837\u672c\u5305\u542b\u7684\u8bc1\u5238\u8d85\u8fc7 {{maxRowsCount}} \u4e2a\u3002\u4e3a\u4e86\u67e5\u770b\u5176\u5b83\u6d4b\u8bc4\u6807\u51c6\u8bf7\u9009\u5b9a\u66f4\u8be6\u7ec6\u7684\u6837\u672c\u53c2\u6570\u3002", RENAME:"\u91cd\u547d\u540d", DUPLICATE:"\u91cd\u590d", DELETE:"\u5220\u9664", COLUMN_ALREADY_EXISTS:'\u5217 "{{name}}" \u65e0\u6cd5\u4f7f\u7528\uff0c\u56e0\u4e3a\u5b83\u4e0e\u67d0\u4e2a\u73b0\u6709\u5217\u76f8\u540c\u3002', 
-NOT_AVAILABLE:"\u4e0d\u53ef\u7528", NOT_AVAILABLE_ABBREVIATION:"N/A", NO_MATCHING_DATA_ITEMS:"\u65e0\u5339\u914d\u6570\u636e\u9879", SEARCH_RESULTS:"\u641c\u7d22\u7ed3\u679c", PRINT:"\u6253\u5370", LOAD:"\u52a0\u8f7d", CREATE_TEMPLATE:"\u521b\u5efa\u6a21\u677f", MANAGE_TEMPLATES:"\u7ba1\u7406\u6a21\u677f", UNSAVED_TEMPLATE:"\u672a\u4fdd\u5b58\u7684\u6a21\u677f", CLICK_TO_VIEW_FIELDS_IN_TEMPLATE:"\u70b9\u51fb\u67e5\u770b\u6a21\u677f\u4e2d\u7684\u5b57\u6bb5", SEARCH_FOR_TEMPLATES:"\u641c\u7d22\u6a21\u677f", 
-TEMPLATE_NAME:"\u6a21\u677f\u540d\u79f0", NAME_ALREADY_EXISTS:"\u540d\u79f0\u5df2\u5b58\u5728", DO_NOT_SAVE:"\u4e0d\u4fdd\u5b58", EXPORT_ALL_AS_VALUES:"\u5c06\u6240\u6709\u5bfc\u51fa\u4e3a\u503c", EXPORT_ALL_AS_FORMULAS:"\u5c06\u6240\u6709\u5bfc\u51fa\u4e3a\u516c\u5f0f", EXPORT_SELECTED_AS_VALUES:"\u5c06\u9009\u4e2d\u5bfc\u51fa\u4e3a\u503c", EXPORT_SELECTED_AS_FORMULAS:"\u5c06\u9009\u4e2d\u5bfc\u51fa\u4e3a\u516c\u5f0f", OPEN_ALL_IN_QUOTE_OBJECT:"\u5728\u62a5\u4ef7\u5bf9\u8c61\u4e2d\u6253\u5f00\u5168\u90e8", 
-OPEN_SELECTED_IN_QUOTE_OBJECT:"\u5728\u62a5\u4ef7\u5bf9\u8c61\u4e2d\u6253\u5f00\u9009\u4e2d", SAVE_AS:"\u53e6\u5b58\u4e3a", TEMPLATE_ALREADY_EXISTS_CONFIRMATION:"\u540d\u4e3a'{{name}}'\u7684\u6a21\u677f\u5df2\u5b58\u5728\uff0c\u60a8\u8981\u66ff\u6362\u62a5\u544a\u6a21\u677f\u5417\uff1f", REPORT_TEMPLATE:"\u62a5\u544a\u6a21\u677f", SEE_ERROR_DETAILS:"\u67e5\u770b\u9519\u8bef\u8be6\u7ec6\u4fe1\u606f", REPORT_TEMPLATE_SUCCESSFULLY_SAVED_INFO_MSG:"\u62a5\u544a\u6a21\u677f\u5df2\u6210\u529f\u4fdd\u5b58\u3002", 
-MAX_LENGTH_EXCEEDED:"\u8d85\u8fc7\u6700\u5927\u957f\u5ea6\u3002", ADD_SECURITY:"\u6dfb\u52a0\u8bc1\u5238", TEMPLATE_DETAILS:"\u6a21\u677f\u8be6\u7ec6\u4fe1\u606f", CRITERIA_FOR_GROUPING_ROWS:"\u884c\u5206\u7ec4\u6807\u51c6", ORDER:"\u6392\u5e8f", CRITERIA:"\u6807\u51c6", ENABLE_GROUPING:"\u542f\u7528\u5206\u7ec4", REGION:"\u533a\u57df", COUNTRY:"\u56fd\u5bb6/\u5730\u533a", INDUSTRY:"\u884c\u4e1a", GICS:"GICS", TRBC:"TRBS", BUSINESS_SECTOR:"\u4e1a\u52a1\u90e8\u95e8", ECONOMIC_SECTROR:"\u7ecf\u6d4e\u90e8\u95e8", 
-INDUSTRY_GROUP:"\u884c\u4e1a\u7ec4", INDUSTRY_NAME:"\u884c\u4e1a\u540d\u79f0", SECTOR_NAME:"\u90e8\u95e8\u540d\u79f0", SUBINDUSTRY_NAME:"\u5b50\u884c\u4e1a\u540d\u79f0", COUNTRY_OF_EXCHANGE:"\u4ea4\u6613\u6240\u6240\u5728\u56fd\u5bb6/\u5730\u533a", COUNTRY_OF_HEADQURTERS:"\u603b\u90e8\u6240\u5728\u56fd\u5bb6/\u5730\u533a", SELECT_FIELD:"\u9009\u62e9\u5b57\u6bb5", EDIT:"\u7f16\u8f91", GROUP_ROWS:"\u7ec4", REMOVE_ROW:"\u5220\u9664", ADVANCED_SETTINGS_BUTTON_TITLE:"\u9ad8\u7ea7\u8bbe\u7f6e", ADVANCED_SETTINGS_DEFAULT_CURRENCY:"\u9ed8\u8ba4\u8d27\u5e01", 
-ADVANCED_SETTINGS_NO_DEFAULT_CURRENCY:"\u65e0", ADVANCED_SETTINGS_UPDATE:"\u66f4\u65b0\u62a5\u544a", ADVANCED_SETTINGS_CANCEL:"\u53d6\u6d88", STATISTICS_CONTROL_COLUMN_STATISTICS:"\u7edf\u8ba1\u6570\u636e", STATISTICS_CONTROL_COLUMN_PREMIUM_DISCOUNT:"\u6ea2\u4ef7/\u6298\u4ef7", FOCUS_STOCK_FINANCIALS:"\u5173\u6ce8\u80a1\u7968 (\u91d1\u878d\uff1a{{currencyId}})", FOCUS_STOCK_PRICING:"\u5173\u6ce8\u80a1\u7968 (\u5b9a\u4ef7\uff1a{{currencyId}})", PRESS_REFRESH_TO_DISPLAY_NUMBER_OF_FIELDS:"\u6309\u5237\u65b0\u6309\u94ae\u663e\u793a\u5b57\u6bb5\u6570\u3002", 
-SECURITY_ALREADY_ADDED:'\u8bc1\u5238"{{ric}}"\u5df2\u51fa\u73b0\u5728\u7f51\u683c\u4e2d', SECURITIES_ALREADY_ADDED:'\u8bc1\u5238"{{rics}}"\u5df2\u51fa\u73b0\u5728\u7f51\u683c\u4e2d', ADD_RANK:"\u6dfb\u52a0\u6392\u540d", SHOW_FACTOR_RANKS:"\u663e\u793a\u56e0\u5b50\u6392\u540d", FIELD_DEFINITION:"\u5b57\u6bb5\u5b9a\u4e49", THOMSON_REUTERS_EIKON_EXCEL_FUNCTION:"Thomson Reuters Eikon Excel \u51fd\u6570", SUM_SYMBOL:"\u03a3", EXCLUDED:"\u5df2\u6392\u9664", INCLUDE_ALL:"\u5305\u542b\u6240\u6709", COMPANY_NAME:"\u516c\u53f8\u540d\u79f0", 
-EXPAND_ALL:"\u5168\u90e8\u5c55\u5f00", COLLAPSE_ALL:"\u5168\u90e8\u6536\u8d77", NATIVE_CURRENCY:"\u672c\u56fd\u8d27\u5e01", MULTIPLE_VALUES:"\u591a\u503c", COLUMNS_RETURN_MULTIPLE_VALUES:"\u9009\u5b9a\u7684\u5217\u8fd4\u56de\u591a\u4e2a\u503c\uff0c\u4e0d\u80fd\u4ee5\u7f51\u683c\u683c\u5f0f\u8868\u793a", DATA_ITEM_IS_NO_LONGER_SUPPORTED:"\u4e0d\u518d\u53d7\u652f\u6301\u7684\u6570\u636e\u9879\u3002", PREMIUM_DISCOUNT_TITLE:"vs. {{statisticsName}}", DISPLAY_OPTIONS:"\u663e\u793a\u9009\u9879", SMALL:"\u5c0f", 
-LARGE:"\u5927", MEDIUM:"\u4e2d", FONT_SIZE_AND_ROW_HEIGHT:"\u5b57\u4f53\u5927\u5c0f\u548c\u884c\u9ad8", CURRENCY:"\u8d27\u5e01", SELECT_UP_TO_MAX_GROUPS_COUNT:"\u9009\u62e9\u8d85\u8fc7 {{maxGroupsCount}} \u9879", HIGH:"\u9ad8", LOW:"\u4f4e", FIRST_QAURTILE:"\u7b2c 1 \u4e2a\u56db\u5206\u4f4d\u6570", THIRD_QAURTILE:"\u7b2c 3 \u4e2a\u56db\u5206\u4f4d\u6570", DISPLAYING_FACTOR_RANKS:"\u663e\u793a\u56e0\u5b50\u6392\u540d", ADD_ALL_TO_EXISTING_LIST:"\u6dfb\u52a0\u6240\u6709\u5230\u5df2\u6709\u5217\u8868", 
-ADD_SELECTED_TO_EXISTING_LIST:"\u6dfb\u52a0\u9009\u4e2d\u5230\u5df2\u6709\u5217\u8868", WATCHLIST_WAS_SUCCESSFULLY_UPDATED:'\u5df2\u6210\u529f\u66f4\u65b0\u89c2\u5bdf\u5217\u8868 "{{watchlistName}}"\u3002', WATCHLIST_FAILED_UPDATE:'\u89c2\u5bdf\u5217\u8868 "{{watchlistName}}"\u66f4\u65b0\u5931\u8d25\u3002', PERSONAL_WATCHLIST_SHOULD_BE_SELECTED:"\u5e94\u9009\u62e9\u4e00\u4e2a\u4e2a\u4eba\u7684\u89c2\u5bdf\u5217\u8868\u3002", CLEAR_ALL:"\u6e05\u9664\u5168\u90e8", SHOW_FACTOR_RANK:"\u663e\u793a\u56e0\u5b50\u6392\u540d", 
-ADD_FIELD:"\u6dfb\u52a0\u5b57\u6bb5", TRANSPOSE:"\u8f6c\u7f6e", SUMMARY:"\u6458\u8981", SUMMARY_STATISTICS:"\u6458\u8981\u7edf\u8ba1\u6570\u636e", VECTOR_NOT_SUPPORTED:"\u5728\u8f6c\u7f6e\u89c6\u56fe\u4e2d\u4e0d\u652f\u6301", EXCLUDE_ALL_SELECTED:"\u6392\u9664\u6240\u6709\u9009\u5b9a", ENABLE_TRANSPOSE:"\u542f\u7528\u8f6c\u7f6e", DISABLE_TRANSPOSE:"\u7981\u7528\u8f6c\u7f6e", ALL:"\u5168\u90e8", SAMPLE_TEMPLATES:"\u6a21\u677f\u8303\u4f8b", VIEW_MORE:"\u67e5\u770b {{count}} \u4e2a\u4ee5\u4e0a\u6a21\u677f", 
-VIEW_AND_MANAGE_ALL_TEMPLATES:"\u67e5\u770b\u5e76\u7ba1\u7406\u6240\u6709\u6a21\u677f", CREATE_NEW_TEMPLATE:"\u521b\u5efa\u65b0\u7684\u6a21\u677f", ADVANCED_SORT:"\u9ad8\u7ea7\u6392\u5e8f", ENABLE_ADVANCED_SORT:"\u542f\u7528\u9ad8\u7ea7\u6392\u5e8f", SORT_BY:"\u6392\u5e8f\u6807\u51c6", ASCENDING:"\u5347\u5e8f", DESCENDING:"\u964d\u5e8f", SUMMARY_ROW:"\u6458\u8981\u884c", ELLIPSIS:"...", HEAT_MAP:"\u9ad8\u4eae\u663e\u793a\u6392\u540d\u9760\u524d/\u6392\u540d\u9760\u540e\u503c", ADD_RANK_FOR_THIS_COLUMN:"\u4e3a\u6b64\u5217\u6dfb\u52a0\u6392\u540d", 
-PERCENTILE:"\u767e\u5206\u4f4d", DECILE:"\u5341\u5206\u4f4d", QUINTILE:"\u4e94\u5206\u4f4d", QUARTILE:"\u56db\u5206\u4f4d", RANK:"\u6392\u540d", ZSCORE:"Z - \u8bc4\u5206", SORTING_TYPE:"\u6392\u5e8f\u7c7b\u578b", BY_VALUE:"\u6309\u503c", BY_ABSOLUTE_VALUE:"\u6309\u7edd\u5bf9\u503c", TIME_SERIES_CHART:"\u65f6\u95f4\u5e8f\u5217\u56fe\u8868", TORNADO_CHART:"\u9f99\u5377\u98ce\u56fe", EXCLUDE_FROM_STATISTICS:"\u4ece\u7edf\u8ba1\u6570\u636e\u4e2d\u6392\u9664", EXCLUDED_FROM_STATISTICS:"\u5df2\u4ece\u7edf\u8ba1\u6570\u636e\u4e2d\u6392\u9664", 
-EXCLUDE_ALL_SELECTED_FROM_STATISTICS:"\u4ece\u7edf\u8ba1\u6570\u636e\u4e2d\u6392\u51fa\u6240\u6709\u5df2\u9009\u9879", IMPORT_TEMPLATE:"\u5bfc\u5165\u6a21\u677f", EXPORT_TEMPLATE:"\u5bfc\u51fa\u6a21\u677f", APPLY:"\u5e94\u7528", REMOVE_ALL_FILTERS:"\u5220\u9664\u6240\u6709\u7b5b\u9009", UNIQUE_VALUE:"\u552f\u4e00\u503c", DEFINE_RANGE:"\u5b9a\u4e49\u8303\u56f4", CLEAR:"\u6e05\u9664", FROM:"\u4ece", TO:"\u5230", NUMBER_OF_ROWS:"\u884c\u6570", KEYWORD_SEARCH:"\u5173\u952e\u5b57\u641c\u7d22", FILTER_RESULTS:"\u7b5b\u9009\u7ed3\u679c", 
-INPUT_DATE:"\u8f93\u5165\u65e5\u671f", INPUT_NUMBER:"\u8f93\u5165\u6570\u5b57", FREEZE_FOCUS_STOCK_ON_TOP:"\u5c06\u5173\u6ce8\u80a1\u7968\u51bb\u7ed3\u5728\u9876\u90e8", CLICK_ON_ANY_COLUMN:"\u70b9\u51fb\u62a5\u544a\u4e2d\u7684\u4efb\u4e00\u5217\uff0c\u5c06\u5176\u5f15\u7528\u5230\u516c\u5f0f", ADD_FORMULA:"\u4f7f\u7528\u516c\u5f0f\u6dfb\u52a0\u5217", FORMULA_EDITOR:"\u516c\u5f0f\u7f16\u8f91\u5668", COLUMN_N:"\u5217 {{columnNumber}}", FACTOR:"\u98ce\u9669\u56e0\u7d20", LANDSCAPE:"\u6a2a\u5411", PORTRAIT:"\u7eb5\u5411", 
-TR_COPYRIGHT:"\u00a9 {{year}} Thomson Reuters. \u4fdd\u7559\u6240\u6709\u6743\u5229\u3002", FORMAT_CELLS:"\u683c\u5f0f\u5316\u5355\u5143\u683c", DATE:"\u65e5\u671f", NUMBER:"\u6570\u5b57", PERCENTAGE:"\u767e\u5206\u6bd4", THOUSANDS_SEPARATOR:"\u5343\u5206\u4f4d\u7b26", DAY_MONTHDATE_YEAR:"Day, Month Date, Year", DATE_ABBREVIATEDMONTH:"Date - Abbreviated Month", DATE_ABBREVIATEDMONYH_YEARE:"Date - Abbreviated Month - Year", MONTH_YEAR:"Month - Year", ABBREVIATEMONYH_ABBREVIATEDYEAR:"Abbreviated Month - Abbreviated Year", 
-EXPORT_PDF_LANDSCAPE:"\u5bfc\u51fa\u4e3a PDF (\u6a2a\u5411)", EXPORT_PDF_PORTRAIT:"\u5bfc\u51fa\u4e3a PDF (\u7eb5\u5411)", EXPORT_PDF_FAILED:"\u65e0\u6cd5\u5bfc\u51fa\u4e3a PDF", MAX_ROWS_COUNT_EXCEEDED:"\u8d85\u8fc7\u4e86\u6700\u5927\u884c\u6570 {{maxRowsCount}}\u3002", SHOW_ABBREVIATIONS:"false", DD_MM_YYYY:"YYYY/MM/DD", DD_MM_YYYY_F:"yyyy/MM/dd", DD_MM_YY:"YY/MM/DD", DD_MM_YY_F:"yy/MM/dd", DD_MM:"MM/DD", DD_MM_F:"MM/dd", MM_DD_YYYY:"", MM_DD_YYYY_F:"", MM_DD_YY:"", MM_DD_YY_F:"", MM_DD:"", MM_DD_F:"", 
-MM_YYYY:"YYYY/MM", MM_YYYY_F:"yyyy/MM", MM_YY:"YY/MM", MM_YY_F:"yy/MM", COPY_TO_CLIPBOARD:"\u590d\u5236\u5230\u526a\u8d34\u677f", ERROR_MESSAGE_HAS_BEEN_COPIED:"\u9519\u8bef\u6d88\u606f\u5df2\u590d\u5236\u5230\u526a\u8d34\u677f", NOTIFY_PRINT_MESSAGE:"\u82e5\u8981\u5728\u6253\u5370\u65f6\u5b9a\u4e49\u5e03\u5c40\u65b9\u5411\uff0c\u8fd8\u9700\u8bbe\u7f6e\u6253\u5370\u673a\u7684\u672c\u5730\u8bbe\u7f6e\u3002", SHARE:"\u5171\u4eab", SHARE_WITH:"\u5171\u4eab\u5230\uff1a", SHARED_TEMPLATES:"\u5171\u4eab\u6a21\u677f", 
-UNABLE_TO_LOAD_SHARED_TEMPLATES:"\u65e0\u6cd5\u52a0\u8f7d\u5171\u4eab\u6a21\u677f\u3002", AUTHOR:"\u4f5c\u8005", SHARED_TO:"\u5171\u4eab\u5230\uff1a", INSER_BLANK_ROW:"\u63d2\u5165\u7a7a\u767d\u884c", NUMBER_INPUT_VALIDATION_MESSAGE:"\u503c\u5fc5\u987b\u4e3a\u6570\u5b57", NUMBER_OUT_OF_RANGE_VALIDATION_MESSAGE:"\u503c\u5fc5\u987b\u4e3a\u8303\u56f4 0 - 100 \u7684\u6570\u5b57", T_B_FILTER_TOP_VALUE:"\u6392\u540d\u9760\u524d\u4f4d\u6570", T_B_FILTER_BOTTOM_VALUE:"\u6392\u540d\u9760\u540e\u4f4d\u6570", 
-T_B_FILTER_TOP_PER:"\u6392\u540d\u9760\u524d %", T_B_FILTER_BOTTOM_PER:"\u6392\u540d\u9760\u540e %", T_B_FILTER_DEFAULT_FIELD:"\u9009\u62e9\u7b5b\u9009\u7c7b\u578b"};
-goog.provide("gridReport.services.AutoSuggestAdapterFactory");
-goog.require("gridReport.Module");
-gridReport.Module.service("gfAutoSuggestAdapterFactory", ["$globalFactory", function($globalFactory) {
-  var service = {};
-  service.create = function(query, getCurrentUniverseFunc) {
-    if (scr.MetadataToAutoSuggestAdapter2 && _.isObject(query)) {
-      return new scr.MetadataToAutoSuggestAdapter2($globalFactory.resolveMetadataService(), query.profile, query.apiKey, query.assetClass, getCurrentUniverseFunc);
-    }
-    return new scr.MetadataToAutoSuggestAdapter($globalFactory.resolveMetadataService(), query, getCurrentUniverseFunc);
-  };
-  return service;
-}]);
-goog.provide("gridReport.services.AutoSuggestServiceFactory");
-goog.require("gridReport.Module");
-goog.require("gridReport.services.AutoSuggestAdapterFactory");
-gridReport.Module.factory("gfAutosuggestServiceFactory", ["gfAutoSuggestAdapterFactory", "gfConfig", "$translate", function(gfAutoSuggestAdapterFactory, gfConfig, $translate) {
-  var service = {};
-  service.createInstance = function(getCurrentUniverseContextFunc) {
-    var autoSuggestAdapter = gfAutoSuggestAdapterFactory.create(gfConfig.defaultAutosuggestQueryParams, getCurrentUniverseContextFunc);
-    function createTooltip(item) {
-      if (item.tooltip) {
-        return item.tooltip;
-      }
-      var tooltip = '<div style="white-space: nowrap;">' + item.name + " (" + item.path + ")" + "</div>";
-      if (item.description) {
-        tooltip += '<br><div style="white-space: normal;">' + item.description + "</div>";
-      }
-      return tooltip;
-    }
-    function getItems(response) {
-      if (_.isArray(response)) {
-        return response;
-      } else {
-        return response != undefined ? response.items : [];
-      }
-    }
-    var autosuggestService = {};
-    autosuggestService.search = function(keyword, callback) {
-      if (keyword != null && (keyword.length !== undefined && keyword.length > 0)) {
-        autoSuggestAdapter.getAutoSuggest(keyword, function(response) {
-          var group = {groupName:$translate.instant("SEARCH_RESULTS"), items:[]};
-          _.each(getItems(response), function(item) {
-            group.items.push({text:item.name, tooltip:createTooltip(item), value:item.id, path:item.path, description:"", dataType:item.dataType});
-          });
-          (callback || angular.noop)([group]);
-        });
-      } else {
-        (callback || angular.noop)([]);
-      }
-    };
-    return autosuggestService;
-  };
-  return service;
-}]);
-goog.provide("gridReport.services.CurrencyService");
-goog.require("gridReport.Module");
-gridReport.Module.factory("gfCurrencies", ["gfConfig", "$q", "$translate", "$rootScope", function(gfConfig, $q, $translate, $rootScope) {
-  var cache = {}, udipEnvironmentConfig = gfConfig.udipOptions ? gfConfig.udipOptions.udipEnvironmentConfig : undefined, service = new UdipMetadataService(udipEnvironmentConfig);
-  function listAsync() {
-    var deferred = $q.defer();
-    if (cache.list) {
-      deferred.resolve(cache.list);
-      if (!$rootScope.$$phase) {
-        $rootScope.$apply();
-      }
-    } else {
-      service.loadCurrencies(function(response) {
-        cache.list = response;
-        deferred.resolve(response);
-        if (!$rootScope.$$phase) {
-          $rootScope.$apply();
-        }
-      });
-    }
-    return deferred.promise;
-  }
-  return{listAsync:listAsync};
-}]);
-goog.provide("gridReport.filters.DateFormatter");
-gridReport.Module.filter("gfDateFormatter", function() {
-  return function(date) {
-    return _.isDate(date) ? date.toString("MMM dd, yyyy") : date;
-  };
-});
 goog.provide("gridReport.directives.TickerAutosuggestDirective");
 gridReport.Module.directive("gfTickerAutosuggest", ["$translate", "gfConfig", "$timeout", function($translate, gfConfig, $timeout) {
   return{replace:true, templateUrl:"", scope:{placeholderText:"=", isEnabled:"=", tickerSelected:"&", moreSearchSelected:"&"}, link:function(scope, element) {
@@ -1458,2628 +1242,90 @@ gridReport.Module.directive("gfTickerAutosuggest", ["$translate", "gfConfig", "$
     });
   }};
 }]);
-goog.provide("gridReport.model.CommandEvents");
-gridReport.model.CommandEvents = {showPicker:"showPicker", showExpressionEditor:"showExpressionEditor"};
-goog.provide("gridReport.services.DapsStorageProvider");
-gridReport.Module.service("gfDapsStorageProvider", ["gfConfig", function(gfConfig) {
-  var udipEnvironmentConfig = gfConfig.udipOptions ? gfConfig.udipOptions.udipEnvironmentConfig : undefined;
-  return new scr.DAPSStorageProvider(udipEnvironmentConfig);
+goog.provide("gridReport.Module");
+gridReport.Module = angular.module("gridReport", ["scr.RootModule", "LocalStorageModule", "pascalprecht.translate", "ui.bootstrap", "excelExporter", "ngGrid", "pdfExporter", "ngAnimate"]);
+gridReport.Module.constant("gfDefaultCalculationName", "None");
+gridReport.Module.constant("gfGroupableColumnsLabels", {"TR.HeadquartersRegion":"Region of Headquarters", "TR.HeadquartersCountry":"Country of Headquarters", "TR.ExchangeCountry":"Country of Exchange", "TR.TRBCBusinessSector":"TRBC Business Sector Name", "TR.TRBCEconomicSector":"TRBC Economic Sector Name", "TR.TRBCIndustryGroup":"TRBC Industry Group Name", "TR.TRBCIndustry":"TRBC Industry Name", "TR.GICSSector":"GICS Sector Name", "TR.GICSIndustryGroup":"GICS Industry Group Name", "TR.GICSIndustry":"GICS Industry Name", 
+"TR.GICSSubIndustry":"GICS Sub-Industry Name"});
+gridReport.Module.constant("gfColumnSources", {UDIP:"UDIP", QDIP:"QDIP"});
+gridReport.Module.constant("gfAggregateRestrictions", [{text:"Current Universe", id:"univ"}, {text:"All Companies", id:"EquityAll"}, {text:"List / Portfolio / Index ...", id:"PWHEADER"}]);
+gridReport.Module.constant("gfDefaultToolbarState", null);
+gridReport.Module.config(["$translateProvider", function($translateProvider) {
+  $translateProvider.translations("en-US", gridReport.localization.en);
+  $translateProvider.translations("ja-JP", gridReport.localization.ja);
+  $translateProvider.translations("zh-CN", gridReport.localization.zh);
 }]);
-goog.provide("gridReport.services.CategoryServiceFactory");
-gridReport.Module.factory("gfCategoryServiceFactory", ["gfConfig", function(gfConfig) {
-  function createInstance() {
-    var udipEnvironmentConfig = gfConfig.udipOptions ? gfConfig.udipOptions.udipEnvironmentConfig : undefined;
-    return new CategoryService(udipEnvironmentConfig);
-  }
-  return{createInstance:createInstance};
+gridReport.Module.factory("peValueFormatting", ["gfValueFormatting", function(gfValueFormatting) {
+  return gfValueFormatting;
 }]);
-goog.provide("gridReport.controllers.DefaultUdipOptions");
-goog.require("gridReport.services.DapsStorageProvider");
-goog.require("gridReport.services.CategoryServiceFactory");
-gridReport.Module.service("gfDefaultUdipOptions", ["gfConfig", "$translate", "$globalEvtAgt", function(gfConfig, $translate, $globalEvtAgt) {
-  var service = {};
-  service.get = function() {
-    var options = {uuid:gfConfig.uuid, globalEvtAgt:$globalEvtAgt, allowMultiSelect:true, showDescriptions:true, showParameterEditors:true, showDescAsTooltip:false, height:550, width:900, parameterOptions:new scr.ParameterOptions({showOutputParameters:true, allowMultiSelectOutput:true}), locale:$translate.preferredLanguage()};
-    return new scr.UdipOptions(_.extend(options, gfConfig.udipOptions));
-  };
-  return service;
+gridReport.Module.config(["$httpProvider", function($httpProvider) {
+  if (!$httpProvider.defaults.headers.get) {
+    $httpProvider.defaults.headers.get = {};
+  }
+  $httpProvider.defaults.headers.get["If-Modified-Since"] = "Mon, 26 Jul 1997 05:00:00 GMT";
+  $httpProvider.defaults.headers.get["Cache-Control"] = "no-cache";
+  $httpProvider.defaults.headers.get["Pragma"] = "no-cache";
 }]);
-goog.provide("gridReport.controllers.DefaultMfrConfig");
-goog.require("gridReport.services.DapsStorageProvider");
-goog.require("gridReport.services.CategoryServiceFactory");
-gridReport.Module.service("gfDefaultMfrConfig", ["gfDapsStorageProvider", "gfCategoryServiceFactory", "gfConfig", function(gfDapsStorageProvider, gfCategoryServiceFactory, gfConfig) {
-  var service = {};
-  service.get = function() {
-    var config = {storageProvider:gfDapsStorageProvider, udipCategoryService:gfCategoryServiceFactory.createInstance()};
-    return _.extend(config, gfConfig.mfrConfig);
-  };
-  return service;
-}]);
-goog.provide("gridReport.controllers.DefaultExpressionEditorConfig");
-goog.require("gridReport.services.DapsStorageProvider");
-goog.require("gridReport.services.CategoryServiceFactory");
-gridReport.Module.service("gfDefaultExpressionEditorConfig", ["gfDapsStorageProvider", "gfCategoryServiceFactory", "gfConfig", function(gfDapsStorageProvider, gfCategoryServiceFactory, gfConfig) {
-  var service = {};
-  service.get = function() {
-    var config = {uuid:gfConfig.uuid, storageProvider:gfDapsStorageProvider, udipCategoryService:gfCategoryServiceFactory.createInstance(), expressionId:"", isStandAlone:false, isVisible:false};
-    return new scr.ExpressionEditorConfig(_.extend(config, gfConfig.expressionEditorConfig));
-  };
-  return service;
-}]);
-goog.provide("gridReport.controllers.ADCDataPickerController");
-goog.require("gridReport.controllers.DefaultUdipOptions");
-goog.require("gridReport.controllers.DefaultMfrConfig");
-goog.require("gridReport.controllers.DefaultExpressionEditorConfig");
-gridReport.Module.controller("ADCDataPickerController", ["$scope", "$timeout", "gfEventsAggregator", "gfConfig", "gfCategoryServiceFactory", "gfDapsStorageProvider", "$globalEvtAgt", "gfLogManager", "gfNotificationService", "$translate", "gfGridManagementService", "gfDefaultUdipOptions", "gfDefaultMfrConfig", "gfDefaultExpressionEditorConfig", function($scope, $timeout, gfEventsAggregator, gfConfig, gfCategoryServiceFactory, gfDapsStorageProvider, $globalEvtAgt, gfLogManager, gfNotificationService, 
-$translate, gfGridManagementService, gfDefaultUdipOptions, gfDefaultMfrConfig, gfDefaultExpressionEditorConfig) {
-  var defaultCommandExpression = "";
-  var editActionType = "edit";
-  var insertActionType = "insert";
-  function broadcastSelectedCommand(command, actionType, containerId) {
-    var evtAggregator = gfEventsAggregator.getChildAggregator(containerId);
-    if (actionType === insertActionType || actionType === editActionType) {
-      var eventType = actionType === editActionType ? gridReport.model.InternalEvents.changeCommand : gridReport.model.InternalEvents.insertCommand;
-      evtAggregator.raiseEvent(eventType, {previousCommand:$scope.initialCommand, newCommand:command, isUserTriggered:true});
-      $scope.initialCommand = command;
-      return;
-    }
-    evtAggregator.raiseEvent(gridReport.model.InternalEvents.addCommand, {command:command, isUserTriggered:true, isFromUDIP:true});
-  }
-  function createSelectedFieldInfo(command) {
-    var type;
-    if (command && command.metadata) {
-      switch(command.metadata.type) {
-        case "field":
-          type = "meta";
-          break;
-        case "custom":
-          type = "expression";
-          break;
-        default:
-          type = command.metadata.type;
-      }
-    }
-    return{id:command && command.id ? command.id : "", order:command.isNewestFirst ? "DESC" : "ASC", path:getPath(command), type:type || "meta", transforms:getTransforms(command), outputColumn:getOutputColumn(command)};
-  }
-  function getTransforms(command) {
-    return command && (command.metadata && command.metadata.transforms) ? command.metadata.transforms : [];
-  }
-  function getOutputColumn(command) {
-    return command && (command.metadata && command.metadata.outputColumn) ? command.metadata.outputColumn : undefined;
-  }
-  function getPath(command) {
-    if (command == undefined) {
-      return defaultCommandExpression;
-    }
-    if (_.isEmpty(command.parameters)) {
-      if (command.metadata != undefined && !_.isEmpty(command.metadata.transforms)) {
-        return "";
-      }
-      return command.expression;
-    }
-    var params = _.filter(command.parameters, function(param) {
-      return param.value != undefined && param.value != "";
-    });
-    var nameValueList = _.map(params, function(param) {
-      if (param.id == scr.output.ParameterIds.RatingScope) {
-        return param.id + ':"' + param.value + '"';
-      } else {
-        return param.id + ":" + param.value;
+goog.exportSymbol("gridReport", gridReport);
+goog.provide("gridReport.directives.StatisticsControlController");
+gridReport.Module.controller("gfStatisticsControlController", ["$scope", "gfStatisticsAlgorithms", "gfGridManagementService", function($scope, gfStatisticsAlgorithms, gfGridManagementService) {
+  function toDictionary(array, uniqueFieldName) {
+    var dictionary = {};
+    angular.forEach(array, function(item) {
+      var key = item[uniqueFieldName];
+      if (key) {
+        dictionary[key] = item;
       }
     });
-    return "_(" + nameValueList.join(",") + ")";
+    return dictionary;
   }
-  function showDataCloudPicker(actionType, args, containerId) {
-    $scope.gridInstanceId = args.gridInstanceId;
-    $scope.initialCommand = args.initialCommand;
-    $scope.actionType = actionType;
-    var selectedFieldInfo = actionType == editActionType || args.openAddWithCommand ? createSelectedFieldInfo(args.initialCommand) : undefined;
-    var callback = function(result, selectedField) {
-      if (result && selectedField) {
-        var commands;
-        selectedField = _.isArray(selectedField) ? selectedField : [selectedField];
-        try {
-          commands = _.map(selectedField, function(field) {
-            return gridReport.model.Command.convert(field, gfConfig.enableAudit);
-          });
-        } catch (err) {
-          gfLogManager.error(err);
-          return;
-        }
-        $timeout(function() {
-          _.each(commands, function(command) {
-            broadcastSelectedCommand(command, actionType, containerId);
-          });
-          gfEventsAggregator.getChildAggregator(containerId).raiseEvent(gridReport.model.InternalEvents.hidePicker);
-        });
-      } else {
-        gfEventsAggregator.getChildAggregator(containerId).raiseEvent(gridReport.model.InternalEvents.hidePicker);
-      }
-    };
-    var udipOptions = new scr.UdipOptions(_.extend(gfDefaultUdipOptions.get(), {parentElement:$scope.parentElement, currentFieldInfo:selectedFieldInfo, searchText:args.text == null ? "" : args.text, includeMFRBuilder:$scope.includeMfrEditor != false, selectedCategoryId:args.selectedCategoryId, universeContext:args.universeContext || scr.UniverseType.Public, includeDataBlockBuilder:!gfGridManagementService.isTransposed(args.gridInstanceId), callback:callback, multiSelectionOfDataItems:{limit:10, addButton:actionType != 
-    "edit"}}));
-    (new scr.Udip).show(udipOptions);
-  }
-  $scope.expressionEditorConfig = gfDefaultExpressionEditorConfig.get();
-  $scope.mfrConfig = gfDefaultMfrConfig.get();
-  $scope.showExpressionEditor = function(expressionId) {
-    $scope.$broadcast($scope.expressionEditorConfig.show, {at:"right top", collision:"flipfit", my:"left top"});
-    if (expressionId && (_.isString(expressionId) && expressionId != "")) {
-      $timeout(function() {
-        $scope.$broadcast($scope.expressionEditorConfig.loadExpression, expressionId);
-      });
-    }
-  };
-  var showPickerSubscription = gfEventsAggregator.addHandler(gridReport.model.CommandEvents.showPicker, function(args) {
-    if (args) {
-      if (args.mode == editActionType && (args.initialCommand && (args.initialCommand.metadata && args.initialCommand.metadata.isGrid === false))) {
-        gfNotificationService.infoDialog({title:$translate.instant("WARNING"), message:$translate.instant("DATA_ITEM_IS_NO_LONGER_SUPPORTED")});
-      } else {
-        showDataCloudPicker(args.mode, args, this.$containerId);
-      }
-    } else {
-      showDataCloudPicker("", {}, this.$containerId);
-    }
-  });
-  function onExpressionEditorLaunchClicked(event, anchorPlacement, expressionId, isSampleExpression, context, path) {
-    if (!$scope.useExternalExpressionEditor) {
-      $scope.$broadcast($scope.expressionEditorConfig.show, anchorPlacement);
-      $timeout(function() {
-        $scope.$broadcast($scope.expressionEditorConfig.loadExpression, expressionId, isSampleExpression, context, path);
-      });
-    }
-  }
-  function onMFRBuilderLaunchNewClicked() {
-    $scope.$broadcast("launchPop:new");
-  }
-  function onMFRBuilderLaunchEditClicked(evt, id) {
-    $scope.$broadcast("launchPop:edit", id);
-  }
-  function onCustomExpressionSaved(event, customExpression) {
-    if (customExpression) {
-      gfDapsStorageProvider.load({type:scr.ObjectType.Expression, id:customExpression.name}, function(data, metadata, success, errorMessage) {
-        if (success && (data && data.length > 0)) {
-          var command;
-          try {
-            command = gridReport.model.Command.convert(new scr.output.Custom(data[0], null, metadata), gfConfig.enableAudit);
-          } catch (err) {
-            gfLogManager.error(err);
-            return;
-          }
-          $timeout(function() {
-            var previousColumn = _.find(gfGridManagementService.getGridColumns($scope.gridInstanceId), function(gridColumn) {
-              return gridColumn.command && (gridColumn.command.id === command.id && gridColumn.command.isCustom());
-            });
-            if (previousColumn) {
-              updateCommand(previousColumn.command, command);
-            }
-          });
-        } else {
-          if (errorMessage) {
-            gfLogManager.error(errorMessage);
-          }
-        }
-      });
-    }
-  }
-  function onMfrSaved(event, mfrObject) {
-    if (mfrObject) {
-      gfDapsStorageProvider.load({type:scr.ObjectType.MultiFactorRank, id:mfrObject.id}, function(data, metadata, success, errorMessage) {
-        if (success && (data && data.length > 0)) {
-          var command;
-          try {
-            command = gridReport.model.Command.convert(new scr.output.MultiFactorRank(data[0], null, metadata), gfConfig.enableAudit);
-          } catch (err) {
-            gfLogManager.error(err);
-            return;
-          }
-          $timeout(function() {
-            var previousColumn = _.find(gfGridManagementService.getGridColumns($scope.gridInstanceId), function(gridColumn) {
-              return gridColumn.command && (gridColumn.command.id === command.id && gridColumn.command.isMultiFactorRank());
-            });
-            if (previousColumn) {
-              updateCommand(previousColumn.command, command);
-            }
-          });
-        } else {
-          if (errorMessage) {
-            gfLogManager.error(errorMessage);
-          }
-        }
-      });
-    }
-  }
-  function onDataBlockSaved(event, dataBlockObject) {
-    if (dataBlockObject) {
-      gfDapsStorageProvider.load({type:scr.ObjectType.DataBlock, id:dataBlockObject.id}, function(data, metadata, success, errorMessage) {
-        if (success && (data && data.length > 0)) {
-          var command;
-          try {
-            command = gridReport.model.Command.convert(new scr.output.DataBlock(data[0], null, metadata), gfConfig.enableAudit);
-          } catch (err) {
-            gfLogManager.error(err);
-            return;
-          }
-          $timeout(function() {
-            var previousColumn = _.find(gfGridManagementService.getGridColumns($scope.gridInstanceId), function(gridColumn) {
-              return gridColumn.command && (gridColumn.command.id === command.id && gridColumn.command.isDataBlock());
-            });
-            if (previousColumn) {
-              updateCommand(previousColumn.command, command);
-            }
-          });
-        }
-      });
-    }
-  }
-  function updateCommand(previousCommand, newCommand) {
-    var evtAggregator = gfEventsAggregator.getChildAggregator($scope.gridInstanceId);
-    evtAggregator.raiseEvent(gridReport.model.InternalEvents.changeCommand, {previousCommand:previousCommand, newCommand:newCommand, isUserTriggered:true});
-  }
-  $globalEvtAgt.on(scr.UdipCEE.EventTypes.ScreenerViews.ExpressionEditorLaunchClicked, onExpressionEditorLaunchClicked);
-  $globalEvtAgt.on(scr.UdipCEE.EventTypes.ScreenerViews.MFRBuilderLaunchNewClicked, onMFRBuilderLaunchNewClicked);
-  $globalEvtAgt.on(scr.UdipCEE.EventTypes.ScreenerViews.MFRBuilderLaunchEditClicked, onMFRBuilderLaunchEditClicked);
-  $globalEvtAgt.on(scr.CEE.EventTypes.ExpressionEditorView.Saved, onCustomExpressionSaved);
-  $globalEvtAgt.on(scr.UdipCEE.EventTypes.ScreenerViews.MFRSaved, onMfrSaved);
-  $globalEvtAgt.on(scr.UdipCEE.EventTypes.DataBlockBuilder.Saved, onDataBlockSaved);
-  var showExpressionEditorSubscription = gfEventsAggregator.addHandler(gridReport.model.CommandEvents.showExpressionEditor, function(args) {
-    if ($scope.useExternalExpressionEditor) {
-      var anchorPlacement = {at:"right top", collision:"flipfit", my:"left top"};
-      $globalEvtAgt.trigger(scr.UdipCEE.EventTypes.ScreenerViews.ExpressionEditorLaunchClicked, [anchorPlacement, args.expressionId]);
-    } else {
-      $scope.showExpressionEditor(args.expressionId);
-    }
-  });
-  $scope.$on("$destroy", function() {
-    gfEventsAggregator.removeHandler(showExpressionEditorSubscription);
-    gfEventsAggregator.removeHandler(showPickerSubscription);
-    $globalEvtAgt.off(scr.UdipCEE.EventTypes.ScreenerViews.ExpressionEditorLaunchClicked, onExpressionEditorLaunchClicked);
-    $globalEvtAgt.off(scr.UdipCEE.EventTypes.ScreenerViews.MFRBuilderLaunchNewClicked, onMFRBuilderLaunchNewClicked);
-    $globalEvtAgt.off(scr.UdipCEE.EventTypes.ScreenerViews.MFRBuilderLaunchEditClicked, onMFRBuilderLaunchEditClicked);
-    $globalEvtAgt.off(scr.CEE.EventTypes.ExpressionEditorView.Saved, onCustomExpressionSaved);
-    $globalEvtAgt.off(scr.UdipCEE.EventTypes.ScreenerViews.MFRSaved, onMfrSaved);
-    $globalEvtAgt.off(scr.UdipCEE.EventTypes.DataBlockBuilder.Saved, onDataBlockSaved);
-  });
-}]);
-goog.provide("gridReport.directives.ADCDataPicker");
-goog.require("gridReport.model.CommandEvents");
-goog.require("gridReport.controllers.ADCDataPickerController");
-gridReport.Module.directive("adcDataPicker", ["$compile", function($compile) {
-  return{restrict:"E", replace:true, template:'<div style="position:absolute"></div>', scope:{includeMfrEditor:"=", useExternalExpressionEditor:"=", useExternalMfrEditor:"=", parentElement:"="}, controller:"ADCDataPickerController", link:function(scope, element) {
-    if (!scope.useExternalExpressionEditor) {
-      var exprEditor = $compile('<scr-expression-editor expression-editor-config="expressionEditorConfig"></scr-expression-editor>')(scope);
-      $(element).first().append(exprEditor);
-    }
-    if (!scope.useExternalMfrEditor) {
-      var mfrEditor = $compile('<scr-mfrb-popup path="Libs/UdipCEE/"></scr-mfrb-popup>')(scope);
-      $(element).first().append(mfrEditor);
-    }
-  }};
-}]);
-goog.provide("gridReport.gridReportVersion");
-gridReport.gridReportVersion = "20.0.19";
-goog.provide("gridReport.model.ReportTemplate");
-(function() {
-  gridReport.model.ReportTemplate = function(options) {
-    if (options) {
-      gridReport.jsUtils.mergeProperties(this, options);
-      if (options.hasOwnProperty("path")) {
-        this.path = options.path;
-        if (options.path != null) {
-          var index = options.path.lastIndexOf("/");
-          this.group = options.path.substr(index + 1);
-        }
-      }
-      if (options.hasOwnProperty("creationDate")) {
-        this.creationDate = new Date(options.creationDate);
-      }
-      if (options.hasOwnProperty("modificationDate")) {
-        this.modificationDate = new Date(options.modificationDate);
-      }
-    }
-  };
-  gridReport.model.ReportTemplate.types = {global:"global", personal:"personal", newTemplate:"new", custom:"custom", shared:"shared"};
-  gridReport.model.ReportTemplate.prototype.accessDate = null;
-  gridReport.model.ReportTemplate.prototype.creationDate = null;
-  gridReport.model.ReportTemplate.prototype.description = "";
-  gridReport.model.ReportTemplate.prototype.author = null;
-  gridReport.model.ReportTemplate.prototype.group = null;
-  gridReport.model.ReportTemplate.prototype.name = "";
-  gridReport.model.ReportTemplate.prototype.modificationDate = null;
-  gridReport.model.ReportTemplate.prototype.type = gridReport.model.ReportTemplate.types.personal;
-  gridReport.model.ReportTemplate.prototype.localizedName = null;
-  gridReport.model.ReportTemplate.prototype.isGroupShared = false;
-  gridReport.model.ReportTemplate.prototype.productMetadata = null;
-  gridReport.model.ReportTemplate.prototype.getColumnsList = function() {
-    var columns = [];
-    try {
-      var description = JSON.parse(this.getProductMetadataValue("description") || this.description);
-      if (description && description.columns) {
-        columns = _.pluck(description.columns, "header");
-      }
-    } catch (e) {
-      if (this.description) {
-        columns = this.description.split(", ");
-      }
-    }
-    return columns;
-  };
-  gridReport.model.ReportTemplate.prototype.getIsObsolete = function() {
-    var isObsolete = false;
-    try {
-      var description = JSON.parse(this.getProductMetadataValue("description") || this.description);
-      if (!description || !description.columns) {
-        isObsolete = true;
-      }
-    } catch (e) {
-      isObsolete = true;
-    }
-    return isObsolete;
-  };
-  gridReport.model.ReportTemplate.prototype.getUniverseContext = function() {
-    try {
-      var description = JSON.parse(this.getProductMetadataValue("description") || this.description);
-      if (description && description.universeContext) {
-        return description.universeContext;
-      }
-    } catch (e) {
-    }
-    return scr.UniverseType.Public;
-  };
-  gridReport.model.ReportTemplate.prototype.isGlobal = function() {
-    return this.type === gridReport.model.ReportTemplate.types.global;
-  };
-  gridReport.model.ReportTemplate.prototype.isPersonal = function() {
-    return this.type === gridReport.model.ReportTemplate.types.personal;
-  };
-  gridReport.model.ReportTemplate.prototype.isShared = function() {
-    return this.type === gridReport.model.ReportTemplate.types.shared;
-  };
-  gridReport.model.ReportTemplate.prototype.getProductMetadataValue = function(key) {
-    var foundItem = _.find(this.productMetadata, function(item) {
-      return item.Key === key;
+  function mergeAlgorithms(algorithms, selectedAlgorithms) {
+    var algorithmsDictionary = toDictionary(selectedAlgorithms, "name");
+    angular.forEach(algorithms, function(algorith) {
+      var selectedAlgorith = algorithmsDictionary[algorith.name];
+      algorith.selected = selectedAlgorith && selectedAlgorith.selected;
+      algorith.isPremium = selectedAlgorith && selectedAlgorith.isPremium;
     });
-    return foundItem ? foundItem.Value : undefined;
-  };
-})();
-goog.provide("gridReport.directives.ReportTemplateManagerController");
-goog.require("gridReport.model.ReportTemplate");
-gridReport.Module.controller("ReportTemplateManagerController", ["$scope", "$timeout", "$q", "$filter", "gfFormatsService", "gfLogManager", "gfNotificationService", "$translate", "reportTemplateManagerSettings", "gfDapsService", function($scope, $timeout, $q, $filter, gfFormatsService, gfLogManager, gfNotificationService, $translate, reportTemplateManagerSettings, gfDapsService) {
-  var FORMATS_TABLE_HEADERS = ["NAME", "NUMBER_OF_FIELDS", "LAST_MODIFIED", "ACTIONS"], FIELDS_TABLE_HEADERS = ["SHARP", "FIELD_NAME"], ALL_TYPE = "All", PERSONAL_TYPE = "Personal", GLOBAL_TYPE = "Global", SHARED_TYPE = "Shared", allTypeFilteredItem = {label:$translate.instant("ALL"), type:ALL_TYPE, data:[]}, personalTypeFilteredItem = {label:$translate.instant("PERSONAL"), type:PERSONAL_TYPE, data:[]}, globalTypeFilteredItem = {label:$translate.instant("SAMPLE_TEMPLATES"), type:GLOBAL_TYPE, data:[]}, 
-  sharedTypeFilteredItem = {label:$translate.instant("SHARED_TEMPLATES"), type:SHARED_TYPE, data:[]};
-  function loadFormats() {
-    $scope.isWorking = true;
-    loadPersonalAndGlobalFormats().then(function(response) {
-      $scope.globalFormats = prefilterFormat(response.formats.globalFormats, gridReport.model.ReportTemplate.types.global, reportTemplateManagerSettings.universeContext);
-      $scope.personalFormats = prefilterFormat(response.formats.personalFormats, gridReport.model.ReportTemplate.types.personal, reportTemplateManagerSettings.universeContext);
-      $scope.sharedFormats = prefilterFormat(response.formats.sharedFormats, gridReport.model.ReportTemplate.types.shared, reportTemplateManagerSettings.universeContext);
-      allTypeFilteredItem.data = _.union($scope.globalFormats, $scope.personalFormats, $scope.sharedFormats);
-      personalTypeFilteredItem.data = $scope.personalFormats;
-      globalTypeFilteredItem.data = $scope.globalFormats;
-      sharedTypeFilteredItem.data = $scope.sharedFormats;
-      _.each(response.fails, function(fail) {
-        gfLogManager.error(fail);
-      });
-      $scope.isWorking = false;
-    }, function(fail) {
-      gfLogManager.error(fail);
-      $scope.isWorking = false;
-    });
+    return algorithms;
   }
-  function prefilterFormat(formats, formatType, universeContext) {
-    return _.chain(formats).map(function(format) {
-      return convertFormat(format, formatType);
-    }).filter(function(format) {
-      return format.universeContext == universeContext;
-    }).value();
-  }
-  function convertFormat(format, formatType) {
-    var fieldsList = format.getColumnsList(), templateUniverseContext = format.getUniverseContext();
-    return{id:_.uniqueId("row_id"), name:format.name, newName:format.name, numberOfFields:fieldsList.length, description:format.description, fieldsList:fieldsList, modified:format.modificationDate || format.creationDate, modified2:format.modificationDate || format.creationDate, editMode:false, shareTemplateMode:false, isObsolete:format.getIsObsolete(), type:formatType, universeContext:templateUniverseContext, canEdit:formatType == gridReport.model.ReportTemplate.types.personal, isSample:formatType == 
-    gridReport.model.ReportTemplate.types.global, isShared:formatType == gridReport.model.ReportTemplate.types.shared, isGroupShared:format.isGroupShared, author:format.author, group:format.group, path:format.path};
-  }
-  $scope.enterEditMode = function(row) {
-    if (row.entity.editMode != true) {
-      row.entity.editMode = true;
-      $timeout(function() {
-        var rowEl = row.elm;
-        var tooltip = rowEl.find(".gf-tooltip");
-        var position = row.elm.offset();
-        tooltip.css("top", position.top + 4);
-        tooltip.css("left", position.left + 170);
-      });
-    }
-  };
-  $scope.enterShareTemplateMode = function(entity) {
-    entity.shareTemplateMode = !entity.shareTemplateMode;
-  };
-  function loadPersonalAndGlobalFormats() {
-    var deffered = $q.defer();
-    gfFormatsService.loadFormats(function(response) {
-      deffered.resolve(response);
-    });
-    return deffered.promise;
-  }
-  function isFormatExists(formatName) {
-    return _.any($scope.personalFormats, function(f) {
-      return f.name == formatName;
-    });
-  }
-  function trySaveFormat() {
-    if (isSaveDisabled()) {
-      return;
-    }
-    var formatName = $scope.saveModeSettings.selectedFormatName;
-    if (!($scope.saveModeSettings.isOverwriteWithoutConfirmation && $scope.saveModeSettings.selectedFormatName === $scope.saveModeSettings.initialSelectedFormatName) && isFormatExists(formatName)) {
-      gfNotificationService.confirm($translate.instant("TEMPLATE_ALREADY_EXISTS_CONFIRMATION", {name:formatName}), saveFormat);
-    } else {
-      saveFormat();
+  function selectAlgorithm(algorithm) {
+    if (!algorithm.selected) {
+      algorithm.selected = true;
     }
   }
-  function saveFormat() {
-    reportTemplateManagerSettings.closeDialog($scope);
-    tryExecuteCallback(reportTemplateManagerSettings.onSaveFormat, $scope.saveModeSettings.selectedFormatName);
+  function removePremiumStatusInOtherAlgorithms(premiumAlgorithm, allAlgorithms) {
+    angular.forEach(allAlgorithms, function(algorithm) {
+      algorithm.isPremium = algorithm.name === premiumAlgorithm.name;
+    });
   }
   function init() {
-    loadFormats();
-  }
-  function tryExecuteCallback(funct) {
-    if (funct) {
-      var params = Array.prototype.slice.call(arguments, 1);
-      funct.apply(this, params);
-    }
-  }
-  function rollbackRenaming(format) {
-    format.newName = format.name;
-    format.editMode = false;
-  }
-  function tryRenameFormat(format, needRollbackInvalid) {
-    var formElement = $scope.formScope.editFormatForm.formatName;
-    if (formElement.$error.objectName) {
-      needRollbackInvalid && rollbackRenaming(format);
-      return;
-    }
-    if (format.name == format.newName) {
-      format.editMode = false;
-      return;
-    }
-    if (isFormatExists(format.newName)) {
-      if (needRollbackInvalid) {
-        rollbackRenaming(format);
-      } else {
-        formElement.$setValidity("nameExists", false);
-        formElement.errorMsg = $translate.instant("NAME_ALREADY_EXISTS");
-      }
-      return;
-    } else {
-      formElement.$setValidity("nameExists", true);
-    }
-    $scope.isWorking = true;
-    gfFormatsService.renameFormat(format.name, format.newName, format.description).then(function() {
-      tryExecuteCallback(reportTemplateManagerSettings.onRenameFormat, format.name, format.newName);
-      format.name = format.newName;
-      format.editMode = false;
-      filterFormats($scope.searchText);
-      $scope.isWorking = false;
-    }, function(fail) {
-      gfLogManager.error(fail);
-      $timeout(function() {
-        format.newName = format.name;
-        $scope.isWorking = false;
-      });
+    var selectedStatistics = gfGridManagementService.getStatistics($scope.gridInstanceId);
+    _.forEach(selectedStatistics, function(s) {
+      s.selected = true;
     });
+    $scope.algorithms = mergeAlgorithms(gfStatisticsAlgorithms.getAll(), selectedStatistics);
   }
-  function deleteFormat(format) {
-    $scope.isWorking = true;
-    gfFormatsService.deleteFormat(format.name).then(function() {
-      $timeout(function() {
-        $scope.personalFormats.splice(_.indexOf($scope.personalFormats, format), 1);
-        if ($scope.currentFormat == format) {
-          $scope.currentFormat = undefined;
-        }
-        filterFormats($scope.searchText);
-        tryExecuteCallback(reportTemplateManagerSettings.onDeleteFormat, format.name);
-        $scope.isWorking = false;
-      });
-    }, function(fail) {
-      gfLogManager.error(fail);
-      $scope.isWorking = false;
-    });
-  }
-  function showFieldsList($event, format) {
-    var xOffset = 0, yOffset = 0, position = {left:270, top:45};
-    $scope.fieldsModal.fieldsList = format.fieldsList;
-    $scope.fieldsModal.formatName = format.name;
-    $scope.fieldsModal.fieldsTableHeaders = FIELDS_TABLE_HEADERS;
-    $scope.fieldsModal.position = {x:position.left + xOffset, y:position.top + yOffset};
-    $event.stopPropagation();
-    $scope.fieldsModal.visible = true;
-    $(document).on("click", closeFieldsList);
-  }
-  function filterFormats(searchText) {
-    var filteredGlobalFormats = $filter("filter")($scope.globalFormats, {name:searchText}), filteredPersonalFormats = $filter("filter")($scope.personalFormats, {name:searchText}), filteredSharedFormats = $filter("filter")($scope.sharedFormats, {name:searchText});
-    allTypeFilteredItem.data = _.union(filteredGlobalFormats, filteredPersonalFormats, filteredSharedFormats);
-    personalTypeFilteredItem.data = filteredPersonalFormats;
-    globalTypeFilteredItem.data = filteredGlobalFormats;
-    sharedTypeFilteredItem.data = filteredSharedFormats;
-  }
-  function closeFieldsList() {
-    $scope.fieldsModal.visible = false;
-    $scope.$apply();
-    $(document).off("click", closeFieldsList);
-  }
-  function disableEditMode(format) {
-    format.editMode = false;
-  }
-  function closeDialog() {
-    $scope.fieldsModal.visible = false;
-    reportTemplateManagerSettings.closeDialog($scope);
-  }
-  function setFormScope(formScope) {
-    $scope.formScope = formScope;
-  }
-  function isSaveDisabled() {
-    return!$scope.formScope.saveFormatForm.formatName.$valid;
-  }
-  function stopPropagationByCondition($event) {
-    if (!$($event.target).hasClass("modal-header-close-buttton")) {
-      $event.stopPropagation();
-    }
-  }
-  function setCurrentType(item) {
-    $scope.currentType = item;
-  }
-  function fixTemplate(template) {
-    $scope.isWorking = true;
-    gfFormatsService.fixTemplate(new gridReport.model.ReportTemplate({name:template.name, type:gridReport.model.ReportTemplate.types.personal})).then(function() {
-      loadFormats();
-    }, function(fail) {
-      gfLogManager.error(fail);
-      $scope.isWorking = false;
-    });
-  }
-  function loadFormat() {
-    if (!isLoadDisabled()) {
-      reportTemplateManagerSettings.closeDialog($scope);
-      tryExecuteCallback(reportTemplateManagerSettings.onLoadFormat, {name:$scope.currentFormat.name, type:$scope.currentFormat.type, path:$scope.currentFormat.path});
-    }
-  }
-  function isLoadDisabled() {
-    return $scope.isWorking || $scope.currentFormat == undefined;
-  }
-  function setCurrentFormat(newVal, oldVal) {
-    var newTemplate = _.first(newVal), oldTemplate = _.first(oldVal);
-    if (newTemplate !== oldTemplate && newTemplate != undefined) {
-      if ($scope.currentFormat && $scope.currentFormat.id != newTemplate.id) {
-        $scope.currentFormat.shareTemplateMode = false;
-      }
-      $scope.currentFormat = newTemplate;
-      if ($scope.saveModeSettings) {
-        $scope.saveModeSettings.selectedFormatName = newTemplate.name;
-      }
-    }
-  }
-  function isSaveVisible() {
-    return $scope.saveModeSettings != null;
-  }
-  function isLoadVisible() {
-    return $scope.saveModeSettings == null;
-  }
-  function getInitialTemplateType() {
-    switch(reportTemplateManagerSettings.templateType) {
-      case gridReport.model.ReportTemplate.types.personal:
-        return personalTypeFilteredItem;
-      case gridReport.model.ReportTemplate.types.global:
-        return globalTypeFilteredItem;
-      case gridReport.model.ReportTemplate.types.shared:
-        return sharedTypeFilteredItem;
-      default:
-        return allTypeFilteredItem;
-    }
-  }
-  function sharedStateChanged(templateName, shared, entity) {
-    entity.isGroupShared = shared;
-  }
-  $scope.saveModeSettings = reportTemplateManagerSettings.saveModeSettings;
-  $scope.formatsTableHeaders = FORMATS_TABLE_HEADERS;
-  $scope.formatsList = [];
-  $scope.closeDialog = closeDialog;
-  $scope.trySaveFormat = trySaveFormat;
-  $scope.showFieldsList = showFieldsList;
-  $scope.searchText = "";
-  $scope.disableEditMode = disableEditMode;
-  $scope.tryRenameFormat = tryRenameFormat;
-  $scope.deleteFormat = deleteFormat;
-  $scope.currentFormat = undefined;
-  $scope.formScope = {};
-  $scope.setFormScope = setFormScope;
-  $scope.isSaveDisabled = isSaveDisabled;
-  $scope.templateNameMaxLengh = gfDapsService.REPORT_TEMPLATE_NAME_MAX_LENGTH;
-  $scope.onHeaderHover = reportTemplateManagerSettings.onHeaderHover;
-  $scope.onHeaderMouseDown = reportTemplateManagerSettings.onHeaderMouseDown;
-  $scope.rollbackRenaming = rollbackRenaming;
-  $scope.stopPropagationByCondition = stopPropagationByCondition;
-  $scope.fieldsModal = {visible:false, fieldsList:[], formatName:null, fieldsTableHeaders:FIELDS_TABLE_HEADERS, position:{x:null, y:null}};
-  $scope.filteredData = [allTypeFilteredItem, personalTypeFilteredItem, globalTypeFilteredItem, sharedTypeFilteredItem];
-  $scope.currentType = getInitialTemplateType();
-  $scope.filterFormats = filterFormats;
-  $scope.fixTemplate = fixTemplate;
-  $scope.setCurrentType = setCurrentType;
-  $scope.loadFormat = loadFormat;
-  $scope.isLoadDisabled = isLoadDisabled;
-  $scope.isLoadVisible = isLoadVisible;
-  $scope.isSaveVisible = isSaveVisible;
-  $scope.sharedStateChanged = sharedStateChanged;
-  $scope.getSharedTitle = function(reportTemplate) {
-    var title = [];
-    if (reportTemplate.author) {
-      title.push($translate.instant("AUTHOR") + ": " + reportTemplate.author.firstName + " " + reportTemplate.author.lastName);
-    }
-    if (reportTemplate.group) {
-      title.push($translate.instant("SHARED_TO") + ": " + reportTemplate.group);
-    }
-    return title.join("\r\n");
+  $scope.markAsPremium = function(algorithm) {
+    algorithm.isPremium = true;
+    selectAlgorithm(algorithm);
+    removePremiumStatusInOtherAlgorithms(algorithm, $scope.algorithms);
   };
-  var headerCellTemplate = '<div class="ngHeaderSortColumn {{col.headerClass}}" ng-style="{\'cursor\': col.cursor}" ng-class="{ \'ngSorted\': !noSortVisible }">' + '<div ng-click="col.sort($event)" ng-class="\'colt\' + col.index" title="{{col.displayName}}" class="ngHeaderText">{{col.displayName}}</div>' + '<div class="ngSortButtonDown" ng-show="col.showSortButtonDown()"></div>' + '<div class="ngSortButtonUp" ng-show="col.showSortButtonUp()"></div>' + '<div class="ngSortPriority">{{col.sortPriority}}</div>' + 
-  '<div ng-class="{ ngPinnedIcon: col.pinned, ngUnPinnedIcon: !col.pinned }" ng-click="togglePin(col)" ng-show="col.pinnable"></div>' + "</div>" + '<div ng-show="col.resizable" class="ngHeaderGrip" ng-click="col.gripClick($event)" ng-mousedown="col.gripOnMouseDown($event)"></div>';
-  $scope.gridOptions = {data:"currentType.data", enableRowSelection:true, enableColumnResize:true, multiSelect:false, headerRowHeight:29, rowHeight:29, selectedItems:[], columnDefs:[{field:"name", displayName:$translate.instant("NAME"), width:"61%", minWidth:160, headerCellTemplate:headerCellTemplate, cellTemplate:"<div>" + '<div title="{{row.entity.name}}" ng-if="!row.entity.editMode && !row.entity.shareTemplateMode" class="ngCellText" style="position:relative">' + "<span>{{row.entity.name}}</span>" + 
-  '<span class="icon-users" ' + 'title="{{getSharedTitle(row.entity)}}" ' + 'ng-show="row.entity.isShared || row.entity.isGroupShared"></span>' + '<span class="sample" ' + 'ng-show="row.entity.isSample">SAMPLE</span>' + "</div>" + '<div title="{{row.entity.name}}" ng-if="row.entity.editMode" style="position:relative">' + '<div class="gf-texbox-error-container">' + '<input maxlength="{{templateNameMaxLengh}}" ' + "ng-class=\"{'input-error':!editFormatForm.formatName.$valid}\" " + "gf-object-name " + 
-  'type="text" ' + 'on-enter="tryRenameFormat(row.entity)" ' + 'on-escape="rollbackRenaming(row.entity)" ' + 'name="formatName" ' + 'on-blur="tryRenameFormat(row.entity,true)" ' + 'focus-me="true" ' + 'selected="true" ' + 'ng-model="row.entity.newName" />' + '<div class="gf-tooltip" ng-show="!editFormatForm.formatName.$valid" style="position:fixed; z-index:1;">{{editFormatForm.formatName.errorMsg}}</div>' + '<span class="gf-textbox-erroricon"' + 'ng-show="!editFormatForm.formatName.$valid">' + "</span>" + 
-  "</div>" + "</div>" + '<div ng-if="row.entity.shareTemplateMode" ' + 'class="gf-share-template-container">' + '<gf-sharing-details template-name="row.entity.name" ' + 'template-description="row.entity.description" ' + 'on-shared-state-changed="sharedStateChanged(templateName, shared, row.entity)">' + "</gf-sharing-details>" + "</div>" + "</div>"}, {field:"numberOfFields", displayName:$translate.instant("NUMBER_OF_FIELDS"), width:"12%", minWidth:80, headerCellTemplate:headerCellTemplate, cellTemplate:'<div><div class="ngCellText">' + 
-  '<a href="javascript:"' + 'class="gf-fields-view-link"' + 'ng-hide="row.entity.isObsolete && row.entity.canEdit"' + "title=\"{{'CLICK_TO_VIEW_FIELDS_IN_TEMPLATE'| translate }}\"" + 'ng-click="showFieldsList($event,row.entity)">{{row.entity.numberOfFields}}</a>' + '<div ng-show="row.entity.isObsolete && row.entity.canEdit"' + 'style="padding-left: 0"' + "title=\"{{'PRESS_REFRESH_TO_DISPLAY_NUMBER_OF_FIELDS'| translate }}\"" + 'class="gf-icon icon-refresh"' + 'ng-click="fixTemplate(row.entity)"></div>' + 
-  "</div></div>"}, {field:"modified2", displayName:$translate.instant("LAST_MODIFIED"), width:"14%", minWidth:95, headerCellTemplate:headerCellTemplate, cellTemplate:"<div>" + '<div class="ngCellText">' + "<span>{{row.entity.modified2 | gfDateFormatter}}</span>" + "</div>" + "</div>"}, {field:"", displayName:$translate.instant("ACTIONS"), resizable:false, sortable:false, width:"12%", minWidth:80, headerCellTemplate:headerCellTemplate, cellTemplate:'<div><div class="gf-actions-cell">' + "<span title=\"{{'SHARE'| translate}}\"" + 
-  'ng-show="row.entity.canEdit"' + 'class="gf-icon icon-share"' + 'ng-click="enterShareTemplateMode(row.entity) "></span>' + "<span title=\"{{'RENAME'| translate}}\"" + 'ng-show="row.entity.canEdit"' + 'class="gf-icon icon-edit"' + 'ng-click="enterEditMode(row) "></span>' + "<span title=\"{{'DELETE'| translate}}\"" + 'ng-show="row.entity.canEdit"' + 'class="gf-icon icon-trash"' + 'ng-click="deleteFormat(row.entity)"></span>' + "</div></div>"}]};
-  $scope.$watch("gridOptions.selectedItems", setCurrentFormat, true);
-  $scope.$on("$destroy", function() {
-    $scope.formScope = null;
-  });
+  $scope.unmarkPremium = function(algorithm) {
+    algorithm.isPremium = false;
+  };
   init();
 }]);
-goog.provide("gridReport.directives.ReportTemplateManagerDialogService");
-goog.require("gridReport.directives.ReportTemplateManagerController");
-gridReport.Module.service("gfReportTemplateManagerDialogService", ["$rootScope", "$modal", function($rootScope, $modal) {
-  var modal;
-  var modalSelector = ".gf-template-manager-modal";
-  function closeDialog($scope) {
-    if (!modal) {
-      return;
-    }
-    modal.close();
-    if ($scope) {
-      $scope.$destroy();
-    }
-    modal = null;
-  }
-  function makeModalDraggable() {
-    $(modalSelector).draggable({handle:".gf-template-manager-modal-header"});
-  }
-  var service = {};
-  service.openDialog = function(reportTemplateManagerSettings) {
-    if (!reportTemplateManagerSettings) {
-      throw new Error("reportTemplateManagerSettings should be provided");
-    }
-    reportTemplateManagerSettings.closeDialog = closeDialog;
-    reportTemplateManagerSettings.onHeaderHover = makeModalDraggable;
-    reportTemplateManagerSettings.onHeaderMouseDown = function() {
-      $(modalSelector).focus();
-    };
-    modal = $modal.open({templateUrl:"scripts/directives/reportTemplateManager/ReportTemplateManagerDialog.html", controller:"ReportTemplateManagerController", windowClass:modalSelector.substring(1) + " gf-modal" + (reportTemplateManagerSettings.templateManagerCustomClass ? " " + reportTemplateManagerSettings.templateManagerCustomClass : ""), keyboard:false, resolve:{reportTemplateManagerSettings:function() {
-      return reportTemplateManagerSettings;
-    }}});
-    modal.opened.then(function() {
-      reportTemplateManagerSettings.onDialogOpen && reportTemplateManagerSettings.onDialogOpen();
-    });
-  };
-  service.closeDialog = closeDialog;
-  return service;
-}]);
-goog.provide("gridReport.model.ExclusionsTypes");
-gridReport.model.ExclusionsTypes = {Exclusions:"ExclusionsTypes_Exclusions", StatisticsExclusions:"ExclusionsTypes_StatisticsExclusions"};
-goog.provide("gridReport.directives.ExclusionsManagerController");
-gridReport.Module.controller("ExclusionsManagerController", ["$scope", "gfExclusions", "gfStatisticsExclusions", "gfGridManagementService", "gfExclusionManagerDialogService", "$translate", function($scope, gfExclusions, gfStatisticsExclusions, gfGridManagementService, gfExclusionManagerDialogService, $translate) {
-  function init() {
-    updateModel();
-  }
-  function getService() {
-    return $scope.exclusionsType == gridReport.model.ExclusionsTypes.StatisticsExclusions ? gfStatisticsExclusions.instance($scope.gridInstanceId) : gfExclusions.instance($scope.gridInstanceId);
-  }
-  function updateModel() {
-    $scope.isWorking = true;
-    var rawGridData = gfGridManagementService.getRawData($scope.gridInstanceId);
-    var identifiers = _.map(rawGridData[0].values, function(v) {
-      return v.rowKey;
-    });
-    getService().filterExclusions(identifiers);
-    function getCompanyName(id) {
-      return _.findWhere(rawGridData, {id:"TR.CommonName"}).values[id].value;
-    }
-    $scope.exclusions = _.map(getService().getExcludedIdentifiers(), function(id) {
-      return{id:id, companyName:getCompanyName(id), isSelected:false};
-    });
-    $scope.isWorking = false;
-  }
-  function areEveryIdentifiersSelected() {
-    return _.every($scope.exclusions, function(e) {
-      return e.isSelected;
-    });
-  }
-  function toogleSelectionForAllIdentifiers() {
-    var val = !anyExclusionsSelected();
-    _.each($scope.exclusions, function(e) {
-      e.isSelected = val;
-    });
-  }
-  function anyExclusionsSelected() {
-    return _.some($scope.exclusions, function(e) {
-      return e.isSelected;
-    });
-  }
-  function save() {
-    if (anyExclusionsSelected()) {
-      var unselectedExclusions = _.where($scope.exclusions, {isSelected:false});
-      getService().setExclusions(_.pluck(unselectedExclusions, "id"));
-    }
-    close();
-  }
-  function close() {
-    gfExclusionManagerDialogService.closeDialog();
-  }
-  function getExcludedMessage() {
-    return $scope.exclusionsType == gridReport.model.ExclusionsTypes.Exclusions ? $translate.instant("EXCLUDED") : $translate.instant("EXCLUDED_FROM_STATISTICS");
-  }
-  $scope.getExcludedMessage = getExcludedMessage;
-  $scope.isWorking = false;
-  $scope.exclusions = null;
-  $scope.toogleSelectionForAllIdentifiers = toogleSelectionForAllIdentifiers;
-  $scope.areEveryIdentifiersSelected = areEveryIdentifiersSelected;
-  $scope.save = save;
-  $scope.close = close;
-  $scope.anyExclusionsSelected = anyExclusionsSelected;
-  init();
-}]);
-goog.provide("gridReport.directives.ExclusionsManagerDirective");
-goog.require("gridReport.directives.ExclusionsManagerController");
-goog.require("gridReport.model.ExclusionsTypes");
-gridReport.Module.directive("gfExclusionsManager", [function() {
-  return{restrict:"E", templateUrl:"scripts/directives/exclusionsManager/ExclusionsManager.html", scope:{gridInstanceId:"=", identifiers:"=", isVisible:"=", exclusionsType:"="}, controller:"ExclusionsManagerController", link:function(scope, element) {
-    scope.element = $(element).closest(".modal-dialog");
-    scope.element.draggable({handle:".modal-header"});
-  }};
-}]);
-goog.provide("gridReport.services.gfGroupingManagerDialogService");
-gridReport.Module.service("gfGroupingManagerDialogService", ["$modal", "$log", "$translate", function($modal, $log, $translate) {
-  var service = {}, popup;
-  service.closeDialog = function() {
-    if (popup) {
-      try {
-        popup.close();
-        popup = null;
-      } catch (e) {
-      }
-    }
-  };
-  service.openGroupingManagerDialog = function(gridInstanceId, isAutoSaveState, maxGroupsCount) {
-    var settings = {gridInstanceId:gridInstanceId, isAutoSaveState:isAutoSaveState, maxGroupsCount:maxGroupsCount};
-    service.closeDialog();
-    popup = $modal.open({windowClass:"gf-grouping-manager-modal gf-modal", templateUrl:"scripts/services/groupingManagerDialog/GroupingManagerDialog.html", controller:["$scope", "$modalInstance", "settings", function($scope, $modalInstance, settings) {
-      $scope.settings = settings;
-    }], resolve:{settings:function() {
-      return settings;
-    }}});
-    return popup;
-  };
-  return service;
-}]);
-goog.provide("gridReport.directives.MultiFactorRankButtonDirective");
-gridReport.Module.directive("gfMultiFactorRankButton", ["gfEventsAggregator", function(gfEventsAggregator) {
-  return{restrict:"E", scope:{isEnabled:"=", universeContext:"=", gridInstanceId:"="}, templateUrl:"scripts/directives/multiFactorRankButton/MultiFactorRankButton.html", link:function(scope) {
-    scope.openMfr = function() {
-      gfEventsAggregator.getChildAggregator(scope.gridInstanceId).raiseEvent(gridReport.model.CommandEvents.showPicker, {selectedCategoryId:scr.ObjectType.MultiFactorRanks, universeContext:scope.universeContext});
-    };
-  }};
-}]);
-goog.provide("gridReport.utils.CommandHelper");
-gridReport.Module.factory("gfCommandHelper", [function() {
-  function getUniverseSyntax(command) {
-    var syntax = "";
-    if (command.metadata.universe === scr.mfr.RankAgainst.CurrentUniverse || command.metadata.universe === scr.mfr.RankAgainst.AllCompanies) {
-      syntax = scr.mfr.ADC.getMFROptionToADCCode("RankAgainst", command.metadata.universe);
-    } else {
-      if (command.metadata.universe === scr.mfr.RankAgainst.ListPortfolioIndex) {
-        if (command.metadata.universeMetadata) {
-          switch(command.metadata.universeMetadata.type) {
-            case "index":
-            ;
-            case "MarketIndex":
-              syntax = "Indices";
-              break;
-            case "watchlist":
-            ;
-            case "Watchlist":
-              syntax = "Lists";
-              break;
-            case "portfolio":
-            ;
-            case "Funded":
-              syntax = "Portfolios";
-              break;
-          }
-          var s = command.metadata.universeMetadata.id + "/*" + command.metadata.universeMetadata.name + "*/";
-          syntax = "SCREEN(U(IN(" + syntax + "(" + s + "))))";
-        }
-      }
-    }
-    return syntax;
-  }
-  function getDecoratedExpression(expression, returnType) {
-    if (returnType === "Boolean") {
-      return "SELECT(" + expression + ', instrument, "(percent)value:[value]?1:0")';
-    } else {
-      return expression;
-    }
-  }
-  var service = {};
-  service.getTransformedPath = function(command, rankNumber, outputType) {
-    var syntax, factorsSyntax = "", rankType = "RankType=", universe = "Universe=", nTileSort = "NTileSort=", comma = ", ";
-    rankType += scr.mfr.ADC.getMFROptionToADCCode("MFMethodology", command.metadata.methodology);
-    nTileSort += scr.mfr.ADC.getMFROptionToADCCode("MFNTileOrder", command.metadata.nTileOrder);
-    for (var i = 0;i < command.factors.length;i++) {
-      var factor = command.factors[i];
-      var factorSyntax = "Factor(" + getDecoratedExpression(factor.expression, factor.returnType) + comma + "SortOrder=" + scr.mfr.ADC.getMFROptionToADCCode("Order", factor.metadata.order) + comma + "optionIfNullFactor=" + scr.mfr.ADC.getMFROptionToADCCode("FactorIfNA", factor.metadata.ifNotAvailable) + comma + "weight=" + factor.metadata.weight + comma + "UseRawAsFactor=" + (factor.metadata.useRaw === false ? "False" : "True") + ")";
-      factorsSyntax += factorSyntax + comma;
-    }
-    factorsSyntax = factorsSyntax.substring(0, factorsSyntax.length - comma.length);
-    var groupBy = scr.output.Item.getPathFromUniverse(command.metadata.partitionBy);
-    if (groupBy && groupBy.length > 0) {
-      groupBy = "GroupBy(" + groupBy + ")" + comma;
-    }
-    universe += '"' + getUniverseSyntax(command) + '"';
-    var rankNumberString = "RankNumber=" + (rankNumber || 0);
-    var outputTypeString = "OutputType=" + (outputType || "FinalRank");
-    syntax = "GRANK(" + factorsSyntax + comma + groupBy + rankType + comma + universe + comma + nTileSort + comma + outputTypeString + comma + rankNumberString + ")";
-    return syntax;
-  };
-  service.getDecoratedExpression = getDecoratedExpression;
-  return service;
-}]);
-goog.provide("gridReport.services.Exclusions");
-goog.require("gridReport.model.GridEvents");
-gridReport.Module.factory("gfExclusions", ["gfEventsAggregator", function(gfEventsAggregator) {
-  function createService(id) {
-    var exclusions = {};
-    var excludedIdentifiers = [];
-    function isExclusionsNotChanged(identifiers) {
-      return excludedIdentifiers.length == identifiers.length && (_.difference(excludedIdentifiers, identifiers).length == 0 && _.difference(identifiers, excludedIdentifiers).length == 0);
-    }
-    var service = {};
-    service.isHidden = function(identifier) {
-      return!!exclusions[identifier];
-    };
-    service.setExclusions = function(identifiers) {
-      if (isExclusionsNotChanged(identifiers)) {
-        return;
-      }
-      excludedIdentifiers = identifiers;
-      exclusions = _.reduce(identifiers, function(map, item) {
-        map[item] = true;
-        return map;
-      }, {});
-      gfEventsAggregator.getChildAggregator(id).raiseEvent(gridReport.model.GridEvents.identifiersExcluded, identifiers, gridReport.model.ExclusionsTypes.Exclusions);
-    };
-    service.getExcludedIdentifiers = function() {
-      return excludedIdentifiers;
-    };
-    service.exclude = function(identifiers) {
-      var addedToExclusion = _.difference(identifiers, excludedIdentifiers);
-      if (addedToExclusion.length == 0) {
-        return addedToExclusion;
-      }
-      service.setExclusions(_.union(excludedIdentifiers, addedToExclusion));
-      return addedToExclusion;
-    };
-    service.removeFromExcluded = function(identifiers) {
-      service.setExclusions(_.difference(excludedIdentifiers, identifiers));
-    };
-    service.filterExclusions = function(identifiers) {
-      var currentExclusions = _.sortBy(excludedIdentifiers);
-      var identifiersToExclude = _.sortBy(_.intersection(excludedIdentifiers, identifiers));
-      if (_.isEqual(currentExclusions, identifiersToExclude)) {
-        return;
-      }
-      service.setExclusions(_.intersection(excludedIdentifiers, identifiers));
-    };
-    return service;
-  }
-  var services = {};
-  return{instance:function(gridInstanceId) {
-    if (!services[gridInstanceId]) {
-      services[gridInstanceId] = createService(gridInstanceId);
-    }
-    return services[gridInstanceId];
-  }, clear:function(gridInstanceId) {
-    if (services[gridInstanceId]) {
-      delete services[gridInstanceId];
-    }
-  }};
-}]);
-goog.provide("gridReport.controllers.ExportControllerBase");
-goog.require("gridReport.services.Exclusions");
-gridReport.Module.controller("ExportControllerBase", ["$scope", "$translate", "gfExclusions", "gfGridManagementService", function($scope, $translate, gfExclusions, gfGridManagementService) {
-  function getIdentifiersForExport(isActionForAll) {
-    return isActionForAll ? gfGridManagementService.getVisibleIdentifiers($scope.gridInstanceId) : $scope.getSelectedIdentifiers();
-  }
-  function getDisabledFuncByCondition(isActionForAll, isDisabled) {
-    return function() {
-      var disabledValue = isDisabled ? isDisabled() : false;
-      return disabledValue || !isActionForAll && !anyIdentifiersChecked();
-    };
-  }
-  function getMenuItemByLabel(label) {
-    return _.find($scope.menuItems, function(item) {
-      return item.label == $translate.instant(label);
-    });
-  }
-  function isDisabled() {
-    var visibleIds = $scope.getVisibleIdentifiers();
-    return!visibleIds || !visibleIds.length;
-  }
-  function anyIdentifiersChecked() {
-    var selected = $scope.getSelectedIdentifiers();
-    var selectedLength = selected ? selected.length : 0;
-    return selectedLength > 0;
-  }
-  function getVisibleIdentifiers() {
-    return _.filter($scope.allTickers, function(ticker) {
-      return!gfExclusions.instance($scope.gridInstanceId).isHidden(ticker);
-    });
-  }
-  function getSelectedIdentifiers() {
-    return _.pluck($scope.selectedRows, "rowKey");
-  }
-  $scope.menuItems = [];
-  $scope.getIdentifiersForExport = getIdentifiersForExport;
-  $scope.getDisabledFuncByCondition = getDisabledFuncByCondition;
-  $scope.addMenuItem = function(label, getAction, isActionForAll, isDisabled, isVisible) {
-    $scope.menuItems.push({label:$translate.instant(label), action:getAction(isActionForAll), disabled:getDisabledFuncByCondition(isActionForAll, isDisabled), visible:isVisible});
-  };
-  $scope.getMenuItemByLabel = getMenuItemByLabel;
-  $scope.isDisabled = isDisabled;
-  $scope.anyIdentifiersChecked = anyIdentifiersChecked;
-  $scope.getVisibleIdentifiers = getVisibleIdentifiers;
-  $scope.getSelectedIdentifiers = getSelectedIdentifiers;
-}]);
-goog.provide("gridReport.directives.ButtonWithContextMenuController");
-gridReport.Module.controller("ButtonWithContextMenuController", ["$scope", "$timeout", function($scope, $timeout) {
-  var DEFAULT_OPTIONS = {openDirection:"left"};
-  function executeMenuAction($event, item) {
-    if (getResultOrValue(item.disabled)) {
-      $event.stopPropagation();
-    } else {
-      item.action();
-      if ($scope.isMenuOpened()) {
-        $timeout(function() {
-          $(document.body).click();
-        });
-      }
-    }
-  }
-  function getResultOrValue(f) {
-    return _.isFunction(f) ? f() : f;
-  }
-  $scope.options = $.extend({}, DEFAULT_OPTIONS, $scope.options);
-  $scope.executeMenuAction = executeMenuAction;
-  $scope.getResultOrValue = getResultOrValue;
-  $scope.buttonSelectClass = $scope.isSingleButton == true ? "button-single-select" : "button-select";
-}]);
-goog.provide("gridReport.controllers.DropDownFakeController");
-gridReport.Module.controller("DropDownFakeController", [function() {
-}]);
-goog.provide("gridReport.directives.ButtonWithContextMenuDirective");
-goog.require("gridReport.directives.ButtonWithContextMenuController");
-goog.require("gridReport.controllers.DropDownFakeController");
-gridReport.Module.directive("gfButtonWithContextMenu", [function() {
-  return{restrict:"E", scope:{buttonText:"=", buttonIconClass:"=", menuItems:"=", defaultMenuItem:"=", isDisabled:"=", isSingleButton:"=", options:"="}, controller:"ButtonWithContextMenuController", templateUrl:"scripts/directives/buttonWithContextMenu/ButtonWithContextMenu.html", link:function(scope, element) {
-    scope.isMenuOpened = function() {
-      return $(element).find(".dropdown").hasClass("open");
-    };
-  }};
-}]);
-goog.provide("gridReport.directives.ExportContextMenuOptions");
-gridReport.directives.ExportContextMenuOptions = function(options) {
-  gridReport.jsUtils.mergeProperties(this, options, ["canExportAllAsValues", "canExportAllAsFormulas", "canExportSelectedAsFormulas", "canExportSelectedAsValues"]);
-};
-gridReport.directives.ExportContextMenuOptions.prototype.canExportAllAsValues = true;
-gridReport.directives.ExportContextMenuOptions.prototype.canExportAllAsFormulas = true;
-gridReport.directives.ExportContextMenuOptions.prototype.canExportSelectedAsFormulas = true;
-gridReport.directives.ExportContextMenuOptions.prototype.canExportSelectedAsValues = true;
-goog.provide("gridReport.directives.ExportToExcelController");
-gridReport.Module.controller("ExportToExcelController", ["$scope", "$translate", "gfGridManagementService", "gfEventsAggregator", function($scope, $translate, gfGridManagementService, gfEventsAggregator) {
-  function getExportFilename() {
-    var date = new Date;
-    var dateString = [date.getMonthName(), date.getDate(), date.getFullYear(), date.getHours(), date.getMinutes(), date.getSeconds()].join("_");
-    return "GridExport_" + dateString;
-  }
-  function getTitle() {
-    var selectedTemplate = gfGridManagementService.getSelectedTemplate($scope.gridInstanceId);
-    return selectedTemplate ? selectedTemplate.name : undefined;
-  }
-  function getExportToExcelAsValuesAction(exportAll) {
-    return function() {
-      var aggregator = gfEventsAggregator.getChildAggregator($scope.gridInstanceId);
-      if (exportAll) {
-        aggregator.raiseEvent(gridReport.model.GridEvents.exportAllAsValuesToExcel);
-      } else {
-        aggregator.raiseEvent(gridReport.model.GridEvents.exportSelectedAsValuesToExcel);
-      }
-      if ($scope.overrideExportAsValues) {
-        $scope.overrideExportAsValues(exportAll);
-      } else {
-        gfGridManagementService.exportToExcel($scope.gridInstanceId, {fileName:getExportFilename(), title:getTitle(), exportAll:exportAll});
-      }
-    };
-  }
-  function getExportToExcelAsFormulaAction(exportAll) {
-    return function() {
-      var selectedIdentifiersUniverse = exportAll ? null : $scope.getSelectedIdentifiers().join(",");
-      var isTransposed = gfGridManagementService.isTransposed($scope.gridInstanceId);
-      var aggregator = gfEventsAggregator.getChildAggregator($scope.gridInstanceId);
-      if (exportAll) {
-        aggregator.raiseEvent(gridReport.model.GridEvents.exportAllAsFormulaToExcel);
-      } else {
-        aggregator.raiseEvent(gridReport.model.GridEvents.exportSelectedAsFormulaToExcel);
-      }
-      if ($scope.overrideExportAsFormula) {
-        $scope.overrideExportAsFormula(exportAll);
-      } else {
-        gfGridManagementService.exportToExcelAsFormula($scope.gridInstanceId, {fileName:getExportFilename(), universe:selectedIdentifiersUniverse, isTransposed:isTransposed});
-      }
-    };
-  }
-  function getDefaultItem() {
-    if ($scope.options.canExportAllAsValues && $scope.options.canExportSelectedAsValues) {
-      return $scope.anyIdentifiersChecked() ? $scope.getMenuItemByLabel("EXPORT_SELECTED_AS_VALUES") : $scope.getMenuItemByLabel("EXPORT_ALL_AS_VALUES");
-    } else {
-      if ($scope.options.canExportAllAsFormulas && $scope.options.canExportSelectedAsFormulas) {
-        return $scope.anyIdentifiersChecked() ? $scope.getMenuItemByLabel("EXPORT_SELECTED_AS_FORMULAS") : $scope.getMenuItemByLabel("EXPORT_ALL_AS_FORMULAS");
-      } else {
-        return undefined;
-      }
-    }
-  }
-  function initMenu() {
-    $scope.isDataLoading = false;
-    $scope.addMenuItem("EXPORT_ALL_AS_VALUES", getExportToExcelAsValuesAction, true, function() {
-      return $scope.isDataLoading;
-    }, function() {
-      return $scope.options.canExportAllAsValues;
-    });
-    $scope.addMenuItem("EXPORT_ALL_AS_FORMULAS", getExportToExcelAsFormulaAction, true, null, function() {
-      return $scope.options.canExportAllAsFormulas;
-    });
-    $scope.addMenuItem("EXPORT_SELECTED_AS_VALUES", getExportToExcelAsValuesAction, false, function() {
-      return $scope.isDataLoading;
-    }, function() {
-      return $scope.options.canExportSelectedAsValues;
-    });
-    $scope.addMenuItem("EXPORT_SELECTED_AS_FORMULAS", getExportToExcelAsFormulaAction, false, null, function() {
-      return $scope.options.canExportSelectedAsFormulas;
-    });
-  }
-  function subscribe() {
-    var aggregator = gfEventsAggregator.getChildAggregator($scope.gridInstanceId);
-    aggregator.addHandler(gridReport.model.GridEvents.loadingStarted, function() {
-      $scope.isDataLoading = true;
-    });
-    aggregator.addHandler(gridReport.model.GridEvents.loadingEnded, function() {
-      $scope.isDataLoading = false;
-    });
-  }
-  $scope.getDefaultItem = getDefaultItem;
-  initMenu();
-  if ($scope.gridInstanceId) {
-    subscribe();
-  }
-  $scope.$watch("gridInstanceId", function(newVal, oldVal) {
-    if (newVal === oldVal) {
-      return;
-    }
-    subscribe();
-  });
-}]);
-goog.provide("gridReport.directives.ExportToExcelDirective");
-goog.require("gridReport.directives.ButtonWithContextMenuDirective");
-goog.require("gridReport.controllers.ExportControllerBase");
-goog.require("gridReport.directives.ExportToExcelController");
-goog.require("gridReport.directives.ExportContextMenuOptions");
-gridReport.Module.directive("gfExportToExel", [function() {
-  return{restrict:"E", transclude:false, scope:{gridInstanceId:"=", buttonWithMenuOptions:"=", allTickers:"=", selectedRows:"=", isEnabled:"=", options:"=", isVisible:"=", overrideExportAsFormula:"=?", overrideExportAsValues:"=?"}, replace:true, controller:"ExportControllerBase", templateUrl:"scripts/directives/exportToExcel/ExportToExcel.html", link:function($scope, $element, attr) {
-    if (attr.hasOwnProperty("isVisible")) {
-      $scope.$watch("isVisible", function(value) {
-        if (value) {
-          $element.show();
-        } else {
-          $element.hide();
-        }
-      });
-    }
-  }};
-}]);
-goog.provide("gridReport.services.MultiFactorRankConverter");
-goog.require("gridReport.utils.CommandHelper");
-gridReport.Module.factory("gfMultiFactorRankConverter", ["$translate", "gfCommandHelper", function($translate, gfCommandHelper) {
-  var service = {};
-  service.createMultiFactorRankCommand = function(gridColumn, options) {
-    var metadata = getMetadata(gridColumn, options.methodology), formattingInfo = gridReport.services.MultiFactorRankToCommandConverter.getFormattingInfo(options);
-    if (options.hasOwnProperty("isBasedOnColumn")) {
-      metadata.isBasedOnColumn = options.isBasedOnColumn;
-    }
-    return new gridReport.model.Command({id:metadata.id, name:metadata.name, expression:metadata.adcSyntax + "/*" + metadata.name + "*/", dataProviderId:gridReport.model.Command.ADC_DATA_PROVIDER_ID, metadata:metadata, defaultOrder:scr.mfr.Order.LowerIsBetter, parameters:[], returnType:formattingInfo.returnType, decimalDigits:formattingInfo.decimalDigits, factors:[getFactor(gridColumn.command)]});
-  };
-  return service;
-  function getMethodologyName(methodology) {
-    switch(methodology) {
-      case scr.mfr.MFMethodology.PercentileScoring:
-        return $translate.instant("PERCENTILE");
-      case scr.mfr.MFMethodology.DecileScoring:
-        return $translate.instant("DECILE");
-      case scr.mfr.MFMethodology.QuintileScoring:
-        return $translate.instant("QUINTILE");
-      case scr.mfr.MFMethodology.OuartileScoring:
-        return $translate.instant("QUARTILE");
-      case scr.mfr.MFMethodology.NScoring:
-        return $translate.instant("RANK");
-      case scr.mfr.MFMethodology.ZScores:
-        return $translate.instant("ZSCORE");
-      default:
-        throw new Error("unknown methodology");;
-    }
-  }
-  function getExpressionWithoutName(expression, methodology, returnType) {
-    return "GRANK(Factor(" + gfCommandHelper.getDecoratedExpression(expression, returnType) + ", SortOrder=desc, optionIfNullFactor=ExclEntity, weight=1, UseRawAsFactor=False), RankType=" + getAdcMethodologyCode(methodology) + ', Universe="univ")';
-  }
-  function getAdcMethodologyCode(methodology) {
-    switch(methodology) {
-      case scr.mfr.MFMethodology.PercentileScoring:
-        return scr.mfr.ADC.MFMethodology.PercentileScoring;
-      case scr.mfr.MFMethodology.DecileScoring:
-        return scr.mfr.ADC.MFMethodology.DecileScoring;
-      case scr.mfr.MFMethodology.QuintileScoring:
-        return scr.mfr.ADC.MFMethodology.QuintileScoring;
-      case scr.mfr.MFMethodology.OuartileScoring:
-        return scr.mfr.ADC.MFMethodology.OuartileScoring;
-      case scr.mfr.MFMethodology.NScoring:
-        return scr.mfr.ADC.MFMethodology.NScoring;
-      case scr.mfr.MFMethodology.ZScores:
-        return scr.mfr.ADC.MFMethodology.ZScores;
-      default:
-        throw new Error("unknown methodology");;
-    }
-  }
-  function getMetadata(gridColumn, methodology) {
-    return{adcSyntax:getExpressionWithoutName(gridColumn.command.expression, methodology, gridColumn.command.returnType), currency:"Default", methodology:methodology, nTileOrder:scr.mfr.MFNTileOrder.Ascending, name:gridColumn.header + " " + getMethodologyName(methodology), partitionBy:"None", type:"multifactorrank", universe:scr.mfr.RankAgainst.CurrentUniverse, universeMetadata:null, factors:[{field:angular.copy(gridColumn.command.metadata), ifNotAvailable:scr.mfr.FactorIfNA.ExcludeSecurities, order:scr.mfr.Order.LowerIsBetter, 
-    useRaw:false, weight:1}]};
-  }
-  function getFactor(command) {
-    return new gridReport.model.Command({dataProviderId:command.dataProviderId, defaultOrder:command.defaultOrder, expression:command.expression, id:command.id, name:command.name, returnType:command.returnType, parameters:_.map(command.parameters, function(param) {
-      return new gridReport.model.CommandParameter(param);
-    }), metadata:{field:angular.copy(command.metadata), ifNotAvailable:scr.mfr.FactorIfNA.ExcludeSecurities, order:command.defaultOrder, useRaw:false, weight:1}});
-  }
-}]);
-goog.provide("gridReport.directives.ContextMenuDirective");
-gridReport.Module.directive("gfContextMenu", ["$timeout", function($timeout) {
-  return{restrict:"E", template:"<div></div>", scope:{options:"=", menuItems:"=", visible:"=", position:"=", openDirection:"="}, link:function(scope, element) {
-    var menuId = 0;
-    var jqxContextMenu = element.jqxMenu({});
-    scope.$watch("options", function() {
-      jqxContextMenu.jqxMenu(scope.options);
-    }, true);
-    scope.$watch("menuItems", function() {
-      menuId = 0;
-      _.each(scope.menuItems, updateIds);
-      _.each(scope.menuItems, setupWatches);
-      jqxContextMenu.jqxMenu({source:scope.menuItems});
-    });
-    scope.$watch("openDirection", function() {
-      updateOpenDirection();
-    });
-    scope.$watch("visible", function() {
-      if (scope.visible) {
-        updateOpenDirection();
-        jqxContextMenu.jqxMenu("open", scope.position.x, scope.position.y);
-      } else {
-        jqxContextMenu.jqxMenu("close");
-      }
-    });
-    jqxContextMenu.on("itemclick", function(event) {
-      var item = getContextMenuItem(scope.menuItems, event.args.id);
-      if (item && (!item.disabled && item.action)) {
-        item.action(event);
-      }
-    });
-    jqxContextMenu.on("closed", function() {
-      if (arguments[0].args.hasOwnProperty("menuElements")) {
-        $timeout(function() {
-          scope.visible = false;
-        });
-      }
-    });
-    function updateOpenDirection() {
-      var direction = scope.openDirection ? scope.openDirection : "right";
-      _.forEach(scope.menuItems, function(menuItem) {
-        jqxContextMenu.jqxMenu("setItemOpenDirection", menuItem.id, direction, "down");
-      });
-    }
-    function getContextMenuItem(items, id) {
-      for (var key in items) {
-        if (items[key].id === id) {
-          return items[key];
-        }
-        var item = getContextMenuItem(items[key].items, id);
-        if (item) {
-          return item;
-        }
-      }
-      return undefined;
-    }
-    function generateMenuId() {
-      return "" + menuId++;
-    }
-    function updateIds(menuItem) {
-      walk(menuItem, function(item) {
-        _.extend(item, {id:generateMenuId()});
-      });
-    }
-    function setupWatches(menuItem) {
-      walk(menuItem, function(item) {
-        if (typeof item.disabled == "function") {
-          var isDisabledFunction = item.disabled;
-          item.disabled = isDisabledFunction();
-          var isDisabledScopeFunctionName = "menuItem_" + item.id + "_disabled";
-          scope[isDisabledScopeFunctionName] = isDisabledFunction;
-          scope.$watch(isDisabledScopeFunctionName + "()", function(newValue) {
-            item.disabled = newValue;
-            jqxContextMenu.jqxMenu("disable", item.id, newValue);
-          });
-        }
-      });
-    }
-    function walk(menuItem, fn) {
-      fn(menuItem);
-      if (menuItem.items) {
-        for (var key in menuItem.items) {
-          walk(menuItem.items[key], fn);
-        }
-      }
-    }
-    scope.$on("$destroy", function() {
-      jqxContextMenu.jqxMenu("destroy");
-    });
-  }};
-}]);
-goog.provide("gridReport.directives.GridContextMenuDirective");
-goog.require("gridReport.directives.ContextMenuDirective");
+goog.provide("gridReport.directives.StatisticsControlDirective");
 goog.require("gridReport.Module");
-gridReport.Module.directive("gridContextMenu", ["$translate", "$timeout", function($translate, $timeout) {
-  return{restrict:"E", replace:true, require:"^gridReport", scope:{isAnyRowSelected:"=", actions:"="}, template:'<div><gf-context-menu menu-items="contextMenu.menuItems" ' + 'open-direction="contextMenu.openDirection" ' + 'options="contextMenu.options" ' + 'visible="contextMenu.visible" ' + 'position="contextMenu.position"></gf-context-menu></div>', link:function(scope, element, attrs, controller) {
-    var actionParams = {rowKey:undefined}, contextMenuWidth = 160;
-    function getMenuItems(rowKey) {
-      var menuItems = [], isTransposedGrid = controller.getIsTransposed();
-      if (!isTransposedGrid && controller.canInsertBlankRow()) {
-        menuItems.push({label:$translate.instant("INSER_BLANK_ROW"), action:function() {
-          controller.insertBlankRow(rowKey, "before");
-        }});
-      }
-      if (controller.canExlcuded(rowKey)) {
-        menuItems.push({label:$translate.instant("EXCLUDE"), action:function() {
-          if (!scope.isAnyRowSelected) {
-            controller.excludeRow(rowKey);
-          } else {
-            controller.excludeSelectedRows();
-          }
-        }});
-      }
-      if (controller.canExcludedFromStatistics(rowKey)) {
-        menuItems.push({label:$translate.instant("EXCLUDE_FROM_STATISTICS"), action:function() {
-          if (!scope.isAnyRowSelected) {
-            controller.excludeRowFromStatistics(rowKey);
-          } else {
-            controller.excludeSelectedRowsFromStatistics();
-          }
-        }});
-      }
-      if (controller.canSelectAll()) {
-        menuItems.push({label:$translate.instant("SELECT_ALL"), action:controller.selectAllRows});
-        menuItems.push({label:$translate.instant("DESELECT_ALL"), action:controller.clearSelection});
-      }
-      return menuItems;
-    }
-    var gridReportContainer = element.closest(".gridReportContainer").first();
-    scope.contextMenu = {menuItems:[], openDirection:"right", options:{width:contextMenuWidth + "px", height:"140px", autoCloseOnClick:true, autoOpenPopup:false, mode:"popup", theme:controller.theme.theme, animationShowDuration:0, animationHideDuration:0}};
-    function tooggleMenuVisibility(value) {
-      scope.contextMenu.visible = !!value;
-      $timeout(angular.noop);
-    }
-    function showContextMenu(rowKey, event) {
-      scope.contextMenu.menuItems = getMenuItems(rowKey);
-      if (scope.contextMenu.menuItems.length == 0) {
-        tooggleMenuVisibility(false);
-        return true;
-      }
-      var initialXPos = parseInt(event.clientX) + 5 + $(window).scrollLeft();
-      var finalXPos = initialXPos + contextMenuWidth >= $(document).width() ? initialXPos - contextMenuWidth : initialXPos;
-      var finalYPos = parseInt(event.clientY) + 5 + $(window).scrollTop();
-      scope.contextMenu.openDirection = finalXPos + contextMenuWidth * 2 <= $(document).width() ? "right" : "left";
-      scope.contextMenu.position = {x:finalXPos, y:finalYPos};
-      if (scope.contextMenu.visible) {
-        scope.$apply(function() {
-          scope.contextMenu.visible = false;
-        });
-      }
-      tooggleMenuVisibility(true);
-      return undefined;
-    }
-    function mouseDownHandler(event) {
-      return controller.getIsTransposed() ? transposedGridContainerMouseDownHandler(event) : gridReportContainerMouseDownHandler(event);
-    }
-    function gridReportContainerMouseDownHandler(event) {
-      if (event.which != 3 || !controller.isGridContextMenuActive()) {
-        return true;
-      }
-      var result;
-      var content = $(event.target).closest(".jqx-grid-content").first();
-      if (content.length > 0) {
-        actionParams.rowKey = $(event.target).closest("[row-key]").attr("row-key");
-        showContextMenu(actionParams.rowKey, event);
-        result = false;
-      } else {
-        if (scope.contextMenu.visible) {
-          tooggleMenuVisibility(false);
-        }
-        result = true;
-      }
-      return result;
-    }
-    function transposedGridContainerMouseDownHandler(event) {
-      var result;
-      if (event.which != 3 || !controller.isGridContextMenuActive()) {
-        return true;
-      }
-      var columnHeader = $(event.target).closest(".columnHeader:not(.statistic-row):not(.totals-row)").first();
-      if (columnHeader.length) {
-        var items = columnHeader.closest(".jqx-grid-column-header").attr("class").match(/jqx-column-id-(\S+)/);
-        if (items == undefined || items.length < 2) {
-          scope.contextMenu.visible = false;
-          result = true;
-        } else {
-          var rowKey = decodeURI(items[1]);
-          showContextMenu(rowKey, event);
-          result = false;
-        }
-      } else {
-        scope.contextMenu.visible = false;
-        result = true;
-      }
-      scope.$apply();
-      return result;
-    }
-    function gridReportContainerContextMenuHandler() {
-      return false;
-    }
-    function hideContextMenu() {
-      if (scope.contextMenu.visible) {
-        tooggleMenuVisibility(false);
-      }
-    }
-    if (scope.actions) {
-      scope.actions = {hideContextMenu:hideContextMenu};
-    }
-    gridReportContainer.mousedown(mouseDownHandler);
-    gridReportContainer.on("contextmenu", gridReportContainerContextMenuHandler);
-    element.bind("$destroy", function() {
-      angular.element(gridReportContainer).unbind("mousedown", mouseDownHandler);
-      gridReportContainer.off("contextmenu", gridReportContainerContextMenuHandler);
-    });
-  }};
-}]);
-goog.provide("gridReport.columnMath.ExpressionParser");
-gridReport.Module.service("gfExpressionParser", [function() {
-  var service = {};
-  service.tokenize = function(expression) {
-    var c;
-    var from;
-    var i = 0;
-    var length = expression.length;
-    var n;
-    var q;
-    var str;
-    var result = [];
-    var error = function(message, token) {
-      token = token || this;
-      token.name = "SyntaxError";
-      token.message = message;
-      throw token;
-    };
-    var make = function(type, value) {
-      return{type:type, value:value, from:from, to:i};
-    };
-    if (!expression) {
-      return[];
-    }
-    var prefix = "<>+-&";
-    var suffix = "=>&:";
-    c = expression.charAt(i);
-    while (c) {
-      from = i;
-      if (c <= " ") {
-        i += 1;
-        c = expression.charAt(i);
-      } else {
-        if (c >= "a" && c <= "z" || c >= "A" && c <= "Z") {
-          str = c;
-          i += 1;
-          for (;;) {
-            c = expression.charAt(i);
-            if (c >= "a" && c <= "z" || (c >= "A" && c <= "Z" || (c >= "0" && c <= "9" || c === "_"))) {
-              str += c;
-              i += 1;
-            } else {
-              break;
-            }
-          }
-          result.push(make("name", str));
-        } else {
-          if (c === "." || c >= "0" && c <= "9") {
-            str = c;
-            i += 1;
-            for (;;) {
-              c = expression.charAt(i);
-              if (c < "0" || c > "9") {
-                break;
-              }
-              i += 1;
-              str += c;
-            }
-            if (c === ".") {
-              i += 1;
-              str += c;
-              for (;;) {
-                c = expression.charAt(i);
-                if (c < "0" || c > "9") {
-                  break;
-                }
-                i += 1;
-                str += c;
-              }
-            }
-            if (c === "e" || c === "E") {
-              i += 1;
-              str += c;
-              c = expression.charAt(i);
-              if (c === "-" || c === "+") {
-                i += 1;
-                str += c;
-                c = expression.charAt(i);
-              }
-              if (c < "0" || c > "9") {
-                error("Bad exponent", make("number", str));
-              }
-              do {
-                i += 1;
-                str += c;
-                c = expression.charAt(i);
-              } while (c >= "0" && c <= "9");
-            }
-            if (c >= "a" && c <= "z") {
-              str += c;
-              i += 1;
-              error("Bad number", make("number", str));
-            }
-            n = +str;
-            if (isFinite(n)) {
-              result.push(make("number", n));
-            } else {
-              error("Bad number", make("number", str));
-            }
-          } else {
-            if (c === "'" || c === '"') {
-              str = "";
-              q = c;
-              i += 1;
-              for (;;) {
-                c = expression.charAt(i);
-                if (c < " ") {
-                  error(c === "\n" || (c === "\r" || c === "") ? "Unterminated string." : "Control character in string.", make("", str));
-                }
-                if (c === q) {
-                  break;
-                }
-                if (c === "\\") {
-                  i += 1;
-                  if (i >= length) {
-                    error("Unterminated string", make("string", str));
-                  }
-                  c = expression.charAt(i);
-                  switch(c) {
-                    case "b":
-                      c = "\b";
-                      break;
-                    case "f":
-                      c = "\f";
-                      break;
-                    case "n":
-                      c = "\n";
-                      break;
-                    case "r":
-                      c = "\r";
-                      break;
-                    case "t":
-                      c = "\t";
-                      break;
-                    case "u":
-                      if (i >= length) {
-                        error("Unterminated string", make("string", str));
-                      }
-                      c = parseInt(expression.substr(i + 1, 4), 16);
-                      if (!isFinite(c) || c < 0) {
-                        error("Unterminated string", make("string", str));
-                      }
-                      c = String.fromCharCode(c);
-                      i += 4;
-                      break;
-                  }
-                }
-                str += c;
-                i += 1;
-              }
-              i += 1;
-              result.push(make("string", str));
-              c = expression.charAt(i);
-            } else {
-              if (c === "/" && expression.charAt(i + 1) === "/") {
-                i += 1;
-                for (;;) {
-                  c = expression.charAt(i);
-                  if (c === "\n" || (c === "\r" || c === "")) {
-                    break;
-                  }
-                  i += 1;
-                }
-              } else {
-                if (prefix.indexOf(c) >= 0) {
-                  str = c;
-                  i += 1;
-                  while (true) {
-                    c = expression.charAt(i);
-                    if (i >= length || suffix.indexOf(c) < 0) {
-                      break;
-                    }
-                    str += c;
-                    i += 1;
-                  }
-                  result.push(make("operator", str));
-                } else {
-                  i += 1;
-                  result.push(make("operator", c));
-                  c = expression.charAt(i);
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-    return result;
-  };
-  return service;
-}]);
-goog.provide("gridReport.columnMath.ExressionEditorDirective");
-goog.require("gridReport.columnMath.ExpressionParser");
-gridReport.Module.directive("gfExpressionEditor", ["$translate", "gfExpressionParser", function($translate, gfExpressionParser) {
-  return{restrict:"E", replace:true, scope:{model:"=", enterPressed:"&"}, template:'<div class="gf-expression-editor">' + '<div class="gf-expression-editor-placeholder"></div>' + '<span class="textEditor-errorLabel" ' + 'ng-show="model.validationMessage">{{model.validationMessage}}</span>' + "</div>", link:function(scope, element) {
-    var model = scope.model;
-    var expressionEditor = CodeMirror(element.find(".gf-expression-editor-placeholder")[0], {value:model.expression, lineWrapping:true, autoCloseBrackets:true, placeholder:$translate.instant("CLICK_ON_ANY_COLUMN"), extraKeys:{"Enter":function() {
-      (scope.enterPressed || angular.noop)();
-    }}});
-    updateColors(expressionEditor);
-    model.expressionInserted = function(expression) {
-      setTextAtCursor(expression);
-    };
-    expressionEditor.on("change", function() {
-      var expressionValue = expressionEditor.getValue();
-      if (model.expression != expressionValue) {
-        scope.$apply(function() {
-          model.setExpression(expressionValue);
-          updateColors(expressionEditor);
-        });
-      }
-    });
-    scope.$on("$destroy", function() {
-      model.expressionInserted = null;
-      expressionEditor.off("change");
-    });
-    function updateColors(editor) {
-      var lineIndex = 0;
-      editor.eachLine(function(lineHandle) {
-        var tokens = null;
-        try {
-          tokens = gfExpressionParser.tokenize(lineHandle.text);
-        } catch (e) {
-        }
-        _.each(tokens, function(token) {
-          if (token.type == "string") {
-            editor.markText({line:lineIndex, ch:token.from}, {line:lineIndex, ch:token.to}, {atomic:true, className:scope.model.getExpressionClassName(token.value)});
-          }
-        });
-        lineIndex++;
-      });
-    }
-    function setTextAtCursor(text) {
-      var startPos = expressionEditor.getCursor(true);
-      expressionEditor.replaceRange(text, startPos, null);
-      expressionEditor.focus();
-    }
-  }};
+goog.require("gridReport.directives.StatisticsControlController");
+gridReport.Module.directive("gfStatisticsControl", [function() {
+  return{restrict:"E", replace:true, scope:{algorithms:"=", isEnabled:"=", showPremiumDiscount:"=", gridInstanceId:"="}, templateUrl:"scripts/directives/statistics/StatisticsControl.html", controller:"gfStatisticsControlController"};
 }]);
 goog.provide("gridReport.services.UuidGenerator");
 gridReport.Module.factory("gfUuidGenerator", [function() {
   var service = {};
   service.get = function() {
     return uiIDGenerator.v1();
-  };
-  return service;
-}]);
-goog.provide("gridReport.columnMath.ColumnSelectionColors");
-gridReport.Module.value("gfColumnSelectionColors", ["#0082FF", "#008000", "#9924CC", "#FF7F7F", "#00CC33", "#FF6600", "#CC0099"]);
-goog.provide("gridReport.model.Formula");
-gridReport.model.Formula = function(options) {
-  gridReport.jsUtils.mergeProperties(this, options);
-};
-gridReport.model.Formula.prototype.expression = null;
-gridReport.model.Formula.prototype.columnIds = null;
-gridReport.model.Formula.prototype.isValid = true;
-goog.provide("gridReport.columnMath.IdentifierCssClasses");
-gridReport.Module.value("gfIdentifierCssClasses", {"#0082FF":"first-identifier", "#008000":"second-identifier", "#9924CC":"third-identifier", "#FF7F7F":"fourth-identifier", "#00CC33":"fifth-identifier", "#FF6600":"sixth-identifier", "#CC0099":"seventh-identifier"});
-goog.provide("gridReport.services.FormulaValidator");
-gridReport.Module.factory("gfFormulaValidator", ["gfExpressionParser", function(gfExpressionParser) {
-  var acceptedOperators = "+-*/^()", binaryOperators = "+-*/^";
-  function findInFormula(columnId, formula, columns) {
-    var found = false;
-    _.each(formula.columnIds, function(clmnId) {
-      if (columnId == clmnId) {
-        found = true;
-      } else {
-        var column = columns[clmnId];
-        if (column && (column.command && column.command.formula)) {
-          found = findInFormula(columnId, column.command.formula, columns);
-        }
-      }
-    });
-    return found;
-  }
-  function createDictionary(columns) {
-    var tempDictionaty = {};
-    _.each(columns, function(clm) {
-      tempDictionaty[clm.id] = clm;
-    });
-    return tempDictionaty;
-  }
-  function findColumn(column, columns) {
-    var found = false;
-    _.each(columns, function(clmn) {
-      if (column.id != clmn.id) {
-        if (column.command && (column.command.formula && findInFormula(column.id, column.command.formula, columns))) {
-          found = true;
-        }
-      }
-    });
-    return found;
-  }
-  function isColumnUsed(targetColumnId, startColumn, columns) {
-    var found = false;
-    if (startColumn.command && startColumn.command.formula) {
-      _.each(startColumn.command.formula.columnIds, function(columnId) {
-        if (columnId == targetColumnId || isColumnUsed(targetColumnId, columns[columnId], columns)) {
-          found = true;
-        }
-      });
-    }
-    return found;
-  }
-  function getColumn(columnId, columns) {
-    var parentColumn;
-    if (columnId != null && (columnId.id != null && columnId.parentId != null)) {
-      parentColumn = columns[columnId.parentId];
-      if (parentColumn) {
-        return parentColumn.gridColumns[columnId.id];
-      }
-    }
-    return columns[columnId];
-  }
-  var service = {};
-  service.validate = function(column, columns) {
-    if (!column) {
-      throw new Error("column should be provided");
-    }
-    if (!columns) {
-      throw new Error("columns should be provided");
-    }
-    if (_.isArray(columns)) {
-      columns = createDictionary(columns);
-    }
-    var errorMessages = [];
-    _.each(column.command.formula.columnIds, function(columnId) {
-      var clmn = getColumn(columnId, columns);
-      if (clmn == null) {
-        errorMessages.push("Unknown column: " + columnId);
-      } else {
-        if (!clmn.isNumber()) {
-          errorMessages.push("Invalid return type: " + columnId);
-        }
-        if (clmn.command) {
-          if (clmn.command && clmn.command.isTimeSeries()) {
-            errorMessages.push("TimeSeries column can not be used in expression: " + clmn.id);
-          }
-          if (clmn.command.formula && !clmn.command.formula.isValid) {
-            errorMessages.push("Column has invalid sub-column: " + clmn.id);
-          }
-        }
-      }
-    });
-    if (findColumn(column, columns)) {
-      errorMessages.push("One or more formulas contain a circullar reference");
-    }
-    return{isValid:_.isEmpty(errorMessages), errorMessages:errorMessages};
-  };
-  service.validateExpression = function(expression, validIdentifiers) {
-    var errorMessages = [], previousToken = null, token, tokens = [], nextToken, bracketsDeep = 0;
-    try {
-      tokens = gfExpressionParser.tokenize(expression);
-    } catch (e) {
-      errorMessages.push(e.name + ":" + e.message);
-    }
-    for (var tokenIndex = 0, tokenLength = tokens.length;tokenIndex < tokenLength;tokenIndex++) {
-      token = tokens[tokenIndex];
-      nextToken = tokenIndex + 1 < tokenLength ? tokens[tokenIndex + 1] : null;
-      if (token.type == "operator") {
-        if (acceptedOperators.indexOf(token.value) < 0) {
-          errorMessages.push("Unexpected operator " + token.value);
-        } else {
-          if (binaryOperators.indexOf(token.value) != -1) {
-            if (previousToken == null) {
-              errorMessages.push("Indentifier is expected before " + token.value);
-            } else {
-              if (nextToken == null) {
-                errorMessages.push("Indentifier is expected after " + token.value);
-              } else {
-                if (nextToken.type == "operator" && binaryOperators.indexOf(nextToken.value) != -1) {
-                  errorMessages.push("Operator is expected after " + token.value);
-                }
-              }
-            }
-            if (token.value == "^" && (nextToken != null && nextToken.type == "string")) {
-              errorMessages.push("Number is expected after ^");
-            }
-          } else {
-            if (token.value == "(") {
-              bracketsDeep++;
-            } else {
-              if (token.value == ")") {
-                if (bracketsDeep > 0) {
-                  bracketsDeep--;
-                }
-              }
-            }
-          }
-        }
-      }
-      if (token.type === "string" || token.type === "name") {
-        if (previousToken != null && previousToken.type === "string") {
-          errorMessages.push("Operator is expected after " + previousToken.value);
-        }
-        if (nextToken != null && (nextToken.type === "number" || nextToken.type === "name")) {
-          errorMessages.push("Operator is expected after " + token.value);
-        }
-        if (!_.isEmpty(validIdentifiers) && validIdentifiers.indexOf(token.value) == -1) {
-          errorMessages.push("Unknown identifier " + token.value);
-        }
-      }
-      previousToken = token;
-    }
-    if (bracketsDeep > 0) {
-      errorMessages.push("Brackets are expected");
-    }
-    return{isValid:_.isEmpty(errorMessages), errorMessages:errorMessages};
-  };
-  service.validateForCyclicDependencies = function(expression, currentColumnId, columns) {
-    var tokens = [], token, errorMessages = [];
-    if (!columns) {
-      throw new Error("columns should be provided");
-    }
-    if (_.isArray(columns)) {
-      columns = createDictionary(columns);
-    }
-    try {
-      tokens = gfExpressionParser.tokenize(expression);
-    } catch (e) {
-      errorMessages.push(e.name + ":" + e.message);
-    }
-    for (var tokenIndex = 0, tokenLength = tokens.length;tokenIndex < tokenLength;tokenIndex++) {
-      token = tokens[tokenIndex];
-      if (token.type === "string" && (currentColumnId != token.value && columns[token.value])) {
-        if (isColumnUsed(currentColumnId, columns[token.value], columns)) {
-          errorMessages.push("One or more formulas contain a circullar reference");
-        }
-      }
-    }
-    return{isValid:_.isEmpty(errorMessages), errorMessages:errorMessages};
-  };
-  service.isHeatMapEnabled = function(formula, columns) {
-    if (!formula) {
-      throw new Error("formula should be provided");
-    }
-    if (!columns) {
-      throw new Error("columns should be provided");
-    }
-    var enableHeatMap = undefined;
-    if (_.isArray(columns)) {
-      columns = createDictionary(columns);
-    }
-    _.each(formula.columnIds, function(columnId) {
-      var column = columns[columnId];
-      if (column && (column.command && column.command)) {
-        if (enableHeatMap == undefined) {
-          enableHeatMap = !!column.command.enableHeatMap;
-        } else {
-          enableHeatMap = enableHeatMap && !!column.command.enableHeatMap;
-        }
-      }
-    });
-    return!!enableHeatMap;
-  };
-  return service;
-}]);
-goog.provide("gridReport.utils.IdentifierHelper");
-gridReport.Module.factory("gfIdentifierHelper", function() {
-  var service = {}, symbols = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  service.getIdentifier = function(index) {
-    var dividend = index + 1, columnName = "", modulo;
-    while (dividend > 0) {
-      modulo = (dividend - 1) % 26;
-      columnName = symbols[modulo].toString() + columnName;
-      dividend = Math.floor((dividend - modulo) / 26);
-    }
-    return columnName;
-  };
-  return service;
-});
-goog.provide("gridReport.columnMath.ColumnMathManager");
-goog.require("gridReport.columnMath.ExpressionParser");
-goog.require("gridReport.model.Formula");
-goog.require("gridReport.services.FormulaValidator");
-goog.require("gridReport.columnMath.ColumnSelectionColors");
-goog.require("gridReport.columnMath.IdentifierCssClasses");
-goog.require("gridReport.utils.IdentifierHelper");
-gridReport.Module.service("gfColumnMathManager", ["gfExpressionParser", "gfFormulaValidator", "gfColumnSelectionColors", "gfIdentifierCssClasses", "gfIdentifierHelper", function(gfExpressionParser, gfFormulaValidator, gfColumnSelectionColors, gfIdentifierCssClasses, gfIdentifierHelper) {
-  var ColumnMathModel = function() {
-    this.columnsDictionary_ = {};
-    this.columns = [];
-    this.tokens_ = [];
-    this.columnAliases_ = {};
-  };
-  ColumnMathModel.prototype.expression = "";
-  ColumnMathModel.prototype.tokens_ = undefined;
-  ColumnMathModel.prototype.currentColorIndex_ = 0;
-  ColumnMathModel.prototype.columnsDictionary_ = null;
-  ColumnMathModel.prototype.columnAliases_ = null;
-  ColumnMathModel.prototype.columns = null;
-  ColumnMathModel.prototype.validationMessage = "";
-  ColumnMathModel.prototype.expressionInserted = null;
-  ColumnMathModel.prototype.expressionChanged = null;
-  ColumnMathModel.prototype.initialColumnId = null;
-  ColumnMathModel.prototype.getNextColor_ = function() {
-    if (this.currentColorIndex_ + 1 > gfColumnSelectionColors.length) {
-      this.currentColorIndex_ = 0;
-    }
-    return gfColumnSelectionColors[this.currentColorIndex_++];
-  };
-  ColumnMathModel.prototype.insertColumn = function(column, parentColumn) {
-    if (!column) {
-      throw new Error("column should be provided.");
-    }
-    var columnId = parentColumn == null ? column.id : this.addPostfix_(column.id, parentColumn);
-    if (this.columnsDictionary_[columnId] == null) {
-      this.columnsDictionary_[columnId] = {column:column};
-    }
-    var color;
-    if (this.columnsDictionary_[columnId].color) {
-      color = this.columnsDictionary_[columnId].color;
-    } else {
-      color = this.columnsDictionary_[columnId].color = this.getNextColor_();
-    }
-    (this.expressionInserted || angular.noop)("'" + columnId + "'", color);
-    return color;
-  };
-  ColumnMathModel.prototype.setFormula = function(formula) {
-    if (!formula) {
-      throw new Error("formula should be provided");
-    }
-    var tokens = gfExpressionParser.tokenize(formula.expression);
-    _.each(tokens, function(token) {
-      if (token.type === "name") {
-        var columnId, item = formula.columnIds[token.value];
-        if (item) {
-          if (item.id && item.parentId) {
-            columnId = this.addPostfix_(item.id, _.findWhere(this.columns, {id:item.parentId}));
-          } else {
-            columnId = item;
-          }
-          token.value = "'" + columnId + "'";
-        }
-      }
-    }, this);
-    this.setExpression(_.pluck(tokens, "value").join(""));
-  };
-  ColumnMathModel.prototype.getExpression = function() {
-    return this.expression.trim();
-  };
-  ColumnMathModel.prototype.getFormula = function() {
-    var columnIds = {}, index = 0, usedColumns = {}, tokens = gfExpressionParser.tokenize(this.getExpression());
-    _.each(tokens, function(token) {
-      if (token.type === "string" && this.columnsDictionary_[token.value]) {
-        var identifier;
-        if (usedColumns[token.value]) {
-          identifier = usedColumns[token.value];
-        } else {
-          identifier = gfIdentifierHelper.getIdentifier(index++);
-          usedColumns[token.value] = identifier;
-          var clmn = this.columnsDictionary_[token.value].column;
-          if (clmn && clmn.parentColumn) {
-            columnIds[identifier] = {id:clmn.id, parentId:clmn.parentColumn};
-          } else {
-            columnIds[identifier] = token.value;
-          }
-        }
-        token.value = identifier;
-      }
-    }, this);
-    return new gridReport.model.Formula({expression:_.pluck(tokens, "value").join(""), columnIds:columnIds});
-  };
-  ColumnMathModel.prototype.getAdcExpression = function() {
-    var tokens = gfExpressionParser.tokenize(this.expression);
-    _.each(tokens, function(token) {
-      if (token.type === "string" && this.columnsDictionary_[token.value]) {
-        token.value = "(" + this.columnsDictionary_[token.value].column.id + ")";
-      }
-    }, this);
-    return _.pluck(tokens, "value").join("");
-  };
-  ColumnMathModel.prototype.setExpression = function(expression) {
-    this.expression = expression;
-    this.parseExpression_();
-    this.validate();
-    (this.expressionChanged || angular.noop)(expression);
-  };
-  ColumnMathModel.prototype.flatten_ = function(columns) {
-    var flattenList = [];
-    _.each(columns, function(column) {
-      flattenList.push(column);
-      _.each(column.gridColumns, function(subColumn) {
-        flattenList.push(subColumn);
-      }, this);
-    }, this);
-    return flattenList;
-  };
-  ColumnMathModel.prototype.addPostfix_ = function(expression, parentColumn) {
-    return parentColumn ? expression + "/*" + this.getColumnAlias_(parentColumn) + "*/" : expression;
-  };
-  ColumnMathModel.prototype.setColumns = function(columns) {
-    this.columns = this.flatten_(columns);
-    this.columnsDictionary_ = {};
-    _.each(this.columns, function(column) {
-      var columnId;
-      if (column.parentColumn && this.columnsDictionary_[column.parentColumn]) {
-        columnId = this.addPostfix_(column.id, this.columnsDictionary_[column.parentColumn].column);
-      } else {
-        columnId = column.id;
-      }
-      this.columnsDictionary_[columnId] = {column:column};
-    }, this);
-    this.parseExpression_();
-  };
-  ColumnMathModel.prototype.parseExpression_ = function() {
-    if (this.isValid()) {
-      var tokens = gfExpressionParser.tokenize(this.getExpression());
-      _.each(tokens, function(token) {
-        if (token.type === "string") {
-          if (this.columnsDictionary_[token.value] && this.columnsDictionary_[token.value].color == null) {
-            this.columnsDictionary_[token.value].color = this.getNextColor_();
-          }
-        }
-      }, this);
-      this.tokens_ = tokens;
-    }
-  };
-  ColumnMathModel.prototype.getExpressionColors = function() {
-    var colors = {};
-    _.each(this.columnsDictionary_, function(value, key) {
-      if (value.color) {
-        colors[key] = value.color;
-      }
-    });
-    return colors;
-  };
-  ColumnMathModel.prototype.getExpressionColor = function(expression) {
-    return this.columnsDictionary_[expression] && _.findWhere(this.tokens_, {value:expression}) ? this.columnsDictionary_[expression].color : undefined;
-  };
-  ColumnMathModel.prototype.getExpressionClassName = function(expression) {
-    return gfIdentifierCssClasses[this.getExpressionColor(expression)];
-  };
-  ColumnMathModel.prototype.isValid = function() {
-    return!_.isEmpty(this.getExpression()) && this.getValidationResult_().isValid;
-  };
-  ColumnMathModel.prototype.validate = function() {
-    var validationResult = this.getValidationResult_();
-    this.validationMessage = _.isEmpty(validationResult.errorMessages) ? "" : validationResult.errorMessages[0];
-  };
-  ColumnMathModel.prototype.getValidIdentifiers_ = function() {
-    var validIdentifiers = [];
-    _.each(this.columns, function(column) {
-      validIdentifiers.push(column.id);
-      _.each(column.gridColumns, function(subColumn) {
-        validIdentifiers.push(this.addPostfix_(subColumn.id, _.findWhere(this.columns, {id:column.id})));
-      }, this);
-    }, this);
-    return validIdentifiers;
-  };
-  ColumnMathModel.prototype.getValidationResult_ = function() {
-    var expression = this.getExpression(), validationResult = gfFormulaValidator.validateExpression(expression, this.getValidIdentifiers_());
-    if (this.initialColumnId && this.columnsDictionary_[this.initialColumnId]) {
-      var additionalValidationResult = gfFormulaValidator.validateForCyclicDependencies(expression, this.initialColumnId, this.columns);
-      validationResult.isValid = validationResult.isValid && additionalValidationResult.isValid;
-      validationResult.errorMessages = _.union(validationResult.errorMessages, additionalValidationResult.errorMessages);
-    }
-    return validationResult;
-  };
-  ColumnMathModel.prototype.getColumnAlias_ = function(column) {
-    if (!column) {
-      throw new Error("column should be provided");
-    }
-    if (!this.columnAliases_[column.id]) {
-      this.columnAliases_[column.id] = column.header;
-    }
-    return this.columnAliases_[column.id];
-  };
-  return{createInstance:function() {
-    return new ColumnMathModel;
-  }};
-}]);
-goog.provide("gridReport.columnMath.ColumnMathDialogController");
-goog.require("gridReport.columnMath.ColumnMathManager");
-goog.require("gridReport.services.UuidGenerator");
-gridReport.Module.controller("gfColumnMathDialogController", ["$scope", "$modalInstance", "settings", "gfGridManagementService", "gfEventsAggregator", "$timeout", "gfColumnMathManager", "$translate", "gfFormulaValidator", "gfUuidGenerator", function($scope, $modalInstance, settings, gfGridManagementService, gfEventsAggregator, $timeout, gfColumnMathManager, $translate, gfFormulaValidator, gfUuidGenerator) {
-  var eventsAggregator = gfEventsAggregator.getChildAggregator(settings.gridInstanceId);
-  eventsAggregator.addHandler(gridReport.model.GridEvents.columnSelected, function(args) {
-    if (args.column && (args.column.command && (args.column.isNumber() && (args.column.command.isDataCloud() && (!args.column.command.isVector() && (!args.column.command.isMultiSelect() && (!args.column.command.isMultiOutput() && (!args.column.command.isFactorRank() && (!(isInEditMode() && args.column.id == settings.column.id) && (args.parentColumn == null || args.parentColumn.command && args.parentColumn.command.isDataBlock())))))))))) {
-      var color = $scope.model.insertColumn(args.column, args.parentColumn);
-      gfGridManagementService.selectColumn(settings.gridInstanceId, args.column.id, color);
-    }
-  });
-  function getSuggestedName() {
-    var columnNumber = 1, columns = gfGridManagementService.getGridColumns(settings.gridInstanceId), suggestedName;
-    do {
-      suggestedName = $translate.instant("COLUMN_N", {columnNumber:columnNumber++});
-    } while (_.findWhere(columns, {header:suggestedName}) != null);
-    return suggestedName;
-  }
-  function createCommand() {
-    var id, name, formula, enableHeatMap;
-    if (isInEditMode()) {
-      id = settings.column.command.id;
-      name = settings.column.command.name;
-    } else {
-      id = gfUuidGenerator.get();
-      name = getSuggestedName();
-    }
-    formula = $scope.model.getFormula();
-    enableHeatMap = gfFormulaValidator.isHeatMapEnabled(formula, gfGridManagementService.getGridColumns(settings.gridInstanceId));
-    return new gridReport.model.Command({id:id, name:name, expression:$scope.model.getAdcExpression(), formula:formula, dataProviderId:gridReport.model.Command.ADC_DATA_PROVIDER_ID, returnType:scr.DataTypes.Float, enableHeatMap:enableHeatMap, decimalDigits:1, metadata:{type:"columnmath"}});
-  }
-  function expressionChanged() {
-    var gridColumns = gfGridManagementService.getGridColumns(settings.gridInstanceId);
-    _.each(gridColumns, function(column) {
-      gfGridManagementService.selectColumn(settings.gridInstanceId, column.id, $scope.model.getExpressionColor(column.id));
-      if (column.gridColumns) {
-        _.each(column.gridColumns, function(subColumn) {
-          if (subColumn.parentColumn) {
-            var parentColumn = _.findWhere(gridColumns, {id:subColumn.parentColumn});
-            if (parentColumn) {
-              gfGridManagementService.selectColumn(settings.gridInstanceId, subColumn.id, $scope.model.getExpressionColor(subColumn.id + "/*" + parentColumn.header + "*/"));
-            }
-          }
-        });
-      }
-    });
-  }
-  function init() {
-    gfGridManagementService.columnSelectionState(settings.gridInstanceId, true);
-    $scope.model = gfColumnMathManager.createInstance();
-    $scope.model.setColumns(gfGridManagementService.getGridColumns(settings.gridInstanceId));
-    $scope.model.expressionChanged = expressionChanged;
-    if (isInEditMode()) {
-      $scope.model.initialColumnId = settings.column.id;
-      $scope.model.setFormula(settings.column.command.formula);
-    }
-  }
-  function isInEditMode() {
-    return settings.column != null && settings.mode === "edit";
-  }
-  $scope.ok = function() {
-    $scope.closeDialog();
-    $timeout(function() {
-      if (settings.mode === "edit" || settings.mode === "insert") {
-        var eventType = isInEditMode() ? gridReport.model.InternalEvents.changeCommand : gridReport.model.InternalEvents.insertCommand;
-        var prevCommand = settings.column ? settings.column.command : null;
-        var curCommand = createCommand();
-        if (eventType === gridReport.model.InternalEvents.changeCommand && (prevCommand && prevCommand.expression === curCommand.expression)) {
-          return;
-        }
-        eventsAggregator.raiseEvent(eventType, {previousCommand:prevCommand, newCommand:curCommand, isUserTriggered:true, isFromUDIP:false});
-      } else {
-        eventsAggregator.raiseEvent(gridReport.model.InternalEvents.addCommand, {command:createCommand(), isUserTriggered:true, isFromUDIP:false});
-      }
-    });
-  };
-  $scope.closeDialog = function() {
-    gfGridManagementService.columnSelectionState(settings.gridInstanceId, false);
-    $modalInstance.close();
-    $scope.$destroy();
-  };
-  $scope.onHeaderHover = function() {
-    $(".gf-modal").draggable({handle:".modal-header"});
-  };
-  $scope.onEnterPressed = function() {
-    if ($scope.model.isValid() === true) {
-      $scope.ok();
-    }
-  };
-  $scope.$on("$destory", function() {
-    eventsAggregator.removeAllHandlers();
-  });
-  init();
-}]);
-goog.provide("gridReport.columnMath.ColumnMathDialogService");
-goog.require("gridReport.columnMath.ColumnMathDialogController");
-goog.require("gridReport.columnMath.ExressionEditorDirective");
-gridReport.Module.service("gfColumnMathDialogService", ["$modal", function($modal) {
-  var service = {};
-  service.openDialog = function(gridInstanceId, options) {
-    options = options || {};
-    return $modal.open({windowClass:"gf-modal gf-column-math-dialog", templateUrl:"scripts/services/columnMath/ColumnMathDialog.html", controller:"gfColumnMathDialogController", backdrop:false, keyboard:false, resolve:{settings:function() {
-      return{gridInstanceId:gridInstanceId, column:options.column, mode:options.mode};
-    }}});
-  };
-  return service;
-}]);
-goog.provide("gridReport.directives.GridColumnContextMenuDirective");
-goog.require("gridReport.directives.ContextMenuDirective");
-goog.require("gridReport.Module");
-goog.require("gridReport.model.SortingTypes");
-goog.require("gridReport.columnMath.ColumnMathDialogService");
-gridReport.Module.directive("gridColumnContextMenu", ["$translate", "$timeout", "gfColumnMathDialogService", "gfConditionalValueFormattingService", function($translate, $timeout, gfColumnMathDialogService, gfConditionalValueFormattingService) {
-  return{restrict:"E", replace:true, require:"^gridReport", scope:{actions:"=", gridInstanceId:"="}, template:"<div>" + '<gf-context-menu menu-items="contextMenu.menuItems" ' + 'options="contextMenu.options" ' + 'visible="contextMenu.visible" ' + 'position="contextMenu.position" ' + 'open-direction="contextMenu.openDirection">' + "</gf-context-menu>" + "</div>", link:function(scope, element, attrs, controller) {
-    scope.clickedColumn = {};
-    var contextMenuWidth = 160;
-    var gridReportContainer = element.closest(".gridReportContainer").first();
-    scope.contextMenu = {openDirection:"right", menuItems:[], options:{width:contextMenuWidth + "px", height:"140px", autoCloseOnClick:true, autoOpenPopup:false, mode:"popup", theme:controller.theme.theme, animationShowDuration:0, animationHideDuration:0}};
-    function tooggleMenuVisibility(value) {
-      scope.contextMenu.visible = !!value;
-      $timeout(angular.noop);
-    }
-    function transposedGridContainerMouseDownHandler(event) {
-      var result, columnId, content = $(event.target).closest('[column-key="columnName"]').first(), isFirstColumn = true;
-      if (_.size(content) < 1) {
-        isFirstColumn = false;
-        content = $(event.target).closest('[role="gridcell"]').first();
-      }
-      if (_.size(content) > 0) {
-        columnId = decodeURI($(event.target).closest("[row-key]").attr("row-key"));
-        if (!columnId || columnId === "undefined") {
-          return true;
-        }
-        scope.clickedColumn = controller.updateClickedColumnById(columnId);
-        scope.contextMenu.menuItems = (isFirstColumn ? getMenuItems : getSimpleTransposedMenuItems)(scope.clickedColumn);
-        calculatePosition(event);
-        if (scope.contextMenu.visible) {
-          scope.$apply(function() {
-            scope.contextMenu.visible = false;
-          });
-        }
-        tooggleMenuVisibility(true);
-        result = false;
-      } else {
-        scope.contextMenu.visible = false;
-        result = true;
-      }
-      scope.$apply();
-      return result;
-    }
-    function calculatePosition(event) {
-      var initialXPos = parseInt(event.clientX) + 5 + $(window).scrollLeft();
-      var finalXPos = initialXPos + contextMenuWidth >= $(document).width() ? initialXPos - contextMenuWidth : initialXPos;
-      var finalYPos = parseInt(event.clientY) + 5 + $(window).scrollTop();
-      scope.contextMenu.openDirection = finalXPos + contextMenuWidth * 2 <= $(document).width() ? "right" : "left";
-      scope.contextMenu.position = {x:finalXPos, y:finalYPos};
-    }
-    function getColId(element) {
-      var items = element.attr("class").match(/jqx-column-id-(\S+)/);
-      if (items == undefined || items.length < 2) {
-        return null;
-      }
-      return decodeURI(items[1]);
-    }
-    function gridReportContainerMouseDownHandler(event) {
-      var result;
-      var columnHeader = $(event.target).closest(".jqx-grid-column-header").first();
-      if (columnHeader.length > 0) {
-        var columnId = getColId(columnHeader);
-        if (columnId == null) {
-          scope.contextMenu.visible = false;
-          result = true;
-        } else {
-          var subColId = getColId($(event.target).closest(".jqx-column-command-header").first());
-          scope.clickedColumn = controller.updateClickedColumnById(columnId, subColId == columnId ? null : subColId);
-          scope.contextMenu.menuItems = getMenuItems(scope.clickedColumn);
-          if (_.isEmpty(scope.contextMenu.menuItems)) {
-            return true;
-          }
-          calculatePosition(event);
-          if (scope.contextMenu.visible) {
-            scope.$apply(function() {
-              scope.contextMenu.visible = false;
-            });
-          }
-          tooggleMenuVisibility(true);
-          result = false;
-        }
-      } else {
-        scope.contextMenu.visible = false;
-        result = true;
-      }
-      scope.$apply();
-      return result;
-    }
-    function bodyMouseDownHandler(event) {
-      if (scope.contextMenu.visible && (event.which != 3 && $(event.originalEvent.srcElement).closest(".jqx-menu-item, .jqx-menu-item-top").length == 0)) {
-        scope.contextMenu.visible = false;
-        scope.$apply();
-      }
-    }
-    function mouseDownHandler(event) {
-      if (event.which != 3 || !controller.isColumnContextMenuActive()) {
-        return true;
-      }
-      return controller.getIsTransposed() ? transposedGridContainerMouseDownHandler(event) : gridReportContainerMouseDownHandler(event);
-    }
-    angular.element(gridReportContainer).mousedown(mouseDownHandler);
-    angular.element("body,html").mousedown(bodyMouseDownHandler);
-    function getSimpleTransposedMenuItems(clickedColumn) {
-      var menuItems = [], clickedColumnModel = clickedColumn.subColModel || clickedColumn.model;
-      if (controller.canInsertBlankRow()) {
-        menuItems.push({label:$translate.instant("INSER_BLANK_ROW"), action:function() {
-          controller.insertBlankColumn(clickedColumnModel.id, "before");
-        }});
-      }
-      return menuItems;
-    }
-    function getMenuItems(clickedColumn) {
-      var menuItems = [];
-      var isTransposedGrid = controller.getIsTransposed();
-      var clickedColumnModel = clickedColumn.subColModel || clickedColumn.model;
-      if (isTransposedGrid && controller.canInsertBlankRow()) {
-        menuItems.push({label:$translate.instant("INSER_BLANK_ROW"), action:function() {
-          controller.insertBlankColumn(clickedColumnModel.id, "before");
-        }});
-      }
-      if (controller.columnContextMenuOptions.canPin && (!clickedColumnModel.forcePinned && (clickedColumnModel.canPin && !isTransposedGrid))) {
-        menuItems.push(!clickedColumnModel.pinned ? {label:$translate.instant("PIN"), action:controller.pinColumn} : {label:$translate.instant("UNPIN"), action:controller.unpinColumn});
-      }
-      if (controller.columnContextMenuOptions.canAdd && clickedColumnModel.canAdd) {
-        menuItems.push({label:!isTransposedGrid ? $translate.instant("ADD_COLUMN") : $translate.instant("ADD_FIELD"), action:controller.insertColumn});
-      }
-      if (controller.columnContextMenuOptions.canAddFormula && clickedColumnModel.canAddFormula) {
-        menuItems.push({label:$translate.instant("ADD_FORMULA"), action:function() {
-          gfColumnMathDialogService.openDialog(scope.gridInstanceId, {column:clickedColumnModel, mode:"insert"});
-        }});
-      }
-      if (controller.columnContextMenuOptions.canAddRank && (isColumnCanBeConvertedToMfr(clickedColumnModel) && clickedColumn.subColModel == null)) {
-        menuItems.push(getAddRankForColumnMenuSection(clickedColumnModel));
-      }
-      if (controller.columnContextMenuOptions.canEdit && (clickedColumnModel.canEdit && !clickedColumnModel.command.isDeleted())) {
-        menuItems.push({label:$translate.instant("EDIT_COLUMN"), action:controller.editColumn});
-      }
-      if (controller.columnContextMenuOptions.canDelete && clickedColumnModel.canDelete) {
-        menuItems.push({label:$translate.instant("REMOVE_COLUMN"), action:controller.deleteColumn});
-      }
-      if (controller.columnContextMenuOptions.canRename && (clickedColumnModel.canRename && (!clickedColumnModel.command.isFactorRank() && !clickedColumnModel.command.isDeleted()))) {
-        menuItems.push({label:$translate.instant("RENAME_COLUMN"), action:controller.renameColumn});
-      }
-      if (controller.columnContextMenuOptions.canRename && (clickedColumnModel.canRename && !clickedColumnModel.command.isFactorRank())) {
-        menuItems.push({label:$translate.instant("REVERT_RENAMING"), action:controller.resetHeaderToDefault, disabled:!clickedColumnModel.isHeaderChanged()});
-      }
-      if (controller.columnContextMenuOptions.canHideParameters && (clickedColumnModel.canHideParameters && (clickedColumnModel.command && clickedColumnModel.command.hasParameters()))) {
-        menuItems.push(clickedColumnModel.areParametersVisible ? {label:$translate.instant("HIDE_PARAMETERS"), action:_.partial(controller.setColumnParametersVisibility, false)} : {label:$translate.instant("SHOW_PARAMETERS"), action:_.partial(controller.setColumnParametersVisibility, true)});
-      }
-      if (controller.columnContextMenuOptions.canChangeCellsFormatting && (clickedColumnModel.isNumber() || clickedColumnModel.isDate())) {
-        menuItems.push(getFormatCellsMenuSection(clickedColumn));
-      }
-      if (controller.columnContextMenuOptions.canChangeSortingType && clickedColumnModel.isNumber()) {
-        menuItems.push(getColumnSortingTypeMenuSection(clickedColumn));
-      }
-      if (controller.columnContextMenuOptions.canChangeStatistics && (clickedColumnModel.canChangeStatistics && (clickedColumnModel.totalCalculations && (clickedColumnModel.totalCalculations.length > 0 && !isTransposedGrid)))) {
-        menuItems.push(getColumnStatisticsMenuSection(clickedColumn));
-      }
-      return menuItems;
-    }
-    function getColumnSortingTypeMenuSection(column) {
-      var isSelectedAction = function(sortingType) {
-        return column.model.sortingType == sortingType;
-      };
-      var getItem = function(text, value) {
-        return{action:_.partial(controller.setColumnSortingType, column.model.id, value, true), selected:isSelectedAction(value), html:formatLabel(text, isSelectedAction(value))};
-      };
-      return{label:$translate.instant("SORTING_TYPE"), items:[getItem($translate.instant("BY_VALUE"), gridReport.model.SortingTypes.ByValue), getItem($translate.instant("BY_ABSOLUTE_VALUE"), gridReport.model.SortingTypes.ByAbsoluteValue)]};
-    }
-    function getColumnFormattingMenuSection(gridColumn) {
-      var isSelectedAction = function(numOfDigits) {
-        return gridColumn.cellsFormat.decimalDigits === numOfDigits;
-      };
-      var getFormattingItem = function(text, value) {
-        return{action:function() {
-          gridColumn.cellsFormat.decimalDigits = value;
-          controller.applyCellsFormatting();
-        }, selected:isSelectedAction(value), html:formatTickedLabel(text, isSelectedAction(value))};
-      };
-      return{html:formatTickedLabel($translate.instant("PRECISION")), subMenuWidth:"140px", items:[getFormattingItem($translate.instant("FORMAT_NO_SYMBOLS"), 0), getFormattingItem($translate.instant("FORMAT_ONE_SYMBOLS"), 1), getFormattingItem($translate.instant("FORMAT_TWO_SYMBOLS"), 2), getFormattingItem($translate.instant("FORMAT_THREE_SYMBOLS"), 3), getFormattingItem($translate.instant("FORMAT_FOUR_SYMBOLS"), 4)]};
-    }
-    function getDateMenuSection(gridColumn) {
-      var items = [getDateFormatSubMenuItem(gridColumn, $translate.instant("DD_MM_YYYY"), $translate.instant("DD_MM_YYYY_F")), getDateFormatSubMenuItem(gridColumn, $translate.instant("DD_MM_YY"), $translate.instant("DD_MM_YY_F")), getDateFormatSubMenuItem(gridColumn, $translate.instant("DD_MM"), $translate.instant("DD_MM_F")), getDateFormatSubMenuItem(gridColumn, $translate.instant("MM_DD_YYYY"), $translate.instant("MM_DD_YYYY_F")), getDateFormatSubMenuItem(gridColumn, $translate.instant("MM_DD_YY"), 
-      $translate.instant("MM_DD_YY_F")), getDateFormatSubMenuItem(gridColumn, $translate.instant("MM_DD"), $translate.instant("MM_DD_F")), getDateFormatSubMenuItem(gridColumn, $translate.instant("MM_YYYY"), $translate.instant("MM_YYYY_F")), getDateFormatSubMenuItem(gridColumn, $translate.instant("MM_YY"), $translate.instant("MM_YY_F"))];
-      if ($translate.instant("SHOW_ABBREVIATIONS") === "true") {
-        items.push(getDateFormatSubMenuItem(gridColumn, $translate.instant("DAY_MONTHDATE_YEAR"), "dddd, MMMM d, yyyy"));
-        items.push(getDateFormatSubMenuItem(gridColumn, $translate.instant("DATE_ABBREVIATEDMONTH"), "d-MMM"));
-        items.push(getDateFormatSubMenuItem(gridColumn, $translate.instant("DATE_ABBREVIATEDMONYH_YEARE"), "d-MMM-yyyy"));
-        items.push(getDateFormatSubMenuItem(gridColumn, $translate.instant("MONTH_YEAR"), "MM-yyyy"));
-        items.push(getDateFormatSubMenuItem(gridColumn, $translate.instant("ABBREVIATEMONYH_ABBREVIATEDYEAR"), "MMM-yy"));
-      }
-      items = _.filter(items, function(item) {
-        return item != null;
-      });
-      return{html:formatTickedLabel($translate.instant("DATE")), subMenuWidth:"250px", items:items};
-    }
-    function getNegativeNumberMenuSection(gridColumn) {
-      var disabled = gridColumn.getReturnType() === scr.DataTypes.Score;
-      return{html:formatTickedLabel($translate.instant("NUMBER")), subMenuWidth:"140px", items:[getNegativeNumberFormatSubMenuItem(gridColumn, gridReport.model.NegativeNumberFormats.Default, {label:"-12345"}, disabled), getNegativeNumberFormatSubMenuItem(gridColumn, gridReport.model.NegativeNumberFormats.ColoredDefault, {label:"-12345", color:"red"}, disabled), getNegativeNumberFormatSubMenuItem(gridColumn, gridReport.model.NegativeNumberFormats.Colored, {label:"12345", color:"red"}, disabled), getNegativeNumberFormatSubMenuItem(gridColumn, 
-      gridReport.model.NegativeNumberFormats.Brackets, {label:"(12345)"}, disabled), getNegativeNumberFormatSubMenuItem(gridColumn, gridReport.model.NegativeNumberFormats.ColoredBrackets, {label:"(12345)", color:"red"}, disabled)], disabled:disabled};
-    }
-    function getPercentageMenuSection(gridColumn) {
-      var selected = !!gridColumn.cellsFormat.percentage;
-      return{html:formatTickedLabel($translate.instant("PERCENTAGE"), selected), action:function() {
-        gridColumn.cellsFormat.setPercentage(!gridColumn.cellsFormat.percentage);
-        gridColumn.conditionalValueFormatting = gfConditionalValueFormattingService.create(gridColumn);
-        controller.applyCellsFormatting();
-      }, selected:selected};
-    }
-    function getThousandsSeparatorMenuSection(gridColumn) {
-      return{html:formatTickedLabel($translate.instant("THOUSANDS_SEPARATOR")), subMenuWidth:"140px", items:[getThousandsSepratorSubMenuItem(gridColumn, $translate.instant("NONE"), ""), getThousandsSepratorSubMenuItem(gridColumn, ".", "."), getThousandsSepratorSubMenuItem(gridColumn, ",", ",")]};
-    }
-    function getFormatCellsMenuSection(clickedColumn) {
-      var menuItems = [], gridColumn = clickedColumn.subColModel || clickedColumn.model;
-      if (gridColumn.isDate()) {
-        menuItems.push(getDateMenuSection(gridColumn));
-      }
-      if (gridColumn.isNumber()) {
-        menuItems.push(getNegativeNumberMenuSection(gridColumn));
-      }
-      if (gridColumn.isNumber()) {
-        menuItems.push(getPercentageMenuSection(gridColumn));
-      }
-      if (controller.columnContextMenuOptions.canChangeValueFormatting && (gridColumn.canChangeValueFormatting && gridColumn.isNumber())) {
-        menuItems.push(getColumnFormattingMenuSection(gridColumn));
-      }
-      if (gridColumn.isNumber()) {
-        menuItems.push(getThousandsSeparatorMenuSection(gridColumn));
-      }
-      return{label:$translate.instant("FORMAT_CELLS"), items:menuItems};
-    }
-    function getThousandsSepratorSubMenuItem(gridColumn, label, thousandsSeparator) {
-      var selected = gridColumn.cellsFormat.thousandsSeparator === thousandsSeparator;
-      return{html:formatTickedLabel(label, selected), action:function() {
-        gridColumn.cellsFormat.thousandsSeparator = thousandsSeparator;
-        controller.applyCellsFormatting();
-      }, selected:selected};
-    }
-    function getNegativeNumberFormatSubMenuItem(gridColumn, negativeNumberFormat, options, disabled) {
-      var selected = gridColumn.cellsFormat.negativeNumberFormat === negativeNumberFormat;
-      return{action:function() {
-        gridColumn.cellsFormat.setNegativeNumberFormat(negativeNumberFormat);
-        gridColumn.conditionalValueFormatting = gfConditionalValueFormattingService.create(gridColumn);
-        controller.applyCellsFormatting();
-      }, selected:selected, html:formatTickedLabel(options.label, selected, options.color), disabled:disabled};
-    }
-    function getDateFormatSubMenuItem(gridColumn, label, dateFormat) {
-      if (label == "" || dateFormat == "") {
-        return null;
-      }
-      var selected = gridColumn.cellsFormat.dateFormat === dateFormat;
-      return{html:formatTickedLabel(label, selected), action:function() {
-        gridColumn.cellsFormat.dateFormat = dateFormat;
-        controller.applyCellsFormatting();
-      }, selected:selected};
-    }
-    function getAddRankForColumnMenuSection(gridColumn) {
-      return{label:$translate.instant("ADD_RANK_FOR_THIS_COLUMN"), items:[getAddRankForColumnItem($translate.instant("PERCENTILE"), scr.mfr.MFMethodology.PercentileScoring, gridColumn), getAddRankForColumnItem($translate.instant("DECILE"), scr.mfr.MFMethodology.DecileScoring, gridColumn), getAddRankForColumnItem($translate.instant("QUINTILE"), scr.mfr.MFMethodology.QuintileScoring, gridColumn), getAddRankForColumnItem($translate.instant("QUARTILE"), scr.mfr.MFMethodology.OuartileScoring, gridColumn), 
-      getAddRankForColumnItem($translate.instant("RANK"), scr.mfr.MFMethodology.NScoring, gridColumn), getAddRankForColumnItem($translate.instant("ZSCORE"), scr.mfr.MFMethodology.ZScores, gridColumn)]};
-    }
-    function isColumnCanBeConvertedToMfr(gridColumn) {
-      return gridColumn && (gridColumn.canAddRank && (gridColumn.command && ((gridColumn.command.isNumber() || gridColumn.command.isBoolean()) && (!gridColumn.command.isMultiFactorRank() && (!gridColumn.command.isFactorRank() && (!gridColumn.command.isColumnMath() && !gridColumn.command.isVector()))))));
-    }
-    function getAddRankForColumnItem(label, methodology, gridColumn) {
-      return{label:label, action:function() {
-        controller.addRankForColumn(gridColumn, methodology);
-      }};
-    }
-    function getColumnStatisticsMenuSection(column) {
-      var isDisabled = !controller.canChangeStatistics();
-      var statisticsSubItems = [];
-      var columnModel = column.subColModel || column.model;
-      if (!isDisabled) {
-        statisticsSubItems = _.foldl(columnModel.totalCalculations, function(list, totalCalc) {
-          var selected = isSelected(column, totalCalc);
-          list.push({selected:selected, html:formatTickedLabel(totalCalc.displayText, selected), action:_.partial(controller.setTotalCalculation, totalCalc), disabled:isDisabled});
-          return list;
-        }, []);
-      }
-      return{label:$translate.instant("SUMMARY_STATISTICS"), items:statisticsSubItems, disabled:isDisabled};
-    }
-    function formatTickedLabel(text, selected, color) {
-      var result = "";
-      var notSelectedClass = "gf-context-menuitem-tick";
-      if (selected) {
-        result = '<span class="icon-tick gf-selected" style="margin-right:3px;"></span>';
-      } else {
-        notSelectedClass = "gf-context-menuitem-no-tick";
-      }
-      if (color) {
-        result += '<span class="' + notSelectedClass + '" style="color:' + color + '">' + text + "</span>";
-      } else {
-        result += '<span class="' + notSelectedClass + '">' + text + "</span>";
-      }
-      return result;
-    }
-    function formatLabel(text, selected, color) {
-      if (selected) {
-        return'<span style="color:#ff9c00">' + text + "</span>";
-      }
-      if (color) {
-        return'<span style="color:' + color + '">' + text + "</span>";
-      }
-      return "<span>" + text + "</span>";
-    }
-    function isSelected(clickedColumn, calc) {
-      var gridColumn = clickedColumn.subColModel || clickedColumn.model;
-      return!gridColumn.selectedTotalsCalculation && calc.isNone || gridColumn.selectedTotalsCalculation && calc.name == gridColumn.selectedTotalsCalculation.name;
-    }
-    function hideContextMenu() {
-      if (scope.contextMenu.visible) {
-        tooggleMenuVisibility(false);
-      }
-    }
-    if (scope.actions) {
-      scope.actions = {hideContextMenu:hideContextMenu};
-    }
-    gridReportContainer.on("contextmenu", function() {
-      return false;
-    });
-    element.bind("$destroy", function() {
-      angular.element("body,html").unbind("mousedown", bodyMouseDownHandler);
-      angular.element(gridReportContainer).unbind("mousedown", gridReportContainerMouseDownHandler);
-    });
-  }};
-}]);
-goog.provide("gridReport.model.GridReportSelectionMode");
-gridReport.model.GridReportSelectionMode = {None:"none", Checkbox:"checkbox", SingleRow:"singlerow", MultipleRows:"multiplerows", MultipleRowsExtended:"multiplerowsextended", SingleCell:"singlecell", MultipleCellsExtended:"multiplecellsextended"};
-goog.provide("gridReport.services.HeatMapLevels");
-gridReport.services.HeatMapLevels = {Positive:"HeatMapLevels_Positive", MidPositive:"HeatMapLevels_MidPositive", Neutral:"HeatMapLevels_Neutral", MidNegative:"HeatMapLevels_MidNegative", Negative:"HeatMapLevels_Negative"};
-goog.provide("gridReport.services.HeatMapService");
-goog.require("gridReport.services.HeatMapLevels");
-gridReport.Module.service("gfHeatMapService", [function() {
-  var service = {};
-  service.getHeatMapLevel = function(value, average, standardDeviation) {
-    if (value > average + 1.25 * standardDeviation) {
-      return gridReport.services.HeatMapLevels.Positive;
-    }
-    if (average + 1.25 * standardDeviation >= value && value > average + 0.5 * standardDeviation) {
-      return gridReport.services.HeatMapLevels.MidPositive;
-    }
-    if (average + 0.5 * standardDeviation >= value && value > average - 0.5 * standardDeviation) {
-      return gridReport.services.HeatMapLevels.Neutral;
-    }
-    if (average - 0.5 * standardDeviation >= value && value > average - 1.25 * standardDeviation) {
-      return gridReport.services.HeatMapLevels.MidNegative;
-    }
-    if (value <= average - 1.25 * standardDeviation) {
-      return gridReport.services.HeatMapLevels.Negative;
-    }
-    throw new Error("Unknow Heat Map level.");
-  };
-  service.getStandardDeviation = function(values) {
-    var sum = 0;
-    var mean = service.getAritmeticMean(values);
-    for (var i = 0, n = values.length;i < n;i++) {
-      sum += Math.pow(values[i] - mean, 2);
-    }
-    return Math.sqrt(sum / (n - 1));
-  };
-  service.getAritmeticMean = function(values) {
-    var sum = 0;
-    for (var i = 0, n = values.length;i < n;i++) {
-      sum += values[i];
-    }
-    return sum / n;
-  };
-  function getMinMax(values) {
-    var i = 0, n = values.length, min, max;
-    if (n == 0) {
-      return null;
-    }
-    max = min = values[0];
-    for (;i < n;i++) {
-      max = Math.max(max, values[i]);
-      min = Math.min(min, values[i]);
-    }
-    return{min:min, max:max};
-  }
-  service.getStatisticValuesV1 = function(values) {
-    var minMax = getMinMax(values);
-    if (minMax == null || minMax.min == minMax.max) {
-      return null;
-    }
-    var average = service.getAritmeticMean(values);
-    var standardDeviation = service.getStandardDeviation(values);
-    var max = average + 2 * standardDeviation;
-    var min = average - 2 * standardDeviation;
-    var limitedValues = [];
-    for (var i = 0, n = values.length;i < n;i++) {
-      if (values[i] >= min && values[i] <= max) {
-        limitedValues.push(values[i]);
-      }
-    }
-    average = service.getAritmeticMean(limitedValues);
-    standardDeviation = service.getStandardDeviation(limitedValues);
-    if (_.isNumber(average) && (!_.isNaN(average) && (_.isNumber(standardDeviation) && !_.isNaN(standardDeviation)))) {
-      return{average:average, standardDeviation:standardDeviation};
-    } else {
-      return null;
-    }
-  };
-  service.getStatisticValues = function(values) {
-    var firstItem = _.first(values);
-    if (_.isArray(firstItem)) {
-      var statisticValues = [];
-      for (var i = 0, n = firstItem.length;i < n;i++) {
-        var subColumnValues = [];
-        for (var j = 0, m = values.length;j < m;j++) {
-          var value = values[j][i];
-          if (_.isNumber(value) && !_.isNaN(value)) {
-            subColumnValues.push(value);
-          }
-        }
-        statisticValues.push(service.getStatisticValuesV1(subColumnValues));
-      }
-      return statisticValues;
-    } else {
-      return service.getStatisticValuesV1(values);
-    }
   };
   return service;
 }]);
@@ -4670,157 +1916,76 @@ gridReport.Module.service("gfAdvancedSortingManagerService", ["$modal", function
   };
   return service;
 }]);
-goog.provide("gridReport.utils.ErrorHandler");
-gridReport.Module.factory("gfErrorHandler", ["$translate", function($translate) {
-  var service = {};
-  service.getErrorMessage = function(data) {
-    if (!_.isString(data) || data.substring(0, 14).toLowerCase() === "<!doctype html") {
-      return $translate.instant("SERVICE_UNAVAILABLE");
+goog.provide("gridReport.model.GridEvents");
+gridReport.model.GridEvents = {columnEditActivated:"columnEditActivated", columnInsertActivated:"columnInsertActivated", columnAdded:"columnAdded", columnRemoved:"columnRemoved", columnTimeseriesChartClicked:"columnTimeseriesChartClicked", columnParametersVisibilityChanged:"columnParametersVisibilityChanged", rowSelected:"rowSelected", rowUnselected:"rowUnselected", beforeColumnSort:"beforeColumnSort", sortChanged:"sortChanged", columnResized:"columnResized", columnReordered:"columnReordered", columnDataLoaded:"columnDataLoaded", 
+createExpressionActivated:"createExpressionActivated", maxRowsCountExceeded:"maxRowsCountExceeded", gridReportError:"gridReportError", screenResolved:"screenResolved", identifiersExcluded:"identifiersExcluded", identifiersIncluded:"identifiersIncluded", formatSaved:"GridEvents_FormatSaved", resize:"GridEvents_resize", loadingStarted:"GridEvents_LoadingStarted", loadingEnded:"GridEvents_LoadingEnded", newStateApplied:"GridEvents_StateApplied", columnActionCanceled:"GridEvents_columnActionCanceled", 
+stateChanged:"GridEvents_stateChanged", componentStateChanged:"GridEvents_ComponentStateChanged", templateLoadingStarted:"GridEvents_TemplateLoadingStarted", templateLoadingEnded:"GridEvents_TemplateLoadingEnded", templateCreated:"GridEvents_TemplateCreated", startLoadingRows:"GridEvents_StartLoadingRows", endLoadingRows:"GridEvents_EndLoadingRows", rowsAdded:"GridEvent_RowsAdded", rowsRemoved:"GridEvent_RowsRemoved", templateDeleted:"GridEvent_TemplateDeleted", templateRenamed:"GridEvent_TemplateDeleted", 
+groupingApplied:"GridEvent_GroupingApplied", globalParametersApplied:"GridEvent_GlobalParametersApplied", groupingComponentRegistered:"GridEvent_GroupingComponentRegistered", templateSelectorComponentRegistered:"GridEvent_TemplateSelectorComponentRegistered", exclusionsComponentRegistered:"GridEvent_ExclusionsComponentRegistered", statisticsComponentRegistered:"GridEvent_StatisticsComponentRegistered", gridComponentRegistered:"GridEvent_GridComponentRegistered", primaryRowKeyChanged:"GridEvent_PrimaryRowKeyChanged", 
+statisticsApplied:"GridEvent_StatisticsApplied", groupExpanded:"GridEvent_GroupExpanded", groupCollapsed:"GridEvent_GroupCollapsed", allGroupsExpanded:"GridEvent_AllGroupsExpanded", allGroupsCollapsed:"GridEvent_AllGroupsCollapsed", groupsStateRestored:"GridEvent_GroupsStateRestored", themeChanged:"GridEvent_ThemeChanged", showMoreSearchResultsSelected:"GridEvent_ShowMoreSearchResultsSelected", transposed:"GridEvent_Transposed", beginTranspose:"GridEvent_BeginTranspose", exportAllAsFormulaToExcel:"GridEvent_ExportAllAsFormulaToExcel", 
+exportSelectedAsFormulaToExcel:"GridEvent_ExportSelectedAsFormulaToExcel", exportAllAsValuesToExcel:"GridEvent_ExportAllAsValuesToExcel", exportSelectedAsValuesToExcel:"GridEvent_ExportSelectedAsValuesToExcel", exportAllToQuoteObject:"GridEvent_ExportAllToQuoteObject", exportSelectedToQuoteObject:"GridEvent_ExportSelectedToQuoteObject", exportAllToList:"GridEvent_EportAllToList", exportSelectedToList:"GridEvent_ExportSelectedToList", exportAllToExistingList:"GridEvent_ExportAllToExistingList", exportSelectedToExistingList:"GridEvent_ExportSelectedToExistingList", 
+columnInfoClicked:"GridEvent_ColumnInfoClicked", columnChartClicked:"GridEvent_ColumnChartClicked", excludeRows:"GridEvent_ExcludeRows", beginGroupApply:"GridEvent_GroupingEnabled", beginAdvancedSort:"GridEvent_AdvancedSortEnabled", mfrAdded:"GridEvent_MFR_Added", templateSelectorTemplateSelected:"GridEvent_TemplateSelectorTemplateSelected", templateManagerTemplateSelected:"GridEvent_TemplateManagerTemplateSelected", displayOptionsChanged:"GridEvent_DisplayOptionsChanged", heatMapChanged:"GridEvent_HeatMapChanged", 
+templateSelectorComponentInitialized:"GridEvent_TemplateSelectorComponentInitialized", columnFilterResultsClicked:"GridEvent_ColumnFilterResultsClicked", columnFilterApplied:"GridEvent_ColumnFilterApplied", columnFiltersRemoved:"GridEvent_ColumnFiltersRemoved", highlightedRowKeyChanged:"GridEvent_HighlightedRowKeyChanged", templateImported:"GridEvent_TemplateImported", columnSelected:"GridEvent_ColumnSelected", groupRowRightClicked:"GridEvent_GroupRowRightClicked", printLandscape:"GridEvent_PrintLandscape", 
+printPortrait:"GridEvent_PrintPortrait", exportToPdfLandscape:"GridEvent_ExportToPdfLandscape", exportToPdfPortrait:"GridEvent_ExportToPdfPortrait", qdipTextChanged:"GridEvent_QdipTextChanged"};
+goog.provide("gridReport.services.StatisticsExclusions");
+goog.require("gridReport.Module");
+goog.require("gridReport.model.GridEvents");
+gridReport.Module.factory("gfStatisticsExclusions", ["gfEventsAggregator", function(gfEventsAggregator) {
+  function createService(id) {
+    var exclusions = {};
+    var excludedIdentifiers = [];
+    function isExclusionsNotChanged(identifiers) {
+      return excludedIdentifiers.length == identifiers.length && (_.difference(excludedIdentifiers, identifiers).length == 0 && _.difference(identifiers, excludedIdentifiers).length == 0);
     }
-    return data;
-  };
-  service.handleErrorResponse = function(data, status, defaultMessage, failCallback) {
-    if (failCallback) {
-      failCallback({message:defaultMessage + " " + service.getErrorMessage(data), statusCode:status, data:data});
-    }
-  };
-  return service;
-}]);
-goog.provide("gridReport.services.DapsService");
-goog.require("gridReport.utils.ErrorHandler");
-gridReport.Module.service("gfDapsService", ["$http", "gfConfig", "$translate", "gfErrorHandler", function($http, gfConfig, $translate, gfErrorHandler) {
-  var invalidCharacters = gfConfig.templateNameInvalidCharacters || "{}/\\[];:$+#*?<>&%.";
-  var templateNameMaxLength = gfConfig.reportTemplateNameMaxLength || 64;
-  var service = {};
-  service.REPORT_TEMPLATE_NAME_MAX_LENGTH = templateNameMaxLength;
-  service.REPORT_TEMPLATE_NAME_MAX_INVALID_CHARACTERS = invalidCharacters;
-  service.loadFile = function(request, successCallback, failCallback) {
-    $http.get(gfConfig.host + "State/" + encodeURIComponent(request.folderName) + "/" + encodeURIComponent(request.fileName)).success(function(response) {
-      if (response.Status && response.Status.Level == "ERROR") {
-        (failCallback || angular.noop)({message:response.Status.Message});
+    var service = {};
+    service.isHidden = function(identifier) {
+      return!!exclusions[identifier];
+    };
+    service.setExclusions = function(identifiers) {
+      if (isExclusionsNotChanged(identifiers)) {
         return;
       }
-      (successCallback || angular.noop)(angular.fromJson(response.Content));
-    }).error(function(data, status) {
-      gfErrorHandler.handleErrorResponse(data, status, $translate.instant("UNABLE_TO_LOAD_TEMPLATE"), failCallback);
-    });
-  };
-  service.loadFileSync = function(request) {
-    var errorMsg = "";
-    var response = null;
-    $.ajax({url:gfConfig.host + "State/" + encodeURIComponent(request.folderName) + "/" + encodeURIComponent(request.fileName), success:function(result) {
-      if (result.isOk == false) {
-        errorMsg = $translate.instant("UNABLE_TO_LOAD_TEMPLATE");
+      excludedIdentifiers = identifiers;
+      exclusions = _.reduce(identifiers, function(map, item) {
+        map[item] = true;
+        return map;
+      }, {});
+      gfEventsAggregator.getChildAggregator(id).raiseEvent(gridReport.model.GridEvents.identifiersExcluded, identifiers, gridReport.model.ExclusionsTypes.StatisticsExclusions);
+    };
+    service.getExcludedIdentifiers = function() {
+      return excludedIdentifiers;
+    };
+    service.exclude = function(identifiers) {
+      var addedToExclusion = _.difference(identifiers, excludedIdentifiers);
+      if (addedToExclusion.length == 0) {
+        return addedToExclusion;
+      }
+      service.setExclusions(_.union(excludedIdentifiers, addedToExclusion));
+      return addedToExclusion;
+    };
+    service.removeFromExcluded = function(identifiers) {
+      service.setExclusions(_.difference(excludedIdentifiers, identifiers));
+    };
+    service.filterExclusions = function(identifiers) {
+      var currentExclusions = _.sortBy(excludedIdentifiers);
+      var identifiersToExclude = _.sortBy(_.intersection(excludedIdentifiers, identifiers));
+      if (_.isEqual(currentExclusions, identifiersToExclude)) {
         return;
       }
-      if (result.Status && result.Status.Level == "ERROR") {
-        errorMsg = result.Status.Message;
-      }
-      response = angular.fromJson(result.Content);
-    }, async:false});
-    if (errorMsg != "" || response == null) {
-      throw errorMsg;
+      service.setExclusions(_.intersection(excludedIdentifiers, identifiers));
+    };
+    return service;
+  }
+  var services = {};
+  return{instance:function(gridInstanceId) {
+    if (!services[gridInstanceId]) {
+      services[gridInstanceId] = createService(gridInstanceId);
     }
-    return response;
-  };
-  service.saveFile = function(request, successCallback, failCallback) {
-    if (!request) {
-      throw new Error("request should be provided.");
+    return services[gridInstanceId];
+  }, clear:function(gridInstanceId) {
+    if (services[gridInstanceId]) {
+      delete services[gridInstanceId];
     }
-    var url = gfConfig.host + "State/" + encodeURIComponent(request.folderName) + "/" + encodeURIComponent(request.fileName);
-    var content = {Content:angular.toJson(request.state), Description:request.description || ""};
-    if (!_.isEmpty(request.description)) {
-      content.Metadata = [{Key:"description", Value:request.description}];
-    }
-    $http.post(url, content).success(function(response) {
-      if (response && response.ErrorCode != 0) {
-        gfErrorHandler.handleErrorResponse(response.Message, response.ErrorCode, $translate.instant("UNABLE_TO_SAVE_TEMPLATE"), failCallback);
-      } else {
-        (successCallback || angular.noop)(response);
-      }
-    }).error(function(data, status) {
-      gfErrorHandler.handleErrorResponse(data, status, $translate.instant("UNABLE_TO_SAVE_TEMPLATE"), failCallback);
-    });
-  };
-  service.listFiles = function(folderName, successCallback, failCallback) {
-    $http.get(gfConfig.host + "Directory/" + encodeURIComponent(folderName)).success(function(response) {
-      if (_.isString(response)) {
-        gfErrorHandler.handleErrorResponse(response, undefined, $translate.instant("UNABLE_TO_LOAD_PERSONAL_TEMPLATES"), failCallback);
-      } else {
-        if (response.Files) {
-          _.each(response.Files, function(file) {
-            if (file.modificationDate) {
-              file.modificationDate = new Date(file.modificationDate);
-            }
-            if (file.creationDate) {
-              file.creationDate = new Date(file.creationDate);
-            }
-            if (file.accessDate) {
-              file.accessDate = new Date(file.accessDate);
-            }
-          });
-        }
-        (successCallback || angular.noop)(response);
-      }
-    }).error(function(data, status) {
-      gfErrorHandler.handleErrorResponse(data, status, $translate.instant("UNABLE_TO_LOAD_PERSONAL_TEMPLATES"), failCallback);
-    });
-  };
-  service.deleteFile = function(request, successCallback, failCallback) {
-    $http.post(gfConfig.host + "State/Delete/" + encodeURIComponent(request.folderName) + "/" + encodeURIComponent(request.fileName)).success(function(response) {
-      (successCallback || angular.noop)(response);
-    }).error(function(data, status) {
-      gfErrorHandler.handleErrorResponse(data, status, $translate.instant("UNABLE_TO_DELETE_TEMPLATE"), failCallback);
-    });
-  };
-  service.renameFile = function(request, successCallback, failCallback) {
-    var body = {From:request.folderName + "/" + request.oldFileName, To:request.newFileName, Description:request.description};
-    $http.post(gfConfig.host + "State/Rename", body).success(function(response) {
-      (successCallback || angular.noop)(response);
-    }).error(function(data, status) {
-      gfErrorHandler.handleErrorResponse(data, status, $translate.instant("UNABLE_TO_RENAME_TEMPLATE"), failCallback);
-    });
-  };
-  service.duplicateFile = function(request, successCallback, failCallback) {
-    var from = encodeURIComponent(request.folderName) + "/" + encodeURIComponent(request.oldFileName);
-    var to = encodeURIComponent(request.folderName) + "/" + encodeURIComponent(request.newFileName);
-    $http.post(gfConfig.host + "State/Copy?from=" + from + "&to=" + to).success(function(response) {
-      (successCallback || angular.noop)(response);
-    }).error(function(data, status) {
-      gfErrorHandler.handleErrorResponse(data, status, $translate.instant("UNABLE_TO_COPY_TEMPLATE"), failCallback);
-    });
-  };
-  service.getNameValidationMessage = function(name) {
-    if (!name || typeof name != "string") {
-      return $translate.instant("NAME_IS_REQUIRED");
-    } else {
-      if (name.length > templateNameMaxLength) {
-        return $translate.instant("MAX_LENGTH_EXCEEDED");
-      }
-    }
-    var badChar = [];
-    for (var i = 0;i < name.length;++i) {
-      var ic = name.charAt(i);
-      if (invalidCharacters.indexOf(ic) >= 0 && badChar.indexOf(ic) == -1) {
-        badChar.push(ic);
-      }
-    }
-    if (badChar.length == 0) {
-      return "";
-    }
-    var r = $translate.instant("INVALID_CHARACTER");
-    switch(badChar.length) {
-      case 0:
-        return "";
-      case 1:
-        break;
-      default:
-        r = r + "s";
-        break;
-    }
-    return r + ": " + badChar.join(" ");
-  };
-  return service;
+  }};
 }]);
 goog.provide("gridReport.services.ActionPostponingService");
 gridReport.Module.factory("gfActionPostponingService", function() {
@@ -10851,6 +8016,101 @@ gridReport.model.ConditionalValueFormatting.prototype.compare = function(value, 
   }
   return "";
 };
+goog.provide("gridReport.services.HeatMapLevels");
+gridReport.services.HeatMapLevels = {Positive:"HeatMapLevels_Positive", MidPositive:"HeatMapLevels_MidPositive", Neutral:"HeatMapLevels_Neutral", MidNegative:"HeatMapLevels_MidNegative", Negative:"HeatMapLevels_Negative"};
+goog.provide("gridReport.services.HeatMapService");
+goog.require("gridReport.services.HeatMapLevels");
+gridReport.Module.service("gfHeatMapService", [function() {
+  var service = {};
+  service.getHeatMapLevel = function(value, average, standardDeviation) {
+    if (value > average + 1.25 * standardDeviation) {
+      return gridReport.services.HeatMapLevels.Positive;
+    }
+    if (average + 1.25 * standardDeviation >= value && value > average + 0.5 * standardDeviation) {
+      return gridReport.services.HeatMapLevels.MidPositive;
+    }
+    if (average + 0.5 * standardDeviation >= value && value > average - 0.5 * standardDeviation) {
+      return gridReport.services.HeatMapLevels.Neutral;
+    }
+    if (average - 0.5 * standardDeviation >= value && value > average - 1.25 * standardDeviation) {
+      return gridReport.services.HeatMapLevels.MidNegative;
+    }
+    if (value <= average - 1.25 * standardDeviation) {
+      return gridReport.services.HeatMapLevels.Negative;
+    }
+    throw new Error("Unknow Heat Map level.");
+  };
+  service.getStandardDeviation = function(values) {
+    var sum = 0;
+    var mean = service.getAritmeticMean(values);
+    for (var i = 0, n = values.length;i < n;i++) {
+      sum += Math.pow(values[i] - mean, 2);
+    }
+    return Math.sqrt(sum / (n - 1));
+  };
+  service.getAritmeticMean = function(values) {
+    var sum = 0;
+    for (var i = 0, n = values.length;i < n;i++) {
+      sum += values[i];
+    }
+    return sum / n;
+  };
+  function getMinMax(values) {
+    var i = 0, n = values.length, min, max;
+    if (n == 0) {
+      return null;
+    }
+    max = min = values[0];
+    for (;i < n;i++) {
+      max = Math.max(max, values[i]);
+      min = Math.min(min, values[i]);
+    }
+    return{min:min, max:max};
+  }
+  service.getStatisticValuesV1 = function(values) {
+    var minMax = getMinMax(values);
+    if (minMax == null || minMax.min == minMax.max) {
+      return null;
+    }
+    var average = service.getAritmeticMean(values);
+    var standardDeviation = service.getStandardDeviation(values);
+    var max = average + 2 * standardDeviation;
+    var min = average - 2 * standardDeviation;
+    var limitedValues = [];
+    for (var i = 0, n = values.length;i < n;i++) {
+      if (values[i] >= min && values[i] <= max) {
+        limitedValues.push(values[i]);
+      }
+    }
+    average = service.getAritmeticMean(limitedValues);
+    standardDeviation = service.getStandardDeviation(limitedValues);
+    if (_.isNumber(average) && (!_.isNaN(average) && (_.isNumber(standardDeviation) && !_.isNaN(standardDeviation)))) {
+      return{average:average, standardDeviation:standardDeviation};
+    } else {
+      return null;
+    }
+  };
+  service.getStatisticValues = function(values) {
+    var firstItem = _.first(values);
+    if (_.isArray(firstItem)) {
+      var statisticValues = [];
+      for (var i = 0, n = firstItem.length;i < n;i++) {
+        var subColumnValues = [];
+        for (var j = 0, m = values.length;j < m;j++) {
+          var value = values[j][i];
+          if (_.isNumber(value) && !_.isNaN(value)) {
+            subColumnValues.push(value);
+          }
+        }
+        statisticValues.push(service.getStatisticValuesV1(subColumnValues));
+      }
+      return statisticValues;
+    } else {
+      return service.getStatisticValuesV1(values);
+    }
+  };
+  return service;
+}]);
 goog.provide("gridReport.services.HeatMapColors");
 goog.require("gridReport.services.HeatMapLevels");
 goog.require("gridReport.services.HeatMapService");
@@ -11179,6 +8439,242 @@ gridReport.Module.factory("gfTransposedGridCellFormatter", ["$translate", "gfCol
     }
     smartTooltip = ' data-smart-tooltip = "' + (outParam.title || service.getCellText(undefined, data, data.item, outParam, columnfield, undefined, options, settings)) + '"';
     return "<div " + rowKey + " " + columnKey + " " + cssClasses + smartTooltip + ">" + (html || getCellHtml(formattedValue, columnproperties.cellsalign, [])) + "</div>";
+  };
+  return service;
+}]);
+goog.provide("gridReport.model.ReportTemplate");
+(function() {
+  gridReport.model.ReportTemplate = function(options) {
+    if (options) {
+      gridReport.jsUtils.mergeProperties(this, options);
+      if (options.hasOwnProperty("path")) {
+        this.path = options.path;
+        if (options.path != null) {
+          var index = options.path.lastIndexOf("/");
+          this.group = options.path.substr(index + 1);
+        }
+      }
+      if (options.hasOwnProperty("creationDate")) {
+        this.creationDate = new Date(options.creationDate);
+      }
+      if (options.hasOwnProperty("modificationDate")) {
+        this.modificationDate = new Date(options.modificationDate);
+      }
+    }
+  };
+  gridReport.model.ReportTemplate.types = {global:"global", personal:"personal", newTemplate:"new", custom:"custom", shared:"shared"};
+  gridReport.model.ReportTemplate.prototype.accessDate = null;
+  gridReport.model.ReportTemplate.prototype.creationDate = null;
+  gridReport.model.ReportTemplate.prototype.description = "";
+  gridReport.model.ReportTemplate.prototype.author = null;
+  gridReport.model.ReportTemplate.prototype.group = null;
+  gridReport.model.ReportTemplate.prototype.name = "";
+  gridReport.model.ReportTemplate.prototype.modificationDate = null;
+  gridReport.model.ReportTemplate.prototype.type = gridReport.model.ReportTemplate.types.personal;
+  gridReport.model.ReportTemplate.prototype.localizedName = null;
+  gridReport.model.ReportTemplate.prototype.isGroupShared = false;
+  gridReport.model.ReportTemplate.prototype.productMetadata = null;
+  gridReport.model.ReportTemplate.prototype.getColumnsList = function() {
+    var columns = [];
+    try {
+      var description = JSON.parse(this.getProductMetadataValue("description") || this.description);
+      if (description && description.columns) {
+        columns = _.pluck(description.columns, "header");
+      }
+    } catch (e) {
+      if (this.description) {
+        columns = this.description.split(", ");
+      }
+    }
+    return columns;
+  };
+  gridReport.model.ReportTemplate.prototype.getIsObsolete = function() {
+    var isObsolete = false;
+    try {
+      var description = JSON.parse(this.getProductMetadataValue("description") || this.description);
+      if (!description || !description.columns) {
+        isObsolete = true;
+      }
+    } catch (e) {
+      isObsolete = true;
+    }
+    return isObsolete;
+  };
+  gridReport.model.ReportTemplate.prototype.getUniverseContext = function() {
+    try {
+      var description = JSON.parse(this.getProductMetadataValue("description") || this.description);
+      if (description && description.universeContext) {
+        return description.universeContext;
+      }
+    } catch (e) {
+    }
+    return scr.UniverseType.Public;
+  };
+  gridReport.model.ReportTemplate.prototype.isGlobal = function() {
+    return this.type === gridReport.model.ReportTemplate.types.global;
+  };
+  gridReport.model.ReportTemplate.prototype.isPersonal = function() {
+    return this.type === gridReport.model.ReportTemplate.types.personal;
+  };
+  gridReport.model.ReportTemplate.prototype.isShared = function() {
+    return this.type === gridReport.model.ReportTemplate.types.shared;
+  };
+  gridReport.model.ReportTemplate.prototype.getProductMetadataValue = function(key) {
+    var foundItem = _.find(this.productMetadata, function(item) {
+      return item.Key === key;
+    });
+    return foundItem ? foundItem.Value : undefined;
+  };
+})();
+goog.provide("gridReport.utils.ErrorHandler");
+gridReport.Module.factory("gfErrorHandler", ["$translate", function($translate) {
+  var service = {};
+  service.getErrorMessage = function(data) {
+    if (!_.isString(data) || data.substring(0, 14).toLowerCase() === "<!doctype html") {
+      return $translate.instant("SERVICE_UNAVAILABLE");
+    }
+    return data;
+  };
+  service.handleErrorResponse = function(data, status, defaultMessage, failCallback) {
+    if (failCallback) {
+      failCallback({message:defaultMessage + " " + service.getErrorMessage(data), statusCode:status, data:data});
+    }
+  };
+  return service;
+}]);
+goog.provide("gridReport.services.DapsService");
+goog.require("gridReport.utils.ErrorHandler");
+gridReport.Module.service("gfDapsService", ["$http", "gfConfig", "$translate", "gfErrorHandler", function($http, gfConfig, $translate, gfErrorHandler) {
+  var invalidCharacters = gfConfig.templateNameInvalidCharacters || "{}/\\[];:$+#*?<>&%.";
+  var templateNameMaxLength = gfConfig.reportTemplateNameMaxLength || 64;
+  var service = {};
+  service.REPORT_TEMPLATE_NAME_MAX_LENGTH = templateNameMaxLength;
+  service.REPORT_TEMPLATE_NAME_MAX_INVALID_CHARACTERS = invalidCharacters;
+  service.loadFile = function(request, successCallback, failCallback) {
+    $http.get(gfConfig.host + "State/" + encodeURIComponent(request.folderName) + "/" + encodeURIComponent(request.fileName)).success(function(response) {
+      if (response.Status && response.Status.Level == "ERROR") {
+        (failCallback || angular.noop)({message:response.Status.Message});
+        return;
+      }
+      (successCallback || angular.noop)(angular.fromJson(response.Content));
+    }).error(function(data, status) {
+      gfErrorHandler.handleErrorResponse(data, status, $translate.instant("UNABLE_TO_LOAD_TEMPLATE"), failCallback);
+    });
+  };
+  service.loadFileSync = function(request) {
+    var errorMsg = "";
+    var response = null;
+    $.ajax({url:gfConfig.host + "State/" + encodeURIComponent(request.folderName) + "/" + encodeURIComponent(request.fileName), success:function(result) {
+      if (result.isOk == false) {
+        errorMsg = $translate.instant("UNABLE_TO_LOAD_TEMPLATE");
+        return;
+      }
+      if (result.Status && result.Status.Level == "ERROR") {
+        errorMsg = result.Status.Message;
+      }
+      response = angular.fromJson(result.Content);
+    }, async:false});
+    if (errorMsg != "" || response == null) {
+      throw errorMsg;
+    }
+    return response;
+  };
+  service.saveFile = function(request, successCallback, failCallback) {
+    if (!request) {
+      throw new Error("request should be provided.");
+    }
+    var url = gfConfig.host + "State/" + encodeURIComponent(request.folderName) + "/" + encodeURIComponent(request.fileName);
+    var content = {Content:angular.toJson(request.state), Description:request.description || ""};
+    if (!_.isEmpty(request.description)) {
+      content.Metadata = [{Key:"description", Value:request.description}];
+    }
+    $http.post(url, content).success(function(response) {
+      if (response && response.ErrorCode != 0) {
+        gfErrorHandler.handleErrorResponse(response.Message, response.ErrorCode, $translate.instant("UNABLE_TO_SAVE_TEMPLATE"), failCallback);
+      } else {
+        (successCallback || angular.noop)(response);
+      }
+    }).error(function(data, status) {
+      gfErrorHandler.handleErrorResponse(data, status, $translate.instant("UNABLE_TO_SAVE_TEMPLATE"), failCallback);
+    });
+  };
+  service.listFiles = function(folderName, successCallback, failCallback) {
+    $http.get(gfConfig.host + "Directory/" + encodeURIComponent(folderName)).success(function(response) {
+      if (_.isString(response)) {
+        gfErrorHandler.handleErrorResponse(response, undefined, $translate.instant("UNABLE_TO_LOAD_PERSONAL_TEMPLATES"), failCallback);
+      } else {
+        if (response.Files) {
+          _.each(response.Files, function(file) {
+            if (file.modificationDate) {
+              file.modificationDate = new Date(file.modificationDate);
+            }
+            if (file.creationDate) {
+              file.creationDate = new Date(file.creationDate);
+            }
+            if (file.accessDate) {
+              file.accessDate = new Date(file.accessDate);
+            }
+          });
+        }
+        (successCallback || angular.noop)(response);
+      }
+    }).error(function(data, status) {
+      gfErrorHandler.handleErrorResponse(data, status, $translate.instant("UNABLE_TO_LOAD_PERSONAL_TEMPLATES"), failCallback);
+    });
+  };
+  service.deleteFile = function(request, successCallback, failCallback) {
+    $http.post(gfConfig.host + "State/Delete/" + encodeURIComponent(request.folderName) + "/" + encodeURIComponent(request.fileName)).success(function(response) {
+      (successCallback || angular.noop)(response);
+    }).error(function(data, status) {
+      gfErrorHandler.handleErrorResponse(data, status, $translate.instant("UNABLE_TO_DELETE_TEMPLATE"), failCallback);
+    });
+  };
+  service.renameFile = function(request, successCallback, failCallback) {
+    var body = {From:request.folderName + "/" + request.oldFileName, To:request.newFileName, Description:request.description};
+    $http.post(gfConfig.host + "State/Rename", body).success(function(response) {
+      (successCallback || angular.noop)(response);
+    }).error(function(data, status) {
+      gfErrorHandler.handleErrorResponse(data, status, $translate.instant("UNABLE_TO_RENAME_TEMPLATE"), failCallback);
+    });
+  };
+  service.duplicateFile = function(request, successCallback, failCallback) {
+    var from = encodeURIComponent(request.folderName) + "/" + encodeURIComponent(request.oldFileName);
+    var to = encodeURIComponent(request.folderName) + "/" + encodeURIComponent(request.newFileName);
+    $http.post(gfConfig.host + "State/Copy?from=" + from + "&to=" + to).success(function(response) {
+      (successCallback || angular.noop)(response);
+    }).error(function(data, status) {
+      gfErrorHandler.handleErrorResponse(data, status, $translate.instant("UNABLE_TO_COPY_TEMPLATE"), failCallback);
+    });
+  };
+  service.getNameValidationMessage = function(name) {
+    if (!name || typeof name != "string") {
+      return $translate.instant("NAME_IS_REQUIRED");
+    } else {
+      if (name.length > templateNameMaxLength) {
+        return $translate.instant("MAX_LENGTH_EXCEEDED");
+      }
+    }
+    var badChar = [];
+    for (var i = 0;i < name.length;++i) {
+      var ic = name.charAt(i);
+      if (invalidCharacters.indexOf(ic) >= 0 && badChar.indexOf(ic) == -1) {
+        badChar.push(ic);
+      }
+    }
+    if (badChar.length == 0) {
+      return "";
+    }
+    var r = $translate.instant("INVALID_CHARACTER");
+    switch(badChar.length) {
+      case 0:
+        return "";
+      case 1:
+        break;
+      default:
+        r = r + "s";
+        break;
+    }
+    return r + ": " + badChar.join(" ");
   };
   return service;
 }]);
@@ -14816,6 +12312,8 @@ gridReport.services.DataService.prototype.columnsDataUpdateCallback = null;
 gridReport.services.DataService.prototype.columnDataLoadingFailedCallback = null;
 goog.provide("gridReport.model.GridContentPlacement");
 gridReport.model.GridContentPlacement = {All:"GridContentPlacement.All", Rows:"GridContentPlacement.Rows"};
+goog.provide("gridReport.model.ExclusionsTypes");
+gridReport.model.ExclusionsTypes = {Exclusions:"ExclusionsTypes_Exclusions", StatisticsExclusions:"ExclusionsTypes_StatisticsExclusions"};
 goog.provide("gridReport.model.StateChangesCause");
 gridReport.model.StateChangesCause = {ColumnResized:"gridReport_ColumnResized", ColumnAdded:"gridReport_ColumnAdded", ColumnProgrammaticallyAdded:"gridReport_ColumnProgrammaticallyAdded", ColumnProgrammaticallyAddedToSavedTemplate:"gridReport_ColumnProgrammaticallyAddedToSavedTemplate", ColumnRemoved:"gridReport_ColumnRemoved", ColumnProgrammaticallyRemoved:"gridReport_ColumnProgrammaticallyRemoved", ColumnInserted:"gridReport_ColumnInserted", ColumnChanged:"gridReport_ColumnChanged", ColumnProgrammaticallyChanged:"gridReport_ColumnProgrammaticallyChanged", 
 ColumnReordered:"gridReport_ColumnReordered", ColumnRenamed:"gridReport_ColumnReordered", ColumnPinned:"gridReport_ColumnPinned", ColumnUnpinned:"gridReport_ColumnUnpinned", ColumnFormattingChanged:"gridReport_ColumnFormattingChanged", ColumnParametersVisibilityChanged:"gridReport_ColumnOarametersVisibilityChanged", ColumnTotalCalculationChanged:"gridReport_ColumnTotalCalculationChanged", ColumnBarChartStateChanged:"gridReport_ColumnBarChartStateChanged", SortChanged:"gridReport_SortChanged", ShowHideGroupsHeader:"gridReport_ShowHideGroupsHeader", 
@@ -14962,6 +12460,8 @@ gridReport.Module.factory("gfFilterHelper", [function() {
 }]);
 goog.provide("gridReport.model.GridReportScrollMode");
 gridReport.model.GridReportScrollMode = {Default:"default", Logical:"logical", Deffered:"deferred"};
+goog.provide("gridReport.model.GridReportSelectionMode");
+gridReport.model.GridReportSelectionMode = {None:"none", Checkbox:"checkbox", SingleRow:"singlerow", MultipleRows:"multiplerows", MultipleRowsExtended:"multiplerowsextended", SingleCell:"singlecell", MultipleCellsExtended:"multiplecellsextended"};
 goog.provide("gridReport.model.GridReportSettings");
 goog.require("gridReport.model.GridReportScrollMode");
 goog.require("gridReport.model.GridReportSelectionMode");
@@ -15046,6 +12546,396 @@ gridReport.model.GridTheme = function(options) {
 };
 gridReport.model.GridTheme.prototype.rowsHeight = null;
 gridReport.model.GridTheme.prototype.theme = null;
+goog.provide("gridReport.services.FormulaValidator");
+gridReport.Module.factory("gfFormulaValidator", ["gfExpressionParser", function(gfExpressionParser) {
+  var acceptedOperators = "+-*/^()", binaryOperators = "+-*/^";
+  function findInFormula(columnId, formula, columns) {
+    var found = false;
+    _.each(formula.columnIds, function(clmnId) {
+      if (columnId == clmnId) {
+        found = true;
+      } else {
+        var column = columns[clmnId];
+        if (column && (column.command && column.command.formula)) {
+          found = findInFormula(columnId, column.command.formula, columns);
+        }
+      }
+    });
+    return found;
+  }
+  function createDictionary(columns) {
+    var tempDictionaty = {};
+    _.each(columns, function(clm) {
+      tempDictionaty[clm.id] = clm;
+    });
+    return tempDictionaty;
+  }
+  function findColumn(column, columns) {
+    var found = false;
+    _.each(columns, function(clmn) {
+      if (column.id != clmn.id) {
+        if (column.command && (column.command.formula && findInFormula(column.id, column.command.formula, columns))) {
+          found = true;
+        }
+      }
+    });
+    return found;
+  }
+  function isColumnUsed(targetColumnId, startColumn, columns) {
+    var found = false;
+    if (startColumn.command && startColumn.command.formula) {
+      _.each(startColumn.command.formula.columnIds, function(columnId) {
+        if (columnId == targetColumnId || isColumnUsed(targetColumnId, columns[columnId], columns)) {
+          found = true;
+        }
+      });
+    }
+    return found;
+  }
+  function getColumn(columnId, columns) {
+    var parentColumn;
+    if (columnId != null && (columnId.id != null && columnId.parentId != null)) {
+      parentColumn = columns[columnId.parentId];
+      if (parentColumn) {
+        return parentColumn.gridColumns[columnId.id];
+      }
+    }
+    return columns[columnId];
+  }
+  var service = {};
+  service.validate = function(column, columns) {
+    if (!column) {
+      throw new Error("column should be provided");
+    }
+    if (!columns) {
+      throw new Error("columns should be provided");
+    }
+    if (_.isArray(columns)) {
+      columns = createDictionary(columns);
+    }
+    var errorMessages = [];
+    _.each(column.command.formula.columnIds, function(columnId) {
+      var clmn = getColumn(columnId, columns);
+      if (clmn == null) {
+        errorMessages.push("Unknown column: " + columnId);
+      } else {
+        if (!clmn.isNumber()) {
+          errorMessages.push("Invalid return type: " + columnId);
+        }
+        if (clmn.command) {
+          if (clmn.command && clmn.command.isTimeSeries()) {
+            errorMessages.push("TimeSeries column can not be used in expression: " + clmn.id);
+          }
+          if (clmn.command.formula && !clmn.command.formula.isValid) {
+            errorMessages.push("Column has invalid sub-column: " + clmn.id);
+          }
+        }
+      }
+    });
+    if (findColumn(column, columns)) {
+      errorMessages.push("One or more formulas contain a circullar reference");
+    }
+    return{isValid:_.isEmpty(errorMessages), errorMessages:errorMessages};
+  };
+  service.validateExpression = function(expression, validIdentifiers) {
+    var errorMessages = [], previousToken = null, token, tokens = [], nextToken, bracketsDeep = 0;
+    try {
+      tokens = gfExpressionParser.tokenize(expression);
+    } catch (e) {
+      errorMessages.push(e.name + ":" + e.message);
+    }
+    for (var tokenIndex = 0, tokenLength = tokens.length;tokenIndex < tokenLength;tokenIndex++) {
+      token = tokens[tokenIndex];
+      nextToken = tokenIndex + 1 < tokenLength ? tokens[tokenIndex + 1] : null;
+      if (token.type == "operator") {
+        if (acceptedOperators.indexOf(token.value) < 0) {
+          errorMessages.push("Unexpected operator " + token.value);
+        } else {
+          if (binaryOperators.indexOf(token.value) != -1) {
+            if (previousToken == null) {
+              errorMessages.push("Indentifier is expected before " + token.value);
+            } else {
+              if (nextToken == null) {
+                errorMessages.push("Indentifier is expected after " + token.value);
+              } else {
+                if (nextToken.type == "operator" && binaryOperators.indexOf(nextToken.value) != -1) {
+                  errorMessages.push("Operator is expected after " + token.value);
+                }
+              }
+            }
+            if (token.value == "^" && (nextToken != null && nextToken.type == "string")) {
+              errorMessages.push("Number is expected after ^");
+            }
+          } else {
+            if (token.value == "(") {
+              bracketsDeep++;
+            } else {
+              if (token.value == ")") {
+                if (bracketsDeep > 0) {
+                  bracketsDeep--;
+                }
+              }
+            }
+          }
+        }
+      }
+      if (token.type === "string" || token.type === "name") {
+        if (previousToken != null && previousToken.type === "string") {
+          errorMessages.push("Operator is expected after " + previousToken.value);
+        }
+        if (nextToken != null && (nextToken.type === "number" || nextToken.type === "name")) {
+          errorMessages.push("Operator is expected after " + token.value);
+        }
+        if (!_.isEmpty(validIdentifiers) && validIdentifiers.indexOf(token.value) == -1) {
+          errorMessages.push("Unknown identifier " + token.value);
+        }
+      }
+      previousToken = token;
+    }
+    if (bracketsDeep > 0) {
+      errorMessages.push("Brackets are expected");
+    }
+    return{isValid:_.isEmpty(errorMessages), errorMessages:errorMessages};
+  };
+  service.validateForCyclicDependencies = function(expression, currentColumnId, columns) {
+    var tokens = [], token, errorMessages = [];
+    if (!columns) {
+      throw new Error("columns should be provided");
+    }
+    if (_.isArray(columns)) {
+      columns = createDictionary(columns);
+    }
+    try {
+      tokens = gfExpressionParser.tokenize(expression);
+    } catch (e) {
+      errorMessages.push(e.name + ":" + e.message);
+    }
+    for (var tokenIndex = 0, tokenLength = tokens.length;tokenIndex < tokenLength;tokenIndex++) {
+      token = tokens[tokenIndex];
+      if (token.type === "string" && (currentColumnId != token.value && columns[token.value])) {
+        if (isColumnUsed(currentColumnId, columns[token.value], columns)) {
+          errorMessages.push("One or more formulas contain a circullar reference");
+        }
+      }
+    }
+    return{isValid:_.isEmpty(errorMessages), errorMessages:errorMessages};
+  };
+  service.isHeatMapEnabled = function(formula, columns) {
+    if (!formula) {
+      throw new Error("formula should be provided");
+    }
+    if (!columns) {
+      throw new Error("columns should be provided");
+    }
+    var enableHeatMap = undefined;
+    if (_.isArray(columns)) {
+      columns = createDictionary(columns);
+    }
+    _.each(formula.columnIds, function(columnId) {
+      var column = columns[columnId];
+      if (column && (column.command && column.command)) {
+        if (enableHeatMap == undefined) {
+          enableHeatMap = !!column.command.enableHeatMap;
+        } else {
+          enableHeatMap = enableHeatMap && !!column.command.enableHeatMap;
+        }
+      }
+    });
+    return!!enableHeatMap;
+  };
+  return service;
+}]);
+goog.provide("gridReport.columnMath.ExpressionParser");
+gridReport.Module.service("gfExpressionParser", [function() {
+  var service = {};
+  service.tokenize = function(expression) {
+    var c;
+    var from;
+    var i = 0;
+    var length = expression.length;
+    var n;
+    var q;
+    var str;
+    var result = [];
+    var error = function(message, token) {
+      token = token || this;
+      token.name = "SyntaxError";
+      token.message = message;
+      throw token;
+    };
+    var make = function(type, value) {
+      return{type:type, value:value, from:from, to:i};
+    };
+    if (!expression) {
+      return[];
+    }
+    var prefix = "<>+-&";
+    var suffix = "=>&:";
+    c = expression.charAt(i);
+    while (c) {
+      from = i;
+      if (c <= " ") {
+        i += 1;
+        c = expression.charAt(i);
+      } else {
+        if (c >= "a" && c <= "z" || c >= "A" && c <= "Z") {
+          str = c;
+          i += 1;
+          for (;;) {
+            c = expression.charAt(i);
+            if (c >= "a" && c <= "z" || (c >= "A" && c <= "Z" || (c >= "0" && c <= "9" || c === "_"))) {
+              str += c;
+              i += 1;
+            } else {
+              break;
+            }
+          }
+          result.push(make("name", str));
+        } else {
+          if (c === "." || c >= "0" && c <= "9") {
+            str = c;
+            i += 1;
+            for (;;) {
+              c = expression.charAt(i);
+              if (c < "0" || c > "9") {
+                break;
+              }
+              i += 1;
+              str += c;
+            }
+            if (c === ".") {
+              i += 1;
+              str += c;
+              for (;;) {
+                c = expression.charAt(i);
+                if (c < "0" || c > "9") {
+                  break;
+                }
+                i += 1;
+                str += c;
+              }
+            }
+            if (c === "e" || c === "E") {
+              i += 1;
+              str += c;
+              c = expression.charAt(i);
+              if (c === "-" || c === "+") {
+                i += 1;
+                str += c;
+                c = expression.charAt(i);
+              }
+              if (c < "0" || c > "9") {
+                error("Bad exponent", make("number", str));
+              }
+              do {
+                i += 1;
+                str += c;
+                c = expression.charAt(i);
+              } while (c >= "0" && c <= "9");
+            }
+            if (c >= "a" && c <= "z") {
+              str += c;
+              i += 1;
+              error("Bad number", make("number", str));
+            }
+            n = +str;
+            if (isFinite(n)) {
+              result.push(make("number", n));
+            } else {
+              error("Bad number", make("number", str));
+            }
+          } else {
+            if (c === "'" || c === '"') {
+              str = "";
+              q = c;
+              i += 1;
+              for (;;) {
+                c = expression.charAt(i);
+                if (c < " ") {
+                  error(c === "\n" || (c === "\r" || c === "") ? "Unterminated string." : "Control character in string.", make("", str));
+                }
+                if (c === q) {
+                  break;
+                }
+                if (c === "\\") {
+                  i += 1;
+                  if (i >= length) {
+                    error("Unterminated string", make("string", str));
+                  }
+                  c = expression.charAt(i);
+                  switch(c) {
+                    case "b":
+                      c = "\b";
+                      break;
+                    case "f":
+                      c = "\f";
+                      break;
+                    case "n":
+                      c = "\n";
+                      break;
+                    case "r":
+                      c = "\r";
+                      break;
+                    case "t":
+                      c = "\t";
+                      break;
+                    case "u":
+                      if (i >= length) {
+                        error("Unterminated string", make("string", str));
+                      }
+                      c = parseInt(expression.substr(i + 1, 4), 16);
+                      if (!isFinite(c) || c < 0) {
+                        error("Unterminated string", make("string", str));
+                      }
+                      c = String.fromCharCode(c);
+                      i += 4;
+                      break;
+                  }
+                }
+                str += c;
+                i += 1;
+              }
+              i += 1;
+              result.push(make("string", str));
+              c = expression.charAt(i);
+            } else {
+              if (c === "/" && expression.charAt(i + 1) === "/") {
+                i += 1;
+                for (;;) {
+                  c = expression.charAt(i);
+                  if (c === "\n" || (c === "\r" || c === "")) {
+                    break;
+                  }
+                  i += 1;
+                }
+              } else {
+                if (prefix.indexOf(c) >= 0) {
+                  str = c;
+                  i += 1;
+                  while (true) {
+                    c = expression.charAt(i);
+                    if (i >= length || suffix.indexOf(c) < 0) {
+                      break;
+                    }
+                    str += c;
+                    i += 1;
+                  }
+                  result.push(make("operator", str));
+                } else {
+                  i += 1;
+                  result.push(make("operator", c));
+                  c = expression.charAt(i);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    return result;
+  };
+  return service;
+}]);
 goog.provide("gridReport.columnMath.ColumnMathColumnsUpdater");
 goog.require("gridReport.columnMath.ExpressionParser");
 goog.require("gridReport.services.FormulaValidator");
@@ -15787,6 +13677,70 @@ gridReport.Module.factory("gfAggregatesAlgorithms", ["$translate", "gfDefaultCal
     return gfDataBlockAggregateAlgorithm.get(column);
   }};
 }]);
+goog.provide("gridReport.utils.CommandHelper");
+gridReport.Module.factory("gfCommandHelper", [function() {
+  function getUniverseSyntax(command) {
+    var syntax = "";
+    if (command.metadata.universe === scr.mfr.RankAgainst.CurrentUniverse || command.metadata.universe === scr.mfr.RankAgainst.AllCompanies) {
+      syntax = scr.mfr.ADC.getMFROptionToADCCode("RankAgainst", command.metadata.universe);
+    } else {
+      if (command.metadata.universe === scr.mfr.RankAgainst.ListPortfolioIndex) {
+        if (command.metadata.universeMetadata) {
+          switch(command.metadata.universeMetadata.type) {
+            case "index":
+            ;
+            case "MarketIndex":
+              syntax = "Indices";
+              break;
+            case "watchlist":
+            ;
+            case "Watchlist":
+              syntax = "Lists";
+              break;
+            case "portfolio":
+            ;
+            case "Funded":
+              syntax = "Portfolios";
+              break;
+          }
+          var s = command.metadata.universeMetadata.id + "/*" + command.metadata.universeMetadata.name + "*/";
+          syntax = "SCREEN(U(IN(" + syntax + "(" + s + "))))";
+        }
+      }
+    }
+    return syntax;
+  }
+  function getDecoratedExpression(expression, returnType) {
+    if (returnType === "Boolean") {
+      return "SELECT(" + expression + ', instrument, "(percent)value:[value]?1:0")';
+    } else {
+      return expression;
+    }
+  }
+  var service = {};
+  service.getTransformedPath = function(command, rankNumber, outputType) {
+    var syntax, factorsSyntax = "", rankType = "RankType=", universe = "Universe=", nTileSort = "NTileSort=", comma = ", ";
+    rankType += scr.mfr.ADC.getMFROptionToADCCode("MFMethodology", command.metadata.methodology);
+    nTileSort += scr.mfr.ADC.getMFROptionToADCCode("MFNTileOrder", command.metadata.nTileOrder);
+    for (var i = 0;i < command.factors.length;i++) {
+      var factor = command.factors[i];
+      var factorSyntax = "Factor(" + getDecoratedExpression(factor.expression, factor.returnType) + comma + "SortOrder=" + scr.mfr.ADC.getMFROptionToADCCode("Order", factor.metadata.order) + comma + "optionIfNullFactor=" + scr.mfr.ADC.getMFROptionToADCCode("FactorIfNA", factor.metadata.ifNotAvailable) + comma + "weight=" + factor.metadata.weight + comma + "UseRawAsFactor=" + (factor.metadata.useRaw === false ? "False" : "True") + ")";
+      factorsSyntax += factorSyntax + comma;
+    }
+    factorsSyntax = factorsSyntax.substring(0, factorsSyntax.length - comma.length);
+    var groupBy = scr.output.Item.getPathFromUniverse(command.metadata.partitionBy);
+    if (groupBy && groupBy.length > 0) {
+      groupBy = "GroupBy(" + groupBy + ")" + comma;
+    }
+    universe += '"' + getUniverseSyntax(command) + '"';
+    var rankNumberString = "RankNumber=" + (rankNumber || 0);
+    var outputTypeString = "OutputType=" + (outputType || "FinalRank");
+    syntax = "GRANK(" + factorsSyntax + comma + groupBy + rankType + comma + universe + comma + nTileSort + comma + outputTypeString + comma + rankNumberString + ")";
+    return syntax;
+  };
+  service.getDecoratedExpression = getDecoratedExpression;
+  return service;
+}]);
 goog.provide("gridReport.services.FactorRankService");
 goog.require("gridReport.utils.CommandHelper");
 goog.require("gridReport.services.CellsFormattingFactory");
@@ -15835,6 +13789,13 @@ gridReport.Module.factory("gfFactorRankService", ["gfAggregatesAlgorithms", "gfC
   }
   return{createFactorRankColumn:createFactorColumn, formatFactorRankColumnId:formatId};
 }]);
+goog.provide("gridReport.model.Formula");
+gridReport.model.Formula = function(options) {
+  gridReport.jsUtils.mergeProperties(this, options);
+};
+gridReport.model.Formula.prototype.expression = null;
+gridReport.model.Formula.prototype.columnIds = null;
+gridReport.model.Formula.prototype.isValid = true;
 goog.provide("gridReport.model.OutputColumn");
 (function() {
   gridReport.model.OutputColumn = function(options) {
@@ -18120,6 +16081,2118 @@ gfDefaultGridColumns, $translate, gfNotificationService, gfExclusions, gfStatePr
     }, 50);
   }};
 }]);
+goog.provide("gridReport.services.GroupStateRestoreService");
+goog.require("gridReport.services.GridManagementService");
+gridReport.Module.factory("gfGroupStateRestoreService", ["gfGridManagementService", "gfGroupableColumnsLabels", "localStorageService", "gfStateProviderService", function(gfGridManagementService, gfGroupableColumnsLabels, localStorageService, gfStateProviderService) {
+  var restoreStateService = {}, services = {}, GROUPING_POSTFIX = "GRID_GROUPING";
+  function GroupStateService(gridInstanceId, isAutoSaveState) {
+    var self = this;
+    function addCriteriaInternally(id, targetIndex) {
+      var criteria = {id:id, header:gfGroupableColumnsLabels[id], editMode:false};
+      if (_.isUndefined(targetIndex)) {
+        self.criterias.push(criteria);
+      } else {
+        self.criterias[targetIndex] = criteria;
+      }
+    }
+    function loadLocalState(isAutoSaveState, stateId) {
+      if (!isAutoSaveState) {
+        return null;
+      }
+      return localStorageService.get(stateId + GROUPING_POSTFIX);
+    }
+    function registerManagementSerivceCallbacks() {
+      gfGridManagementService.registerCallback(gridInstanceId, gfGridManagementService.restoreState, restoreStateCallback);
+    }
+    function unregisterManagementSerivceCallbacks() {
+      gfGridManagementService.unregisterCallback(gridInstanceId, gfGridManagementService.restoreState, restoreStateCallback);
+    }
+    function registerStateCallbacks() {
+      gfStateProviderService.register(gridReport.services.StateProvideService.components.grouping, gridInstanceId, {getStateCallback:getState, setStateCallback:setState});
+    }
+    function unregisterStateCallbacks() {
+      gfStateProviderService.unregister(gridReport.services.StateProvideService.components.grouping, gridInstanceId);
+    }
+    function restoreStateCallback(stateId) {
+      if (!self.isAutoSaveState || stateId === undefined) {
+        return;
+      }
+      self.stateId = stateId;
+      self.criterias = [];
+      setState(loadLocalState(self.isAutoSaveState, stateId));
+      if (self.isCriteriasEnabled) {
+        gfGridManagementService.setGrouping(gridInstanceId, getCriteriasIds());
+      }
+    }
+    function getCriteriasIds() {
+      return _.pluck(self.criterias, "id");
+    }
+    function getState() {
+      return{isGroupingEnabled:self.isCriteriasEnabled, groups:getCriteriasIds()};
+    }
+    function setState(state) {
+      if (!state) {
+        return;
+      }
+      self.isCriteriasEnabled = state.isGroupingEnabled;
+      self.criterias = [];
+      _.each(state.groups, addCriteriaInternally);
+    }
+    function dispose() {
+      unregisterManagementSerivceCallbacks();
+      unregisterStateCallbacks();
+    }
+    function save() {
+      if (!self.isAutoSaveState || self.stateId === undefined) {
+        return;
+      }
+      localStorageService.add(self.stateId + GROUPING_POSTFIX, JSON.stringify(getState()));
+    }
+    self.gridInstanceId = gridInstanceId;
+    self.criterias = [];
+    self.isCriteriasEnabled = false;
+    self.loadLocalState = loadLocalState;
+    self.getCriteriasIds = getCriteriasIds;
+    self.stateId = gfStateProviderService.getStateId(gridInstanceId);
+    self.dispose = dispose;
+    self.isAutoSaveState = isAutoSaveState;
+    self.save = save;
+    registerManagementSerivceCallbacks();
+    registerStateCallbacks();
+    if (self.stateId != undefined) {
+      restoreStateCallback(self.stateId);
+    }
+  }
+  function createService(gridInstanceId, isAutoSaveState) {
+    return new GroupStateService(gridInstanceId, isAutoSaveState);
+  }
+  restoreStateService.instance = function(gridInstanceId, isAutoSaveState) {
+    if (!services[gridInstanceId]) {
+      services[gridInstanceId] = createService(gridInstanceId, isAutoSaveState);
+    }
+    return services[gridInstanceId];
+  };
+  restoreStateService.clear = function(gridInstanceId) {
+    if (services[gridInstanceId]) {
+      services[gridInstanceId].dispose();
+      delete services[gridInstanceId];
+    }
+  };
+  return restoreStateService;
+}]);
+goog.provide("gridReport.directives.GroupingButtonDirective");
+gridReport.Module.directive("gfGroupingButton", ["gfGroupStateRestoreService", function(gfGroupStateRestoreService) {
+  return{restrict:"E", scope:{gridInstanceId:"=", isEnabled:"=", isAutoSaveState:"=", maxGroupsCount:"&"}, controller:["$scope", "gfEventsAggregator", "gfGroupingManagerDialogService", "gfGridManagementService", function($scope, gfEventsAggregator, gfGroupingManagerDialogService, gfGridManagementService) {
+    $scope.isGridTransposed = false;
+    var groupInstance = gfGroupStateRestoreService.instance($scope.gridInstanceId, $scope.isAutoSaveState), maxRowsCountExceeded = false;
+    function subscribe() {
+      var aggregator = gfEventsAggregator.getChildAggregator($scope.gridInstanceId);
+      aggregator.addHandler(gridReport.model.GridEvents.transposed, function(args) {
+        $scope.isGridTransposed = args.isTransposed;
+      });
+      aggregator.addHandler(gridReport.model.GridEvents.transposed, function(args) {
+        if (!args.isTransposed) {
+          var isCriteriasEnabled;
+          if (!groupInstance.stateId) {
+            groupInstance = gfGroupStateRestoreService.instance($scope.gridInstanceId, $scope.isAutoSaveState);
+          }
+          var groups = getCriteriasIds(groupInstance.criterias), state = groupInstance.loadLocalState(true, groupInstance.stateId);
+          if (state) {
+            isCriteriasEnabled = state.isGroupingEnabled;
+          } else {
+            isCriteriasEnabled = false;
+          }
+          var groupsToApply = isCriteriasEnabled ? groups : [];
+          if (groupsToApply.length > 0) {
+            showLoadingRows();
+            setGrouping(groupsToApply);
+            gfGridManagementService.loadData($scope.gridInstanceId, false);
+          }
+        }
+      });
+      aggregator.addHandler(gridReport.model.GridEvents.groupingApplied, function() {
+        gfGridManagementService.endLoading($scope.gridInstanceId, gridReport.model.GridContentPlacement.Rows, gridReport.model.LoadingReasons.Grouping);
+      });
+      aggregator.addHandler(gridReport.model.GridEvents.loadingEnded, function() {
+        var state = groupInstance.loadLocalState(true, groupInstance.stateId);
+        if (state && state.isGroupingEnabled) {
+          if (gfGridManagementService.getRowsCount($scope.gridInstanceId) > gfGridManagementService.getMaxRowsCount($scope.gridInstanceId)) {
+            setGrouping([]);
+            maxRowsCountExceeded = true;
+          } else {
+            if (!maxRowsCountExceeded) {
+              return;
+            }
+            showLoadingRows();
+            setGrouping(groupInstance.getCriteriasIds());
+            gfGridManagementService.loadData($scope.gridInstanceId, false);
+            maxRowsCountExceeded = false;
+          }
+        }
+      });
+    }
+    function getCriteriasIds(criterias) {
+      return _.pluck(criterias, "id");
+    }
+    function setGrouping(groups, isUserAction) {
+      gfGridManagementService.setGrouping($scope.gridInstanceId, groups, isUserAction);
+    }
+    function showLoadingRows() {
+      gfGridManagementService.startLoading($scope.gridInstanceId, gridReport.model.GridContentPlacement.Rows, gridReport.model.LoadingReasons.Grouping);
+    }
+    $scope.openGroupingManagerDialog = function() {
+      gfGroupingManagerDialogService.openGroupingManagerDialog($scope.gridInstanceId, $scope.isAutoSaveState, $scope.maxGroupsCount);
+    };
+    $scope.$watch("gridInstanceId", function(newVal, oldVal) {
+      if (newVal === oldVal) {
+        return;
+      }
+      subscribe();
+    });
+    if ($scope.gridInstanceId) {
+      subscribe($scope.gridInstanceId);
+      gfGroupStateRestoreService.instance($scope.gridInstanceId, $scope.isAutoSaveState);
+    }
+  }], templateUrl:"scripts/directives/groupingButton/GroupingButton.html", link:function(scope, element) {
+    element.bind("$destroy", function() {
+      gfGroupStateRestoreService.clear(scope.gridInstanceId);
+    });
+  }};
+}]);
+goog.provide("gridReport.model.CommandEvents");
+gridReport.model.CommandEvents = {showPicker:"showPicker", showExpressionEditor:"showExpressionEditor"};
+goog.provide("gridReport.services.DapsStorageProvider");
+gridReport.Module.service("gfDapsStorageProvider", ["gfConfig", function(gfConfig) {
+  var udipEnvironmentConfig = gfConfig.udipOptions ? gfConfig.udipOptions.udipEnvironmentConfig : undefined;
+  return new scr.DAPSStorageProvider(udipEnvironmentConfig);
+}]);
+goog.provide("gridReport.services.CategoryServiceFactory");
+gridReport.Module.factory("gfCategoryServiceFactory", ["gfConfig", function(gfConfig) {
+  function createInstance() {
+    var udipEnvironmentConfig = gfConfig.udipOptions ? gfConfig.udipOptions.udipEnvironmentConfig : undefined;
+    return new CategoryService(udipEnvironmentConfig);
+  }
+  return{createInstance:createInstance};
+}]);
+goog.provide("gridReport.controllers.DefaultUdipOptions");
+goog.require("gridReport.services.DapsStorageProvider");
+goog.require("gridReport.services.CategoryServiceFactory");
+gridReport.Module.service("gfDefaultUdipOptions", ["gfConfig", "$translate", "$globalEvtAgt", function(gfConfig, $translate, $globalEvtAgt) {
+  var service = {};
+  service.get = function() {
+    var options = {uuid:gfConfig.uuid, globalEvtAgt:$globalEvtAgt, allowMultiSelect:true, showDescriptions:true, showParameterEditors:true, showDescAsTooltip:false, height:550, width:900, parameterOptions:new scr.ParameterOptions({showOutputParameters:true, allowMultiSelectOutput:true}), locale:$translate.preferredLanguage()};
+    return new scr.UdipOptions(_.extend(options, gfConfig.udipOptions));
+  };
+  return service;
+}]);
+goog.provide("gridReport.controllers.DefaultMfrConfig");
+goog.require("gridReport.services.DapsStorageProvider");
+goog.require("gridReport.services.CategoryServiceFactory");
+gridReport.Module.service("gfDefaultMfrConfig", ["gfDapsStorageProvider", "gfCategoryServiceFactory", "gfConfig", function(gfDapsStorageProvider, gfCategoryServiceFactory, gfConfig) {
+  var service = {};
+  service.get = function() {
+    var config = {storageProvider:gfDapsStorageProvider, udipCategoryService:gfCategoryServiceFactory.createInstance()};
+    return _.extend(config, gfConfig.mfrConfig);
+  };
+  return service;
+}]);
+goog.provide("gridReport.controllers.DefaultExpressionEditorConfig");
+goog.require("gridReport.services.DapsStorageProvider");
+goog.require("gridReport.services.CategoryServiceFactory");
+gridReport.Module.service("gfDefaultExpressionEditorConfig", ["gfDapsStorageProvider", "gfCategoryServiceFactory", "gfConfig", function(gfDapsStorageProvider, gfCategoryServiceFactory, gfConfig) {
+  var service = {};
+  service.get = function() {
+    var config = {uuid:gfConfig.uuid, storageProvider:gfDapsStorageProvider, udipCategoryService:gfCategoryServiceFactory.createInstance(), expressionId:"", isStandAlone:false, isVisible:false};
+    return new scr.ExpressionEditorConfig(_.extend(config, gfConfig.expressionEditorConfig));
+  };
+  return service;
+}]);
+goog.provide("gridReport.controllers.ADCDataPickerController");
+goog.require("gridReport.controllers.DefaultUdipOptions");
+goog.require("gridReport.controllers.DefaultMfrConfig");
+goog.require("gridReport.controllers.DefaultExpressionEditorConfig");
+gridReport.Module.controller("ADCDataPickerController", ["$scope", "$timeout", "gfEventsAggregator", "gfConfig", "gfCategoryServiceFactory", "gfDapsStorageProvider", "$globalEvtAgt", "gfLogManager", "gfNotificationService", "$translate", "gfGridManagementService", "gfDefaultUdipOptions", "gfDefaultMfrConfig", "gfDefaultExpressionEditorConfig", function($scope, $timeout, gfEventsAggregator, gfConfig, gfCategoryServiceFactory, gfDapsStorageProvider, $globalEvtAgt, gfLogManager, gfNotificationService, 
+$translate, gfGridManagementService, gfDefaultUdipOptions, gfDefaultMfrConfig, gfDefaultExpressionEditorConfig) {
+  var defaultCommandExpression = "";
+  var editActionType = "edit";
+  var insertActionType = "insert";
+  function broadcastSelectedCommand(command, actionType, containerId) {
+    var evtAggregator = gfEventsAggregator.getChildAggregator(containerId);
+    if (actionType === insertActionType || actionType === editActionType) {
+      var eventType = actionType === editActionType ? gridReport.model.InternalEvents.changeCommand : gridReport.model.InternalEvents.insertCommand;
+      evtAggregator.raiseEvent(eventType, {previousCommand:$scope.initialCommand, newCommand:command, isUserTriggered:true});
+      $scope.initialCommand = command;
+      return;
+    }
+    evtAggregator.raiseEvent(gridReport.model.InternalEvents.addCommand, {command:command, isUserTriggered:true, isFromUDIP:true});
+  }
+  function createSelectedFieldInfo(command) {
+    var type;
+    if (command && command.metadata) {
+      switch(command.metadata.type) {
+        case "field":
+          type = "meta";
+          break;
+        case "custom":
+          type = "expression";
+          break;
+        default:
+          type = command.metadata.type;
+      }
+    }
+    return{id:command && command.id ? command.id : "", order:command.isNewestFirst ? "DESC" : "ASC", path:getPath(command), type:type || "meta", transforms:getTransforms(command), outputColumn:getOutputColumn(command)};
+  }
+  function getTransforms(command) {
+    return command && (command.metadata && command.metadata.transforms) ? command.metadata.transforms : [];
+  }
+  function getOutputColumn(command) {
+    return command && (command.metadata && command.metadata.outputColumn) ? command.metadata.outputColumn : undefined;
+  }
+  function getPath(command) {
+    if (command == undefined) {
+      return defaultCommandExpression;
+    }
+    if (_.isEmpty(command.parameters)) {
+      if (command.metadata != undefined && !_.isEmpty(command.metadata.transforms)) {
+        return "";
+      }
+      return command.expression;
+    }
+    var params = _.filter(command.parameters, function(param) {
+      return param.value != undefined && param.value != "";
+    });
+    var nameValueList = _.map(params, function(param) {
+      if (param.id == scr.output.ParameterIds.RatingScope) {
+        return param.id + ':"' + param.value + '"';
+      } else {
+        return param.id + ":" + param.value;
+      }
+    });
+    return "_(" + nameValueList.join(",") + ")";
+  }
+  function showDataCloudPicker(actionType, args, containerId) {
+    $scope.gridInstanceId = args.gridInstanceId;
+    $scope.initialCommand = args.initialCommand;
+    $scope.actionType = actionType;
+    var selectedFieldInfo = actionType == editActionType || args.openAddWithCommand ? createSelectedFieldInfo(args.initialCommand) : undefined;
+    var callback = function(result, selectedField) {
+      if (result && selectedField) {
+        var commands;
+        selectedField = _.isArray(selectedField) ? selectedField : [selectedField];
+        try {
+          commands = _.map(selectedField, function(field) {
+            return gridReport.model.Command.convert(field, gfConfig.enableAudit);
+          });
+        } catch (err) {
+          gfLogManager.error(err);
+          return;
+        }
+        $timeout(function() {
+          _.each(commands, function(command) {
+            broadcastSelectedCommand(command, actionType, containerId);
+          });
+          gfEventsAggregator.getChildAggregator(containerId).raiseEvent(gridReport.model.InternalEvents.hidePicker);
+        });
+      } else {
+        gfEventsAggregator.getChildAggregator(containerId).raiseEvent(gridReport.model.InternalEvents.hidePicker);
+      }
+    };
+    var udipOptions = new scr.UdipOptions(_.extend(gfDefaultUdipOptions.get(), {parentElement:$scope.parentElement, currentFieldInfo:selectedFieldInfo, searchText:args.text == null ? "" : args.text, includeMFRBuilder:$scope.includeMfrEditor != false, selectedCategoryId:args.selectedCategoryId, universeContext:args.universeContext || scr.UniverseType.Public, includeDataBlockBuilder:!gfGridManagementService.isTransposed(args.gridInstanceId), callback:callback, multiSelectionOfDataItems:{limit:10, addButton:actionType != 
+    "edit"}}));
+    (new scr.Udip).show(udipOptions);
+  }
+  $scope.expressionEditorConfig = gfDefaultExpressionEditorConfig.get();
+  $scope.mfrConfig = gfDefaultMfrConfig.get();
+  $scope.showExpressionEditor = function(expressionId) {
+    $scope.$broadcast($scope.expressionEditorConfig.show, {at:"right top", collision:"flipfit", my:"left top"});
+    if (expressionId && (_.isString(expressionId) && expressionId != "")) {
+      $timeout(function() {
+        $scope.$broadcast($scope.expressionEditorConfig.loadExpression, expressionId);
+      });
+    }
+  };
+  var showPickerSubscription = gfEventsAggregator.addHandler(gridReport.model.CommandEvents.showPicker, function(args) {
+    if (args) {
+      if (args.mode == editActionType && (args.initialCommand && (args.initialCommand.metadata && args.initialCommand.metadata.isGrid === false))) {
+        gfNotificationService.infoDialog({title:$translate.instant("WARNING"), message:$translate.instant("DATA_ITEM_IS_NO_LONGER_SUPPORTED")});
+      } else {
+        showDataCloudPicker(args.mode, args, this.$containerId);
+      }
+    } else {
+      showDataCloudPicker("", {}, this.$containerId);
+    }
+  });
+  function onExpressionEditorLaunchClicked(event, anchorPlacement, expressionId, isSampleExpression, context, path) {
+    if (!$scope.useExternalExpressionEditor) {
+      $scope.$broadcast($scope.expressionEditorConfig.show, anchorPlacement);
+      $timeout(function() {
+        $scope.$broadcast($scope.expressionEditorConfig.loadExpression, expressionId, isSampleExpression, context, path);
+      });
+    }
+  }
+  function onMFRBuilderLaunchNewClicked() {
+    $scope.$broadcast("launchPop:new");
+  }
+  function onMFRBuilderLaunchEditClicked(evt, id) {
+    $scope.$broadcast("launchPop:edit", id);
+  }
+  function onCustomExpressionSaved(event, customExpression) {
+    if (customExpression) {
+      gfDapsStorageProvider.load({type:scr.ObjectType.Expression, id:customExpression.name}, function(data, metadata, success, errorMessage) {
+        if (success && (data && data.length > 0)) {
+          var command;
+          try {
+            command = gridReport.model.Command.convert(new scr.output.Custom(data[0], null, metadata), gfConfig.enableAudit);
+          } catch (err) {
+            gfLogManager.error(err);
+            return;
+          }
+          $timeout(function() {
+            var previousColumn = _.find(gfGridManagementService.getGridColumns($scope.gridInstanceId), function(gridColumn) {
+              return gridColumn.command && (gridColumn.command.id === command.id && gridColumn.command.isCustom());
+            });
+            if (previousColumn) {
+              updateCommand(previousColumn.command, command);
+            }
+          });
+        } else {
+          if (errorMessage) {
+            gfLogManager.error(errorMessage);
+          }
+        }
+      });
+    }
+  }
+  function onMfrSaved(event, mfrObject) {
+    if (mfrObject) {
+      gfDapsStorageProvider.load({type:scr.ObjectType.MultiFactorRank, id:mfrObject.id}, function(data, metadata, success, errorMessage) {
+        if (success && (data && data.length > 0)) {
+          var command;
+          try {
+            command = gridReport.model.Command.convert(new scr.output.MultiFactorRank(data[0], null, metadata), gfConfig.enableAudit);
+          } catch (err) {
+            gfLogManager.error(err);
+            return;
+          }
+          $timeout(function() {
+            var previousColumn = _.find(gfGridManagementService.getGridColumns($scope.gridInstanceId), function(gridColumn) {
+              return gridColumn.command && (gridColumn.command.id === command.id && gridColumn.command.isMultiFactorRank());
+            });
+            if (previousColumn) {
+              updateCommand(previousColumn.command, command);
+            }
+          });
+        } else {
+          if (errorMessage) {
+            gfLogManager.error(errorMessage);
+          }
+        }
+      });
+    }
+  }
+  function onDataBlockSaved(event, dataBlockObject) {
+    if (dataBlockObject) {
+      gfDapsStorageProvider.load({type:scr.ObjectType.DataBlock, id:dataBlockObject.id}, function(data, metadata, success, errorMessage) {
+        if (success && (data && data.length > 0)) {
+          var command;
+          try {
+            command = gridReport.model.Command.convert(new scr.output.DataBlock(data[0], null, metadata), gfConfig.enableAudit);
+          } catch (err) {
+            gfLogManager.error(err);
+            return;
+          }
+          $timeout(function() {
+            var previousColumn = _.find(gfGridManagementService.getGridColumns($scope.gridInstanceId), function(gridColumn) {
+              return gridColumn.command && (gridColumn.command.id === command.id && gridColumn.command.isDataBlock());
+            });
+            if (previousColumn) {
+              updateCommand(previousColumn.command, command);
+            }
+          });
+        }
+      });
+    }
+  }
+  function updateCommand(previousCommand, newCommand) {
+    var evtAggregator = gfEventsAggregator.getChildAggregator($scope.gridInstanceId);
+    evtAggregator.raiseEvent(gridReport.model.InternalEvents.changeCommand, {previousCommand:previousCommand, newCommand:newCommand, isUserTriggered:true});
+  }
+  $globalEvtAgt.on(scr.UdipCEE.EventTypes.ScreenerViews.ExpressionEditorLaunchClicked, onExpressionEditorLaunchClicked);
+  $globalEvtAgt.on(scr.UdipCEE.EventTypes.ScreenerViews.MFRBuilderLaunchNewClicked, onMFRBuilderLaunchNewClicked);
+  $globalEvtAgt.on(scr.UdipCEE.EventTypes.ScreenerViews.MFRBuilderLaunchEditClicked, onMFRBuilderLaunchEditClicked);
+  $globalEvtAgt.on(scr.CEE.EventTypes.ExpressionEditorView.Saved, onCustomExpressionSaved);
+  $globalEvtAgt.on(scr.UdipCEE.EventTypes.ScreenerViews.MFRSaved, onMfrSaved);
+  $globalEvtAgt.on(scr.UdipCEE.EventTypes.DataBlockBuilder.Saved, onDataBlockSaved);
+  var showExpressionEditorSubscription = gfEventsAggregator.addHandler(gridReport.model.CommandEvents.showExpressionEditor, function(args) {
+    if ($scope.useExternalExpressionEditor) {
+      var anchorPlacement = {at:"right top", collision:"flipfit", my:"left top"};
+      $globalEvtAgt.trigger(scr.UdipCEE.EventTypes.ScreenerViews.ExpressionEditorLaunchClicked, [anchorPlacement, args.expressionId]);
+    } else {
+      $scope.showExpressionEditor(args.expressionId);
+    }
+  });
+  $scope.$on("$destroy", function() {
+    gfEventsAggregator.removeHandler(showExpressionEditorSubscription);
+    gfEventsAggregator.removeHandler(showPickerSubscription);
+    $globalEvtAgt.off(scr.UdipCEE.EventTypes.ScreenerViews.ExpressionEditorLaunchClicked, onExpressionEditorLaunchClicked);
+    $globalEvtAgt.off(scr.UdipCEE.EventTypes.ScreenerViews.MFRBuilderLaunchNewClicked, onMFRBuilderLaunchNewClicked);
+    $globalEvtAgt.off(scr.UdipCEE.EventTypes.ScreenerViews.MFRBuilderLaunchEditClicked, onMFRBuilderLaunchEditClicked);
+    $globalEvtAgt.off(scr.CEE.EventTypes.ExpressionEditorView.Saved, onCustomExpressionSaved);
+    $globalEvtAgt.off(scr.UdipCEE.EventTypes.ScreenerViews.MFRSaved, onMfrSaved);
+    $globalEvtAgt.off(scr.UdipCEE.EventTypes.DataBlockBuilder.Saved, onDataBlockSaved);
+  });
+}]);
+goog.provide("gridReport.directives.ADCDataPicker");
+goog.require("gridReport.model.CommandEvents");
+goog.require("gridReport.controllers.ADCDataPickerController");
+gridReport.Module.directive("adcDataPicker", ["$compile", function($compile) {
+  return{restrict:"E", replace:true, template:'<div style="position:absolute"></div>', scope:{includeMfrEditor:"=", useExternalExpressionEditor:"=", useExternalMfrEditor:"=", parentElement:"="}, controller:"ADCDataPickerController", link:function(scope, element) {
+    if (!scope.useExternalExpressionEditor) {
+      var exprEditor = $compile('<scr-expression-editor expression-editor-config="expressionEditorConfig"></scr-expression-editor>')(scope);
+      $(element).first().append(exprEditor);
+    }
+    if (!scope.useExternalMfrEditor) {
+      var mfrEditor = $compile('<scr-mfrb-popup path="Libs/UdipCEE/"></scr-mfrb-popup>')(scope);
+      $(element).first().append(mfrEditor);
+    }
+  }};
+}]);
+goog.provide("gridReport.services.ObjectsImporter");
+goog.require("gridReport.services.DapsStorageProvider");
+gridReport.Module.factory("gfObjectsImporter", ["gfDapsStorageProvider", "$q", function(gfDapsStorageProvider, $q) {
+  function createCustomExpression(command) {
+    return{returnType:command.returnType, name:command.id, path:command.getExpression(false), isValid:true};
+  }
+  function createMfr(command) {
+    return _.extend(command.metadata, {adcSyntax:command.getExpression(false)});
+  }
+  function createDataBlock(command) {
+    return command.metadata;
+  }
+  function createRequest(gridState) {
+    var expressions = {}, mfranks = {}, dblocks = {};
+    _.each(gridState.columns, function(column) {
+      var command = new gridReport.model.Command(column.command);
+      if (command.isCustom()) {
+        expressions[command.id] = createCustomExpression(command);
+      } else {
+        if (command.isMultiFactorRank()) {
+          mfranks[command.id] = createMfr(command);
+        } else {
+          if (command.isDataBlock()) {
+            dblocks[command.id] = createDataBlock(command);
+            _.each(column.gridColumns, function(subColumn) {
+              var subCommand = new gridReport.model.Command(subColumn.command);
+              if (subCommand.isCustom()) {
+                expressions[subCommand.id] = createCustomExpression(subCommand);
+              } else {
+                if (subCommand.isMultiFactorRank()) {
+                  mfranks[subCommand.id] = createMfr(subCommand);
+                }
+              }
+            });
+          }
+        }
+      }
+    });
+    return{expressions:_.toArray(expressions), mfranks:_.toArray(mfranks), dblocks:_.toArray(dblocks)};
+  }
+  var service = {};
+  service.importObjects = function(gridState) {
+    if (!gridState) {
+      throw new Error("gridState should be provided");
+    }
+    var deffered = $q.defer(), request = createRequest(gridState);
+    gfDapsStorageProvider.importObjects(request, function(results) {
+      deffered.resolve(results);
+    });
+    return deffered.promise;
+  };
+  return service;
+}]);
+goog.provide("gridReport.directives.ReportTemplateManagerController");
+goog.require("gridReport.model.ReportTemplate");
+gridReport.Module.controller("ReportTemplateManagerController", ["$scope", "$timeout", "$q", "$filter", "gfFormatsService", "gfLogManager", "gfNotificationService", "$translate", "reportTemplateManagerSettings", "gfDapsService", function($scope, $timeout, $q, $filter, gfFormatsService, gfLogManager, gfNotificationService, $translate, reportTemplateManagerSettings, gfDapsService) {
+  var FORMATS_TABLE_HEADERS = ["NAME", "NUMBER_OF_FIELDS", "LAST_MODIFIED", "ACTIONS"], FIELDS_TABLE_HEADERS = ["SHARP", "FIELD_NAME"], ALL_TYPE = "All", PERSONAL_TYPE = "Personal", GLOBAL_TYPE = "Global", SHARED_TYPE = "Shared", allTypeFilteredItem = {label:$translate.instant("ALL"), type:ALL_TYPE, data:[]}, personalTypeFilteredItem = {label:$translate.instant("PERSONAL"), type:PERSONAL_TYPE, data:[]}, globalTypeFilteredItem = {label:$translate.instant("SAMPLE_TEMPLATES"), type:GLOBAL_TYPE, data:[]}, 
+  sharedTypeFilteredItem = {label:$translate.instant("SHARED_TEMPLATES"), type:SHARED_TYPE, data:[]};
+  function loadFormats() {
+    $scope.isWorking = true;
+    loadPersonalAndGlobalFormats().then(function(response) {
+      $scope.globalFormats = prefilterFormat(response.formats.globalFormats, gridReport.model.ReportTemplate.types.global, reportTemplateManagerSettings.universeContext);
+      $scope.personalFormats = prefilterFormat(response.formats.personalFormats, gridReport.model.ReportTemplate.types.personal, reportTemplateManagerSettings.universeContext);
+      $scope.sharedFormats = prefilterFormat(response.formats.sharedFormats, gridReport.model.ReportTemplate.types.shared, reportTemplateManagerSettings.universeContext);
+      allTypeFilteredItem.data = _.union($scope.globalFormats, $scope.personalFormats, $scope.sharedFormats);
+      personalTypeFilteredItem.data = $scope.personalFormats;
+      globalTypeFilteredItem.data = $scope.globalFormats;
+      sharedTypeFilteredItem.data = $scope.sharedFormats;
+      _.each(response.fails, function(fail) {
+        gfLogManager.error(fail);
+      });
+      $scope.isWorking = false;
+    }, function(fail) {
+      gfLogManager.error(fail);
+      $scope.isWorking = false;
+    });
+  }
+  function prefilterFormat(formats, formatType, universeContext) {
+    return _.chain(formats).map(function(format) {
+      return convertFormat(format, formatType);
+    }).filter(function(format) {
+      return format.universeContext == universeContext;
+    }).value();
+  }
+  function convertFormat(format, formatType) {
+    var fieldsList = format.getColumnsList(), templateUniverseContext = format.getUniverseContext();
+    return{id:_.uniqueId("row_id"), name:format.name, newName:format.name, numberOfFields:fieldsList.length, description:format.description, fieldsList:fieldsList, modified:format.modificationDate || format.creationDate, modified2:format.modificationDate || format.creationDate, editMode:false, shareTemplateMode:false, isObsolete:format.getIsObsolete(), type:formatType, universeContext:templateUniverseContext, canEdit:formatType == gridReport.model.ReportTemplate.types.personal, isSample:formatType == 
+    gridReport.model.ReportTemplate.types.global, isShared:formatType == gridReport.model.ReportTemplate.types.shared, isGroupShared:format.isGroupShared, author:format.author, group:format.group, path:format.path};
+  }
+  $scope.enterEditMode = function(row) {
+    if (row.entity.editMode != true) {
+      row.entity.editMode = true;
+      $timeout(function() {
+        var rowEl = row.elm;
+        var tooltip = rowEl.find(".gf-tooltip");
+        var position = row.elm.offset();
+        tooltip.css("top", position.top + 4);
+        tooltip.css("left", position.left + 170);
+      });
+    }
+  };
+  $scope.enterShareTemplateMode = function(entity) {
+    entity.shareTemplateMode = !entity.shareTemplateMode;
+  };
+  function loadPersonalAndGlobalFormats() {
+    var deffered = $q.defer();
+    gfFormatsService.loadFormats(function(response) {
+      deffered.resolve(response);
+    });
+    return deffered.promise;
+  }
+  function isFormatExists(formatName) {
+    return _.any($scope.personalFormats, function(f) {
+      return f.name == formatName;
+    });
+  }
+  function trySaveFormat() {
+    if (isSaveDisabled()) {
+      return;
+    }
+    var formatName = $scope.saveModeSettings.selectedFormatName;
+    if (!($scope.saveModeSettings.isOverwriteWithoutConfirmation && $scope.saveModeSettings.selectedFormatName === $scope.saveModeSettings.initialSelectedFormatName) && isFormatExists(formatName)) {
+      gfNotificationService.confirm($translate.instant("TEMPLATE_ALREADY_EXISTS_CONFIRMATION", {name:formatName}), saveFormat);
+    } else {
+      saveFormat();
+    }
+  }
+  function saveFormat() {
+    reportTemplateManagerSettings.closeDialog($scope);
+    tryExecuteCallback(reportTemplateManagerSettings.onSaveFormat, $scope.saveModeSettings.selectedFormatName);
+  }
+  function init() {
+    loadFormats();
+  }
+  function tryExecuteCallback(funct) {
+    if (funct) {
+      var params = Array.prototype.slice.call(arguments, 1);
+      funct.apply(this, params);
+    }
+  }
+  function rollbackRenaming(format) {
+    format.newName = format.name;
+    format.editMode = false;
+  }
+  function tryRenameFormat(format, needRollbackInvalid) {
+    var formElement = $scope.formScope.editFormatForm.formatName;
+    if (formElement.$error.objectName) {
+      needRollbackInvalid && rollbackRenaming(format);
+      return;
+    }
+    if (format.name == format.newName) {
+      format.editMode = false;
+      return;
+    }
+    if (isFormatExists(format.newName)) {
+      if (needRollbackInvalid) {
+        rollbackRenaming(format);
+      } else {
+        formElement.$setValidity("nameExists", false);
+        formElement.errorMsg = $translate.instant("NAME_ALREADY_EXISTS");
+      }
+      return;
+    } else {
+      formElement.$setValidity("nameExists", true);
+    }
+    $scope.isWorking = true;
+    gfFormatsService.renameFormat(format.name, format.newName, format.description).then(function() {
+      tryExecuteCallback(reportTemplateManagerSettings.onRenameFormat, format.name, format.newName);
+      format.name = format.newName;
+      format.editMode = false;
+      filterFormats($scope.searchText);
+      $scope.isWorking = false;
+    }, function(fail) {
+      gfLogManager.error(fail);
+      $timeout(function() {
+        format.newName = format.name;
+        $scope.isWorking = false;
+      });
+    });
+  }
+  function deleteFormat(format) {
+    $scope.isWorking = true;
+    gfFormatsService.deleteFormat(format.name).then(function() {
+      $timeout(function() {
+        $scope.personalFormats.splice(_.indexOf($scope.personalFormats, format), 1);
+        if ($scope.currentFormat == format) {
+          $scope.currentFormat = undefined;
+        }
+        filterFormats($scope.searchText);
+        tryExecuteCallback(reportTemplateManagerSettings.onDeleteFormat, format.name);
+        $scope.isWorking = false;
+      });
+    }, function(fail) {
+      gfLogManager.error(fail);
+      $scope.isWorking = false;
+    });
+  }
+  function showFieldsList($event, format) {
+    var xOffset = 0, yOffset = 0, position = {left:270, top:45};
+    $scope.fieldsModal.fieldsList = format.fieldsList;
+    $scope.fieldsModal.formatName = format.name;
+    $scope.fieldsModal.fieldsTableHeaders = FIELDS_TABLE_HEADERS;
+    $scope.fieldsModal.position = {x:position.left + xOffset, y:position.top + yOffset};
+    $event.stopPropagation();
+    $scope.fieldsModal.visible = true;
+    $(document).on("click", closeFieldsList);
+  }
+  function filterFormats(searchText) {
+    var filteredGlobalFormats = $filter("filter")($scope.globalFormats, {name:searchText}), filteredPersonalFormats = $filter("filter")($scope.personalFormats, {name:searchText}), filteredSharedFormats = $filter("filter")($scope.sharedFormats, {name:searchText});
+    allTypeFilteredItem.data = _.union(filteredGlobalFormats, filteredPersonalFormats, filteredSharedFormats);
+    personalTypeFilteredItem.data = filteredPersonalFormats;
+    globalTypeFilteredItem.data = filteredGlobalFormats;
+    sharedTypeFilteredItem.data = filteredSharedFormats;
+  }
+  function closeFieldsList() {
+    $scope.fieldsModal.visible = false;
+    $scope.$apply();
+    $(document).off("click", closeFieldsList);
+  }
+  function disableEditMode(format) {
+    format.editMode = false;
+  }
+  function closeDialog() {
+    $scope.fieldsModal.visible = false;
+    reportTemplateManagerSettings.closeDialog($scope);
+  }
+  function setFormScope(formScope) {
+    $scope.formScope = formScope;
+  }
+  function isSaveDisabled() {
+    return!$scope.formScope.saveFormatForm.formatName.$valid;
+  }
+  function stopPropagationByCondition($event) {
+    if (!$($event.target).hasClass("modal-header-close-buttton")) {
+      $event.stopPropagation();
+    }
+  }
+  function setCurrentType(item) {
+    $scope.currentType = item;
+  }
+  function fixTemplate(template) {
+    $scope.isWorking = true;
+    gfFormatsService.fixTemplate(new gridReport.model.ReportTemplate({name:template.name, type:gridReport.model.ReportTemplate.types.personal})).then(function() {
+      loadFormats();
+    }, function(fail) {
+      gfLogManager.error(fail);
+      $scope.isWorking = false;
+    });
+  }
+  function loadFormat() {
+    if (!isLoadDisabled()) {
+      reportTemplateManagerSettings.closeDialog($scope);
+      tryExecuteCallback(reportTemplateManagerSettings.onLoadFormat, {name:$scope.currentFormat.name, type:$scope.currentFormat.type, path:$scope.currentFormat.path});
+    }
+  }
+  function isLoadDisabled() {
+    return $scope.isWorking || $scope.currentFormat == undefined;
+  }
+  function setCurrentFormat(newVal, oldVal) {
+    var newTemplate = _.first(newVal), oldTemplate = _.first(oldVal);
+    if (newTemplate !== oldTemplate && newTemplate != undefined) {
+      if ($scope.currentFormat && $scope.currentFormat.id != newTemplate.id) {
+        $scope.currentFormat.shareTemplateMode = false;
+      }
+      $scope.currentFormat = newTemplate;
+      if ($scope.saveModeSettings) {
+        $scope.saveModeSettings.selectedFormatName = newTemplate.name;
+      }
+    }
+  }
+  function isSaveVisible() {
+    return $scope.saveModeSettings != null;
+  }
+  function isLoadVisible() {
+    return $scope.saveModeSettings == null;
+  }
+  function getInitialTemplateType() {
+    switch(reportTemplateManagerSettings.templateType) {
+      case gridReport.model.ReportTemplate.types.personal:
+        return personalTypeFilteredItem;
+      case gridReport.model.ReportTemplate.types.global:
+        return globalTypeFilteredItem;
+      case gridReport.model.ReportTemplate.types.shared:
+        return sharedTypeFilteredItem;
+      default:
+        return allTypeFilteredItem;
+    }
+  }
+  function sharedStateChanged(templateName, shared, entity) {
+    entity.isGroupShared = shared;
+  }
+  $scope.saveModeSettings = reportTemplateManagerSettings.saveModeSettings;
+  $scope.formatsTableHeaders = FORMATS_TABLE_HEADERS;
+  $scope.formatsList = [];
+  $scope.closeDialog = closeDialog;
+  $scope.trySaveFormat = trySaveFormat;
+  $scope.showFieldsList = showFieldsList;
+  $scope.searchText = "";
+  $scope.disableEditMode = disableEditMode;
+  $scope.tryRenameFormat = tryRenameFormat;
+  $scope.deleteFormat = deleteFormat;
+  $scope.currentFormat = undefined;
+  $scope.formScope = {};
+  $scope.setFormScope = setFormScope;
+  $scope.isSaveDisabled = isSaveDisabled;
+  $scope.templateNameMaxLengh = gfDapsService.REPORT_TEMPLATE_NAME_MAX_LENGTH;
+  $scope.onHeaderHover = reportTemplateManagerSettings.onHeaderHover;
+  $scope.onHeaderMouseDown = reportTemplateManagerSettings.onHeaderMouseDown;
+  $scope.rollbackRenaming = rollbackRenaming;
+  $scope.stopPropagationByCondition = stopPropagationByCondition;
+  $scope.fieldsModal = {visible:false, fieldsList:[], formatName:null, fieldsTableHeaders:FIELDS_TABLE_HEADERS, position:{x:null, y:null}};
+  $scope.filteredData = [allTypeFilteredItem, personalTypeFilteredItem, globalTypeFilteredItem, sharedTypeFilteredItem];
+  $scope.currentType = getInitialTemplateType();
+  $scope.filterFormats = filterFormats;
+  $scope.fixTemplate = fixTemplate;
+  $scope.setCurrentType = setCurrentType;
+  $scope.loadFormat = loadFormat;
+  $scope.isLoadDisabled = isLoadDisabled;
+  $scope.isLoadVisible = isLoadVisible;
+  $scope.isSaveVisible = isSaveVisible;
+  $scope.sharedStateChanged = sharedStateChanged;
+  $scope.getSharedTitle = function(reportTemplate) {
+    var title = [];
+    if (reportTemplate.author) {
+      title.push($translate.instant("AUTHOR") + ": " + reportTemplate.author.firstName + " " + reportTemplate.author.lastName);
+    }
+    if (reportTemplate.group) {
+      title.push($translate.instant("SHARED_TO") + ": " + reportTemplate.group);
+    }
+    return title.join("\r\n");
+  };
+  var headerCellTemplate = '<div class="ngHeaderSortColumn {{col.headerClass}}" ng-style="{\'cursor\': col.cursor}" ng-class="{ \'ngSorted\': !noSortVisible }">' + '<div ng-click="col.sort($event)" ng-class="\'colt\' + col.index" title="{{col.displayName}}" class="ngHeaderText">{{col.displayName}}</div>' + '<div class="ngSortButtonDown" ng-show="col.showSortButtonDown()"></div>' + '<div class="ngSortButtonUp" ng-show="col.showSortButtonUp()"></div>' + '<div class="ngSortPriority">{{col.sortPriority}}</div>' + 
+  '<div ng-class="{ ngPinnedIcon: col.pinned, ngUnPinnedIcon: !col.pinned }" ng-click="togglePin(col)" ng-show="col.pinnable"></div>' + "</div>" + '<div ng-show="col.resizable" class="ngHeaderGrip" ng-click="col.gripClick($event)" ng-mousedown="col.gripOnMouseDown($event)"></div>';
+  $scope.gridOptions = {data:"currentType.data", enableRowSelection:true, enableColumnResize:true, multiSelect:false, headerRowHeight:29, rowHeight:29, selectedItems:[], columnDefs:[{field:"name", displayName:$translate.instant("NAME"), width:"61%", minWidth:160, headerCellTemplate:headerCellTemplate, cellTemplate:"<div>" + '<div title="{{row.entity.name}}" ng-if="!row.entity.editMode && !row.entity.shareTemplateMode" class="ngCellText" style="position:relative">' + "<span>{{row.entity.name}}</span>" + 
+  '<span class="icon-users" ' + 'title="{{getSharedTitle(row.entity)}}" ' + 'ng-show="row.entity.isShared || row.entity.isGroupShared"></span>' + '<span class="sample" ' + 'ng-show="row.entity.isSample">SAMPLE</span>' + "</div>" + '<div title="{{row.entity.name}}" ng-if="row.entity.editMode" style="position:relative">' + '<div class="gf-texbox-error-container">' + '<input maxlength="{{templateNameMaxLengh}}" ' + "ng-class=\"{'input-error':!editFormatForm.formatName.$valid}\" " + "gf-object-name " + 
+  'type="text" ' + 'on-enter="tryRenameFormat(row.entity)" ' + 'on-escape="rollbackRenaming(row.entity)" ' + 'name="formatName" ' + 'on-blur="tryRenameFormat(row.entity,true)" ' + 'focus-me="true" ' + 'selected="true" ' + 'ng-model="row.entity.newName" />' + '<div class="gf-tooltip" ng-show="!editFormatForm.formatName.$valid" style="position:fixed; z-index:1;">{{editFormatForm.formatName.errorMsg}}</div>' + '<span class="gf-textbox-erroricon"' + 'ng-show="!editFormatForm.formatName.$valid">' + "</span>" + 
+  "</div>" + "</div>" + '<div ng-if="row.entity.shareTemplateMode" ' + 'class="gf-share-template-container">' + '<gf-sharing-details template-name="row.entity.name" ' + 'template-description="row.entity.description" ' + 'on-shared-state-changed="sharedStateChanged(templateName, shared, row.entity)">' + "</gf-sharing-details>" + "</div>" + "</div>"}, {field:"numberOfFields", displayName:$translate.instant("NUMBER_OF_FIELDS"), width:"12%", minWidth:80, headerCellTemplate:headerCellTemplate, cellTemplate:'<div><div class="ngCellText">' + 
+  '<a href="javascript:"' + 'class="gf-fields-view-link"' + 'ng-hide="row.entity.isObsolete && row.entity.canEdit"' + "title=\"{{'CLICK_TO_VIEW_FIELDS_IN_TEMPLATE'| translate }}\"" + 'ng-click="showFieldsList($event,row.entity)">{{row.entity.numberOfFields}}</a>' + '<div ng-show="row.entity.isObsolete && row.entity.canEdit"' + 'style="padding-left: 0"' + "title=\"{{'PRESS_REFRESH_TO_DISPLAY_NUMBER_OF_FIELDS'| translate }}\"" + 'class="gf-icon icon-refresh"' + 'ng-click="fixTemplate(row.entity)"></div>' + 
+  "</div></div>"}, {field:"modified2", displayName:$translate.instant("LAST_MODIFIED"), width:"14%", minWidth:95, headerCellTemplate:headerCellTemplate, cellTemplate:"<div>" + '<div class="ngCellText">' + "<span>{{row.entity.modified2 | gfDateFormatter}}</span>" + "</div>" + "</div>"}, {field:"", displayName:$translate.instant("ACTIONS"), resizable:false, sortable:false, width:"12%", minWidth:80, headerCellTemplate:headerCellTemplate, cellTemplate:'<div><div class="gf-actions-cell">' + "<span title=\"{{'SHARE'| translate}}\"" + 
+  'ng-show="row.entity.canEdit"' + 'class="gf-icon icon-share"' + 'ng-click="enterShareTemplateMode(row.entity) "></span>' + "<span title=\"{{'RENAME'| translate}}\"" + 'ng-show="row.entity.canEdit"' + 'class="gf-icon icon-edit"' + 'ng-click="enterEditMode(row) "></span>' + "<span title=\"{{'DELETE'| translate}}\"" + 'ng-show="row.entity.canEdit"' + 'class="gf-icon icon-trash"' + 'ng-click="deleteFormat(row.entity)"></span>' + "</div></div>"}]};
+  $scope.$watch("gridOptions.selectedItems", setCurrentFormat, true);
+  $scope.$on("$destroy", function() {
+    $scope.formScope = null;
+  });
+  init();
+}]);
+goog.provide("gridReport.directives.ReportTemplateManagerDialogService");
+goog.require("gridReport.directives.ReportTemplateManagerController");
+gridReport.Module.service("gfReportTemplateManagerDialogService", ["$rootScope", "$modal", function($rootScope, $modal) {
+  var modal;
+  var modalSelector = ".gf-template-manager-modal";
+  function closeDialog($scope) {
+    if (!modal) {
+      return;
+    }
+    modal.close();
+    if ($scope) {
+      $scope.$destroy();
+    }
+    modal = null;
+  }
+  function makeModalDraggable() {
+    $(modalSelector).draggable({handle:".gf-template-manager-modal-header"});
+  }
+  var service = {};
+  service.openDialog = function(reportTemplateManagerSettings) {
+    if (!reportTemplateManagerSettings) {
+      throw new Error("reportTemplateManagerSettings should be provided");
+    }
+    reportTemplateManagerSettings.closeDialog = closeDialog;
+    reportTemplateManagerSettings.onHeaderHover = makeModalDraggable;
+    reportTemplateManagerSettings.onHeaderMouseDown = function() {
+      $(modalSelector).focus();
+    };
+    modal = $modal.open({templateUrl:"scripts/directives/reportTemplateManager/ReportTemplateManagerDialog.html", controller:"ReportTemplateManagerController", windowClass:modalSelector.substring(1) + " gf-modal" + (reportTemplateManagerSettings.templateManagerCustomClass ? " " + reportTemplateManagerSettings.templateManagerCustomClass : ""), keyboard:false, resolve:{reportTemplateManagerSettings:function() {
+      return reportTemplateManagerSettings;
+    }}});
+    modal.opened.then(function() {
+      reportTemplateManagerSettings.onDialogOpen && reportTemplateManagerSettings.onDialogOpen();
+    });
+  };
+  service.closeDialog = closeDialog;
+  return service;
+}]);
+goog.provide("gridReport.services.MostRecentlyUsedService");
+gridReport.Module.factory("gfMostRecentlyUsedService", ["$q", "gfDapsService", function($q, gfDapsService) {
+  var folderName = "Settings", fileName = "mru";
+  function loadMRUs() {
+    var deferred = $q.defer();
+    gfDapsService.loadFile({folderName:folderName, fileName:fileName}, function(response) {
+      if (response) {
+        var mru = JSON.parse(response);
+        _.each(mru, function(type) {
+          _.each(type, function(item) {
+            if (item.accessDate) {
+              item.accessDate = new Date(item.accessDate);
+            }
+          });
+        });
+        deferred.resolve(mru);
+      } else {
+        deferred.resolve();
+      }
+    }, function() {
+      deferred.resolve();
+    });
+    return deferred.promise;
+  }
+  function addMRU(type, item) {
+    if (!type) {
+      throw new Error("type should be defined");
+    }
+    if (!item) {
+      throw new Error("item should be defined");
+    }
+    var deferred = $q.defer();
+    loadMRUs().then(function(mru) {
+      mru = mru || {};
+      mru[type] = _.filter(mru[type] || [], function(record) {
+        return record.name != item.name;
+      });
+      mru[type].unshift(item);
+      mru[type].length = Math.min(mru[type].length, 10);
+      gfDapsService.saveFile({folderName:folderName, fileName:fileName, state:JSON.stringify(mru)}, function() {
+        deferred.resolve();
+      }, function() {
+        deferred.reject();
+      });
+    }, function() {
+      deferred.reject();
+    });
+    return deferred.promise;
+  }
+  return{loadMRUs:loadMRUs, addMRU:addMRU};
+}]);
+goog.provide("gridReport.services.TemplateStateUpdater");
+goog.require("gridReport.services.GridColumnConverterService");
+goog.require("gridReport.columnMath.ColumnMathColumnsUpdater");
+gridReport.Module.factory("gfTemplateStateUpdater", ["$q", "gfGridColumnConverterService", "gfColumnMathColumnsUpdater", function($q, gfGridColumnConverterService, gfColumnMathColumnsUpdater) {
+  function getListOfColumns(columnsState) {
+    var column = [];
+    _.each(columnsState, function(columnState, key) {
+      column.push(gfGridColumnConverterService.createGridColumnFromState(key, columnState));
+    });
+    return column;
+  }
+  function getColumnsObject(columns) {
+    var columnsState = {};
+    _.each(columns, function(column) {
+      var columnState = {};
+      gfGridColumnConverterService.convertGridColumnToState(columnState, column);
+      columnsState[column.id] = columnState;
+    });
+    return columnsState;
+  }
+  function getColumnsByNameAndType(columns, columnNameCheckFnct, typeCheckFnct) {
+    var foundColumns = [];
+    _.each(columns, function(column) {
+      if ((typeCheckFnct || angular.noop)(column) && (columnNameCheckFnct || angular.noop)(column)) {
+        foundColumns.push(column);
+      }
+      if (column.gridColumns) {
+        var subColumns = getColumnsByNameAndType(column.gridColumns, columnNameCheckFnct, typeCheckFnct);
+        if (subColumns) {
+          foundColumns = foundColumns.concat(subColumns);
+        }
+      }
+    });
+    return foundColumns;
+  }
+  function updateCustomExpressions(columns, customExpressions) {
+    _.each(customExpressions, function(customExpression, previousCustomExpressionName) {
+      if (customExpression == null) {
+        return;
+      }
+      var previousColumns = getColumnsByNameAndType(columns, function(column) {
+        return column.command && column.command.name === previousCustomExpressionName;
+      }, function(column) {
+        return column.command && column.command.isCustom();
+      });
+      _.each(previousColumns, function(previousColumn) {
+        var previousColumnId;
+        previousColumn.header = customExpression.name;
+        previousColumn.initialHeader = customExpression.name;
+        previousColumn.command.id = customExpression.name;
+        previousColumn.command.name = customExpression.name;
+        previousColumn.command.metadata.id = customExpression.name;
+        previousColumn.command.expression = customExpression.path + "/*" + customExpression.name + "*/";
+        previousColumnId = previousColumn.id;
+        previousColumn.id = previousColumn.command.expression;
+        gfColumnMathColumnsUpdater.update(columns, previousColumnId, previousColumn.id);
+      });
+    });
+  }
+  function updateMultiFactorRanks(columns, multiFactorRanks) {
+    _.each(multiFactorRanks, function(multiFactorRank, previousMfrName) {
+      if (multiFactorRank == null) {
+        return;
+      }
+      var previousColumns = getColumnsByNameAndType(columns, function(column) {
+        return column.command && column.command.name === previousMfrName;
+      }, function(column) {
+        return column.command && column.command.isMultiFactorRank();
+      });
+      _.each(previousColumns, function(previousColumn) {
+        previousColumn.header = multiFactorRank.name;
+        previousColumn.initialHeader = multiFactorRank.name;
+        previousColumn.command.id = multiFactorRank.id;
+        previousColumn.command.name = multiFactorRank.name;
+        previousColumn.command.metadata.id = multiFactorRank.id;
+        previousColumn.command.expression = multiFactorRank.adcSyntax + "/*MfrExpression:" + multiFactorRank.name + "*/";
+        previousColumn.id = previousColumn.command.expression;
+      });
+    });
+  }
+  function updateDataBlocks(columns, dataBlocks) {
+    _.each(dataBlocks, function(dataBlock, previousDataBlockName) {
+      if (dataBlock == null) {
+        return;
+      }
+      var previousColumns = getColumnsByNameAndType(columns, function(column) {
+        return column.command && column.command.name === previousDataBlockName;
+      }, function(column) {
+        return column.command && column.command.isDataBlock();
+      });
+      _.each(previousColumns, function(previousColumn) {
+        previousColumn.header = dataBlock.name;
+        previousColumn.initialHeader = dataBlock.name;
+        previousColumn.command.id = dataBlock.id;
+        previousColumn.command.name = dataBlock.name;
+        previousColumn.command.metadata.id = dataBlock.id;
+        previousColumn.id = previousColumn.command.id;
+      });
+    });
+    _.each(columns, function(column) {
+      if (column.command && column.command.isDataBlock()) {
+        var subColumns = _.values(column.gridColumns);
+        column.gridColumns = {};
+        _.each(subColumns, function(subColumn) {
+          column.gridColumns[subColumn.id] = subColumn;
+        });
+      }
+    });
+  }
+  var service = {};
+  service.updateState = function(templateData, request) {
+    if (!templateData) {
+      throw new Error("templateData should be provided");
+    }
+    var deffered = $q.defer();
+    if (request) {
+      var columns = getListOfColumns(templateData.state.gridState.columns);
+      updateCustomExpressions(columns, request.expressions);
+      updateMultiFactorRanks(columns, request.mfranks);
+      updateDataBlocks(columns, request.dblocks);
+      templateData.state.gridState.columns = getColumnsObject(columns);
+    }
+    deffered.resolve(templateData);
+    return deffered.promise;
+  };
+  return service;
+}]);
+goog.provide("gridReport.services.ReportTemplatesModel");
+goog.require("gridReport.directives.ReportTemplateManagerDialogService");
+goog.require("gridReport.services.FormatsService");
+goog.require("gridReport.services.StateProvideService");
+goog.require("gridReport.services.MostRecentlyUsedService");
+goog.require("gridReport.services.ObjectsImporter");
+goog.require("gridReport.services.TemplateStateUpdater");
+gridReport.services.ReportTemplatesModel = function($translate, $q, gfFormatsService, gfGridManagementService, gfNotificationService, gfEventsAggregator, localStorageService, gfLogManager, gfDefaultToolbarState, gfReportTemplateManagerDialogService, gridInstanceId, gfGridStateService, gfStateProviderService, gfMostRecentlyUsedService, gfObjectsImporter, gfTemplateStateUpdater) {
+  var REPORT_TEMPLATES_STATE_POSTFIX = "REPORT_TEMPLATES";
+  var BLANK_TEMPLATE = new gridReport.model.ReportTemplate({name:$translate.instant("UNSAVED_TEMPLATE"), type:gridReport.model.ReportTemplate.types.newTemplate});
+  var currentStateId;
+  var model = this;
+  var restoredState;
+  var universeContext = scr.UniverseType.Public;
+  var templateManagerCustomClass = null;
+  model.gridInstanceId = gridInstanceId;
+  model.isTemplateSaved = false;
+  model.isTemplateChanged = false;
+  model.isConfirmationAllowed = true;
+  gfEventsAggregator = gfEventsAggregator.getChildAggregator(gridInstanceId);
+  model.setBlankTemplateSelected = function() {
+    createNewTemplate();
+    saveLocalState();
+  };
+  model.createBlankTemplate = function() {
+    if (model.isTemplateChanged && model.isConfirmationAllowed) {
+      gfNotificationService.confirmSave($translate.instant("FORMAT_WAS_CHANGED_CONFIRMATION", {name:getSuggestedTemplateName(model.selectedTemplate)}), function() {
+        model.tryToSaveTemplate().then(function() {
+          createNewTemplate();
+        });
+      }, createNewTemplate);
+    } else {
+      createNewTemplate();
+    }
+  };
+  function createNewTemplate(supressLoadData) {
+    gfGridManagementService.createNew(model.gridInstanceId, currentStateId);
+    if (!supressLoadData) {
+      gfGridManagementService.loadData(model.gridInstanceId, true);
+    }
+    model.selectedTemplate = BLANK_TEMPLATE;
+    model.isTemplateSaved = false;
+    model.isTemplateChanged = false;
+    model.isPersonalTemplate = false;
+    saveLocalState();
+    gfEventsAggregator.raiseEvent(gridReport.model.GridEvents.templateCreated);
+    gfEventsAggregator.raiseEvent(gridReport.model.GridEvents.componentStateChanged, {component:gridReport.services.StateProvideService.components.templates});
+  }
+  model.setSelectedCustomItem = function(item) {
+    var template = new gridReport.model.ReportTemplate({name:item.text, type:gridReport.model.ReportTemplate.types.custom});
+    template.isCustom = true;
+    template.customItem = item;
+    model.selectedTemplate = template;
+    model.isTemplateChanged = item.isTemplateChanged;
+    model.isTemplateSaved = item.isTemplateSaved;
+    saveLocalState();
+    gfEventsAggregator.raiseEvent(gridReport.model.GridEvents.componentStateChanged, {component:gridReport.services.StateProvideService.components.templates});
+  };
+  model.resolveTemplateName = function(name, templatesNames) {
+    if (!_.contains(templatesNames, name)) {
+      return name;
+    }
+    return model.resolveTemplateName(name + " (copy)", templatesNames);
+  };
+  function getTemplateNames() {
+    return _.pluck(_.union(model.templates.globalFormats, model.templates.personalFormats, model.templates.sharedFormats), "name");
+  }
+  model.saveAndSelectImportedTemplate = function(templateData) {
+    checkTemplateChangesAndInvokeAction(function() {
+      model.importTemplate(templateData);
+    });
+  };
+  model.loadSelectedTemplate = function(newTemplate) {
+    gfGridManagementService.startLoading(model.gridInstanceId, gridReport.model.GridContentPlacement.All, gridReport.model.LoadingReasons.TemplateLoading);
+    gfEventsAggregator.raiseEvent(gridReport.model.GridEvents.templateLoadingStarted);
+    model.selectedTemplate = newTemplate;
+    gfFormatsService.loadTemplate(newTemplate).then(function(state) {
+      gfGridManagementService.setGridState(model.gridInstanceId, state, function() {
+        gfGridManagementService.endLoading(model.gridInstanceId, gridReport.model.GridContentPlacement.All, gridReport.model.LoadingReasons.TemplateLoading);
+        gfEventsAggregator.raiseEvent(gridReport.model.GridEvents.templateLoadingEnded);
+      });
+      newTemplate.accessDate = new Date;
+      model.isTemplateSaved = true;
+      model.isTemplateChanged = false;
+      model.isPersonalTemplate = model.selectedTemplate && !model.selectedTemplate.isGlobal();
+      if (!model.isPersonalTemplate) {
+        gfMostRecentlyUsedService.addMRU(gridReport.model.ReportTemplate.types.global, {name:model.selectedTemplate.name, accessDate:newTemplate.accessDate});
+      }
+      saveLocalState();
+      gfEventsAggregator.raiseEvent(gridReport.model.GridEvents.componentStateChanged, {component:gridReport.services.StateProvideService.components.templates});
+    }, function() {
+      gfGridManagementService.endLoading(model.gridInstanceId, gridReport.model.GridContentPlacement.All, gridReport.model.LoadingReasons.TemplateLoading);
+      gfEventsAggregator.raiseEvent(gridReport.model.GridEvents.templateLoadingEnded);
+    });
+  };
+  model.setSelectedTemplate = function(newTemplate) {
+    var loadTemplateAction = function() {
+      model.loadSelectedTemplate(newTemplate);
+    };
+    checkTemplateChangesAndInvokeAction(loadTemplateAction);
+  };
+  function checkTemplateChangesAndInvokeAction(callback) {
+    if (model.isTemplateChanged && model.isConfirmationAllowed) {
+      gfNotificationService.confirmSave($translate.instant("FORMAT_WAS_CHANGED_CONFIRMATION", {name:getSuggestedTemplateName(model.selectedTemplate)}), function() {
+        model.tryToSaveTemplate().then(callback);
+      }, callback);
+    } else {
+      callback();
+    }
+  }
+  model.tryToSaveTemplate = function() {
+    var deffered = $q.defer();
+    if (model.selectedTemplate) {
+      model.openReportTemplateManager(getSuggestedTemplateName(model.selectedTemplate), function() {
+        deffered.resolve("saved");
+      }, !model.selectedTemplate.isGlobal());
+    } else {
+      deffered.reject(new Error("template should be selected"));
+    }
+    return deffered.promise;
+  };
+  function getSuggestedTemplateName(template, preferredTemplateName) {
+    if (template.isGlobal() || template.isShared()) {
+      var templateName = preferredTemplateName || template.name + " (copy)";
+      var existedTemplate = _.findWhere(model.templates.personalFormats, {name:templateName});
+      if (existedTemplate) {
+        return getSuggestedTemplateName(template, templateName + " (copy)");
+      } else {
+        return templateName;
+      }
+    } else {
+      return template.name;
+    }
+  }
+  model.saveAs = function() {
+    if (model.selectedTemplate) {
+      var saveAsSuccessfullAction = function(templateName) {
+        selectCreatedTemplate(templateName);
+      };
+      model.openReportTemplateManager(getSuggestedTemplateName(model.selectedTemplate), saveAsSuccessfullAction, !model.selectedTemplate.isGlobal());
+    }
+  };
+  function selectCreatedTemplate(templateName) {
+    var tempalte = getTemplate(templateName, gridReport.model.ReportTemplate.types.personal);
+    if (tempalte) {
+      model.selectedTemplate = tempalte;
+      model.isTemplateSaved = true;
+      model.isTemplateChanged = false;
+      model.isPersonalTemplate = model.selectedTemplate && !model.selectedTemplate.isGlobal();
+    }
+  }
+  function setTemplateManagerDialogClassCallback(customClass) {
+    templateManagerCustomClass = customClass;
+  }
+  model.save = function() {
+    if (model.selectedTemplate && !model.selectedTemplate.isGlobal()) {
+      saveFormatHandler(model.selectedTemplate.name);
+    }
+  };
+  model["export"] = function() {
+    if (model.selectedTemplate) {
+      exportFormatHandler();
+    }
+  };
+  model.openReportTemplateManager = function(formatName, successCallback, isOverwriteWithoutConfirmation, templateType) {
+    var settings = {universeContext:universeContext, templateType:templateType, saveModeSettings:formatName ? {selectedFormatName:formatName, initialSelectedFormatName:formatName, isOverwriteWithoutConfirmation:isOverwriteWithoutConfirmation} : null, onDeleteFormat:templateDeletedHandler, onRenameFormat:templateRenamedHandler, onSaveFormat:function(templateName) {
+      saveFormatHandler(templateName, successCallback);
+    }, onLoadFormat:function(format) {
+      if (format) {
+        var template = getTemplate(format.name, format.type);
+        if (!template) {
+          template = new gridReport.model.ReportTemplate({type:format.type, name:format.name, path:format.path, accessDate:new Date});
+          model.templates.personalFormats.push(template);
+        }
+        gfEventsAggregator.raiseEvent(gridReport.model.GridEvents.templateManagerTemplateSelected);
+        model.setSelectedTemplate(template);
+      }
+    }};
+    if (templateManagerCustomClass) {
+      settings.templateManagerCustomClass = templateManagerCustomClass;
+    }
+    gfReportTemplateManagerDialogService.openDialog(settings);
+  };
+  model.setUniverseContext = function(newUniverseContext) {
+    if (newUniverseContext && universeContext != newUniverseContext) {
+      universeContext = newUniverseContext;
+      loadTemplates();
+    }
+  };
+  model.getUniverseContext = function() {
+    return universeContext || scr.UniverseType.Public;
+  };
+  model.importTemplate = function(templateData) {
+    if (!templateData) {
+      throw new Error("templateData should be provided");
+    }
+    gfGridManagementService.startLoading(model.gridInstanceId, gridReport.model.GridContentPlacement.All, gridReport.model.LoadingReasons.TemplateSaving);
+    var allTemplatesNames = getTemplateNames();
+    templateData.name = model.resolveTemplateName(templateData.name + " Imported", allTemplatesNames);
+    return gfObjectsImporter.importObjects(templateData.state.gridState).then(function(response) {
+      return gfTemplateStateUpdater.updateState(templateData, response).then(function() {
+        return gfFormatsService.saveTemplate(templateData.name, templateData.state, templateData.description).then(function() {
+          gfGridManagementService.endLoading(model.gridInstanceId, gridReport.model.GridContentPlacement.All, gridReport.model.LoadingReasons.TemplateSaving);
+          if (!_.contains(getTemplateNames(), templateData.name)) {
+            loadTemplates();
+          }
+          gfEventsAggregator.raiseEvent(gridReport.model.GridEvents.templateImported, {templateName:templateData.name});
+        }).then(function() {
+          model.loadSelectedTemplate(new gridReport.model.ReportTemplate(templateData));
+        }, function() {
+          throw new Error("Imported template wasn't saved because of some server error");
+        });
+      });
+    });
+  };
+  function getState() {
+    return{isTemplateSaved:model.isTemplateSaved, isTemplateChanged:model.isTemplateChanged, selectedTemplate:model.selectedTemplate};
+  }
+  function setState(state, forceLoad) {
+    if (!state || !state.selectedTemplate) {
+      state = getEmptyState();
+    }
+    if (state.selectedTemplate.name == BLANK_TEMPLATE.name) {
+      model.selectedTemplate = BLANK_TEMPLATE;
+    } else {
+      if (state.selectedTemplate.isCustom) {
+        model.setSelectedCustomItem(state.selectedTemplate.customItem);
+      } else {
+        if (forceLoad && (state.selectedTemplate && state.selectedTemplate.type == gridReport.model.ReportTemplate.types.global)) {
+          model.loadSelectedTemplate(new gridReport.model.ReportTemplate(state.selectedTemplate));
+        }
+        if (model.templates) {
+          var template = getTemplate(state.selectedTemplate.name, state.selectedTemplate.type);
+          if (template) {
+            model.selectedTemplate = template;
+          } else {
+            model.selectedTemplate = BLANK_TEMPLATE;
+            state.isTemplateSaved = false;
+            state.isTemplateChanged = true;
+          }
+        }
+      }
+    }
+    model.isTemplateSaved = state.isTemplateSaved;
+    model.isTemplateChanged = state.isTemplateChanged;
+    if (model.selectedTemplate != BLANK_TEMPLATE) {
+      model.isPersonalTemplate = model.selectedTemplate && !model.selectedTemplate.isGlobal();
+    }
+  }
+  function loadLocalState() {
+    return localStorageService.get(currentStateId + REPORT_TEMPLATES_STATE_POSTFIX);
+  }
+  function saveLocalState() {
+    if (!model.isAutoSaveState) {
+      gfLogManager.trace("REPORT_TEMPLATE. unable to save state for isAutoSaveState == false");
+      return;
+    }
+    if (currentStateId === undefined) {
+      gfLogManager.trace("REPORT_TEMPLATE. trying to save state with undefined id");
+      return;
+    }
+    var state = getState();
+    localStorageService.add(currentStateId + REPORT_TEMPLATES_STATE_POSTFIX, JSON.stringify(state));
+    gfLogManager.trace("REPORT_TEMPLATE. Request to save state [id: " + (currentStateId + REPORT_TEMPLATES_STATE_POSTFIX) + "]");
+  }
+  function getIsTemplateSavedCallback() {
+    return model.isTemplateSaved;
+  }
+  function getIsTemplateChangedCallback() {
+    return model.isTemplateChanged;
+  }
+  function restoreStateCallback(stateId) {
+    if (stateId == undefined) {
+      gfLogManager.trace("REPORT_TEMPLATE. trying to restore state with undefined id");
+      return;
+    }
+    currentStateId = stateId;
+    gfLogManager.trace("REPORT_TEMPLATE. restore state id: " + stateId);
+    restoredState = loadLocalState();
+    if (!model.selectedTemplate) {
+      if (restoredState && restoredState.selectedTemplate) {
+        setState(restoredState);
+      } else {
+        var state = getEmptyState();
+        setState(state, true);
+        if (state.selectedTemplate == BLANK_TEMPLATE) {
+          gfGridManagementService.createNew(model.gridInstanceId, currentStateId);
+          gfEventsAggregator.raiseEvent(gridReport.model.GridEvents.newStateApplied);
+        }
+      }
+    }
+  }
+  function getEmptyState() {
+    var state = {};
+    state.isTemplateChanged = false;
+    state.isTemplateSaved = false;
+    state.selectedTemplate = BLANK_TEMPLATE;
+    if (gfDefaultToolbarState && gfDefaultToolbarState.selectedTemplate) {
+      state.isTemplateChanged = gfDefaultToolbarState.isTemplateChanged;
+      state.isTemplateSaved = gfDefaultToolbarState.isTemplateSaved;
+      state.selectedTemplate = gfDefaultToolbarState.selectedTemplate;
+    }
+    return state;
+  }
+  function createNewCallback(newStateId) {
+    if (model.isAutoSaveState) {
+      currentStateId = newStateId;
+    }
+    model.isTemplateSaved = false;
+    model.isTemplateChanged = false;
+    saveLocalState();
+    gfEventsAggregator.raiseEvent(gridReport.model.GridEvents.componentStateChanged, {component:gridReport.services.StateProvideService.components.templates});
+  }
+  function getSelectedTemplateCalback() {
+    return new gridReport.model.ReportTemplate(model.selectedTemplate);
+  }
+  function setSelectedTemplateCallback(template) {
+    model.loadSelectedTemplate(new gridReport.model.ReportTemplate(template));
+  }
+  function setSelectedCustomItemCallback(item) {
+    model.setSelectedCustomItem(item);
+  }
+  function setSelectedNewTemplateCallback(needLoadData) {
+    createNewTemplate(!needLoadData);
+  }
+  function saveFormatCallback(templateName, successCallback, failCallback) {
+    saveFormatHandler(templateName, successCallback, failCallback);
+  }
+  function saveSelectedTemplateAsCallback(templateName, successCallback, failCallback) {
+    saveFormatHandler(templateName, function() {
+      selectCreatedTemplate(templateName);
+      (successCallback || angular.noop)();
+    }, failCallback);
+  }
+  function getIsTemplateExistsCallback(templateName, templateType) {
+    return getTemplate(templateName, templateType) != null;
+  }
+  var callbacksArray = [[gfGridManagementService.getIsTemplateSaved, getIsTemplateSavedCallback], [gfGridManagementService.getIsTemplateChanged, getIsTemplateChangedCallback], [gfGridManagementService.restoreState, restoreStateCallback], [gfGridManagementService.createNew, createNewCallback], [gfGridManagementService.getSelectedTemplate, getSelectedTemplateCalback], [gfGridManagementService.saveTemplate, saveFormatCallback], [gfGridManagementService.saveTemplateAs, saveSelectedTemplateAsCallback], 
+  [gfGridManagementService.getIsTemplateExists, getIsTemplateExistsCallback], [gfGridManagementService.setSelectedTemplate, setSelectedTemplateCallback], [gfGridManagementService.setSelectedCustomItem, setSelectedCustomItemCallback], [gfGridManagementService.setSelectedNewTemplate, setSelectedNewTemplateCallback], [gfGridManagementService.setTemplateManagerDialogClass, setTemplateManagerDialogClassCallback]];
+  function registerManagementSerivceCallbacks(gridId) {
+    gfGridManagementService.registerCallbacks(gridId, callbacksArray);
+  }
+  function unregisterManagementSerivceCallbacks(gridId) {
+    gfGridManagementService.unregisterCallbacks(gridId, callbacksArray);
+  }
+  model.destroy = function() {
+    unregisterManagementSerivceCallbacks(model.gridInstanceId);
+    unregisterStateCallbacks(model.gridInstanceId);
+  };
+  function registerStateCallbacks(gridId) {
+    gfStateProviderService.register(gridReport.services.StateProvideService.components.templates, gridId, {getStateCallback:getState, setStateCallback:function(state) {
+      restoredState = state;
+      setState(state);
+    }});
+  }
+  function unregisterStateCallbacks(gridId) {
+    gfStateProviderService.unregister(gridReport.services.StateProvideService.components.templates, gridId);
+  }
+  gfEventsAggregator.addHandler(gridReport.model.GridEvents.stateChanged, function(cause) {
+    if (cause == gridReport.model.StateChangesCause.ColumnProgrammaticallyAddedToSavedTemplate) {
+      if (model.isTemplateSaved) {
+        model.isTemplateChanged = true;
+        saveLocalState();
+        gfEventsAggregator.raiseEvent(gridReport.model.GridEvents.componentStateChanged, {component:gridReport.services.StateProvideService.components.templates});
+      }
+    } else {
+      model.isTemplateChanged = true;
+      saveLocalState();
+      gfEventsAggregator.raiseEvent(gridReport.model.GridEvents.componentStateChanged, {component:gridReport.services.StateProvideService.components.templates});
+    }
+  }, true);
+  gfEventsAggregator.addHandler(gridReport.model.InternalEvents.gridStateNotFound, function() {
+    setState(getEmptyState(), true);
+  });
+  function getTemplate(name, type) {
+    switch(type) {
+      case gridReport.model.ReportTemplate.types.global:
+        return _.findWhere(model.templates.globalFormats, {name:name});
+      case gridReport.model.ReportTemplate.types.personal:
+        return _.findWhere(model.templates.personalFormats, {name:name});
+      case gridReport.model.ReportTemplate.types.shared:
+        return _.findWhere(model.templates.sharedFormats, {name:name});
+      default:
+        return undefined;
+    }
+  }
+  function filterTemplates(templates) {
+    return _.filter(templates, function(template) {
+      return template.getUniverseContext() == universeContext;
+    });
+  }
+  function filterTemplatesGroups(templatesGroups) {
+    return{globalFormats:filterTemplates(templatesGroups.globalFormats), personalFormats:filterTemplates(templatesGroups.personalFormats), sharedFormats:filterTemplates(templatesGroups.sharedFormats)};
+  }
+  function loadTemplates() {
+    model.isTemplatesLoading = true;
+    var deffered = $q.defer();
+    gfMostRecentlyUsedService.loadMRUs().then(function(mrus) {
+      gfFormatsService.loadFormats(function(response) {
+        model.templates = filterTemplatesGroups(response.formats);
+        if (mrus && mrus.global) {
+          _.each(model.templates.globalFormats, function(format) {
+            var t = _.findWhere(mrus.global, {name:format.name});
+            if (t) {
+              format.accessDate = t.accessDate;
+            }
+          });
+        }
+        _.each(response.fails, function(fail) {
+          gfLogManager.error(fail);
+        });
+        model.isTemplatesLoading = false;
+        deffered.resolve();
+        gfEventsAggregator.raiseEvent(gridReport.model.GridEvents.templateSelectorComponentInitialized);
+      });
+    }, function() {
+    });
+    return deffered.promise;
+  }
+  function templateDeletedHandler(templateName) {
+    var deletedTemplate = getTemplate(templateName, gridReport.model.ReportTemplate.types.personal);
+    if (_.isEqual(model.selectedTemplate, deletedTemplate)) {
+      model.createBlankTemplate();
+    }
+    model.templates.personalFormats.splice(model.templates.personalFormats.indexOf(deletedTemplate), 1);
+    gfEventsAggregator.raiseEvent(gridReport.model.GridEvents.templateDeleted, {templateName:templateName});
+  }
+  function templateRenamedHandler(oldName, newName) {
+    var renamedTemplate = getTemplate(oldName, gridReport.model.ReportTemplate.types.personal);
+    if (renamedTemplate) {
+      renamedTemplate.name = newName;
+    }
+    saveLocalState();
+    gfEventsAggregator.raiseEvent(gridReport.model.GridEvents.templateRenamed, {oldName:oldName, newName:newName});
+    gfEventsAggregator.raiseEvent(gridReport.model.GridEvents.componentStateChanged, {component:gridReport.services.StateProvideService.components.templates});
+  }
+  function exportFormatHandler() {
+    var templateData = gfGridManagementService.exportSelectedTemplate(model.gridInstanceId);
+    var text = JSON.stringify(templateData);
+    var blob = new Blob([text], {type:"text/plain;charset=utf-8"});
+    saveAs(blob, model.selectedTemplate.name + ".ugrf");
+  }
+  function saveFormatHandler(templateName, successCallback, failCallback) {
+    model.isSaving = true;
+    gfGridManagementService.startLoading(model.gridInstanceId, gridReport.model.GridContentPlacement.All, gridReport.model.LoadingReasons.TemplateSaving);
+    gfFormatsService.saveTemplate(templateName, gfGridStateService.getState(model.gridInstanceId), gfGridStateService.getGridDescription(model.gridInstanceId)).then(function() {
+      model.isTemplateSaved = true;
+      model.isTemplateChanged = false;
+      updateSavedTemplate(templateName);
+      model.isSaving = false;
+      gfGridManagementService.endLoading(model.gridInstanceId, gridReport.model.GridContentPlacement.All, gridReport.model.LoadingReasons.TemplateSaving);
+      gfReportTemplateManagerDialogService.closeDialog();
+      (successCallback || angular.noop)(templateName);
+      saveLocalState();
+    }, function(error) {
+      model.isSaving = false;
+      gfGridManagementService.endLoading(model.gridInstanceId, gridReport.model.GridContentPlacement.All, gridReport.model.LoadingReasons.TemplateSaving);
+      (failCallback || angular.noop)(error);
+    });
+  }
+  function updateSavedTemplate(templateName) {
+    var savedTemplate = getTemplate(templateName, gridReport.model.ReportTemplate.types.personal);
+    if (savedTemplate) {
+      savedTemplate.accessDate = new Date;
+    } else {
+      model.templates.personalFormats.push(new gridReport.model.ReportTemplate({type:gridReport.model.ReportTemplate.types.personal, name:templateName, accessDate:new Date}));
+    }
+  }
+  registerManagementSerivceCallbacks(model.gridInstanceId);
+  registerStateCallbacks(model.gridInstanceId);
+  gfEventsAggregator.raiseEvent(gridReport.model.GridEvents.templateSelectorComponentRegistered, {gridInstanceId:model.gridInstanceId});
+  var stateId = gfStateProviderService.getStateId(model.gridInstanceId);
+  if (!_.isUndefined(stateId) && !_.isNull(stateId)) {
+    restoreStateCallback(stateId);
+  }
+  loadTemplates().then(function() {
+    if (model.selectedTemplate && (model.selectedTemplate.type == gridReport.model.ReportTemplate.types.global || (model.selectedTemplate.type == gridReport.model.ReportTemplate.types.personal || model.selectedTemplate.type == gridReport.model.ReportTemplate.types.shared))) {
+      model.selectedTemplate = getTemplate(model.selectedTemplate.name, model.selectedTemplate.type);
+    }
+    if (restoredState && !model.selectedTemplate) {
+      setState(restoredState);
+    }
+  });
+};
+gridReport.services.ReportTemplatesModel["$inject"] = ["$translate", "$q", "gfFormatsService", "gfGridManagementService", "gfNotificationService", "gfEventsAggregator", "localStorageService", "gfLogManager", "gfDefaultToolbarState", "gfReportTemplateManagerDialogService", "gridInstanceId", "gfGridStateService", "gfStateProviderService", "gfMostRecentlyUsedService", "gfObjectsImporter", "gfTemplateStateUpdater"];
+goog.provide("gridReport.services.ReportTemplatesModelFactory");
+goog.require("gridReport.services.ReportTemplatesModel");
+gridReport.Module.service("gfReportTemplatesModelFactory", ["$injector", function($injector) {
+  var models = {};
+  var service = {getReportTemplateModel:function(gridInstanceId) {
+    if (!models[gridInstanceId]) {
+      models[gridInstanceId] = $injector.instantiate(gridReport.services.ReportTemplatesModel, {gridInstanceId:gridInstanceId});
+    }
+    return models[gridInstanceId];
+  }, destroyReportTemplateModel:function(gridInstanceId) {
+    if (models[gridInstanceId]) {
+      models[gridInstanceId].destroy();
+      models[gridInstanceId].templates = null;
+      models[gridInstanceId] = undefined;
+    }
+  }};
+  return service;
+}]);
+goog.provide("gridReport.directives.ReportTemplateSelectorController");
+goog.require("gridReport.services.ReportTemplatesModelFactory");
+goog.require("gridReport.services.NotificationService");
+goog.require("gridReport.utils.LogManager");
+gridReport.Module.controller("ReportTemplateSelectorController", ["$scope", "$translate", "gfReportTemplatesModelFactory", "gfEventsAggregator", "gfNotificationService", "gfGridManagementService", "gfLogManager", function($scope, $translate, gfReportTemplatesModelFactory, gfEventsAggregator, gfNotificationService, gfGridManagementService, gfLogManager) {
+  $scope.onFileUploaded = function(fileName, fileData) {
+    if (fileData) {
+      try {
+        var templateData = JSON.parse(fileData);
+        $scope.model.saveAndSelectImportedTemplate(templateData);
+      } catch (e) {
+        gfLogManager.error(e, true);
+      }
+    }
+  };
+  function setSelectedTemplateByNameCallback(name, type) {
+    var template = new gridReport.model.ReportTemplate({name:name, type:type});
+    $scope.model.setSelectedTemplate(template);
+  }
+  function importTemplateCallback(templateData) {
+    return $scope.model.importTemplate(templateData);
+  }
+  $scope.mruOptions = {filter:function(template) {
+    return template.accessDate != undefined;
+  }};
+  $scope.numberOfItemsPerCategory = angular.isDefined($scope.numberOfItemsPerCategory) ? $scope.numberOfItemsPerCategory : 10;
+  $scope.canCreateBlankTemplate = angular.isDefined($scope.canCreateBlankTemplate) ? $scope.canCreateBlankTemplate : true;
+  $scope.canImportTemplate = angular.isDefined($scope.canImportTemplate) ? $scope.canImportTemplate : true;
+  $scope.canOpenTemplateManager = angular.isDefined($scope.canOpenTemplateManager) ? $scope.canOpenTemplateManager : true;
+  $scope.isConfirmationAllowed = angular.isDefined($scope.isConfirmationAllowed) ? $scope.isConfirmationAllowed : true;
+  $scope.useDateSortingForGlobals = angular.isDefined($scope.useDateSortingForGlobals) ? $scope.useDateSortingForGlobals : true;
+  $scope.getGlobalText = function() {
+    if ($scope.globalSectionText) {
+      return $scope.globalSectionText;
+    }
+    return $translate.instant("SAMPLE_TEMPLATES");
+  };
+  $scope.getPersonalText = function() {
+    if ($scope.personalSectionText) {
+      return $scope.personalSectionText;
+    }
+    return $translate.instant("PERSONAL");
+  };
+  $scope.getRecentText = function() {
+    if ($scope.recentSectionText) {
+      return $scope.recentSectionText;
+    }
+    return $translate.instant("RECENT");
+  };
+  $scope.getSharedText = function() {
+    return $scope.sharedSectionText ? $scope.sharedSectionText : $translate.instant("SHARED_TEMPLATES");
+  };
+  $scope.getFormattedTemplateName = function() {
+    var getSelectedTemplateNameCallback = $scope.getSelectedTemplateName();
+    if (getSelectedTemplateNameCallback) {
+      return getSelectedTemplateNameCallback($scope.model.selectedTemplate);
+    }
+    return $scope.model.selectedTemplate ? $scope.model.selectedTemplate.name : "";
+  };
+  $scope.createBlankTemplate = function() {
+    var onCreateBlankCallback = $scope.onCreateBlank();
+    if (onCreateBlankCallback) {
+      var promise = onCreateBlankCallback();
+      promise && promise.then($scope.model.setBlankTemplateSelected);
+    } else {
+      $scope.model.createBlankTemplate();
+    }
+  };
+  $scope.setSelectedCustomItem = function(event, item) {
+    var selectCustomItem = function() {
+      if (item.isItem() || item.isDefaultAction()) {
+        $scope.model.setSelectedCustomItem(item);
+      }
+    };
+    if (item.action) {
+      var promise = item.action($scope.model.selectedTemplate, item);
+      promise && promise.then(selectCustomItem);
+    } else {
+      selectCustomItem();
+    }
+  };
+  $scope.setSelectedTemplate = function(template) {
+    if (template == $scope.model.selectedTemplate) {
+      return;
+    }
+    var onTemplateSelectedCallback = $scope.onTemplateSelected();
+    gfEventsAggregator.getChildAggregator($scope.gridInstanceId).raiseEvent(gridReport.model.GridEvents.templateSelectorTemplateSelected);
+    if (onTemplateSelectedCallback) {
+      var oldTemplate = $scope.model.selectedTemplate;
+      var promise = onTemplateSelectedCallback(oldTemplate, template);
+      promise && promise.then(function() {
+        $scope.model.loadSelectedTemplate(template);
+      });
+    } else {
+      $scope.model.setSelectedTemplate(template);
+    }
+  };
+  $scope.$watch("gridInstanceId", function(newValue, oldValue) {
+    if (oldValue == newValue) {
+      return;
+    }
+    if (oldValue) {
+      gfReportTemplatesModelFactory.destroyReportTemplateModel(oldValue);
+    }
+    setModel($scope.gridInstanceId);
+  });
+  $scope.$watch("isAutoSaveState", function() {
+    if ($scope.model) {
+      $scope.model.isAutoSaveState = $scope.isAutoSaveState;
+    }
+  });
+  $scope.$watch("isConfirmationAllowed", function() {
+    if ($scope.model) {
+      $scope.model.isConfirmationAllowed = $scope.isConfirmationAllowed;
+    }
+  });
+  $scope.$watch("universeContext", function() {
+    if ($scope.model) {
+      $scope.model.setUniverseContext($scope.universeContext);
+    }
+  });
+  $scope.getGlobalViewMoreText = function() {
+    return $translate.instant("VIEW_MORE", {count:$scope.model.templates.globalFormats.length - $scope.numberOfItemsPerCategory});
+  };
+  $scope.getPersonalViewMoreText = function() {
+    return $translate.instant("VIEW_MORE", {count:$scope.model.templates.personalFormats.length - $scope.numberOfItemsPerCategory});
+  };
+  $scope.getSharedViewMoreText = function() {
+    return $translate.instant("VIEW_MORE", {count:$scope.model.templates.sharedFormats.length - $scope.numberOfItemsPerCategory});
+  };
+  function setModel(gridInstanceId) {
+    if (gridInstanceId) {
+      $scope.model = gfReportTemplatesModelFactory.getReportTemplateModel($scope.gridInstanceId);
+      $scope.model.setUniverseContext($scope.universeContext);
+    }
+  }
+  $scope.showReportTemplateManager = function(templateType) {
+    $scope.model.openReportTemplateManager(undefined, undefined, undefined, templateType);
+  };
+  setModel($scope.gridInstanceId);
+  $scope.model.isAutoSaveState = $scope.isAutoSaveState;
+  $scope.model.isConfirmationAllowed = $scope.isConfirmationAllowed;
+  $scope.$on("$destroy", function() {
+    gfReportTemplatesModelFactory.destroyReportTemplateModel($scope.gridInstanceId);
+  });
+  var callbackArray = [[gfGridManagementService.setSelectedTemplateByName, setSelectedTemplateByNameCallback], [gfGridManagementService.importTemplate, importTemplateCallback]];
+  gfGridManagementService.registerCallbacks($scope.model.gridInstanceId, callbackArray);
+}]);
+goog.provide("gridReport.model.TemplateSelectorCustomItem");
+gridReport.model.TemplateSelectorCustomItem = function(options) {
+  if (options) {
+    if (options.hasOwnProperty("itemType")) {
+      this.itemType = options.itemType;
+    }
+    if (options.hasOwnProperty("text")) {
+      this.text = options.text;
+    }
+    if (options.hasOwnProperty("action")) {
+      this.action = options.action;
+    }
+    if (options.hasOwnProperty("isTemplateSaved")) {
+      this.isTemplateSaved = options.isTemplateSaved;
+    }
+    if (options.hasOwnProperty("isTemplateChanged")) {
+      this.isTemplateChanged = options.isTemplateChanged;
+    }
+  }
+};
+gridReport.model.TemplateSelectorCustomItem.itemTypes = {header:"header", link:"link", item:"item", defaultAction:"default"};
+gridReport.model.TemplateSelectorCustomItem.prototype.itemType = gridReport.model.TemplateSelectorCustomItem.itemTypes.item;
+gridReport.model.TemplateSelectorCustomItem.prototype.text = "";
+gridReport.model.TemplateSelectorCustomItem.prototype.action = null;
+gridReport.model.TemplateSelectorCustomItem.prototype.isHeader = function() {
+  return this.itemType === gridReport.model.TemplateSelectorCustomItem.itemTypes.header;
+};
+gridReport.model.TemplateSelectorCustomItem.prototype.isLink = function() {
+  return this.itemType === gridReport.model.TemplateSelectorCustomItem.itemTypes.link;
+};
+gridReport.model.TemplateSelectorCustomItem.prototype.isItem = function() {
+  return this.itemType === gridReport.model.TemplateSelectorCustomItem.itemTypes.item;
+};
+gridReport.model.TemplateSelectorCustomItem.prototype.isDefaultAction = function() {
+  return this.itemType === gridReport.model.TemplateSelectorCustomItem.itemTypes.defaultAction;
+};
+goog.provide("gridReport.services.FileUploadService");
+gridReport.Module.factory("gfFileUploadService", function() {
+  var service = {};
+  function createInput(triggerEl, accept, dataUploadedCallback) {
+    var fileEl = $("<input type='file'>").attr("accept", accept);
+    triggerEl.parent().append(fileEl);
+    fileEl.hide();
+    fileEl.change(getInputnChangeHandler(dataUploadedCallback));
+    triggerEl.data("gfFileUploadService", fileEl);
+    return fileEl;
+  }
+  function getInputnChangeHandler(dataUploadedCallback) {
+    return function(e) {
+      var inputEl = $(e.target);
+      var files = inputEl.get(0).files;
+      if (files.length != 1) {
+        return;
+      }
+      var reader = new FileReader;
+      reader.onload = function(e) {
+        var name = files[0].name;
+        var fileData = e.target.result;
+        dataUploadedCallback(name, fileData);
+        inputEl.val("");
+      };
+      reader.readAsText(files[0]);
+    };
+  }
+  service.applyTo = function(triggerEl, dataUploadedCallback, accept) {
+    triggerEl.on("remove", function() {
+      var fileEl = triggerEl.data("gfFileUploadService");
+      if (fileEl && _.isFunction(fileEl.remove)) {
+        fileEl.remove();
+      }
+    });
+    triggerEl.click(function() {
+      var fileEl = triggerEl.data("gfFileUploadService") || createInput(triggerEl, accept, dataUploadedCallback);
+      fileEl.click();
+    });
+  };
+  return service;
+});
+goog.provide("gridReport.directives.ReportTemplateSelectorDirective");
+goog.require("gridReport.model.TemplateSelectorCustomItem");
+goog.require("gridReport.directives.ReportTemplateSelectorController");
+goog.require("gridReport.services.FileUploadService");
+gridReport.Module.directive("gfReportTemplateSelector", ["gfFileUploadService", function(gfFileUploadService) {
+  return{restrict:"E", replace:true, transclude:false, templateUrl:"scripts/directives/reportTemplateSelector/ReportTemplateSelector.html", scope:{globalSectionText:"=", personalSectionText:"=", sharedSectionText:"=", recentSectionText:"=", isEnabled:"=", isAutoSaveState:"=", customItems:"=", gridInstanceId:"=", getSelectedTemplateName:"&", universeContext:"=", numberOfItemsPerCategory:"=?", onTemplateSelected:"&", onCreateBlank:"&", canCreateBlankTemplate:"=?", canImportTemplate:"=?", canOpenTemplateManager:"=?", 
+  isConfirmationAllowed:"=?", useDateSortingForGlobals:"=?"}, controller:"ReportTemplateSelectorController", link:function(scope, element) {
+    var listener = function(event) {
+      event.preventDefault();
+      event.stopPropagation();
+    };
+    gfFileUploadService.applyTo(element.find("#gfRTS_importTempalteLink"), scope.onFileUploaded, ".ugrf");
+    scope.element = element;
+    function scollToTop() {
+      element.find(".gf-template-selector-list-container").scrollTop(0);
+    }
+    var isOpen = false;
+    function closeMenu(e) {
+      $(document).off("mousedown", closeMenu);
+      if ($(e.target).closest(element.find(".dropdown-menu")).length > 0) {
+        isOpen = false;
+        return;
+      }
+      if ($(e.target).closest(element).length > 0) {
+        return;
+      }
+      element.find(".dropdown-toggle").trigger("click");
+    }
+    element.find(".dropdown-toggle").on("click", function() {
+      if (!isOpen) {
+        scollToTop();
+        $(document).on("mousedown", closeMenu);
+      }
+      isOpen = !isOpen;
+    });
+    element.find(".gf-template-selector-item-header").on("click", listener);
+    element.on("$destroy", function() {
+      element.find(".gf-template-selector-item-header").off("click", listener);
+      element.find(".dropdown-toggle").off("click", scollToTop);
+      scope.onCreateBlank = null;
+      scope.onTemplateSelected = null;
+      scope.getSelectedTemplateName = null;
+      scope.$destroy();
+    });
+  }};
+}]);
+goog.provide("gridReport.datacloud.service.DataCloudCommandService");
+goog.require("gridReport.services.CategoryServiceFactory");
+gridReport.Module.factory("gfDataCloudCommandService", ["gfCategoryServiceFactory", "gfDapsStorageProvider", "$timeout", "$q", "$rootScope", "gfConditionalValueFormattingService", function(gfCategoryServiceFactory, gfDapsStorageProvider, $timeout, $q, $rootScope, gfConditionalValueFormattingService) {
+  function get() {
+    var cache = {}, requests = [], categoryService = gfCategoryServiceFactory.createInstance();
+    function updateField(command, metadata) {
+      command.name = metadata.name;
+      command.expression = gridReport.model.Command.getExpression(command, metadata);
+      command.description = metadata.description;
+      command.defaultOrder = metadata.defaultOrder;
+      command.enableHeatMap = metadata.enableHeatMap;
+      command.isTimeSeriesable = metadata.isTimeSeriesable;
+      command.isAbsComp = metadata.isAbsComp;
+      if (command.outputColumn && (!_.isArray(command.outputColumn) && !command.outputColumn.isValueOutputColumn())) {
+        if (metadata.outputColumns && metadata.outputColumns.columns) {
+          var out = _.findWhere(metadata.outputColumns.columns, {id:command.outputColumn.id});
+          if (out) {
+            command.outputColumn.name = out.name;
+          }
+        }
+      } else {
+        command.returnType = metadata.dataType;
+      }
+      if (command.metadata) {
+        command.metadata.isGrid = metadata.isGrid;
+      }
+      if (metadata.parameterSet != undefined) {
+        command.pSetId = metadata.parameterSet.pSetId;
+        if (command.parameters != undefined && metadata.parameterSet.parameters != undefined) {
+          _.each(metadata.parameterSet.parameters, function(parameter) {
+            var cmdParam = _.findWhere(command.parameters, {id:parameter.id});
+            if (cmdParam != undefined) {
+              cmdParam.defaultValue = parameter["default"];
+            }
+          });
+        }
+      }
+    }
+    function updateExpression(command, expression) {
+      command.description = expression.description;
+      command.returnType = expression.returnType;
+      command.expression = expression.path + "/*" + expression.name + "*/";
+    }
+    function updateColumn(column, command) {
+      if (column.header == column.initialHeader) {
+        column.header = command.name;
+      }
+      column.initialHeader = command.name;
+      column.conditionalValueFormatting = gfConditionalValueFormattingService.create(column);
+      if (column.command == null || column.command.isDataBlock() == false) {
+        column.id = command.expression;
+      }
+    }
+    function getFromCache(commandId) {
+      var val = null;
+      if (commandId) {
+        val = cache[commandId];
+        if (!val) {
+          val = cache[commandId.toUpperCase()];
+        }
+      }
+      return val;
+    }
+    function getRequest(columns) {
+      var fieldIds = [], expressionNames = [], mfrIds = [], dataBlockIds = [];
+      _.each(columns, function(column) {
+        var command = column.command;
+        if (command == undefined || (command.id == undefined || command.id == "")) {
+          return;
+        }
+        if (command.isCustom()) {
+          expressionNames.push(command.id);
+        } else {
+          if (command.isMultiFactorRank()) {
+            mfrIds.push(command.id);
+          } else {
+            if (command.isDataBlock()) {
+              dataBlockIds.push(command.id);
+            } else {
+              fieldIds.push(command.id);
+            }
+          }
+        }
+      });
+      return{fieldIds:fieldIds, expressionNames:expressionNames, mfrIds:mfrIds, dataBlockIds:dataBlockIds};
+    }
+    function updateMfr(command, mfr, fields) {
+      command.expression = mfr.adcSyntax + "/*MfrExpression:" + mfr.name + "*/";
+      command.metadata = mfr;
+      command.defaultOrder = mfr.nTileOrder == scr.mfr.MFNTileOrder.Ascending ? scr.mfr.Order.LowerIsBetter : scr.mfr.Order.HigherIsBetter;
+      command.name = mfr.name;
+      var formattingInfo = gridReport.services.MultiFactorRankToCommandConverter.getFormattingInfo(mfr);
+      command.returnType = formattingInfo.returnType;
+      command.decimalDigits = formattingInfo.decimalDigits;
+      var removedFactors = [];
+      _.each(command.factors, function(f) {
+        var mfrFactor = _.find(mfr.factors, function(fc) {
+          return fc.field.id == f.id;
+        });
+        if (mfrFactor === undefined) {
+          removedFactors.push(f);
+        } else {
+          f.metadata = mfrFactor;
+        }
+      });
+      _.each(removedFactors, function(f) {
+        var indexOfFactor = _.indexOf(command.factors, f);
+        command.factors.splice(indexOfFactor, 1);
+      });
+      var addedFactors = _.filter(mfr.factors, function(mfrFactor) {
+        return _.find(command.factors, function(f) {
+          return f.id == mfrFactor.field.id;
+        }) == undefined;
+      });
+      var addedConvertedFactors = [];
+      _.each(addedFactors, function(newFactor) {
+        if (!fields[newFactor.field.id]) {
+          return;
+        }
+        var factor = gridReport.model.Command.convert(new scr.output.Field(fields[newFactor.field.id]));
+        factor.metadata = newFactor;
+        command.factors.push(factor);
+        addedConvertedFactors.push(factor);
+      });
+      return{addedFactors:addedConvertedFactors, removedFactors:removedFactors};
+    }
+    function updateColumns(columns, response) {
+      var removedColumns = [];
+      _.each(columns, function(column) {
+        if (column.command == undefined || (column.command.id == undefined || column.command.id == "")) {
+          return;
+        }
+        response = response || {};
+        var expressions = response.expressions, mfrs = response.mfrs ? response.mfrs.results : [], fields = response.fields ? response.fields.fields : [];
+        if (column.command.isCustom()) {
+          var expression = _.findWhere(expressions, {name:column.command.id});
+          if (expression) {
+            updateExpression(column.command, expression);
+            delete column.command.metadata.deleted;
+          } else {
+            column.command.metadata.deleted = true;
+          }
+        } else {
+          if (column.command.isMultiFactorRank()) {
+            var mfr = _.findWhere(mfrs, {id:column.command.id});
+            var removeRanks = false;
+            if (mfr && mfr.value != null) {
+              updateMfr(column.command, JSON.parse(mfr.value), response.mfrs.metadata.fields);
+              if (column.id != column.command.expression) {
+                removeRanks = true;
+              }
+            } else {
+              if (!column.command.metadata.isBasedOnColumn) {
+                removeRanks = true;
+                column.command.metadata.deleted = true;
+              }
+            }
+            if (removeRanks) {
+              removedColumns = removedColumns.concat(_.filter(columns, function(c) {
+                return c.parentColumn == column.id;
+              }));
+            }
+          } else {
+            var field = _.findWhere(fields, {id:column.command.id});
+            if (field) {
+              updateField(column.command, field);
+            }
+          }
+        }
+        updateColumn(column, column.command);
+      });
+      _.each(removedColumns, function(removedCol) {
+        var ind = _.indexOf(columns, removedCol);
+        columns.splice(ind, 1);
+      });
+    }
+    var service = {};
+    function putMetadatasToCache(fields) {
+      _.each(fields, function(field) {
+        service.putMetadataToCache(field.id, field);
+      });
+    }
+    service.getCommandById = function(id, successCallback, failCallback) {
+      if (!id) {
+        throw new Error("id should be provided");
+      }
+      var cachedCommand = getFromCache(id);
+      if (cachedCommand) {
+        (successCallback || angular.noop)(cachedCommand);
+      }
+      var gfCategoryService = gfCategoryServiceFactory.createInstance();
+      gfCategoryService.getField(id, function(response) {
+        if (response) {
+          service.putMetadataToCache(id, response);
+          (successCallback || angular.noop)(response);
+        } else {
+          if (failCallback) {
+            failCallback();
+          }
+        }
+      });
+    };
+    service.updateGridColumns = function(columns) {
+      if (!columns) {
+        throw new Error("columns should be provided.");
+      }
+      var deffered = $q.defer(), request;
+      request = getRequest(columns);
+      requests.push(request);
+      categoryService.getObjects(request.fieldIds, request.expressionNames, request.mfrIds, request.dataBlockIds, function(response) {
+        if (requests.indexOf(request) == -1) {
+          deffered.reject();
+        } else {
+          if (response) {
+            putMetadatasToCache(response.fields ? response.fields.fields : []);
+            updateColumns(columns, response);
+          }
+          deffered.resolve(columns);
+        }
+      }, undefined, false);
+      return deffered.promise;
+    };
+    service.abortUpdateGridColumns = function() {
+      requests = [];
+    };
+    service.clearCache = function() {
+      cache = {};
+    };
+    service.putMetadataToCache = function(commandId, metadata) {
+      cache[commandId] = metadata;
+    };
+    service.getSavedMultiFactorRankById = function(commandId) {
+      if (!commandId) {
+        throw new Error("commandId should be provided");
+      }
+      var deffered = $q.defer();
+      gfDapsStorageProvider.load({id:commandId, type:scr.ObjectType.MultiFactorRank}, function(items, metadata, success) {
+        if (success && !_.isEmpty(items)) {
+          deffered.resolve(items[0]);
+        } else {
+          deffered.reject(new Error("Unable to get command metadata"));
+        }
+        $timeout(angular.noop);
+      });
+      return deffered.promise;
+    };
+    service.getExpressionByName = function(name) {
+      if (!name) {
+        throw new Error("name should be provided");
+      }
+      var deffered = $q.defer();
+      gfDapsStorageProvider.load({name:name, type:scr.ObjectType.Expression}, function(items, metadata, success) {
+        if (success && !_.isEmpty(items)) {
+          deffered.resolve(items[0]);
+        } else {
+          deffered.reject(new Error("Unable to get command metadata"));
+        }
+        $timeout(angular.noop);
+      });
+      return deffered.promise;
+    };
+    service.getCommandMetadataById = function(commandId) {
+      if (!commandId) {
+        throw new Error("commandId should be provided");
+      }
+      var deffered = $q.defer();
+      var cachedCommand = getFromCache(commandId);
+      if (cachedCommand) {
+        deffered.resolve(cachedCommand);
+        if (!$rootScope.$$phase) {
+          $rootScope.$apply();
+        }
+      } else {
+        var gfCategoryService = gfCategoryServiceFactory.createInstance();
+        gfCategoryService.getField(commandId, function(response) {
+          if (response) {
+            service.putMetadataToCache(commandId, response);
+            deffered.resolve(response);
+          } else {
+            deffered.reject(new Error("Unable to get command metadata"));
+          }
+          if (!$rootScope.$$phase) {
+            $rootScope.$apply();
+          }
+        });
+      }
+      return deffered.promise;
+    };
+    return service;
+  }
+  var services = {};
+  return{get:function(id) {
+    return services[id] || (services[id] = get());
+  }, putMetadataToCache:function(commandId, metadata) {
+    _.values(services).forEach(function(service) {
+      service.putMetadataToCache(commandId, metadata);
+    });
+  }};
+}]);
 goog.provide("gridReport.model.MenuItem");
 gridReport.model.MenuItem = function(options) {
   gridReport.jsUtils.mergeProperties(this, options, ["label", "action", "isDisabled", "subitems"]);
@@ -18334,43 +18407,254 @@ gridReport.Module.directive("gfGroupingManager", [function() {
     scope.init();
   }};
 }]);
-goog.provide("gridReport.localization.ja");
+goog.provide("gridReport.localization.en");
 gridReport.localization = gridReport.localization || {};
-gridReport.localization.ja = {TOGGLE:"\u5207\u308a\u66ff\u3048", GROUPING:"\u30b0\u30eb\u30fc\u30d7\u5316", PRECISION:"\u6841\u6570", DEFAULT:"\u521d\u671f\u5024", FORMAT_NO_SYMBOLS:"0", FORMAT_ONE_SYMBOLS:"0.0", FORMAT_TWO_SYMBOLS:"0.00", FORMAT_THREE_SYMBOLS:"0.000", FORMAT_FOUR_SYMBOLS:"0.0000", STATISTICS:"\u7d71\u8a08", ADD_COLUMN:"\u5217\u3092\u8ffd\u52a0", EDIT_COLUMN:"\u7de8\u96c6", REMOVE_COLUMN:"\u524a\u9664", RENAME_COLUMN:"\u540d\u524d\u5909\u66f4", REVERT_RENAMING:"\u540d\u524d\u5909\u66f4\u3092\u5143\u306b\u623b\u3059", 
-PIN:"\u5217\u3092\u56fa\u5b9a", UNPIN:"\u5217\u306e\u56fa\u5b9a\u89e3\u9664", HIDE_PARAMETERS:"\u30d1\u30e9\u30e1\u30fc\u30bf\u30fc\u3092\u975e\u8868\u793a", SHOW_PARAMETERS:"\u30d1\u30e9\u30e1\u30fc\u30bf\u30fc\u3092\u8868\u793a", SELECT_ALL:"\u3059\u3079\u3066\u9078\u629e", DESELECT_ALL:"\u3059\u3079\u3066\u9078\u629e\u89e3\u9664", UNGROUP:"\u30b0\u30eb\u30fc\u30d7\u89e3\u9664", NEW:"\u65b0\u898f\u4f5c\u6210", OBJECT_MANAGER:"\u30aa\u30d6\u30b8\u30a7\u30af\u30c8 \u30de\u30cd\u30fc\u30b8\u30e3\u30fc", 
-SAVE:"\u4fdd\u5b58", REVERT:"\u623b\u308b", EXCLUDE:"\u9664\u5916", INCLUDE:"\u542b\u3080", ADDITIONAL_ACTIONS:"\u305d\u306e\u4ed6\u306e\u30a2\u30af\u30b7\u30e7\u30f3", ACTIONS:"\u30a2\u30af\u30b7\u30e7\u30f3", ADD_ALL_TO_LIST:"\u3059\u3079\u3066\u306e\u9805\u76ee\u3092\u30ea\u30b9\u30c8\u306b\u8ffd\u52a0", ADD_SELECTED_TO_LIST:"\u9078\u629e\u3057\u305f\u9805\u76ee\u3092\u30ea\u30b9\u30c8\u306b\u8ffd\u52a0", WARNING:"\u8b66\u544a", OK:"OK", CANCEL:"\u30ad\u30e3\u30f3\u30bb\u30eb", DONT_ASK_AGAIN:"\u6b21\u56de\u304b\u3089\u78ba\u8a8d\u3057\u306a\u3044", 
-RECALL:"\u547c\u3073\u51fa\u3057", CLOSE:"\u9589\u3058\u308b", PERSONAL:"\u500b\u4eba\u7528\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8", GLOBAL:"Thomson Reuters \u30c6\u30f3\u30d7\u30ec\u30fc\u30c8", RECENT:"\u6700\u8fd1\u306e\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8", CUSTOM_EXPRESSIONS:"\u30ab\u30b9\u30bf\u30e0\u5f0f", FORMAT_WAS_CHANGED_CONFIRMATION:"'{{name}}' \u306e\u5909\u66f4\u3092\u4fdd\u5b58\u3057\u307e\u3059\u304b?", RESULTS_WITH_COUNT:"\u7d50\u679c ({{count}})", EXCLUDED_WITH_COUNT:"\u9664\u5916\u9805\u76ee ({{count}})", 
-ALL_SECURITIES_WITH_COUNT:"\u3059\u3079\u3066\u306e\u8a3c\u5238 ({{count}})", IDENTIFIERS_ADDED_WITH_COUNT_INFO_MSG:"{{count}} \u4ef6\u306e\u8b58\u5225\u30b3\u30fc\u30c9\u304c\u9664\u5916\u9805\u76ee\u306b\u8ffd\u52a0\u3055\u308c\u307e\u3057\u305f\u3002", IDENTIFIERS_REMOVED_WITH_COUNT_INFO_MSG:"{{count}} \u4ef6\u306e\u8b58\u5225\u30b3\u30fc\u30c9\u304c\u9664\u5916\u9805\u76ee\u304b\u3089\u524a\u9664\u3055\u308c\u307e\u3057\u305f\u3002", FORMAT_WILL_BE_REVERTED_CONFIRMATION:"\u5f62\u5f0f\u304c\u521d\u671f\u8a2d\u5b9a\u306b\u623b\u308a\u307e\u3059\u3002", 
-SEARCH:"\u691c\u7d22", NAME:"\u540d\u79f0", NUMBER_OF_FIELDS:"\u30d5\u30a3\u30fc\u30eb\u30c9\u6570", SHARP:"#", FIELD_NAME:"\u30d5\u30a3\u30fc\u30eb\u30c9\u540d", PREVIEW:"\u30d7\u30ec\u30d3\u30e5\u30fc", LAST_MODIFIED:"\u6700\u7d42\u66f4\u65b0\u65e5", IDENTIFIER:"\u8b58\u5225\u30b3\u30fc\u30c9", ERROR:"\u30a8\u30e9\u30fc", INFORMATION:"\u60c5\u5831", GROUPED_BY:"\u30b0\u30eb\u30fc\u30d7\u5225\u8868\u793a:", SUM:"\u5408\u8a08", AVERAGE:"\u5e73\u5747", MEDIAN:"\u4e2d\u592e\u5024", SERVER_SIDE:"\u30b5\u30fc\u30d0\u30fc\u5074", 
-NONE:"\u306a\u3057", TEMPLATE_MANAGER:"\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8 \u30de\u30cd\u30fc\u30b8\u30e3\u30fc", REPORT_TEMPLATE_MANAGER:"\u30ec\u30dd\u30fc\u30c8 \u30c6\u30f3\u30d7\u30ec\u30fc\u30c8 \u30de\u30cd\u30fc\u30b8\u30e3\u30fc", SERVICE_UNAVAILABLE:"\u30b5\u30fc\u30d3\u30b9\u304c\u5229\u7528\u3067\u304d\u307e\u305b\u3093\u3002", UNABLE_TO_LOAD_TEMPLATE:"\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8\u3092\u30ed\u30fc\u30c9\u3067\u304d\u307e\u305b\u3093\u3002", UNABLE_TO_LOAD_GLOBAL_TEMPLATES:"\u30b0\u30ed\u30fc\u30d0\u30eb \u30c6\u30f3\u30d7\u30ec\u30fc\u30c8\u3092\u30ed\u30fc\u30c9\u3067\u304d\u307e\u305b\u3093\u3002", 
-UNABLE_TO_SAVE_TEMPLATE:"\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8\u3092\u4fdd\u5b58\u3067\u304d\u307e\u305b\u3093\u3002", UNABLE_TO_LOAD_PERSONAL_TEMPLATES:"\u500b\u4eba\u7528\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8\u3092\u30ed\u30fc\u30c9\u3067\u304d\u307e\u305b\u3093\u3002", UNABLE_TO_DELETE_TEMPLATE:"\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8\u3092\u524a\u9664\u3067\u304d\u307e\u305b\u3093\u3002", UNABLE_TO_RENAME_TEMPLATE:"\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8\u540d\u3092\u5909\u66f4\u3067\u304d\u307e\u305b\u3093\u3002", 
-UNABLE_TO_COPY_TEMPLATE:"\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8\u3092\u30b3\u30d4\u30fc\u3067\u304d\u307e\u305b\u3093\u3002", INVALID_CHARACTER:"\u7121\u52b9\u306a\u6587\u5b57\u5217", NAME_IS_REQUIRED:"\u540d\u79f0\u3092\u6307\u5b9a\u3057\u3066\u304f\u3060\u3055\u3044\u3002", NEW_TEMPLATE:"\u65b0\u898f\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8", SAVE_TEMPLATE:"\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8\u3092\u4fdd\u5b58", SERVICE_UNAVAILABLE_RESUBMIT_YOUR_REQUEST:"\u30b5\u30fc\u30d3\u30b9\u304c\u5229\u7528\u3067\u304d\u307e\u305b\u3093\u3002\u30ea\u30af\u30a8\u30b9\u30c8\u3092\u518d\u5ea6\u5b9f\u884c\u3057\u3066\u304f\u3060\u3055\u3044\u3002", 
-FAILED_TO_RESOLVE_UNIVERSE:"\u30e6\u30cb\u30d0\u30fc\u30b9\u3092\u89e3\u6c7a\u3067\u304d\u307e\u305b\u3093\u3067\u3057\u305f\u3002", THERE_ARE_NO_ITEMS_TO_DISPLAY:"\u8868\u793a\u3059\u308b\u9805\u76ee\u306f\u3042\u308a\u307e\u305b\u3093\u3002", MAX_ROWS_COUNT_EXCEEDED_INDUSTRY_MESSAGE:"\u9078\u629e\u3057\u305f\u6761\u4ef6\u306e\u7d50\u679c\u306f\u3001{{maxRowsCount}} \u884c\u3092\u8d85\u3048\u3066\u3044\u307e\u3059\u3002\u7d50\u679c\u3092\u8868\u793a\u3059\u308b\u306b\u306f\u3001\u3088\u308a\u8a73\u7d30\u306a\u6761\u4ef6\u3092\u9078\u629e\u3057\u3066\u304f\u3060\u3055\u3044\u3002", 
-RENAME:"\u540d\u79f0\u3092\u5909\u66f4", DUPLICATE:"\u30b3\u30d4\u30fc", DELETE:"\u524a\u9664", COLUMN_ALREADY_EXISTS:'\u5217\u540d\u3001"{{name}}" \u306f\u3001\u3059\u3067\u306b\u5b58\u5728\u3059\u308b\u305f\u3081\u4f7f\u7528\u3059\u308b\u3053\u3068\u306f\u3067\u304d\u307e\u305b\u3093\u3002', NOT_AVAILABLE:"\u5229\u7528\u3067\u304d\u307e\u305b\u3093", NOT_AVAILABLE_ABBREVIATION:"N/A", NO_MATCHING_DATA_ITEMS:"\u4e00\u81f4\u3059\u308b\u30c7\u30fc\u30bf\u9805\u76ee\u304c\u3042\u308a\u307e\u305b\u3093\u3002", 
-SEARCH_RESULTS:"\u691c\u7d22\u7d50\u679c", PRINT:"\u5370\u5237", LOAD:"\u30ed\u30fc\u30c9", CREATE_TEMPLATE:"\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8\u3092\u4f5c\u6210", MANAGE_TEMPLATES:"\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8\u3092\u7ba1\u7406", UNSAVED_TEMPLATE:"\u672a\u4fdd\u5b58\u306e\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8", CLICK_TO_VIEW_FIELDS_IN_TEMPLATE:"\u30af\u30ea\u30c3\u30af\u3057\u3066\u30d5\u30a3\u30fc\u30eb\u30c9\u3092\u8868\u793a", SEARCH_FOR_TEMPLATES:"\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8\u3092\u691c\u7d22", 
-TEMPLATE_NAME:"\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8\u540d", NAME_ALREADY_EXISTS:"\u3053\u306e\u540d\u524d\u306f\u65e2\u306b\u5b58\u5728\u3057\u3066\u3044\u307e\u3059\u3002", DO_NOT_SAVE:"\u4fdd\u5b58\u3057\u306a\u3044", SAVE_AS:"\u540d\u524d\u3092\u4ed8\u3051\u3066\u4fdd\u5b58", EXPORT_ALL_AS_VALUES:"\u3059\u3079\u3066\u3092\u5024\u3068\u3057\u3066\u30a8\u30af\u30b9\u30dd\u30fc\u30c8", EXPORT_ALL_AS_FORMULAS:"\u3059\u3079\u3066\u3092\u95a2\u6570\u3068\u3057\u3066\u30a8\u30af\u30b9\u30dd\u30fc\u30c8", 
-EXPORT_SELECTED_AS_VALUES:"\u9078\u629e\u3057\u305f\u5024\u3092\u30a8\u30af\u30b9\u30dd\u30fc\u30c8", EXPORT_SELECTED_AS_FORMULAS:"\u9078\u629e\u3057\u305f\u95a2\u6570\u3092\u30a8\u30af\u30b9\u30dd\u30fc\u30c8", OPEN_ALL_IN_QUOTE_OBJECT:"\u3059\u3079\u3066\u3092\u30af\u30a9\u30fc\u30c8\u3067\u958b\u304f", OPEN_SELECTED_IN_QUOTE_OBJECT:"\u9078\u629e\u3057\u305f\u9805\u76ee\u3092\u30af\u30a9\u30fc\u30c8\u3067\u958b\u304f", TEMPLATE_ALREADY_EXISTS_CONFIRMATION:"\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8\u540d '{{name}}' \u306f\u65e2\u306b\u5b58\u5728\u3057\u307e\u3059\u3002\u3053\u306e\u30ec\u30dd\u30fc\u30c8 \u30c6\u30f3\u30d7\u30ec\u30fc\u30c8\u306b\u7f6e\u304d\u63db\u3048\u307e\u3059\u304b?", 
-REPORT_TEMPLATE:"\u30ec\u30dd\u30fc\u30c8 \u30c6\u30f3\u30d7\u30ec\u30fc\u30c8", SEE_ERROR_DETAILS:"\u30a8\u30e9\u30fc\u306e\u8a73\u7d30\u3092\u53c2\u7167\u3057\u3066\u304f\u3060\u3055\u3044\u3002", REPORT_TEMPLATE_SUCCESSFULLY_SAVED_INFO_MSG:"\u30ec\u30dd\u30fc\u30c8 \u30c6\u30f3\u30d7\u30ec\u30fc\u30c8\u304c\u6b63\u5e38\u306b\u4fdd\u5b58\u3055\u308c\u307e\u3057\u305f\u3002", MAX_LENGTH_EXCEEDED:"\u6587\u5b57\u6570\u304c\u5236\u9650\u3092\u8d85\u3048\u3066\u3044\u307e\u3059\u3002", TEMPLATE_DETAILS:"\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8\u306e\u8a73\u7d30", 
-ADD_SECURITY:"\u8a3c\u5238\u3092\u8ffd\u52a0", CRITERIA_FOR_GROUPING_ROWS:"\u30b0\u30eb\u30fc\u30d7\u306b\u5bfe\u3059\u308b\u6761\u4ef6", ORDER:"\u9806\u5e8f", CRITERIA:"\u6761\u4ef6", ENABLE_GROUPING:"\u30b0\u30eb\u30fc\u30d7\u5316\u3059\u308b", REGION:"\u5730\u57df", COUNTRY:"\u56fd", INDUSTRY:"\u696d\u7a2e", GICS:"GICS", TRBC:"TRBS", BUSINESS_SECTOR:"\u4e8b\u696d\u30bb\u30af\u30bf\u30fc", ECONOMIC_SECTROR:"\u7d4c\u6e08\u30bb\u30af\u30bf\u30fc", INDUSTRY_GROUP:"\u696d\u7a2e\u30b0\u30eb\u30fc\u30d7", 
-INDUSTRY_NAME:"\u696d\u7a2e\u540d", SECTOR_NAME:"\u30bb\u30af\u30bf\u30fc\u540d", SUBINDUSTRY_NAME:"\u526f\u696d\u7a2e\u540d", COUNTRY_OF_EXCHANGE:"\u53d6\u5f15\u6240\u56fd", COUNTRY_OF_HEADQURTERS:"\u672c\u793e\u6240\u5728\u56fd", SELECT_FIELD:"\u30d5\u30a3\u30fc\u30eb\u30c9\u3092\u9078\u629e", EDIT:"\u7de8\u96c6", GROUP_ROWS:"\u30b0\u30eb\u30fc\u30d7", REMOVE_ROW:"\u524a\u9664", ADVANCED_SETTINGS_BUTTON_TITLE:"\u8a73\u7d30\u8a2d\u5b9a", ADVANCED_SETTINGS_DEFAULT_CURRENCY:"\u65e2\u5b9a\u901a\u8ca8", 
-ADVANCED_SETTINGS_NO_DEFAULT_CURRENCY:"\u306a\u3057", ADVANCED_SETTINGS_UPDATE:"\u30ec\u30dd\u30fc\u30c8\u3092\u66f4\u65b0", ADVANCED_SETTINGS_CANCEL:"\u30ad\u30e3\u30f3\u30bb\u30eb", STATISTICS_CONTROL_COLUMN_STATISTICS:"\u7d71\u8a08\u5024", STATISTICS_CONTROL_COLUMN_PREMIUM_DISCOUNT:"\u30d7\u30ec\u30df\u30a2\u30e0/\u30c7\u30a3\u30b9\u30ab\u30a6\u30f3\u30c8", FOCUS_STOCK_FINANCIALS:"\u5f53\u8a72\u9298\u67c4 (\u30d5\u30a1\u30a4\u30ca\u30f3\u30b7\u30e3\u30eb: {{currencyId}})", FOCUS_STOCK_PRICING:"\u5f53\u8a72\u9298\u67c4 (\u30d7\u30e9\u30a4\u30b7\u30f3\u30b0: {{currencyId}})", 
-PRESS_REFRESH_TO_DISPLAY_NUMBER_OF_FIELDS:"\u66f4\u65b0\u3057\u3066\u30d5\u30a3\u30fc\u30eb\u30c9\u6570\u3092\u8868\u793a\u3059\u308b\u3002", SECURITY_ALREADY_ADDED:'\u8a3c\u5238 "{{ric}}" \u306f\u3001\u65e2\u306b\u5b58\u5728\u3057\u307e\u3059\u3002', SECURITIES_ALREADY_ADDED:'\u8a3c\u5238 "{{rics}}" \u306f\u3001\u65e2\u306b\u5b58\u5728\u3057\u307e\u3059\u3002', ADD_RANK:"\u30e9\u30f3\u30af\u3092\u8ffd\u52a0", SHOW_FACTOR_RANKS:"\u30d5\u30a1\u30af\u30bf\u30fc\u30e9\u30f3\u30af\u3092\u8868\u793a", 
-FIELD_DEFINITION:"\u9805\u76ee\u306e\u5b9a\u7fa9", THOMSON_REUTERS_EIKON_EXCEL_FUNCTION:"Thomson Reuters Eikon Excel \u95a2\u6570", SUM_SYMBOL:"\u03a3", EXCLUDED:"\u9664\u5916", INCLUDE_ALL:"\u3059\u3079\u3066\u3092\u542b\u3080", COMPANY_NAME:"\u4f1a\u793e\u540d", EXPAND_ALL:"\u3059\u3079\u3066\u5c55\u958b", COLLAPSE_ALL:"\u3059\u3079\u3066\u6298\u308a\u305f\u305f\u3080", NATIVE_CURRENCY:"\u81ea\u56fd\u901a\u8ca8", MULTIPLE_VALUES:"\u8907\u6570\u306e\u5024", COLUMNS_RETURN_MULTIPLE_VALUES:"\u8907\u6570\u306e\u5024\u304c\u542b\u307e\u308c\u3066\u3044\u308b\u305f\u3081\u3001\u6b63\u3057\u304f\u8868\u793a\u3067\u304d\u307e\u305b\u3093\u3002", 
-DATA_ITEM_IS_NO_LONGER_SUPPORTED:"\u3053\u306e\u30c7\u30fc\u30bf\u9805\u76ee\u306f\u73fe\u5728\u30b5\u30dd\u30fc\u30c8\u3055\u308c\u3066\u3044\u307e\u305b\u3093\u3002", PREMIUM_DISCOUNT_TITLE:"\u5bfe {{statisticsName}}", DISPLAY_OPTIONS:"\u8868\u793a\u30aa\u30d7\u30b7\u30e7\u30f3", SMALL:"\u5c0f", LARGE:"\u5927", MEDIUM:"\u4e2d", FONT_SIZE_AND_ROW_HEIGHT:"\u30d5\u30a9\u30f3\u30c8 \u30b5\u30a4\u30ba\u3068\u884c\u306e\u9ad8\u3055", CURRENCY:"\u901a\u8ca8", SELECT_UP_TO_MAX_GROUPS_COUNT:"\u6700\u5927 {{maxGroupsCount}} \u9805\u76ee\u307e\u3067\u9078\u629e\u3067\u304d\u307e\u3059", 
-HIGH:"\u6700\u9ad8\u5024", LOW:"\u6700\u4f4e\u5024", FIRST_QAURTILE:"\u7b2c1\u56db\u5206\u4f4d\u6570", THIRD_QAURTILE:"\u7b2c3\u56db\u5206\u4f4d\u6570", DISPLAYING_FACTOR_RANKS:"\u30d5\u30a1\u30af\u30bf\u30fc\u30e9\u30f3\u30af\u8868\u793a", ADD_ALL_TO_EXISTING_LIST:"\u3059\u3079\u3066\u306e\u9805\u76ee\u3092\u65e2\u5b58\u306e\u30ea\u30b9\u30c8\u306b\u8ffd\u52a0", ADD_SELECTED_TO_EXISTING_LIST:"\u9078\u629e\u3057\u305f\u9805\u76ee\u3092\u65e2\u5b58\u306e\u30ea\u30b9\u30c8\u306b\u8ffd\u52a0", WATCHLIST_WAS_SUCCESSFULLY_UPDATED:'\u30a6\u30a9\u30c3\u30c1\u30ea\u30b9\u30c8 "{{watchlistName}}" \u306f\u6b63\u5e38\u306b\u66f4\u65b0\u3055\u308c\u307e\u3057\u305f\u3002', 
-PERSONAL_WATCHLIST_SHOULD_BE_SELECTED:"\u500b\u4eba\u7528\u30a6\u30a9\u30c3\u30c1\u30ea\u30b9\u30c8\u3092\u9078\u629e\u3057\u3066\u304f\u3060\u3055\u3044\u3002", CLEAR_ALL:"\u3059\u3079\u3066\u30af\u30ea\u30a2", SHOW_FACTOR_RANK:"\u30d5\u30a1\u30af\u30bf\u30fc\u30e9\u30f3\u30af\u3092\u8868\u793a", ADD_FIELD:"\u9805\u76ee\u3092\u8ffd\u52a0", TRANSPOSE:"\u884c\u5217\u306e\u5165\u308c\u66ff\u3048", SUMMARY:"\u30b5\u30de\u30ea\u30fc", SUMMARY_STATISTICS:"\u7d71\u8a08\u30b5\u30de\u30ea\u30fc", VECTOR_NOT_SUPPORTED:"\u3053\u306e\u884c\u3068\u5217\u306e\u5165\u308c\u66ff\u3048\u306f\u30b5\u30dd\u30fc\u30c8\u3055\u308c\u3066\u3044\u307e\u305b\u3093", 
-EXCLUDE_ALL_SELECTED:"\u9078\u629e\u9805\u76ee\u3092\u3059\u3079\u3066\u9664\u5916", ENABLE_TRANSPOSE:"\u884c\u5217\u306e\u5165\u308c\u66ff\u3048\u3092\u3059\u308b", DISABLE_TRANSPOSE:"\u884c\u5217\u306e\u5165\u308c\u66ff\u3048\u3092\u5143\u306b\u623b\u3059", ALL:"\u3059\u3079\u3066", SAMPLE_TEMPLATES:"\u30b5\u30f3\u30d7\u30eb \u30c6\u30f3\u30d7\u30ec\u30fc\u30c8", VIEW_MORE:"\u3055\u3089\u306b {{count}} \u30c6\u30f3\u30d7\u30ec\u30fc\u30c8\u3092\u8868\u793a", VIEW_AND_MANAGE_ALL_TEMPLATES:"\u3059\u3079\u3066\u306e\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8\u3092\u8868\u793a/\u7ba1\u7406", 
-CREATE_NEW_TEMPLATE:"\u65b0\u898f\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8\u3092\u4f5c\u6210", ADVANCED_SORT:"\u4e26\u3079\u66ff\u3048\u8a2d\u5b9a", ENABLE_ADVANCED_SORT:"\u4e26\u3079\u66ff\u3048\u3092\u6709\u52b9\u306b\u3059\u308b", SORT_BY:"\u4e26\u3079\u66ff\u3048\u57fa\u6e96", ASCENDING:"\u6607\u9806", DESCENDING:"\u964d\u9806", SUMMARY_ROW:"\u96c6\u8a08\u884c", ELLIPSIS:"...", HEAT_MAP:"\u4e0a\u4f4d/\u4e0b\u4f4d\u306e\u5024\u3092\u30cf\u30a4\u30e9\u30a4\u30c8", WATCHLIST_FAILED_UPDATE:'T\u30a6\u30a9\u30c3\u30c1\u30ea\u30b9\u30c8\u3001"{{watchlistName}}" \u306e\u66f4\u65b0\u306b\u5931\u6557\u3057\u307e\u3057\u305f\u3002', 
-ADD_RANK_FOR_THIS_COLUMN:"\u3053\u306e\u5217\u306b\u30e9\u30f3\u30af\u3092\u8ffd\u52a0", PERCENTILE:"\u767e\u5206\u4f4d", DECILE:"\u5341\u5206\u4f4d", QUINTILE:"\u4e94\u5206\u4f4d", QUARTILE:"\u56db\u5206\u4f4d", RANK:"\u30e9\u30f3\u30af", ZSCORE:"Z \u30b9\u30b3\u30a2", SORTING_TYPE:"\u4e26\u3079\u66ff\u3048", BY_VALUE:"\u5024\u57fa\u6e96", BY_ABSOLUTE_VALUE:"\u7d76\u5bfe\u5024\u57fa\u6e96", TIME_SERIES_CHART:"\u6642\u7cfb\u5217\u30c1\u30e3\u30fc\u30c8", TORNADO_CHART:"\u30c8\u30eb\u30cd\u30fc\u30c9\u30c1\u30e3\u30fc\u30c8", 
-EXCLUDE_FROM_STATISTICS:"\u96c6\u8a08\u304b\u3089\u9664\u5916\u3059\u308b", EXCLUDED_FROM_STATISTICS:"\u96c6\u8a08\u304b\u3089\u9664\u5916\u3057\u305f\u9298\u67c4", EXCLUDE_ALL_SELECTED_FROM_STATISTICS:"\u3059\u3079\u3066\u306e\u9078\u629e\u9805\u76ee\u3092\u96c6\u8a08\u304b\u3089\u9664\u5916", EXPORT_TEMPLATE:"\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8\u3092\u30a8\u30af\u30b9\u30dd\u30fc\u30c8", IMPORT_TEMPLATE:"\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8\u3092\u30a4\u30f3\u30dd\u30fc\u30c8", APPLY:"\u9069\u7528", 
-REMOVE_ALL_FILTERS:"\u3059\u3079\u3066\u89e3\u9664", UNIQUE_VALUE:"\u9805\u76ee", DEFINE_RANGE:"\u7bc4\u56f2\u3092\u6307\u5b9a", TOP_BOTTOM:"\u4e0a\u4f4d/\u4e0b\u4f4d", CLEAR:"\u30af\u30ea\u30a2", FROM:"\u6700\u4f4e\u5024", TO:"\u6700\u9ad8\u5024", NUMBER_OF_ROWS:"\u884c\u6570", KEYWORD_SEARCH:"\u30ad\u30fc\u30ef\u30fc\u30c9\u691c\u7d22", FILTER_RESULTS:"\u7d50\u679c\u306e\u7d5e\u308a\u8fbc\u307f", INPUT_DATE:"\u65e5\u4ed8\u3092\u9078\u629e\u3057\u3066\u304f\u3060\u3055\u3044", NPUT_NUMBER:"\u6570\u5024\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044", 
-FREEZE_FOCUS_STOCK_ON_TOP:"\u5f53\u8a72\u9298\u67c4\u3092\u4e0a\u4f4d\u306b\u56fa\u5b9a", FACTOR:"\u30d5\u30a1\u30af\u30bf\u30fc", ADD_FORMULA:"\u8a08\u7b97\u5f0f\u3092\u4f7f\u7528\u3057\u3066\u5217\u3092\u8ffd\u52a0", FORMULA_EDITOR:"\u8a08\u7b97\u5f0f\u306e\u8a2d\u5b9a", COLUMN_N:"\u5217 {{columnNumber}}", LANDSCAPE:"\u6a2a\u5411\u304d", PORTRAIT:"\u7e26\u5411\u304d", TR_COPYRIGHT:"\u00a9 {{year}} Thomson Reuters. All rights reserved.", CLICK_ON_ANY_COLUMN:"\u8a08\u7b97\u5f0f\u306b\u4f7f\u7528\u3059\u308b\u9805\u76ee\u3092\u30ec\u30dd\u30fc\u30c8\u306e\u5217\u304b\u3089\u30af\u30ea\u30c3\u30af\u3057\u3066\u304f\u3060\u3055\u3044", 
-FORMAT_CELLS:"\u5024\u306e\u8868\u793a\u8a2d\u5b9a", DATE:"\u65e5\u4ed8\u5f62\u5f0f", NUMBER:"\u6570\u5024\u5f62\u5f0f", PERCENTAGE:"\u30d1\u30fc\u30bb\u30f3\u30c8", THOUSANDS_SEPARATOR:"\u6841\u533a\u5207\u308a", DAY_MONTHDATE_YEAR:"\u65e5\u3001\u6708\u3001\u5e74", DATE_ABBREVIATEDMONTH:"\u65e5 - \u6708\u306e\u77ed\u7e2e\u5f62", DATE_ABBREVIATEDMONYH_YEARE:"\u65e5 - \u6708\u306e\u77ed\u7e2e\u5f62 - \u5e74", MONTH_YEAR:"\u6708 - \u5e74", ABBREVIATEMONYH_ABBREVIATEDYEAR:"\u6708\u306e\u77ed\u7e2e\u5f62 - \u5e74\u306e\u77ed\u7e2e\u5f62", 
-EXPORT_PDF_LANDSCAPE:"PDF \u306b\u30a8\u30af\u30b9\u30dd\u30fc\u30c8(\u6a2a\u5411\u304d)", EXPORT_PDF_PORTRAIT:"PDF \u306b\u30a8\u30af\u30b9\u30dd\u30fc\u30c8(\u7e26\u5411\u304d)", EXPORT_PDF_FAILED:"PDF \u306e\u30a8\u30af\u30b9\u30dd\u30fc\u30c8\u306b\u5931\u6557\u3057\u307e\u3057\u305f\u3002", MAX_ROWS_COUNT_EXCEEDED:"\u6700\u5927\u884c\u6570\u3092\u8d85\u3048\u3066\u3044\u307e\u3059\u3002\u6700\u5927\u884c\u6570\u3092 {{maxRowsCount}} \u884c\u4ee5\u4e0b\u306b\u3057\u3066\u304f\u3060\u3055\u3044\u3002", 
-SHOW_ABBREVIATIONS:"false", DD_MM_YYYY:"YYYY/MM/DD", DD_MM_YYYY_F:"yyyy/MM/dd", DD_MM_YY:"YY/MM/DD", DD_MM_YY_F:"yy/MM/dd", DD_MM:"MM/DD", DD_MM_F:"MM/dd", MM_DD_YYYY:"", MM_DD_YYYY_F:"", MM_DD_YY:"", MM_DD_YY_F:"", MM_DD:"", MM_DD_F:"", MM_YYYY:"YYYY/MM", MM_YYYY_F:"yyyy/MM", MM_YY:"YY/MM", MM_YY_F:"yy/MM", COPY_TO_CLIPBOARD:"\u30af\u30ea\u30c3\u30d7\u30dc\u30fc\u30c9\u306b\u30b3\u30d4\u30fc", ERROR_MESSAGE_HAS_BEEN_COPIED:"\u30a8\u30e9\u30fc \u30e1\u30c3\u30bb\u30fc\u30b8\u304c\u30af\u30ea\u30c3\u30d7\u30dc\u30fc\u30c9\u306b\u30b3\u30d4\u30fc\u3055\u308c\u307e\u3057\u305f", 
-NOTIFY_PRINT_MESSAGE:"\u30d7\u30ea\u30f3\u30bf\u30fc\u306e\u30ed\u30fc\u30ab\u30eb\u8a2d\u5b9a\u3067\u30ec\u30a4\u30a2\u30a6\u30c8\u306e\u65b9\u5411\u3092\u6307\u5b9a\u3057\u3066\u304f\u3060\u3055\u3044\u3002", SHARE:"\u5171\u6709", SHARE_WITH:"\u5171\u6709\u5148", SHARED_TEMPLATES:"\u5171\u6709\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8", UNABLE_TO_LOAD_SHARED_TEMPLATES:"\u5171\u6709\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8\u3092\u8aad\u307f\u8fbc\u3081\u307e\u305b\u3093\u3002", AUTHOR:"\u4f5c\u6210\u8005", 
-SHARED_TO:"\u5171\u6709\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8\u540d", INSER_BLANK_ROW:"\u65b0\u3057\u3044\u884c\u3092\u633f\u5165\u3059\u308b", NUMBER_INPUT_VALIDATION_MESSAGE:"\u5024\u3092\u6570\u5024\u306b\u8a2d\u5b9a\u3057\u3066\u304f\u3060\u3055\u3044", NUMBER_OUT_OF_RANGE_VALIDATION_MESSAGE:"0\u304b\u3089100\u307e\u3067\u306e\u6570\u5024\u3092\u8a2d\u5b9a\u3057\u3066\u304f\u3060\u3055\u3044", T_B_FILTER_TOP_VALUE:"\u9806\u4f4d\u4e0a\u4f4d #", T_B_FILTER_BOTTOM_VALUE:"\u9806\u4f4d\u4e0b\u4f4d #", 
-T_B_FILTER_TOP_PER:"\u767e\u5206\u4f4d\u4e0a\u4f4d %", T_B_FILTER_BOTTOM_PER:"\u767e\u5206\u4f4d\u4e0b\u4f4d %", T_B_FILTER_DEFAULT_FIELD:"\u4e26\u3079\u66ff\u3048\u306e\u6761\u4ef6\u3092\u9078\u629e"};
+gridReport.localization.en = {TOGGLE:"Toggle", GROUPING:"Grouping", PRECISION:"Precision", DEFAULT:"Default", FORMAT_NO_SYMBOLS:"0", FORMAT_ONE_SYMBOLS:"0.0", FORMAT_TWO_SYMBOLS:"0.00", FORMAT_THREE_SYMBOLS:"0.000", FORMAT_FOUR_SYMBOLS:"0.0000", STATISTICS:"Statistics", ADD_COLUMN:"Add Column", EDIT_COLUMN:"Edit", REMOVE_COLUMN:"Remove", RENAME_COLUMN:"Rename", REVERT_RENAMING:"Revert Renaming", PIN:"Pin Column", UNPIN:"Unpin Column", HIDE_PARAMETERS:"Hide Parameters", SHOW_PARAMETERS:"Show Parameters", 
+SELECT_ALL:"Select All", DESELECT_ALL:"Deselect All", UNGROUP:"Ungroup", NEW:"New", OBJECT_MANAGER:"Object Manager", SAVE:"Save", REVERT:"Revert", EXCLUDE:"Exclude", INCLUDE:"Include", ADDITIONAL_ACTIONS:"Additional Actions", ACTIONS:"Actions", ADD_ALL_TO_LIST:"Add All to List", ADD_SELECTED_TO_LIST:"Add Selected to List", WARNING:"Warning", OK:"OK", CANCEL:"Cancel", DONT_ASK_AGAIN:"Don't ask again", RECALL:"Recall", CLOSE:"Close", PERSONAL:"Personal Templates", GLOBAL:"Thomson Reuters Templates", 
+RECENT:"Recent Templates", CUSTOM_EXPRESSIONS:"Custom Expressions", FORMAT_WAS_CHANGED_CONFIRMATION:"Would you like to save your changes to '{{name}}'?", RESULTS_WITH_COUNT:"Results ({{count}})", EXCLUDED_WITH_COUNT:"Excluded ({{count}})", ALL_SECURITIES_WITH_COUNT:"All Securities ({{count}})", IDENTIFIERS_ADDED_WITH_COUNT_INFO_MSG:"{{count}} identifier(s) added to exclusions.", IDENTIFIERS_REMOVED_WITH_COUNT_INFO_MSG:"{{count}} identifier(s) removed from exclusions.", FORMAT_WILL_BE_REVERTED_CONFIRMATION:"Format will be reverted to its initial state.", 
+SEARCH:"Search", NAME:"Name", NUMBER_OF_FIELDS:"# of Fields", SHARP:"#", FIELD_NAME:"Field Name", PREVIEW:"Preview", LAST_MODIFIED:"Last Modified", IDENTIFIER:"Identifier", ERROR:"Error", INFORMATION:"Information", GROUPED_BY:"Grouped by:", SUM:"Sum", AVERAGE:"Average", MEDIAN:"Median", SERVER_SIDE:"Server side", NONE:"None", TEMPLATE_MANAGER:"Template Manager", REPORT_TEMPLATE_MANAGER:"Report Template Manager", SERVICE_UNAVAILABLE:"Service unavailable.", UNABLE_TO_LOAD_TEMPLATE:"Unable to load template.", 
+UNABLE_TO_LOAD_GLOBAL_TEMPLATES:"Unable to load global templates.", UNABLE_TO_SAVE_TEMPLATE:"Unable to save template.", UNABLE_TO_LOAD_PERSONAL_TEMPLATES:"Unable to load personal templates.", UNABLE_TO_DELETE_TEMPLATE:"Unable to delete template.", UNABLE_TO_RENAME_TEMPLATE:"Unable to rename template.", UNABLE_TO_COPY_TEMPLATE:"Unable to copy template.", INVALID_CHARACTER:"Invalid character", NAME_IS_REQUIRED:"A name is required.", NEW_TEMPLATE:"New Template", SAVE_TEMPLATE:"Save Template", SERVICE_UNAVAILABLE_RESUBMIT_YOUR_REQUEST:"Service unavailable. Please resubmit your request.", 
+FAILED_TO_RESOLVE_UNIVERSE:"Failed to resolve universe.", THERE_ARE_NO_ITEMS_TO_DISPLAY:"There are no items to display.", MAX_ROWS_COUNT_EXCEEDED:"Max rows count exceeded. Expected not more than {{maxRowsCount}}.", MAX_ROWS_COUNT_EXCEEDED_INDUSTRY_MESSAGE:"The selected universe contains greater than {{maxRowsCount}} securities. Please select a more detailed universe parameter in order to view additional metrics.", RENAME:"Rename", DUPLICATE:"Duplicate", DELETE:"Delete", COLUMN_ALREADY_EXISTS:'The column "{{name}}" cannot be used because it is identical to an already existing one', 
+NOT_AVAILABLE:"Not Available", NOT_AVAILABLE_ABBREVIATION:"N/A", NO_MATCHING_DATA_ITEMS:"No Matching Data Items", SEARCH_RESULTS:"Search Result", PRINT:"Print", LOAD:"Load", CREATE_TEMPLATE:"Create Template", MANAGE_TEMPLATES:"Manage Templates", UNSAVED_TEMPLATE:"Unsaved Template", CLICK_TO_VIEW_FIELDS_IN_TEMPLATE:"Click to view fields in template", SEARCH_FOR_TEMPLATES:"Search for Templates", TEMPLATE_NAME:"Template Name", NAME_ALREADY_EXISTS:"Name already exists", DO_NOT_SAVE:"Don't Save", EXPORT_ALL_AS_VALUES:"Export All as Values", 
+EXPORT_ALL_AS_FORMULAS:"Export All as Formulas", EXPORT_SELECTED_AS_VALUES:"Export Selected as Values", EXPORT_SELECTED_AS_FORMULAS:"Export Selected as Formulas", OPEN_ALL_IN_QUOTE_OBJECT:"Open All in Quote Object", OPEN_SELECTED_IN_QUOTE_OBJECT:"Open Selected in Quote Object", SAVE_AS:"Save As", TEMPLATE_ALREADY_EXISTS_CONFIRMATION:"Template '{{name}}' already exists. Do you want to replace this report template?", REPORT_TEMPLATE:"Report Template", SEE_ERROR_DETAILS:"See error details", REPORT_TEMPLATE_SUCCESSFULLY_SAVED_INFO_MSG:"The report template was successfully saved.", 
+MAX_LENGTH_EXCEEDED:"Max length exceeded.", ADD_SECURITY:"Add Security", TEMPLATE_DETAILS:"Template Details", CRITERIA_FOR_GROUPING_ROWS:"Criteria for grouping rows", ORDER:"Order", CRITERIA:"Criteria", ENABLE_GROUPING:"Enable Grouping", REGION:"Region", COUNTRY:"Country", INDUSTRY:"Industry", GICS:"GICS", TRBC:"TRBS", BUSINESS_SECTOR:"Business Sector", ECONOMIC_SECTROR:"Economic Sector", INDUSTRY_GROUP:"Industry Group", INDUSTRY_NAME:"Industry Name", SECTOR_NAME:"Sector Name", SUBINDUSTRY_NAME:"Sub-Industry Name", 
+COUNTRY_OF_EXCHANGE:"Country of Exchange", COUNTRY_OF_HEADQURTERS:"Country of Headquarters", SELECT_FIELD:"Select field", EDIT:"Edit", GROUP_ROWS:"Group", REMOVE_ROW:"Remove", ADVANCED_SETTINGS_BUTTON_TITLE:"Advanced Settings", ADVANCED_SETTINGS_DEFAULT_CURRENCY:"Default Currency", ADVANCED_SETTINGS_NO_DEFAULT_CURRENCY:"None", ADVANCED_SETTINGS_UPDATE:"Update Report", ADVANCED_SETTINGS_CANCEL:"Cancel", STATISTICS_CONTROL_COLUMN_STATISTICS:"Statistics", STATISTICS_CONTROL_COLUMN_PREMIUM_DISCOUNT:"Premium/Discount", 
+FOCUS_STOCK_FINANCIALS:"Focus Stock (Financials: {{currencyId}})", FOCUS_STOCK_PRICING:"Focus Stock (Pricing: {{currencyId}})", PRESS_REFRESH_TO_DISPLAY_NUMBER_OF_FIELDS:"Press refresh button to display number of fields.", SECURITY_ALREADY_ADDED:'The security "{{ric}}" already presents in the grid', SECURITIES_ALREADY_ADDED:'The securities "{{rics}}" already present in the grid', ADD_RANK:"Add Rank", SHOW_FACTOR_RANKS:"Show Factor Ranks", FIELD_DEFINITION:"Field Definition", THOMSON_REUTERS_EIKON_EXCEL_FUNCTION:"Thomson Reuters Eikon Excel Function", 
+SUM_SYMBOL:"\u03a3", EXCLUDED:"Excluded", INCLUDE_ALL:"Include All", COMPANY_NAME:"Company Name", EXPAND_ALL:"Expand All", COLLAPSE_ALL:"Collapse All", NATIVE_CURRENCY:"Native Currency", MULTIPLE_VALUES:"Multiple values", COLUMNS_RETURN_MULTIPLE_VALUES:"The column chosen returns multiple values that cannot be rendered in a grid format", DATA_ITEM_IS_NO_LONGER_SUPPORTED:"This data item is no longer supported.", PREMIUM_DISCOUNT_TITLE:"vs. {{statisticsName}}", DISPLAY_OPTIONS:"Display Options", SMALL:"Small", 
+LARGE:"Large", MEDIUM:"Medium", FONT_SIZE_AND_ROW_HEIGHT:"Font Size and Row Height", CURRENCY:"Currency", SELECT_UP_TO_MAX_GROUPS_COUNT:"Select up to {{maxGroupsCount}} items", HIGH:"High", LOW:"Low", FIRST_QAURTILE:"1st Quartile", THIRD_QAURTILE:"3rd Quartile", DISPLAYING_FACTOR_RANKS:"Displaying Factor Ranks", ADD_ALL_TO_EXISTING_LIST:"Add All to Existing List", ADD_SELECTED_TO_EXISTING_LIST:"Add Selected to Existing List", WATCHLIST_WAS_SUCCESSFULLY_UPDATED:'The watchlist "{{watchlistName}}" was successfully updated.', 
+WATCHLIST_FAILED_UPDATE:'The watchlist "{{watchlistName}}" update failed.', PERSONAL_WATCHLIST_SHOULD_BE_SELECTED:"A personal watchlist should be selected.", CLEAR_ALL:"Clear All", SHOW_FACTOR_RANK:"Show Factor Rank", ADD_FIELD:"Add Field", TRANSPOSE:"Transpose", SUMMARY:"Summary", SUMMARY_STATISTICS:"Summary Statistics", VECTOR_NOT_SUPPORTED:"Is not supported in Transposed View", EXCLUDE_ALL_SELECTED:"Exclude All Selected", ENABLE_TRANSPOSE:"Enable Transpose", DISABLE_TRANSPOSE:"Disable Transpose", 
+ALL:"All", SAMPLE_TEMPLATES:"Sample Templates", VIEW_MORE:"View {{count}} more", VIEW_AND_MANAGE_ALL_TEMPLATES:"View and Manage all Templates", CREATE_NEW_TEMPLATE:"Create New Template", ADVANCED_SORT:"Advanced Sort", ENABLE_ADVANCED_SORT:"Enable Advanced Sort", SORT_BY:"Sort by", ASCENDING:"Ascending", DESCENDING:"Descending", SUMMARY_ROW:"Summary Row", ELLIPSIS:"...", HEAT_MAP:"Highlight Top/Bottom Values", ADD_RANK_FOR_THIS_COLUMN:"Add rank for this column", PERCENTILE:"Percentile", DECILE:"Decile", 
+QUINTILE:"Quintile", QUARTILE:"Quartile", RANK:"Rank", ZSCORE:"Z-Score", SORTING_TYPE:"Sorting Type", BY_VALUE:"By Value", BY_ABSOLUTE_VALUE:"By Absolute Value", TIME_SERIES_CHART:"Time Series Chart", TORNADO_CHART:"Tornado Chart", EXCLUDE_FROM_STATISTICS:"Exclude from Statistics", EXCLUDED_FROM_STATISTICS:"Excluded from Statistics", EXCLUDE_ALL_SELECTED_FROM_STATISTICS:"Exclude All Selected from Statistics", IMPORT_TEMPLATE:"Import Template", EXPORT_TEMPLATE:"Export Template", APPLY:"Apply", REMOVE_ALL_FILTERS:"Remove All Filters", 
+UNIQUE_VALUE:"Unique Value", DEFINE_RANGE:"Define Range", TOP_BOTTOM:"Top/Bottom", CLEAR:"Clear", FROM:"From", TO:"To", NUMBER_OF_ROWS:"# of Rows", KEYWORD_SEARCH:"Keyword Search", FILTER_RESULTS:"Filter Results", INPUT_DATE:"Input date", INPUT_NUMBER:"Input number", FREEZE_FOCUS_STOCK_ON_TOP:"Freeze Focus Stock on Top", CLICK_ON_ANY_COLUMN:"Click on any column in the report to reference it in the formula", ADD_FORMULA:"Add Column Using Formula", FORMULA_EDITOR:"Formula Editor", COLUMN_N:"Column {{columnNumber}}", 
+FACTOR:"Factor", LANDSCAPE:"Landscape", PORTRAIT:"Portrait", TR_COPYRIGHT:"\u00a9 {{year}} Thomson Reuters. All rights reserved.", FORMAT_CELLS:"Format Cells", DATE:"Date", NUMBER:"Number", PERCENTAGE:"Percentage", THOUSANDS_SEPARATOR:"Thousands separator", DAY_MONTHDATE_YEAR:"Day, Month Date, Year", DATE_ABBREVIATEDMONTH:"Date - Abbreviated Month", DATE_ABBREVIATEDMONYH_YEARE:"Date - Abbreviated Month - Year", MONTH_YEAR:"Month - Year", ABBREVIATEMONYH_ABBREVIATEDYEAR:"Abbreviated Month - Abbreviated Year", 
+EXPORT_PDF_LANDSCAPE:"Export To PDF (Landscape)", EXPORT_PDF_PORTRAIT:"Export To PDF (Portrait)", EXPORT_PDF_FAILED:"Export to PDF failed", SHOW_ABBREVIATIONS:"true", DD_MM_YYYY:"DD/MM/YYYY", DD_MM_YYYY_F:"dd/MM/yyyy", DD_MM_YY:"DD/MM/YY", DD_MM_YY_F:"dd/MM/yy", DD_MM:"DD/MM", DD_MM_F:"dd/MM", MM_DD_YYYY:"MM/DD/YYYY", MM_DD_YYYY_F:"MM/dd/yyyy", MM_DD_YY:"MM/DD/YY", MM_DD_YY_F:"MM/dd/yy", MM_DD:"MM/DD", MM_DD_F:"MM/dd", MM_YYYY:"MM/YYYY", MM_YYYY_F:"MM/yyyy", MM_YY:"MM/YY", MM_YY_F:"MM/yy", COPY_TO_CLIPBOARD:"Copy to clipboard", 
+ERROR_MESSAGE_HAS_BEEN_COPIED:"Error message has been copied to clipboard", NOTIFY_PRINT_MESSAGE:"You will also need to set your printer's local settings in order to define the layout orientation when printing.", SHARE:"Share", SHARE_WITH:"Share with", SHARED_TEMPLATES:"Shared Templates", UNABLE_TO_LOAD_SHARED_TEMPLATES:"Unable to load shared templates.", AUTHOR:"Author", SHARED_TO:"Shared to", INSER_BLANK_ROW:"Insert Blank Row", NUMBER_INPUT_VALIDATION_MESSAGE:"Value must be a number", NUMBER_OUT_OF_RANGE_VALIDATION_MESSAGE:"Value must be a number in range 0 - 100", 
+T_B_FILTER_TOP_VALUE:"In Top #", T_B_FILTER_BOTTOM_VALUE:"In Bottom #", T_B_FILTER_TOP_PER:"In Top %", T_B_FILTER_BOTTOM_PER:"In Bottom %", T_B_FILTER_DEFAULT_FIELD:"Choose filter type"};
+goog.provide("gridReport.directives.onEscapeDirective");
+gridReport.Module.directive("onEscape", function() {
+  return{link:function(scope, element, attrs) {
+    element.bind("keydown", function(event) {
+      if (event.which === 27) {
+        scope.$apply(function() {
+          scope.$eval(attrs.onEscape);
+        });
+        event.preventDefault();
+        event.stopPropagation();
+      }
+    });
+  }};
+});
+goog.provide("gridReport.directives.DatepickerDirective");
+gridReport.Module.directive("gfDatepicker", ["$translate", function($translate) {
+  return{restrict:"E", scope:{isEnabled:"=", date:"=", selected:"=", placeholder:"=?", dateFormat:"=?", min:"=?", max:"=?"}, template:'<input type="text" ' + 'class="gf-datepicker-container" ' + 'ng-attr-placeholder="{{placeholder}}" ' + 'style="width:100px"></input>', link:function(scope, element) {
+    var $datepicker = element.find(".gf-datepicker-container");
+    scope.placeholder = scope.placeholder || $translate.instant("INPUT_DATE");
+    scope.dateFormat = scope.dateFormat || "mm/dd/yy";
+    $datepicker.datepicker({showOn:"both", dateFormat:scope.dateFormat, firstDay:0, minDate:scope.min, maxDate:scope.max, onSelect:function() {
+      scope.$apply(function() {
+        scope.date = $datepicker.datepicker("getDate");
+        (scope.selected || angular.noop)({date:scope.date});
+      });
+    }});
+    scope.$watch("isEnabled", function() {
+      if (scope.isEnabled !== false) {
+        $datepicker.datepicker("enable");
+      } else {
+        $datepicker.datepicker("disable");
+      }
+    });
+    scope.$watch("date", function() {
+      $datepicker.datepicker("setDate", $.datepicker.formatDate(scope.dateFormat, scope.date));
+    });
+    scope.$on("$destroy", function() {
+      $datepicker.datepicker("destroy");
+    });
+  }};
+}]);
+goog.provide("gridReport.model.Currency");
+gridReport.model.Currency = function(currencyId, format, uid) {
+  var self = this, curId = currencyId, formatCurrency = format || function(id) {
+    return id;
+  }, isDisabled = function(id) {
+    return!id || id.length === 0;
+  };
+  this.disabled = isDisabled(curId);
+  this.displayText = formatCurrency(curId);
+  this.uid = uid;
+  Object.defineProperty(this, "id", {get:function() {
+    return curId;
+  }, set:function(value) {
+    curId = value;
+    self.disabled = isDisabled(curId);
+    self.displayText = formatCurrency(curId);
+  }});
+};
+goog.provide("gridReport.services.AutoSuggestAdapterFactory");
+goog.require("gridReport.Module");
+gridReport.Module.service("gfAutoSuggestAdapterFactory", ["$globalFactory", function($globalFactory) {
+  var service = {};
+  service.create = function(query, getCurrentUniverseFunc) {
+    if (scr.MetadataToAutoSuggestAdapter2 && _.isObject(query)) {
+      return new scr.MetadataToAutoSuggestAdapter2($globalFactory.resolveMetadataService(), query.profile, query.apiKey, query.assetClass, getCurrentUniverseFunc);
+    }
+    return new scr.MetadataToAutoSuggestAdapter($globalFactory.resolveMetadataService(), query, getCurrentUniverseFunc);
+  };
+  return service;
+}]);
+goog.provide("gridReport.services.AutoSuggestServiceFactory");
+goog.require("gridReport.Module");
+goog.require("gridReport.services.AutoSuggestAdapterFactory");
+gridReport.Module.factory("gfAutosuggestServiceFactory", ["gfAutoSuggestAdapterFactory", "gfConfig", "$translate", function(gfAutoSuggestAdapterFactory, gfConfig, $translate) {
+  var service = {};
+  service.createInstance = function(getCurrentUniverseContextFunc) {
+    var autoSuggestAdapter = gfAutoSuggestAdapterFactory.create(gfConfig.defaultAutosuggestQueryParams, getCurrentUniverseContextFunc);
+    function createTooltip(item) {
+      if (item.tooltip) {
+        return item.tooltip;
+      }
+      var tooltip = '<div style="white-space: nowrap;">' + item.name + " (" + item.path + ")" + "</div>";
+      if (item.description) {
+        tooltip += '<br><div style="white-space: normal;">' + item.description + "</div>";
+      }
+      return tooltip;
+    }
+    function getItems(response) {
+      if (_.isArray(response)) {
+        return response;
+      } else {
+        return response != undefined ? response.items : [];
+      }
+    }
+    var autosuggestService = {};
+    autosuggestService.search = function(keyword, callback) {
+      if (keyword != null && (keyword.length !== undefined && keyword.length > 0)) {
+        autoSuggestAdapter.getAutoSuggest(keyword, function(response) {
+          var group = {groupName:$translate.instant("SEARCH_RESULTS"), items:[]};
+          _.each(getItems(response), function(item) {
+            group.items.push({text:item.name, tooltip:createTooltip(item), value:item.id, path:item.path, description:"", dataType:item.dataType});
+          });
+          (callback || angular.noop)([group]);
+        });
+      } else {
+        (callback || angular.noop)([]);
+      }
+    };
+    return autosuggestService;
+  };
+  return service;
+}]);
+goog.provide("gridReport.directives.ButtonWithContextMenuController");
+gridReport.Module.controller("ButtonWithContextMenuController", ["$scope", "$timeout", function($scope, $timeout) {
+  var DEFAULT_OPTIONS = {openDirection:"left"};
+  function executeMenuAction($event, item) {
+    if (getResultOrValue(item.disabled)) {
+      $event.stopPropagation();
+    } else {
+      item.action();
+      if ($scope.isMenuOpened()) {
+        $timeout(function() {
+          $(document.body).click();
+        });
+      }
+    }
+  }
+  function getResultOrValue(f) {
+    return _.isFunction(f) ? f() : f;
+  }
+  $scope.options = $.extend({}, DEFAULT_OPTIONS, $scope.options);
+  $scope.executeMenuAction = executeMenuAction;
+  $scope.getResultOrValue = getResultOrValue;
+  $scope.buttonSelectClass = $scope.isSingleButton == true ? "button-single-select" : "button-select";
+}]);
+goog.provide("gridReport.controllers.DropDownFakeController");
+gridReport.Module.controller("DropDownFakeController", [function() {
+}]);
+goog.provide("gridReport.directives.ButtonWithContextMenuDirective");
+goog.require("gridReport.directives.ButtonWithContextMenuController");
+goog.require("gridReport.controllers.DropDownFakeController");
+gridReport.Module.directive("gfButtonWithContextMenu", [function() {
+  return{restrict:"E", scope:{buttonText:"=", buttonIconClass:"=", menuItems:"=", defaultMenuItem:"=", isDisabled:"=", isSingleButton:"=", options:"="}, controller:"ButtonWithContextMenuController", templateUrl:"scripts/directives/buttonWithContextMenu/ButtonWithContextMenu.html", link:function(scope, element) {
+    scope.isMenuOpened = function() {
+      return $(element).find(".dropdown").hasClass("open");
+    };
+  }};
+}]);
+goog.provide("gridReport.directives.ExportToPdfContextMenuOptions");
+gridReport.directives.ExportToPdfContextMenuOptions = function(options) {
+  gridReport.jsUtils.mergeProperties(this, options, ["canPrintLandscape", "canPrintPortrait"]);
+};
+gridReport.directives.ExportToPdfContextMenuOptions.prototype.canExportLandscape = true;
+gridReport.directives.ExportToPdfContextMenuOptions.prototype.canExportPortrait = true;
+goog.provide("gridReport.directives.ExportToPdfDirective");
+goog.require("gridReport.directives.ButtonWithContextMenuDirective");
+goog.require("gridReport.directives.ExportToPdfContextMenuOptions");
+gridReport.Module.directive("gfExportToPdf", [function() {
+  return{restrict:"E", transclude:false, scope:{gridInstanceId:"=", isEnabled:"=", options:"=?", allTickers:"=", buttonWithMenuOptions:"=?", headerDescription:"=?", header:"=?", footer:"=?"}, replace:true, templateUrl:"scripts/directives/exportToPdf/ExportToPdf.html", controller:["$scope", "$translate", "gfGridManagementService", "gfEventsAggregator", "gfNotificationService", function($scope, $translate, gfGridManagementService, gfEventsAggregator, gfNotificationService) {
+    function subscribe() {
+      var aggregator = gfEventsAggregator.getChildAggregator($scope.gridInstanceId);
+      aggregator.addHandler(gridReport.model.GridEvents.loadingStarted, function() {
+        $scope.isDataLoading = true;
+      });
+      aggregator.addHandler(gridReport.model.GridEvents.loadingEnded, function() {
+        $scope.isDataLoading = false;
+      });
+    }
+    function getExportFilename() {
+      var date = new Date;
+      var dateString = [date.getMonthName(), date.getDate(), date.getFullYear(), date.getHours(), date.getMinutes(), date.getSeconds()].join("_");
+      return "GridExport_" + dateString;
+    }
+    function getTitle() {
+      var selectedTemplate = gfGridManagementService.getSelectedTemplate($scope.gridInstanceId), timePattern = "MMMM dd, yyyy HH:mm:ss", date;
+      date = Date.now().toString(timePattern);
+      return selectedTemplate ? selectedTemplate.name + " - " + date : date;
+    }
+    function exportToPdfAction(pageOrientation) {
+      var aggregator = gfEventsAggregator.getChildAggregator($scope.gridInstanceId);
+      if (pageOrientation === pdfExporter.models.PageOrientation.Landscape) {
+        aggregator.raiseEvent(gridReport.model.GridEvents.exportToPdfLandscape);
+      } else {
+        aggregator.raiseEvent(gridReport.model.GridEvents.exportToPdfPortrait);
+      }
+      var title = getTitle();
+      gfGridManagementService.exportToPdf($scope.gridInstanceId, {fileName:getExportFilename(), title:title, exportAll:true, printingOptions:new pdfExporter.models.PrintingOptions({pageOrientation:pageOrientation, header:$scope.header || title, headerDescription:$scope.headerDescription, footer:$scope.footer || $translate.instant("TR_COPYRIGHT", {year:(new Date).getFullYear()}), printCollapsedGroups:false, usePagedMedia:true})}).then(null, function() {
+        gfNotificationService.error($translate.instant("EXPORT_PDF_FAILED"));
+      });
+    }
+    var options = $scope.options || new gridReport.directives.ExportToPdfContextMenuOptions;
+    $scope.menuItems = [{label:$translate.instant("EXPORT_PDF_LANDSCAPE"), action:function() {
+      exportToPdfAction(pdfExporter.models.PageOrientation.Landscape);
+    }, disabled:function() {
+      return!$scope.isEnabled && $scope.isDataLoading;
+    }, visible:function() {
+      return options.canExportLandscape;
+    }}, {label:$translate.instant("EXPORT_PDF_PORTRAIT"), action:function() {
+      exportToPdfAction(pdfExporter.models.PageOrientation.Portrait);
+    }, disabled:function() {
+      return!$scope.isEnabled && $scope.isDataLoading;
+    }, visible:function() {
+      return options.canExportPortrait;
+    }}];
+    $scope.getDefaultMenuItem = function() {
+      return $scope.menuItems[0];
+    };
+    $scope.isExportEnabled = function() {
+      return $scope.isEnabled && (!$scope.isDataLoading && !_.isEmpty($scope.allTickers));
+    };
+    if ($scope.gridInstanceId) {
+      subscribe();
+    }
+    $scope.$watch("gridInstanceId", function(newVal, oldVal) {
+      if (newVal === oldVal) {
+        return;
+      }
+      subscribe();
+    });
+    $scope.$watch("options", function() {
+      options = $scope.options || new gridReport.directives.ExportToPdfContextMenuOptions;
+    });
+  }]};
+}]);
 goog.provide("gridReport.directives.SliderDirective");
 gridReport.Module.directive("gfSlider", [function() {
   return{restrict:"E", scope:{isEnabled:"=", min:"=", max:"=", slid:"&", minValue:"=?", maxValue:"=?"}, template:'<div class="gf-slider-container" style="width: 400px"></div>', link:function(scope, element) {
@@ -18426,104 +18710,1192 @@ gridReport.Module.directive("gfSlider", [function() {
     });
   }};
 }]);
-goog.provide("gridReport.services.GroupStateRestoreService");
-goog.require("gridReport.services.GridManagementService");
-gridReport.Module.factory("gfGroupStateRestoreService", ["gfGridManagementService", "gfGroupableColumnsLabels", "localStorageService", "gfStateProviderService", function(gfGridManagementService, gfGroupableColumnsLabels, localStorageService, gfStateProviderService) {
-  var restoreStateService = {}, services = {}, GROUPING_POSTFIX = "GRID_GROUPING";
-  function GroupStateService(gridInstanceId, isAutoSaveState) {
-    var self = this;
-    function addCriteriaInternally(id, targetIndex) {
-      var criteria = {id:id, header:gfGroupableColumnsLabels[id], editMode:false};
-      if (_.isUndefined(targetIndex)) {
-        self.criterias.push(criteria);
-      } else {
-        self.criterias[targetIndex] = criteria;
+goog.provide("gridReport.directives.focusMeDirective");
+gridReport.Module.directive("focusMe", ["$timeout", "$parse", function($timeout, $parse) {
+  return{link:function(scope, element, attrs) {
+    var model = $parse(attrs.focusMe);
+    var needSelect = attrs.selected;
+    scope.$watch(model, function(value) {
+      if (value === true) {
+        $timeout(function() {
+          element[0].focus();
+          if (needSelect && element.select) {
+            element.select();
+          }
+        });
+      }
+    });
+  }};
+}]);
+goog.provide("gridReport.directives.MultiFactorRankButtonDirective");
+gridReport.Module.directive("gfMultiFactorRankButton", ["gfEventsAggregator", function(gfEventsAggregator) {
+  return{restrict:"E", scope:{isEnabled:"=", universeContext:"=", gridInstanceId:"="}, templateUrl:"scripts/directives/multiFactorRankButton/MultiFactorRankButton.html", link:function(scope) {
+    scope.openMfr = function() {
+      gfEventsAggregator.getChildAggregator(scope.gridInstanceId).raiseEvent(gridReport.model.CommandEvents.showPicker, {selectedCategoryId:scr.ObjectType.MultiFactorRanks, universeContext:scope.universeContext});
+    };
+  }};
+}]);
+goog.provide("gridReport.services.gfPrintingLandscapeDialogService");
+gridReport.Module.service("gfPrintingLandscapeDialogService", ["$modal", "$log", "$translate", function($modal, $log, $translate) {
+  var service = {}, popup;
+  service.closeDialog = function() {
+    if (popup) {
+      try {
+        popup.close();
+        popup = null;
+      } catch (e) {
       }
     }
-    function loadLocalState(isAutoSaveState, stateId) {
-      if (!isAutoSaveState) {
-        return null;
+  };
+  service.openDialog = function(okCallback, callbackParams) {
+    var settings = {message:$translate.instant("NOTIFY_PRINT_MESSAGE"), title:$translate.instant("PRINT"), okCallback:okCallback, callbackParams:callbackParams, checkboxTitle:$translate.instant("DONT_ASK_AGAIN"), showCheckbox:true};
+    service.closeDialog();
+    popup = $modal.open({windowClass:"gf-notification gf-modal", templateUrl:"scripts/services/printingLandscapeDialog/PrintingLandscapeDialog.html", controller:["$scope", "$modalInstance", "settings", function($scope, $modalInstance, settings) {
+      function execCallbackAndClose(callback) {
+        if (callback) {
+          callback(settings.callbackParams, $scope.settings.showCheckbox ? $scope.viewModel.doNotShowThisMessageAgain : undefined);
+        }
+        $modalInstance.close();
       }
-      return localStorageService.get(stateId + GROUPING_POSTFIX);
-    }
-    function registerManagementSerivceCallbacks() {
-      gfGridManagementService.registerCallback(gridInstanceId, gfGridManagementService.restoreState, restoreStateCallback);
-    }
-    function unregisterManagementSerivceCallbacks() {
-      gfGridManagementService.unregisterCallback(gridInstanceId, gfGridManagementService.restoreState, restoreStateCallback);
-    }
-    function registerStateCallbacks() {
-      gfStateProviderService.register(gridReport.services.StateProvideService.components.grouping, gridInstanceId, {getStateCallback:getState, setStateCallback:setState});
-    }
-    function unregisterStateCallbacks() {
-      gfStateProviderService.unregister(gridReport.services.StateProvideService.components.grouping, gridInstanceId);
-    }
-    function restoreStateCallback(stateId) {
-      if (!self.isAutoSaveState || stateId === undefined) {
-        return;
-      }
-      self.stateId = stateId;
-      self.criterias = [];
-      setState(loadLocalState(self.isAutoSaveState, stateId));
-      if (self.isCriteriasEnabled) {
-        gfGridManagementService.setGrouping(gridInstanceId, getCriteriasIds());
-      }
-    }
-    function getCriteriasIds() {
-      return _.pluck(self.criterias, "id");
-    }
-    function getState() {
-      return{isGroupingEnabled:self.isCriteriasEnabled, groups:getCriteriasIds()};
-    }
-    function setState(state) {
-      if (!state) {
-        return;
-      }
-      self.isCriteriasEnabled = state.isGroupingEnabled;
-      self.criterias = [];
-      _.each(state.groups, addCriteriaInternally);
-    }
-    function dispose() {
-      unregisterManagementSerivceCallbacks();
-      unregisterStateCallbacks();
-    }
-    function save() {
-      if (!self.isAutoSaveState || self.stateId === undefined) {
-        return;
-      }
-      localStorageService.add(self.stateId + GROUPING_POSTFIX, JSON.stringify(getState()));
-    }
-    self.gridInstanceId = gridInstanceId;
-    self.criterias = [];
-    self.isCriteriasEnabled = false;
-    self.loadLocalState = loadLocalState;
-    self.getCriteriasIds = getCriteriasIds;
-    self.stateId = gfStateProviderService.getStateId(gridInstanceId);
-    self.dispose = dispose;
-    self.isAutoSaveState = isAutoSaveState;
-    self.save = save;
-    registerManagementSerivceCallbacks();
-    registerStateCallbacks();
-    if (self.stateId != undefined) {
-      restoreStateCallback(self.stateId);
-    }
+      $scope.ok = _.partial(execCallbackAndClose, settings.okCallback);
+      $scope.closeDialog = function() {
+        service.closeDialog();
+      };
+      $scope.settings = settings;
+      $scope.viewModel = {doNotShowThisMessageAgain:false};
+    }], resolve:{settings:function() {
+      return settings;
+    }}});
+    return popup;
+  };
+  return service;
+}]);
+goog.provide("gridReport.dataProvider.BaseDataProvider");
+gridReport.dataProvider.BaseDataProvider = function() {
+};
+gridReport.dataProvider.BaseDataProvider.prototype.subscribe = function(columns) {
+};
+gridReport.dataProvider.BaseDataProvider.prototype.unsubscribe = function(columns) {
+};
+gridReport.dataProvider.BaseDataProvider.prototype.dataLoaded = undefined;
+gridReport.dataProvider.BaseDataProvider.prototype.dataLoading = undefined;
+gridReport.dataProvider.BaseDataProvider.prototype.clearData = undefined;
+gridReport.dataProvider.BaseDataProvider.prototype.startLoading = undefined;
+gridReport.dataProvider.BaseDataProvider.prototype.endLoading = undefined;
+gridReport.dataProvider.BaseDataProvider.prototype.suspend = undefined;
+gridReport.dataProvider.BaseDataProvider.prototype.resume = undefined;
+gridReport.dataProvider.BaseDataProvider.prototype.abort = undefined;
+gridReport.dataProvider.BaseDataProvider.prototype.loadData = undefined;
+gridReport.dataProvider.BaseDataProvider.prototype.loadPartialData = undefined;
+goog.provide("gridReport.directives.ExclusionsManagerController");
+gridReport.Module.controller("ExclusionsManagerController", ["$scope", "gfExclusions", "gfStatisticsExclusions", "gfGridManagementService", "gfExclusionManagerDialogService", "$translate", function($scope, gfExclusions, gfStatisticsExclusions, gfGridManagementService, gfExclusionManagerDialogService, $translate) {
+  function init() {
+    updateModel();
   }
-  function createService(gridInstanceId, isAutoSaveState) {
-    return new GroupStateService(gridInstanceId, isAutoSaveState);
+  function getService() {
+    return $scope.exclusionsType == gridReport.model.ExclusionsTypes.StatisticsExclusions ? gfStatisticsExclusions.instance($scope.gridInstanceId) : gfExclusions.instance($scope.gridInstanceId);
   }
-  restoreStateService.instance = function(gridInstanceId, isAutoSaveState) {
+  function updateModel() {
+    $scope.isWorking = true;
+    var rawGridData = gfGridManagementService.getRawData($scope.gridInstanceId);
+    var identifiers = _.map(rawGridData[0].values, function(v) {
+      return v.rowKey;
+    });
+    getService().filterExclusions(identifiers);
+    function getCompanyName(id) {
+      return _.findWhere(rawGridData, {id:"TR.CommonName"}).values[id].value;
+    }
+    $scope.exclusions = _.map(getService().getExcludedIdentifiers(), function(id) {
+      return{id:id, companyName:getCompanyName(id), isSelected:false};
+    });
+    $scope.isWorking = false;
+  }
+  function areEveryIdentifiersSelected() {
+    return _.every($scope.exclusions, function(e) {
+      return e.isSelected;
+    });
+  }
+  function toogleSelectionForAllIdentifiers() {
+    var val = !anyExclusionsSelected();
+    _.each($scope.exclusions, function(e) {
+      e.isSelected = val;
+    });
+  }
+  function anyExclusionsSelected() {
+    return _.some($scope.exclusions, function(e) {
+      return e.isSelected;
+    });
+  }
+  function save() {
+    if (anyExclusionsSelected()) {
+      var unselectedExclusions = _.where($scope.exclusions, {isSelected:false});
+      getService().setExclusions(_.pluck(unselectedExclusions, "id"));
+    }
+    close();
+  }
+  function close() {
+    gfExclusionManagerDialogService.closeDialog();
+  }
+  function getExcludedMessage() {
+    return $scope.exclusionsType == gridReport.model.ExclusionsTypes.Exclusions ? $translate.instant("EXCLUDED") : $translate.instant("EXCLUDED_FROM_STATISTICS");
+  }
+  $scope.getExcludedMessage = getExcludedMessage;
+  $scope.isWorking = false;
+  $scope.exclusions = null;
+  $scope.toogleSelectionForAllIdentifiers = toogleSelectionForAllIdentifiers;
+  $scope.areEveryIdentifiersSelected = areEveryIdentifiersSelected;
+  $scope.save = save;
+  $scope.close = close;
+  $scope.anyExclusionsSelected = anyExclusionsSelected;
+  init();
+}]);
+goog.provide("gridReport.directives.ExclusionsManagerDirective");
+goog.require("gridReport.directives.ExclusionsManagerController");
+goog.require("gridReport.model.ExclusionsTypes");
+gridReport.Module.directive("gfExclusionsManager", [function() {
+  return{restrict:"E", templateUrl:"scripts/directives/exclusionsManager/ExclusionsManager.html", scope:{gridInstanceId:"=", identifiers:"=", isVisible:"=", exclusionsType:"="}, controller:"ExclusionsManagerController", link:function(scope, element) {
+    scope.element = $(element).closest(".modal-dialog");
+    scope.element.draggable({handle:".modal-header"});
+  }};
+}]);
+goog.provide("gridReport.services.Exclusions");
+goog.require("gridReport.model.GridEvents");
+gridReport.Module.factory("gfExclusions", ["gfEventsAggregator", function(gfEventsAggregator) {
+  function createService(id) {
+    var exclusions = {};
+    var excludedIdentifiers = [];
+    function isExclusionsNotChanged(identifiers) {
+      return excludedIdentifiers.length == identifiers.length && (_.difference(excludedIdentifiers, identifiers).length == 0 && _.difference(identifiers, excludedIdentifiers).length == 0);
+    }
+    var service = {};
+    service.isHidden = function(identifier) {
+      return!!exclusions[identifier];
+    };
+    service.setExclusions = function(identifiers) {
+      if (isExclusionsNotChanged(identifiers)) {
+        return;
+      }
+      excludedIdentifiers = identifiers;
+      exclusions = _.reduce(identifiers, function(map, item) {
+        map[item] = true;
+        return map;
+      }, {});
+      gfEventsAggregator.getChildAggregator(id).raiseEvent(gridReport.model.GridEvents.identifiersExcluded, identifiers, gridReport.model.ExclusionsTypes.Exclusions);
+    };
+    service.getExcludedIdentifiers = function() {
+      return excludedIdentifiers;
+    };
+    service.exclude = function(identifiers) {
+      var addedToExclusion = _.difference(identifiers, excludedIdentifiers);
+      if (addedToExclusion.length == 0) {
+        return addedToExclusion;
+      }
+      service.setExclusions(_.union(excludedIdentifiers, addedToExclusion));
+      return addedToExclusion;
+    };
+    service.removeFromExcluded = function(identifiers) {
+      service.setExclusions(_.difference(excludedIdentifiers, identifiers));
+    };
+    service.filterExclusions = function(identifiers) {
+      var currentExclusions = _.sortBy(excludedIdentifiers);
+      var identifiersToExclude = _.sortBy(_.intersection(excludedIdentifiers, identifiers));
+      if (_.isEqual(currentExclusions, identifiersToExclude)) {
+        return;
+      }
+      service.setExclusions(_.intersection(excludedIdentifiers, identifiers));
+    };
+    return service;
+  }
+  var services = {};
+  return{instance:function(gridInstanceId) {
     if (!services[gridInstanceId]) {
-      services[gridInstanceId] = createService(gridInstanceId, isAutoSaveState);
+      services[gridInstanceId] = createService(gridInstanceId);
     }
     return services[gridInstanceId];
-  };
-  restoreStateService.clear = function(gridInstanceId) {
+  }, clear:function(gridInstanceId) {
     if (services[gridInstanceId]) {
-      services[gridInstanceId].dispose();
       delete services[gridInstanceId];
     }
+  }};
+}]);
+goog.provide("gridReport.controllers.ExportControllerBase");
+goog.require("gridReport.services.Exclusions");
+gridReport.Module.controller("ExportControllerBase", ["$scope", "$translate", "gfExclusions", "gfGridManagementService", function($scope, $translate, gfExclusions, gfGridManagementService) {
+  function getIdentifiersForExport(isActionForAll) {
+    return isActionForAll ? gfGridManagementService.getVisibleIdentifiers($scope.gridInstanceId) : $scope.getSelectedIdentifiers();
+  }
+  function getDisabledFuncByCondition(isActionForAll, isDisabled) {
+    return function() {
+      var disabledValue = isDisabled ? isDisabled() : false;
+      return disabledValue || !isActionForAll && !anyIdentifiersChecked();
+    };
+  }
+  function getMenuItemByLabel(label) {
+    return _.find($scope.menuItems, function(item) {
+      return item.label == $translate.instant(label);
+    });
+  }
+  function isDisabled() {
+    var visibleIds = $scope.getVisibleIdentifiers();
+    return!visibleIds || !visibleIds.length;
+  }
+  function anyIdentifiersChecked() {
+    var selected = $scope.getSelectedIdentifiers();
+    var selectedLength = selected ? selected.length : 0;
+    return selectedLength > 0;
+  }
+  function getVisibleIdentifiers() {
+    return _.filter($scope.allTickers, function(ticker) {
+      return!gfExclusions.instance($scope.gridInstanceId).isHidden(ticker);
+    });
+  }
+  function getSelectedIdentifiers() {
+    return _.pluck($scope.selectedRows, "rowKey");
+  }
+  $scope.menuItems = [];
+  $scope.getIdentifiersForExport = getIdentifiersForExport;
+  $scope.getDisabledFuncByCondition = getDisabledFuncByCondition;
+  $scope.addMenuItem = function(label, getAction, isActionForAll, isDisabled, isVisible) {
+    $scope.menuItems.push({label:$translate.instant(label), action:getAction(isActionForAll), disabled:getDisabledFuncByCondition(isActionForAll, isDisabled), visible:isVisible});
   };
-  return restoreStateService;
+  $scope.getMenuItemByLabel = getMenuItemByLabel;
+  $scope.isDisabled = isDisabled;
+  $scope.anyIdentifiersChecked = anyIdentifiersChecked;
+  $scope.getVisibleIdentifiers = getVisibleIdentifiers;
+  $scope.getSelectedIdentifiers = getSelectedIdentifiers;
+}]);
+goog.provide("gridReport.directives.ExportContextMenuOptions");
+gridReport.directives.ExportContextMenuOptions = function(options) {
+  gridReport.jsUtils.mergeProperties(this, options, ["canExportAllAsValues", "canExportAllAsFormulas", "canExportSelectedAsFormulas", "canExportSelectedAsValues"]);
+};
+gridReport.directives.ExportContextMenuOptions.prototype.canExportAllAsValues = true;
+gridReport.directives.ExportContextMenuOptions.prototype.canExportAllAsFormulas = true;
+gridReport.directives.ExportContextMenuOptions.prototype.canExportSelectedAsFormulas = true;
+gridReport.directives.ExportContextMenuOptions.prototype.canExportSelectedAsValues = true;
+goog.provide("gridReport.directives.ExportToExcelController");
+gridReport.Module.controller("ExportToExcelController", ["$scope", "$translate", "gfGridManagementService", "gfEventsAggregator", function($scope, $translate, gfGridManagementService, gfEventsAggregator) {
+  function getExportFilename() {
+    var date = new Date;
+    var dateString = [date.getMonthName(), date.getDate(), date.getFullYear(), date.getHours(), date.getMinutes(), date.getSeconds()].join("_");
+    return "GridExport_" + dateString;
+  }
+  function getTitle() {
+    var selectedTemplate = gfGridManagementService.getSelectedTemplate($scope.gridInstanceId);
+    return selectedTemplate ? selectedTemplate.name : undefined;
+  }
+  function getExportToExcelAsValuesAction(exportAll) {
+    return function() {
+      var aggregator = gfEventsAggregator.getChildAggregator($scope.gridInstanceId);
+      if (exportAll) {
+        aggregator.raiseEvent(gridReport.model.GridEvents.exportAllAsValuesToExcel);
+      } else {
+        aggregator.raiseEvent(gridReport.model.GridEvents.exportSelectedAsValuesToExcel);
+      }
+      if ($scope.overrideExportAsValues) {
+        $scope.overrideExportAsValues(exportAll);
+      } else {
+        gfGridManagementService.exportToExcel($scope.gridInstanceId, {fileName:getExportFilename(), title:getTitle(), exportAll:exportAll});
+      }
+    };
+  }
+  function getExportToExcelAsFormulaAction(exportAll) {
+    return function() {
+      var selectedIdentifiersUniverse = exportAll ? null : $scope.getSelectedIdentifiers().join(",");
+      var isTransposed = gfGridManagementService.isTransposed($scope.gridInstanceId);
+      var aggregator = gfEventsAggregator.getChildAggregator($scope.gridInstanceId);
+      if (exportAll) {
+        aggregator.raiseEvent(gridReport.model.GridEvents.exportAllAsFormulaToExcel);
+      } else {
+        aggregator.raiseEvent(gridReport.model.GridEvents.exportSelectedAsFormulaToExcel);
+      }
+      if ($scope.overrideExportAsFormula) {
+        $scope.overrideExportAsFormula(exportAll);
+      } else {
+        gfGridManagementService.exportToExcelAsFormula($scope.gridInstanceId, {fileName:getExportFilename(), universe:selectedIdentifiersUniverse, isTransposed:isTransposed});
+      }
+    };
+  }
+  function getDefaultItem() {
+    if ($scope.options.canExportAllAsValues && $scope.options.canExportSelectedAsValues) {
+      return $scope.anyIdentifiersChecked() ? $scope.getMenuItemByLabel("EXPORT_SELECTED_AS_VALUES") : $scope.getMenuItemByLabel("EXPORT_ALL_AS_VALUES");
+    } else {
+      if ($scope.options.canExportAllAsFormulas && $scope.options.canExportSelectedAsFormulas) {
+        return $scope.anyIdentifiersChecked() ? $scope.getMenuItemByLabel("EXPORT_SELECTED_AS_FORMULAS") : $scope.getMenuItemByLabel("EXPORT_ALL_AS_FORMULAS");
+      } else {
+        return undefined;
+      }
+    }
+  }
+  function initMenu() {
+    $scope.isDataLoading = false;
+    $scope.addMenuItem("EXPORT_ALL_AS_VALUES", getExportToExcelAsValuesAction, true, function() {
+      return $scope.isDataLoading;
+    }, function() {
+      return $scope.options.canExportAllAsValues;
+    });
+    $scope.addMenuItem("EXPORT_ALL_AS_FORMULAS", getExportToExcelAsFormulaAction, true, null, function() {
+      return $scope.options.canExportAllAsFormulas;
+    });
+    $scope.addMenuItem("EXPORT_SELECTED_AS_VALUES", getExportToExcelAsValuesAction, false, function() {
+      return $scope.isDataLoading;
+    }, function() {
+      return $scope.options.canExportSelectedAsValues;
+    });
+    $scope.addMenuItem("EXPORT_SELECTED_AS_FORMULAS", getExportToExcelAsFormulaAction, false, null, function() {
+      return $scope.options.canExportSelectedAsFormulas;
+    });
+  }
+  function subscribe() {
+    var aggregator = gfEventsAggregator.getChildAggregator($scope.gridInstanceId);
+    aggregator.addHandler(gridReport.model.GridEvents.loadingStarted, function() {
+      $scope.isDataLoading = true;
+    });
+    aggregator.addHandler(gridReport.model.GridEvents.loadingEnded, function() {
+      $scope.isDataLoading = false;
+    });
+  }
+  $scope.getDefaultItem = getDefaultItem;
+  initMenu();
+  if ($scope.gridInstanceId) {
+    subscribe();
+  }
+  $scope.$watch("gridInstanceId", function(newVal, oldVal) {
+    if (newVal === oldVal) {
+      return;
+    }
+    subscribe();
+  });
+}]);
+goog.provide("gridReport.directives.ExportToExcelDirective");
+goog.require("gridReport.directives.ButtonWithContextMenuDirective");
+goog.require("gridReport.controllers.ExportControllerBase");
+goog.require("gridReport.directives.ExportToExcelController");
+goog.require("gridReport.directives.ExportContextMenuOptions");
+gridReport.Module.directive("gfExportToExel", [function() {
+  return{restrict:"E", transclude:false, scope:{gridInstanceId:"=", buttonWithMenuOptions:"=", allTickers:"=", selectedRows:"=", isEnabled:"=", options:"=", isVisible:"=", overrideExportAsFormula:"=?", overrideExportAsValues:"=?"}, replace:true, controller:"ExportControllerBase", templateUrl:"scripts/directives/exportToExcel/ExportToExcel.html", link:function($scope, $element, attr) {
+    if (attr.hasOwnProperty("isVisible")) {
+      $scope.$watch("isVisible", function(value) {
+        if (value) {
+          $element.show();
+        } else {
+          $element.hide();
+        }
+      });
+    }
+  }};
+}]);
+goog.provide("gridReport.directives.SharingService");
+gridReport.Module.service("gfSharingService", ["$q", "$http", "gfConfig", function($q, $http, gfConfig) {
+  function wrapCall(call) {
+    var canceller = $q.defer();
+    var cancel = function(reason) {
+      canceller.resolve(reason);
+    };
+    var promise = call({timeout:canceller.promise});
+    return angular.extend(promise, {cancel:cancel});
+  }
+  function createGroup(groupItem) {
+    return{id:groupItem.Id, name:groupItem.Name, text:groupItem.Name, shared:groupItem.Shared, sharedLabel:groupItem.ShareLabel};
+  }
+  function getSharingFolderName() {
+    return gfConfig.sharingFolderName || "GridReportFormats";
+  }
+  var service = {};
+  service.getGroupsToShare = function(request) {
+    if (!request) {
+      throw new Error("request should be provided");
+    }
+    return wrapCall(function(options) {
+      return $http.get(gfConfig.host + "State/GroupsToShare/" + getSharingFolderName() + "/" + encodeURIComponent(request.templateName), options).then(function(data) {
+        return _.map(data.data.Groups, createGroup);
+      });
+    });
+  };
+  service.share = function(request) {
+    if (!request) {
+      throw new Error("request should be provided");
+    }
+    return wrapCall(function(options) {
+      var parameters = {GroupId:request.groupId};
+      if (!_.isEmpty(request.templateDescription)) {
+        parameters.Metadata = [{Key:"description", Value:request.templateDescription}];
+      }
+      return $http.post(gfConfig.host + "State/Share/" + getSharingFolderName() + "/" + encodeURIComponent(request.templateName), parameters, options).then(function(response) {
+        if (response && response.data) {
+          if (response.data.ErrorCode === 0) {
+            return response.data.Message;
+          } else {
+            return $q.reject({code:response.data.ErrorCode, message:response.data.Message});
+          }
+        } else {
+          return $q.reject();
+        }
+      });
+    });
+  };
+  service.unshare = function(request) {
+    if (!request) {
+      throw new Error("request should be provided");
+    }
+    return wrapCall(function(options) {
+      var parameters = {GroupId:request.groupId};
+      return $http.post(gfConfig.host + "/State/Unshare/" + getSharingFolderName() + "/" + encodeURIComponent(request.templateName), parameters, options).then(function(response) {
+        if (response && response.data) {
+          if (response.data.ErrorCode === 0) {
+            return response.data.Message;
+          } else {
+            return $q.reject(response.data.Message);
+          }
+        } else {
+          return $q.reject();
+        }
+      });
+    });
+  };
+  return service;
+}]);
+goog.provide("gridReport.directives.SharingDetailsController");
+goog.require("gridReport.directives.SharingService");
+gridReport.Module.controller("gfSharingDetailsController", ["$scope", "$element", "gfSharingService", "gfLogManager", function($scope, $element, gfSharingService, gfLogManager) {
+  function refreshSelection() {
+    $element.find(".group-selector").select2("val", _.map($scope.sharedGroups, "id"));
+  }
+  function stopAndRefresh() {
+    $scope.stopLoading();
+    refreshSelection();
+  }
+  function logError(error) {
+    if (error != null) {
+      gfLogManager.error(error);
+    }
+  }
+  $scope.isLoading = false;
+  $scope.groupsList = [];
+  $scope.sharedGroups = [];
+  $scope.startLoading = function() {
+    $scope.isLoading = true;
+  };
+  $scope.stopLoading = function() {
+    $scope.isLoading = false;
+  };
+  $scope.removeGroup = function(group) {
+    $scope.startLoading();
+    gfSharingService.unshare({templateName:$scope.templateName, groupId:group.id}).then(function() {
+      $scope.sharedGroups = _.without($scope.sharedGroups, group);
+      ($scope.onSharedStateChanged || angular.noop)({templateName:$scope.templateName, shared:!_.isEmpty($scope.sharedGroups)});
+    }, function(error) {
+      logError(error);
+    })["finally"](function() {
+      stopAndRefresh();
+    });
+  };
+  $scope.addGroup = function(group) {
+    $scope.startLoading();
+    gfSharingService.share({templateName:$scope.templateName, templateDescription:$scope.templateDescription, groupId:group.id}).then(function() {
+      $scope.sharedGroups.push(group);
+      ($scope.onSharedStateChanged || angular.noop)({templateName:$scope.templateName, shared:!_.isEmpty($scope.sharedGroups)});
+    }, function(error) {
+      logError(error);
+    })["finally"](function() {
+      stopAndRefresh();
+    });
+  };
+  $scope.startLoading();
+  gfSharingService.getGroupsToShare({templateName:$scope.templateName}).then(function(groups) {
+    _.each(groups, function(group) {
+      $scope.groupsList.push(group);
+      if (group.shared) {
+        $scope.sharedGroups.push(group);
+      }
+    });
+  }, function(error) {
+    logError(error);
+  })["finally"](function() {
+    stopAndRefresh();
+  });
+}]);
+goog.provide("gridReport.directives.SharingDetailsDirective");
+goog.require("gridReport.directives.SharingDetailsController");
+gridReport.Module.directive("gfSharingDetails", ["$translate", function($translate) {
+  return{restrict:"E", scope:{templateName:"=", templateDescription:"=", onSharedStateChanged:"&?"}, templateUrl:"scripts/directives/sharingDetails/SharingDetails.html", controller:"gfSharingDetailsController", link:function(scope, element) {
+    var select = element.find(".group-selector");
+    select.select2({data:scope.groupsList, multiple:true, placeholder:$translate.instant("SHARE_WITH")});
+    select.on("change", function(e) {
+      if (e.added) {
+        scope.addGroup(e.added);
+      }
+      if (e.removed) {
+        scope.removeGroup(e.removed);
+      }
+      scope.$apply();
+    });
+    scope.$watch("isLoading", function() {
+      select.select2(scope.isLoading == true ? "disable" : "enable");
+    });
+  }};
+}]);
+goog.provide("gridReport.filters.ValueFormatter");
+gridReport.Module.filter("gfValueFormatter", [function() {
+  return function(value, format) {
+    if ($.jqx.dataFormat.isDate(value)) {
+      return $.jqx.dataFormat.formatdate(value, format, undefined);
+    } else {
+      if ($.jqx.dataFormat.isNumber(value)) {
+        return $.jqx.dataFormat.formatnumber(value, format, undefined);
+      }
+    }
+    return value;
+  };
+}]);
+goog.provide("gridReport.directives.SaveControlController");
+goog.require("gridReport.services.ReportTemplatesModelFactory");
+gridReport.Module.controller("gfSaveControlController", ["$scope", "$translate", "gfReportTemplatesModelFactory", function($scope, $translate, gfReportTemplatesModelFactory) {
+  var defaultIcon = "gf-icon-save-template";
+  var activeIcon = "gf-icon-save-template-active";
+  $scope.isSaveDisabled = false;
+  $scope.isSaveAsDisabled = false;
+  $scope.buttonIconClass = defaultIcon;
+  $scope.menuItemOptions = {openDirection:"right"};
+  $scope.$watch("model.isTemplateChanged", function() {
+    if ($scope.model) {
+      $scope.buttonIconClass = $scope.model.isTemplateChanged ? activeIcon : defaultIcon;
+      $scope.buttonIconClass += " icon-save";
+    }
+    updateIsSaveDisabledFlag();
+  });
+  $scope.$watch("model.isPersonalTemplate", function() {
+    updateIsSaveDisabledFlag();
+  });
+  function updateIsSaveDisabledFlag() {
+    if ($scope.model) {
+      $scope.isSaveDisabled = !$scope.model.isPersonalTemplate || !$scope.model.isTemplateChanged;
+    }
+  }
+  $scope.saveMenuItemClicked = function() {
+    callSaveAction();
+  };
+  $scope.saveAsMenuItemClicked = function() {
+    callSaveAsAction();
+  };
+  $scope.exportTemplate = function() {
+    $scope.model && $scope.model["export"]();
+  };
+  $scope.menuItems = [{label:$translate.instant("SAVE"), action:$scope.saveMenuItemClicked, disabled:function() {
+    return $scope.isSaveDisabled;
+  }, visible:true}, {label:$translate.instant("SAVE_AS"), action:$scope.saveAsMenuItemClicked, disabled:function() {
+    return $scope.isSaveAsDisabled;
+  }, bottomDelimiter:true, visible:true}, {label:$translate.instant("EXPORT_TEMPLATE"), action:$scope.exportTemplate, disabled:function() {
+    return $scope.isSaveAsDisabled;
+  }, visible:true}];
+  function callSaveAction() {
+    var onSaveCallback = $scope.onSave();
+    if (onSaveCallback) {
+      onSaveCallback();
+    } else {
+      if ($scope.model) {
+        $scope.model.save();
+      }
+    }
+  }
+  function callSaveAsAction() {
+    var onSaveAsCallback = $scope.onSaveAs();
+    if (onSaveAsCallback) {
+      onSaveAsCallback();
+    } else {
+      if ($scope.model) {
+        $scope.model.saveAs();
+      }
+    }
+  }
+  function getMenuItemByLabel(label) {
+    return _.find($scope.menuItems, function(item) {
+      return item.label == $translate.instant(label);
+    });
+  }
+  $scope.getDefaultMenuItem = function() {
+    if ($scope.model) {
+      if ($scope.isSaveDisabled && !$scope.isSaveAsDisabled) {
+        return getMenuItemByLabel("SAVE_AS");
+      } else {
+        if (!$scope.isSaveDisabled) {
+          return getMenuItemByLabel("SAVE");
+        }
+      }
+    }
+    return undefined;
+  };
+  $scope.$watch("gridInstanceId", function() {
+    setModel($scope.gridInstanceId);
+  });
+  $scope.$watch("universeContext", function() {
+    if ($scope.model) {
+      $scope.model.setUniverseContext($scope.universeContext);
+    }
+  });
+  function setModel(gridInstanceId) {
+    if (gridInstanceId) {
+      $scope.model = gfReportTemplatesModelFactory.getReportTemplateModel($scope.gridInstanceId);
+      $scope.model.setUniverseContext($scope.universeContext);
+    }
+  }
+  setModel($scope.gridInstanceId);
+}]);
+goog.provide("gridReport.directives.SaveControlDirective");
+goog.require("gridReport.directives.SaveControlController");
+gridReport.Module.directive("gfSaveControl", [function() {
+  return{restrict:"E", scope:{gridInstanceId:"=", isEnabled:"=", onSave:"&", onSaveAs:"&", universeContext:"="}, templateUrl:"scripts/directives/saveControl/SaveControl.html", controller:"gfSaveControlController"};
+}]);
+goog.provide("gridReport.directives.ObjectNameDirective");
+gridReport.Module.directive("gfObjectName", ["$compile", "gfDapsService", "gfConfig", function($compile, gfDapsService, gfConfig) {
+  return{restrict:"AC", require:"ngModel", link:function(scope, elm, attrs, ctrl) {
+    var forbiddenNames = gfConfig.reservedTemplateNames || [];
+    function checkValue(viewValue) {
+      var errMsg = "";
+      if (!_.isString(viewValue)) {
+        viewValue = "";
+      }
+      var lcText = viewValue.toLowerCase();
+      var fn = $.extend([], forbiddenNames);
+      for (var i = 0;i < fn.length;++i) {
+        var fname = fn[i].toLowerCase();
+        if (lcText == fname) {
+          errMsg = "Name" + " '" + viewValue + "' is a reserved name.";
+        }
+      }
+      if (!errMsg) {
+        errMsg = gfDapsService.getNameValidationMessage(viewValue);
+      }
+      if (errMsg) {
+        ctrl.$setValidity("objectName", false);
+        ctrl.errorMsg = errMsg;
+        return undefined;
+      }
+      ctrl.$setValidity("objectName", true);
+      return viewValue;
+    }
+    ctrl.$parsers.unshift(function(viewValue) {
+      return checkValue(viewValue);
+    });
+    ctrl.$formatters.push(function(value) {
+      var result = checkValue(value);
+      if (result == undefined) {
+        return value;
+      }
+      return result;
+    });
+  }};
+}]);
+goog.provide("gridReport.services.gfGroupingManagerDialogService");
+gridReport.Module.service("gfGroupingManagerDialogService", ["$modal", "$log", "$translate", function($modal, $log, $translate) {
+  var service = {}, popup;
+  service.closeDialog = function() {
+    if (popup) {
+      try {
+        popup.close();
+        popup = null;
+      } catch (e) {
+      }
+    }
+  };
+  service.openGroupingManagerDialog = function(gridInstanceId, isAutoSaveState, maxGroupsCount) {
+    var settings = {gridInstanceId:gridInstanceId, isAutoSaveState:isAutoSaveState, maxGroupsCount:maxGroupsCount};
+    service.closeDialog();
+    popup = $modal.open({windowClass:"gf-grouping-manager-modal gf-modal", templateUrl:"scripts/services/groupingManagerDialog/GroupingManagerDialog.html", controller:["$scope", "$modalInstance", "settings", function($scope, $modalInstance, settings) {
+      $scope.settings = settings;
+    }], resolve:{settings:function() {
+      return settings;
+    }}});
+    return popup;
+  };
+  return service;
+}]);
+goog.provide("gridReport.model.RowSectorData");
+gridReport.model.RowSectorData = function(classificationId, sectorId) {
+  this.classificationId = classificationId;
+  this.sectorId = sectorId;
+};
+goog.provide("gridReport.model.ColumnValue");
+goog.require("gridReport.model.RowSectorData");
+gridReport.model.ColumnValue = function(rowKey, value, sectors, curn, properties, isPublic) {
+  this.rowKey = rowKey;
+  this.value = value;
+  this.sectors = sectors || [];
+  this.curn = curn;
+  this.properties = properties;
+  this.isPublic = isPublic;
+};
+gridReport.model.ColumnValue.prototype.rowKey = undefined;
+gridReport.model.ColumnValue.prototype.value = undefined;
+gridReport.model.ColumnValue.prototype.sectors = undefined;
+gridReport.model.ColumnValue.prototype.curn = undefined;
+gridReport.model.ColumnValue.prototype.properties = undefined;
+gridReport.model.ColumnValue.prototype.isPublic = undefined;
+goog.provide("gridReport.directives.AutosuggestDirective");
+goog.require("gridReport.services.AutoSuggestServiceFactory");
+goog.require("gridReport.services.CategoryServiceFactory");
+gridReport.Module.directive("gfAutosuggest", ["$translate", "gfCategoryServiceFactory", "gfAutosuggestServiceFactory", "gfEventsAggregator", "gfDataCloudCommandService", "gfConfig", function($translate, gfCategoryServiceFactory, gfAutosuggestServiceFactory, gfEventsAggregator, gfDataCloudCommandService, gfConfig) {
+  return{restrict:"E", replace:true, template:"<div></div>", scope:{isEnabled:"=", universeContext:"=", gridInstanceId:"=", attachToBody:"=?", onGetFocus:"&?", onLostFocus:"&?"}, link:function(scope, element, attrs) {
+    function getCurrentUniverseContext() {
+      return scope.universeContext == scr.UniverseType.Private ? "&u=PVT" : scr.UniverseType.Public ? "&u=PUB" : "&u=PUB&u=PVT";
+    }
+    var categoryService = gfCategoryServiceFactory.createInstance();
+    var autosuggestService = gfAutosuggestServiceFactory.createInstance(getCurrentUniverseContext);
+    var control = new scr.control.GroupComboBox({showItemsOnButtonClick:false, width:167, placeHolderText:attrs.placeHolderText || $translate.instant("ADD_COLUMN"), dataRequestOnEveryKey:true, popUpOffsetY:6, popUpHeight:100, popUpWidth:300, showEllipsis:true, emptyMessage:$translate.instant("NO_MATCHING_DATA_ITEMS"), renderAsSibling:!scope.attachToBody});
+    control.isScreenFilterCombo = true;
+    control.render(element);
+    element.addClass(attrs["class"]);
+    control.getDataRequestEvent().listen(function() {
+      autosuggestService.search(control.getText(), function(data) {
+        control.setData(data, true);
+      });
+    }, this);
+    var throttledFieldSelection = _.throttle(function() {
+      var selecteItem = control.getSelectedItem().originalItem;
+      var addField = function(currentField) {
+        if (currentField.isBrokerWithoutValue && currentField.isBrokerWithoutValue()) {
+          gfEventsAggregator.getChildAggregator(scope.gridInstanceId).raiseEvent(gridReport.model.CommandEvents.showPicker, {mode:"search", universeContext:scope.universeContext, initialCommand:gridReport.model.Command.convert(currentField, gfConfig.enableAudit), openAddWithCommand:true, gridInstanceId:scope.gridInstanceId});
+          return;
+        }
+        gfEventsAggregator.getChildAggregator(scope.gridInstanceId).raiseEvent(gridReport.model.InternalEvents.addCommand, {command:gridReport.model.Command.convert(currentField, gfConfig.enableAudit), isUserTriggered:true, isFromUDIP:false});
+      };
+      switch(selecteItem.dataType) {
+        case scr.ObjectType.Expression:
+          gfDataCloudCommandService.get(scope.gridInstanceId).getExpressionByName(selecteItem.value).then(function(field) {
+            addField(new scr.output.Custom(field));
+          });
+          break;
+        case scr.ObjectType.MultiFactorRank:
+          gfDataCloudCommandService.get(scope.gridInstanceId).getSavedMultiFactorRankById(selecteItem.value).then(function(field) {
+            addField(field);
+          });
+          break;
+        default:
+          var code = selecteItem.value;
+          categoryService.getField(code, function(fieldMetadata) {
+            var field = new scr.output.Field(fieldMetadata);
+            if (scope.universeContext === scr.UniverseType.PublicPrivate) {
+              (scr.output.Item.applyAvailTransform || angular.noop)(field);
+            }
+            addField(field);
+          });
+      }
+      control.clearSearch();
+    }, 2E3);
+    control.getSelectedIndexChangedEvent().listen(function() {
+      throttledFieldSelection();
+    }, this);
+    control.getButtonClickedEvent().listen(function() {
+      gfEventsAggregator.getChildAggregator(scope.gridInstanceId).raiseEvent(gridReport.model.CommandEvents.showPicker, {mode:"search", text:control.getText(), universeContext:scope.universeContext, gridInstanceId:scope.gridInstanceId});
+    }, this);
+    control.getInputClickedEvent().listen(function() {
+      control.focusInput();
+    }, this);
+    control.getInputFocusedEvent().listen(function() {
+      control.hidePopUp();
+      (scope.onGetFocus || angular.noop)({});
+    }, this);
+    control.getCancelEditEvent().listen(function() {
+      control.clearSearch();
+      control.clearError();
+    }, this);
+    control.getBluredEvent().listen(function() {
+      control.clearSearch();
+      control.clearError();
+      (scope.onLostFocus || angular.noop)({});
+    });
+    control.getTextChangedEvent().listen(function() {
+      gfEventsAggregator.getChildAggregator(scope.gridInstanceId).raiseEvent(gridReport.model.GridEvents.qdipTextChanged);
+    });
+    scope.$on("$destroy", function() {
+      control.dispose();
+    });
+    scope.$watch("isEnabled", function(newValue) {
+      control.setIsEnabled(newValue);
+    });
+    element.css("float", "initial");
+  }};
+}]);
+goog.provide("gridReport.directives.AdvancedControlsContextMenuOptions");
+gridReport.directives.AdvancedControlsContextMenuOptions = function(options) {
+  gridReport.jsUtils.mergeProperties(this, options);
+};
+gridReport.directives.AdvancedControlsContextMenuOptions.prototype.canSeeStatistics = true;
+gridReport.directives.AdvancedControlsContextMenuOptions.prototype.canSeeCurrency = true;
+gridReport.directives.AdvancedControlsContextMenuOptions.prototype.canSeeDisplayOptions = true;
+gridReport.directives.AdvancedControlsContextMenuOptions.prototype.canSeeTotalsRowSwitch = true;
+gridReport.directives.AdvancedControlsContextMenuOptions.prototype.canSeeTransposeSwitch = true;
+gridReport.directives.AdvancedControlsContextMenuOptions.prototype.canSeeAdvancedSortingManager = true;
+gridReport.directives.AdvancedControlsContextMenuOptions.prototype.canSeeHeatMapSwitch = true;
+gridReport.directives.AdvancedControlsContextMenuOptions.prototype.canSeeRemoveAllFilters = true;
+goog.provide("gridReport.model.CustomAdvancedMenuOption");
+gridReport.model.CustomAdvancedMenuOptionType = {switchBtn:"switch", mainBtn:"main", menuBtn:"menu"};
+gridReport.model.CustomAdvancedMenuOption = function(options) {
+  _.extend(this, options);
+};
+gridReport.model.CustomAdvancedMenuOption.prototype.type = gridReport.model.CustomAdvancedMenuOptionType.switchBtn;
+gridReport.model.CustomAdvancedMenuOption.prototype.label = "";
+gridReport.model.CustomAdvancedMenuOption.prototype.inEnabledState = false;
+gridReport.model.CustomAdvancedMenuOption.prototype.visible = true;
+gridReport.model.CustomAdvancedMenuOption.prototype.action = null;
+gridReport.model.CustomAdvancedMenuOption.prototype.bottomDelimiter = false;
+gridReport.model.CustomAdvancedMenuOption.prototype.disabled = false;
+goog.provide("gridReport.directives.CurrencyDialogController");
+gridReport.Module.controller("gfCurrencyDialogController", ["$scope", "$timeout", "$modalInstance", "gfGridManagementService", "gridInstanceId", "options", function($scope, $timeout, $modalInstance, gfGridManagementService, gridInstanceId, options) {
+  $scope.gridInstanceId = gridInstanceId;
+  $scope.model = {customCurrencies:options.customCurrencies};
+  $scope.model.currency = getSelectedCurrencyFromGrid();
+  $scope.closeDialog = function() {
+    $modalInstance.close();
+    $scope.$destroy();
+  };
+  $scope.ok = function() {
+    $scope.closeDialog();
+    $timeout(function() {
+      updateCurrency($scope.model.currency);
+    });
+  };
+  function updateCurrency(currency) {
+    var globalParams = gfGridManagementService.getGlobalParameters($scope.gridInstanceId) || [];
+    globalParams = _.filter(globalParams, function(p) {
+      return p.name != "curn";
+    });
+    if (currency) {
+      globalParams.push({name:"curn", value:currency.id, uid:currency.uid, displayName:currency.name});
+    }
+    gfGridManagementService.setGlobalParameters($scope.gridInstanceId, globalParams);
+    gfGridManagementService.loadData($scope.gridInstanceId, true);
+  }
+  function getSelectedCurrencyFromGrid() {
+    var globalParams = gfGridManagementService.getGlobalParameters($scope.gridInstanceId) || [];
+    var currencyParameter = _.findWhere(globalParams, {name:"curn"});
+    return currencyParameter ? {id:currencyParameter.value, uid:currencyParameter.uid} : null;
+  }
+}]);
+goog.provide("gridReport.directives.CurrencyDialogService");
+goog.require("gridReport.directives.CurrencyDialogController");
+gridReport.Module.service("gfCurrencyDialogService", ["$modal", function($modal) {
+  var service = {};
+  service.openDialog = function(gridInstanceId, options) {
+    return $modal.open({templateUrl:"scripts/directives/advancedControls/currencyDialog/CurrencyDialog.html", controller:"gfCurrencyDialogController", windowClass:"gf-modal", resolve:{gridInstanceId:function() {
+      return gridInstanceId;
+    }, options:function() {
+      return options;
+    }}});
+  };
+  return service;
+}]);
+goog.provide("gridReport.directives.Themes");
+gridReport.Module.factory("gfThemes", ["$translate", function($translate) {
+  var themes = [{name:$translate.instant("SMALL"), value:new gridReport.model.GridTheme({theme:"solar-small", rowsHeight:18})}, {name:$translate.instant("MEDIUM"), value:new gridReport.model.GridTheme({theme:"solar-medium", rowsHeight:27})}, {name:$translate.instant("LARGE"), value:new gridReport.model.GridTheme({theme:"solar-large", rowsHeight:32})}];
+  var service = {};
+  service.getThemes = function() {
+    return themes;
+  };
+  service.setThemes = function(th) {
+    themes = th;
+  };
+  return service;
+}]);
+goog.provide("gridReport.directives.DisplayOptionsDialogController");
+goog.require("gridReport.directives.Themes");
+gridReport.Module.controller("gfDisplayOptionsDialogController", ["$scope", "$timeout", "$modalInstance", "gridInstanceId", "gfGridManagementService", "gfThemes", "gfEventsAggregator", function($scope, $timeout, $modalInstance, gridInstanceId, gfGridManagementService, gfThemes, gfEventsAggregator) {
+  $scope.model = {theme:gfGridManagementService.getTheme(gridInstanceId), themes:gfThemes.getThemes()};
+  $scope.closeDialog = function() {
+    $modalInstance.close();
+    $scope.$destroy();
+  };
+  $scope.ok = function() {
+    $scope.closeDialog();
+    $timeout(function() {
+      gfGridManagementService.setTheme(gridInstanceId, $scope.model.theme);
+      gfEventsAggregator.getChildAggregator(gridInstanceId).raiseEvent(gridReport.model.GridEvents.displayOptionsChanged);
+    }, 200);
+  };
+  $scope.selectTheme = function(theme) {
+    $scope.model.theme = theme;
+  };
+}]);
+goog.provide("gridReport.directives.DisplayOptionsDialogService");
+goog.require("gridReport.directives.DisplayOptionsDialogController");
+gridReport.Module.service("gfDisplayOptionsDialogService", ["$modal", function($modal) {
+  var service = {};
+  service.openDialog = function(gridInstanceId) {
+    return $modal.open({templateUrl:"scripts/directives/advancedControls/displayOptionsDialog/DisplayOptionsDialog.html", controller:"gfDisplayOptionsDialogController", windowClass:"gf-modal", resolve:{gridInstanceId:function() {
+      return gridInstanceId;
+    }}});
+  };
+  return service;
+}]);
+goog.provide("gridReport.directives.StatisticsDialogController");
+gridReport.Module.controller("gfStatisticsDialogController", ["$scope", "$timeout", "$modalInstance", "gridInstanceId", "options", "gfGridManagementService", function($scope, $timeout, $modalInstance, gridInstanceId, options, gfGridManagementService) {
+  $scope.gridInstanceId = gridInstanceId;
+  $scope.model = {algorithms:null, showPremiumDiscount:options.showPremiumDiscount};
+  function getSelectedAlgorithms(algorithms) {
+    var result = [];
+    angular.forEach(algorithms, function(algorithm) {
+      if (algorithm.selected) {
+        result.push(algorithm);
+      }
+    });
+    return result;
+  }
+  function updateStatistics(algorithms) {
+    gfGridManagementService.setStatistics($scope.gridInstanceId, algorithms);
+  }
+  $scope.ok = function() {
+    $scope.closeDialog();
+    $timeout(function() {
+      updateStatistics(getSelectedAlgorithms($scope.model.algorithms));
+    });
+  };
+  $scope.closeDialog = function() {
+    $modalInstance.close();
+    $scope.$destroy();
+  };
+}]);
+goog.provide("gridReport.directives.StatisticsDialogService");
+goog.require("gridReport.directives.StatisticsDialogController");
+gridReport.Module.service("gfStatisticsDialogService", ["$modal", function($modal) {
+  var service = {};
+  service.openDialog = function(gridInstanceId, options) {
+    return $modal.open({templateUrl:"scripts/directives/advancedControls/statisticsDialog/StatisticsDialog.html", controller:"gfStatisticsDialogController", windowClass:"gf-modal", resolve:{gridInstanceId:function() {
+      return gridInstanceId;
+    }, options:function() {
+      return options;
+    }}});
+  };
+  return service;
+}]);
+goog.provide("gridReport.directives.AdvancedControlsController");
+goog.require("gridReport.Module");
+goog.require("gridReport.services.AggregatesAlgorithmsService");
+goog.require("gridReport.directives.CurrencyDialogService");
+goog.require("gridReport.directives.StatisticsDialogService");
+goog.require("gridReport.directives.DisplayOptionsDialogService");
+goog.require("gridReport.model.CustomAdvancedMenuOption");
+gridReport.Module.controller("gfAdvancedControlsController", ["$scope", "$translate", "gfCurrencyDialogService", "gfDisplayOptionsDialogService", "gfStatisticsDialogService", "gfGridManagementService", "gfEventsAggregator", "gfAdvancedSortingManagerService", "$timeout", function($scope, $translate, gfCurrencyDialogService, gfDisplayOptionsDialogService, gfStatisticsDialogService, gfGridManagementService, gfEventsAggregator, gfAdvancedSortingManagerService, $timeout) {
+  $scope.menuItemOptions = {openDirection:"left"};
+  $scope.statisticsMenuItemClicked = function() {
+    gfStatisticsDialogService.openDialog($scope.gridInstanceId, {showPremiumDiscount:$scope.showPremiumDiscount});
+  };
+  $scope.currencyMenuItemClicked = function() {
+    gfCurrencyDialogService.openDialog($scope.gridInstanceId, {customCurrencies:$scope.customCurrencies});
+  };
+  $scope.displayOptionsMenuItemClicked = function() {
+    gfDisplayOptionsDialogService.openDialog($scope.gridInstanceId);
+  };
+  $scope.getResultOrValue = function(f) {
+    return gridReport.jsUtils.getResultOrValue(f);
+  };
+  var menuBtns = getMenuMainButtons().concat(getMenuSwitches(), getMenuButtons());
+  if ($scope.beforeItemsAppliedCallback && $scope.beforeItemsAppliedCallback()) {
+    $scope.beforeItemsAppliedCallback()(menuBtns);
+  }
+  $scope.menuButtons = menuBtns;
+  $scope.executeItemAction = executeItemAction;
+  function executeItemAction($event, item, isSwitch) {
+    if (gridReport.jsUtils.getResultOrValue(item.disabled)) {
+      $event.stopPropagation();
+    } else {
+      if (isSwitch && item.inEnabledState) {
+        item.action(!item.inEnabledState());
+      } else {
+        item.action();
+      }
+      if ($scope.isMenuOpened()) {
+        $timeout(function() {
+          $(document.body).click();
+        });
+      }
+    }
+  }
+  function isTotalsRowVisible() {
+    return gfGridManagementService.totalsRowVisible($scope.gridInstanceId);
+  }
+  function isTransposed() {
+    return gfGridManagementService.isTransposed($scope.gridInstanceId);
+  }
+  function transposeGrid() {
+    gfEventsAggregator.getChildAggregator($scope.gridInstanceId).raiseEvent(gridReport.model.GridEvents.beginTranspose);
+    $timeout(function() {
+      gfGridManagementService.transpose($scope.gridInstanceId);
+    });
+  }
+  function openAdvancedSortingManager() {
+    gfAdvancedSortingManagerService.openDialog($scope.gridInstanceId);
+  }
+  function getMenuSwitches() {
+    var res = [];
+    res.push({label:$translate.instant("SUMMARY_ROW"), inEnabledState:isTotalsRowVisible, disabled:function() {
+      return!$scope.options.canSeeTotalsRowSwitch;
+    }, visible:function() {
+      return $scope.options.canSeeTotalsRowSwitch;
+    }, action:function(value) {
+      gfGridManagementService.totalsRowVisible($scope.gridInstanceId, value);
+    }, bottomDelimiter:!$scope.options.canSeeHeatMapSwitch && !$scope.options.canSeeTransposeSwitch});
+    res.push({label:$translate.instant("TRANSPOSE"), inEnabledState:isTransposed, disabled:false, visible:$scope.options.canSeeTransposeSwitch, action:transposeGrid, bottomDelimiter:!$scope.options.canSeeHeatMapSwitch});
+    res.push({label:$translate.instant("HEAT_MAP"), inEnabledState:isHeatMapEnabled, disabled:false, visible:function() {
+      return $scope.options.canSeeHeatMapSwitch;
+    }, action:switchHeatMap, bottomDelimiter:$scope.options.canSeeHeatMapSwitch && !$scope.options.canSeeRemoveAllFilters});
+    res.push({label:$translate.instant("REMOVE_ALL_FILTERS"), disabled:isRemoveAllFiltersDisabled, visible:function() {
+      return $scope.options.canSeeRemoveAllFilters;
+    }, action:removeAllFilters, bottomDelimiter:$scope.options.canSeeRemoveAllFilters});
+    return res;
+  }
+  function isHeatMapEnabled() {
+    var heatMapState = gfGridManagementService.heatMapState($scope.gridInstanceId);
+    return heatMapState && heatMapState.isEnabled;
+  }
+  function isRemoveAllFiltersDisabled() {
+    return!_.any(gfGridManagementService.getColumns($scope.gridInstanceId), function(column) {
+      return column.isFilterApplied();
+    });
+  }
+  function switchHeatMap(value) {
+    var state = gfGridManagementService.heatMapState($scope.gridInstanceId);
+    if (state) {
+      state.isEnabled = value;
+    }
+    gfGridManagementService.heatMapState($scope.gridInstanceId, state);
+    gfEventsAggregator.getChildAggregator($scope.gridInstanceId).raiseEvent(gridReport.model.GridEvents.heatMapChanged, state);
+  }
+  function removeAllFilters() {
+    $timeout(function() {
+      gfGridManagementService.removeAllFilters($scope.gridInstanceId);
+    });
+  }
+  function traslateWithEllipsis(key) {
+    return $translate.instant(key) + $translate.instant("ELLIPSIS");
+  }
+  function getMenuButtons() {
+    var menuButtons = [];
+    menuButtons.push({label:traslateWithEllipsis("STATISTICS"), action:$scope.statisticsMenuItemClicked, disabled:function() {
+      return $scope.isStatisticsDisabled;
+    }, visible:function() {
+      return $scope.options.canSeeStatistics;
+    }});
+    menuButtons.push({label:traslateWithEllipsis("CURRENCY"), action:$scope.currencyMenuItemClicked, disabled:function() {
+      return $scope.isCurrencyDisabled;
+    }, visible:function() {
+      return $scope.options.canSeeCurrency;
+    }});
+    menuButtons.push({label:traslateWithEllipsis("DISPLAY_OPTIONS"), action:$scope.displayOptionsMenuItemClicked, disabled:function() {
+      return $scope.isDisplayOptionsDisabled;
+    }, visible:function() {
+      return $scope.options.canSeeDisplayOptions;
+    }});
+    return menuButtons;
+  }
+  function getMenuMainButtons() {
+    var menuMainButtons = [];
+    menuMainButtons.push({label:traslateWithEllipsis("ADVANCED_SORT"), action:openAdvancedSortingManager, disabled:function() {
+      return isTransposed() || !$scope.options.canSeeAdvancedSortingManager;
+    }, visible:function() {
+      return $scope.options.canSeeAdvancedSortingManager;
+    }, bottomDelimiter:true});
+    return menuMainButtons;
+  }
+}]);
+goog.provide("gridReport.directives.AdvancedControls");
+goog.require("gridReport.Module");
+goog.require("gridReport.directives.AdvancedControlsController");
+goog.require("gridReport.directives.AdvancedControlsContextMenuOptions");
+gridReport.Module.directive("gfAdvancedControls", [function() {
+  return{restrict:"E", replace:true, scope:{gridInstanceId:"=", customCurrencies:"=", showPremiumDiscount:"=", isEnabled:"=", beforeItemsAppliedCallback:"&", options:"="}, templateUrl:"scripts/directives/advancedControls/AdvancedControls.html", controller:"gfAdvancedControlsController", link:function(scope, element) {
+    scope.isMenuOpened = function() {
+      return $(element).find(".dropdown").hasClass("open");
+    };
+  }};
+}]);
+goog.provide("gridReport.directives.NumberInputDirective");
+gridReport.Module.directive("gfNumberInput", ["$translate", function($translate) {
+  return{restrict:"E", scope:{value:"=", max:"=", min:"=", placeholder:"=?", isEnabled:"="}, template:"<input gf-number-input-format " + 'ng-disabled="{{!isEnabled}}"' + 'class="gf-number-input" ' + 'type="text" ' + 'gf-decimals="2" ' + 'gf-min="min" ' + 'gf-max="max" ' + 'ng-attr-placeholder="{{placeholder}}" ' + 'ng-model="value"></input>', link:function(scope) {
+    scope.placeholder = scope.placeholder || $translate.instant("INPUT_NUMBER");
+  }};
+}]);
+goog.provide("gridReport.services.MultiFactorRankConverter");
+goog.require("gridReport.utils.CommandHelper");
+gridReport.Module.factory("gfMultiFactorRankConverter", ["$translate", "gfCommandHelper", function($translate, gfCommandHelper) {
+  var service = {};
+  service.createMultiFactorRankCommand = function(gridColumn, options) {
+    var metadata = getMetadata(gridColumn, options.methodology), formattingInfo = gridReport.services.MultiFactorRankToCommandConverter.getFormattingInfo(options);
+    if (options.hasOwnProperty("isBasedOnColumn")) {
+      metadata.isBasedOnColumn = options.isBasedOnColumn;
+    }
+    return new gridReport.model.Command({id:metadata.id, name:metadata.name, expression:metadata.adcSyntax + "/*" + metadata.name + "*/", dataProviderId:gridReport.model.Command.ADC_DATA_PROVIDER_ID, metadata:metadata, defaultOrder:scr.mfr.Order.LowerIsBetter, parameters:[], returnType:formattingInfo.returnType, decimalDigits:formattingInfo.decimalDigits, factors:[getFactor(gridColumn.command)]});
+  };
+  return service;
+  function getMethodologyName(methodology) {
+    switch(methodology) {
+      case scr.mfr.MFMethodology.PercentileScoring:
+        return $translate.instant("PERCENTILE");
+      case scr.mfr.MFMethodology.DecileScoring:
+        return $translate.instant("DECILE");
+      case scr.mfr.MFMethodology.QuintileScoring:
+        return $translate.instant("QUINTILE");
+      case scr.mfr.MFMethodology.OuartileScoring:
+        return $translate.instant("QUARTILE");
+      case scr.mfr.MFMethodology.NScoring:
+        return $translate.instant("RANK");
+      case scr.mfr.MFMethodology.ZScores:
+        return $translate.instant("ZSCORE");
+      default:
+        throw new Error("unknown methodology");;
+    }
+  }
+  function getExpressionWithoutName(expression, methodology, returnType) {
+    return "GRANK(Factor(" + gfCommandHelper.getDecoratedExpression(expression, returnType) + ", SortOrder=desc, optionIfNullFactor=ExclEntity, weight=1, UseRawAsFactor=False), RankType=" + getAdcMethodologyCode(methodology) + ', Universe="univ")';
+  }
+  function getAdcMethodologyCode(methodology) {
+    switch(methodology) {
+      case scr.mfr.MFMethodology.PercentileScoring:
+        return scr.mfr.ADC.MFMethodology.PercentileScoring;
+      case scr.mfr.MFMethodology.DecileScoring:
+        return scr.mfr.ADC.MFMethodology.DecileScoring;
+      case scr.mfr.MFMethodology.QuintileScoring:
+        return scr.mfr.ADC.MFMethodology.QuintileScoring;
+      case scr.mfr.MFMethodology.OuartileScoring:
+        return scr.mfr.ADC.MFMethodology.OuartileScoring;
+      case scr.mfr.MFMethodology.NScoring:
+        return scr.mfr.ADC.MFMethodology.NScoring;
+      case scr.mfr.MFMethodology.ZScores:
+        return scr.mfr.ADC.MFMethodology.ZScores;
+      default:
+        throw new Error("unknown methodology");;
+    }
+  }
+  function getMetadata(gridColumn, methodology) {
+    return{adcSyntax:getExpressionWithoutName(gridColumn.command.expression, methodology, gridColumn.command.returnType), currency:"Default", methodology:methodology, nTileOrder:scr.mfr.MFNTileOrder.Ascending, name:gridColumn.header + " " + getMethodologyName(methodology), partitionBy:"None", type:"multifactorrank", universe:scr.mfr.RankAgainst.CurrentUniverse, universeMetadata:null, factors:[{field:angular.copy(gridColumn.command.metadata), ifNotAvailable:scr.mfr.FactorIfNA.ExcludeSecurities, order:scr.mfr.Order.LowerIsBetter, 
+    useRaw:false, weight:1}]};
+  }
+  function getFactor(command) {
+    return new gridReport.model.Command({dataProviderId:command.dataProviderId, defaultOrder:command.defaultOrder, expression:command.expression, id:command.id, name:command.name, returnType:command.returnType, parameters:_.map(command.parameters, function(param) {
+      return new gridReport.model.CommandParameter(param);
+    }), metadata:{field:angular.copy(command.metadata), ifNotAvailable:scr.mfr.FactorIfNA.ExcludeSecurities, order:command.defaultOrder, useRaw:false, weight:1}});
+  }
+}]);
+goog.provide("gridReport.directives.Select2Directive");
+goog.require("gridReport.Module");
+gridReport.Module.directive("gfSelect2", ["$timeout", function($timeout) {
+  return{restrict:"E", scope:{selectList:"=", isEnabled:"=?", value:"=?", placeholder:"@?", onChange:"&?", resetOnChange:"=?"}, template:'<div class="selector"  style="width: 100%;"></div>', link:function(scope, element) {
+    var select = element.find(".selector");
+    select.select2({placeholder:scope.placeholder, data:scope.selectList});
+    select.on("change", function(event) {
+      if (scope.onChange && (_.isFunction(scope.onChange) && (_.isFunction(scope.onChange()) && event.added))) {
+        scope.onChange()(event.added);
+        if (scope.resetOnChange) {
+          select.select2("val", "");
+        }
+        $timeout(angular.noop);
+      }
+    });
+    scope.$watch("selectList", function(newValue, oldValue) {
+      select.select2({placeholder:scope.placeholder, data:newValue});
+    });
+    scope.$watch("value", function(newValue, oldValue) {
+      select.select2("val", newValue);
+    });
+  }};
 }]);
 goog.provide("gridReport.directives.CurrencyController");
 goog.require("gridReport.Module");
@@ -18660,22 +20032,103 @@ gridReport.Module.directive("gfCurrency", [function() {
     });
   }};
 }]);
-goog.provide("gridReport.directives.AddRowDirective");
-gridReport.Module.directive("gfAddRow", [function() {
-  return{replace:true, template:'<div style="padding:0 2px;">' + '<input type="text" ' + 'size="30" ' + 'is-enabled="values.toolbar.isTickerSearchEnabled" ' + 'ticker-selected="onTickerSelected(ticker)" ' + 'more-search-selected="onMoreSearchSelected(event)" ' + 'placeholder-text="placeholderText" ' + 'style="width:100%;" ' + "gf-ticker-autosuggest />" + "</div>", restrict:"E", scope:{gridInstanceId:"=", placeholderText:"="}, controller:["$scope", "gfGridManagementService", "gfEventsAggregator", 
-  function($scope, gfGridManagementService, gfEventsAggregator) {
-    $scope.onTickerSelected = function(ticker) {
-      if (ticker) {
-        gfGridManagementService.addIdentifiers($scope.gridInstanceId, [ticker]);
-      }
-    };
-    $scope.onMoreSearchSelected = function(event) {
-      gfEventsAggregator.getChildAggregator($scope.gridInstanceId).raiseEvent(gridReport.model.GridEvents.showMoreSearchResultsSelected, {event:event});
-    };
-  }]};
+goog.provide("gridReport.directives.GroupingToolbarController");
+goog.require("gridReport.model.GridReportExpandCollapseState");
+goog.require("gridReport.model.GridEvents");
+gridReport.Module.controller("GroupingToolbarController", ["$scope", "gfGridManagementService", "gfEventsAggregator", "$timeout", function($scope, gfGridManagementService, gfEventsAggregator, $timeout) {
+  var expandCollapseState = gridReport.model.GridReportExpandCollapseState.allCollapsed;
+  var currentGroups;
+  function allGroupsExpanded() {
+    return expandCollapseState == gridReport.model.GridReportExpandCollapseState.allExpanded;
+  }
+  function allGroupsCollapsed() {
+    return expandCollapseState == gridReport.model.GridReportExpandCollapseState.allCollapsed;
+  }
+  function expandAll() {
+    gfGridManagementService.toggleAllGroups($scope.gridInstanceId, true);
+  }
+  function collapseAll() {
+    gfGridManagementService.toggleAllGroups($scope.gridInstanceId, false);
+  }
+  function expandCollapseStateChanged() {
+    var prevState = expandCollapseState;
+    expandCollapseState = gfGridManagementService.getExpandCollapseState($scope.gridInstanceId);
+    if (prevState != expandCollapseState) {
+      $timeout(angular.noop);
+    }
+  }
+  function refreshModel() {
+    currentGroups = gfGridManagementService.getGrouping($scope.gridInstanceId);
+    expandCollapseStateChanged();
+  }
+  var oldIsVisible = false;
+  function isVisible() {
+    var newValue = currentGroups && (currentGroups.length && gfGridManagementService.getVisibleIdentifiers($scope.gridInstanceId).length);
+    if (newValue != oldIsVisible) {
+      gfEventsAggregator.getChildAggregator($scope.gridInstanceId).raiseEvent(gridReport.model.InternalEvents.groupingToolbarVisibilityChanged, {isVisible:newValue});
+      oldIsVisible = newValue;
+    }
+    return newValue;
+  }
+  function init() {
+    var aggregator = gfEventsAggregator.getChildAggregator($scope.gridInstanceId);
+    aggregator.addHandler(gridReport.model.GridEvents.groupingApplied, refreshModel);
+    aggregator.addHandler(gridReport.model.GridEvents.groupsStateRestored, expandCollapseStateChanged);
+    aggregator.addHandler(gridReport.model.GridEvents.groupExpanded, expandCollapseStateChanged);
+    aggregator.addHandler(gridReport.model.GridEvents.groupCollapsed, expandCollapseStateChanged);
+    aggregator.addHandler(gridReport.model.GridEvents.allGroupsCollapsed, expandCollapseStateChanged);
+    aggregator.addHandler(gridReport.model.GridEvents.allGroupsExpanded, expandCollapseStateChanged);
+  }
+  $scope.allGroupsExpanded = allGroupsExpanded;
+  $scope.allGroupsCollapsed = allGroupsCollapsed;
+  $scope.expandAll = expandAll;
+  $scope.collapseAll = collapseAll;
+  $scope.isVisible = isVisible;
+  if ($scope.gridInstanceId) {
+    init();
+  }
+  $scope.$watch("gridInstanceId", function(newVal, oldVal) {
+    if (newVal === oldVal) {
+      return;
+    }
+    init();
+  });
 }]);
-goog.provide("gridReport.services.gfPrintingLandscapeDialogService");
-gridReport.Module.service("gfPrintingLandscapeDialogService", ["$modal", "$log", "$translate", function($modal, $log, $translate) {
+goog.provide("gridReport.directives.GroupingToolbarDirective");
+goog.require("gridReport.directives.GroupingToolbarController");
+gridReport.Module.directive("gfGroupingToolbar", [function() {
+  return{restrict:"E", templateUrl:"scripts/directives/groupingToolbar/GroupingToolbar.html", scope:{gridInstanceId:"="}, controller:"GroupingToolbarController"};
+}]);
+goog.provide("gridReport.services.SystemCurrenciesService");
+gridReport.Module.factory("gfSystemCurrenciesService", ["$translate", function($translate) {
+  var systemCurrencies = [], service = {};
+  service.add = function(newCurrency) {
+    if (_.isEmpty(newCurrency)) {
+      throw new Error("No currency was specified.");
+    }
+    systemCurrencies.push(newCurrency);
+  };
+  service.remove = function(id) {
+    var index = systemCurrencies.length;
+    while (index--) {
+      if (systemCurrencies.id === id) {
+        systemCurrencies.splice(index, 1);
+      }
+    }
+  };
+  service.list = function() {
+    return systemCurrencies;
+  };
+  service.clear = function() {
+    systemCurrencies = [];
+  };
+  angular.forEach([{id:null, displayText:$translate.instant("NONE")}, {id:"Native", displayText:$translate.instant("NATIVE_CURRENCY")}], service.add);
+  return service;
+}]);
+goog.provide("gridReport.constants.CurrencySymbols");
+gridReport.Module.constant("gfCurrencySymbols", {USD:"$", GBP:"\u00a3", JPY:"\u00a5", EUR:"\u20ac"});
+goog.provide("gridReport.services.gfExclusionManagerDialogService");
+gridReport.Module.service("gfExclusionManagerDialogService", ["$modal", "$log", "$translate", function($modal, $log, $translate) {
   var service = {}, popup;
   service.closeDialog = function() {
     if (popup) {
@@ -18686,22 +20139,11 @@ gridReport.Module.service("gfPrintingLandscapeDialogService", ["$modal", "$log",
       }
     }
   };
-  service.openDialog = function(okCallback, callbackParams) {
-    var settings = {message:$translate.instant("NOTIFY_PRINT_MESSAGE"), title:$translate.instant("PRINT"), okCallback:okCallback, callbackParams:callbackParams, checkboxTitle:$translate.instant("DONT_ASK_AGAIN"), showCheckbox:true};
+  service.openExclusionManagerDialog = function(gridInstanceId, identifiers, exclusionsType) {
+    var settings = {gridInstanceId:gridInstanceId, identifiers:identifiers, exclusionsType:exclusionsType};
     service.closeDialog();
-    popup = $modal.open({windowClass:"gf-notification gf-modal", templateUrl:"scripts/services/printingLandscapeDialog/PrintingLandscapeDialog.html", controller:["$scope", "$modalInstance", "settings", function($scope, $modalInstance, settings) {
-      function execCallbackAndClose(callback) {
-        if (callback) {
-          callback(settings.callbackParams, $scope.settings.showCheckbox ? $scope.viewModel.doNotShowThisMessageAgain : undefined);
-        }
-        $modalInstance.close();
-      }
-      $scope.ok = _.partial(execCallbackAndClose, settings.okCallback);
-      $scope.closeDialog = function() {
-        service.closeDialog();
-      };
+    popup = $modal.open({windowClass:"gf-exclusions-manager-modal gf-modal modal", templateUrl:"scripts/services/exclusionDialog/ExclusionManagerDialog.html", controller:["$scope", "$modalInstance", "settings", function($scope, $modalInstance, settings) {
       $scope.settings = settings;
-      $scope.viewModel = {doNotShowThisMessageAgain:false};
     }], resolve:{settings:function() {
       return settings;
     }}});
@@ -18709,189 +20151,12 @@ gridReport.Module.service("gfPrintingLandscapeDialogService", ["$modal", "$log",
   };
   return service;
 }]);
-goog.provide("gridReport.dataProvider.BaseDataProvider");
-gridReport.dataProvider.BaseDataProvider = function() {
-};
-gridReport.dataProvider.BaseDataProvider.prototype.subscribe = function(columns) {
-};
-gridReport.dataProvider.BaseDataProvider.prototype.unsubscribe = function(columns) {
-};
-gridReport.dataProvider.BaseDataProvider.prototype.dataLoaded = undefined;
-gridReport.dataProvider.BaseDataProvider.prototype.dataLoading = undefined;
-gridReport.dataProvider.BaseDataProvider.prototype.clearData = undefined;
-gridReport.dataProvider.BaseDataProvider.prototype.startLoading = undefined;
-gridReport.dataProvider.BaseDataProvider.prototype.endLoading = undefined;
-gridReport.dataProvider.BaseDataProvider.prototype.suspend = undefined;
-gridReport.dataProvider.BaseDataProvider.prototype.resume = undefined;
-gridReport.dataProvider.BaseDataProvider.prototype.abort = undefined;
-gridReport.dataProvider.BaseDataProvider.prototype.loadData = undefined;
-gridReport.dataProvider.BaseDataProvider.prototype.loadPartialData = undefined;
-goog.provide("gridReport.directives.GroupingButtonDirective");
-gridReport.Module.directive("gfGroupingButton", ["gfGroupStateRestoreService", function(gfGroupStateRestoreService) {
-  return{restrict:"E", scope:{gridInstanceId:"=", isEnabled:"=", isAutoSaveState:"=", maxGroupsCount:"&"}, controller:["$scope", "gfEventsAggregator", "gfGroupingManagerDialogService", "gfGridManagementService", function($scope, gfEventsAggregator, gfGroupingManagerDialogService, gfGridManagementService) {
-    $scope.isGridTransposed = false;
-    var groupInstance = gfGroupStateRestoreService.instance($scope.gridInstanceId, $scope.isAutoSaveState), maxRowsCountExceeded = false;
-    function subscribe() {
-      var aggregator = gfEventsAggregator.getChildAggregator($scope.gridInstanceId);
-      aggregator.addHandler(gridReport.model.GridEvents.transposed, function(args) {
-        $scope.isGridTransposed = args.isTransposed;
-      });
-      aggregator.addHandler(gridReport.model.GridEvents.transposed, function(args) {
-        if (!args.isTransposed) {
-          var isCriteriasEnabled;
-          if (!groupInstance.stateId) {
-            groupInstance = gfGroupStateRestoreService.instance($scope.gridInstanceId, $scope.isAutoSaveState);
-          }
-          var groups = getCriteriasIds(groupInstance.criterias), state = groupInstance.loadLocalState(true, groupInstance.stateId);
-          if (state) {
-            isCriteriasEnabled = state.isGroupingEnabled;
-          } else {
-            isCriteriasEnabled = false;
-          }
-          var groupsToApply = isCriteriasEnabled ? groups : [];
-          if (groupsToApply.length > 0) {
-            showLoadingRows();
-            setGrouping(groupsToApply);
-            gfGridManagementService.loadData($scope.gridInstanceId, false);
-          }
-        }
-      });
-      aggregator.addHandler(gridReport.model.GridEvents.groupingApplied, function() {
-        gfGridManagementService.endLoading($scope.gridInstanceId, gridReport.model.GridContentPlacement.Rows, gridReport.model.LoadingReasons.Grouping);
-      });
-      aggregator.addHandler(gridReport.model.GridEvents.loadingEnded, function() {
-        var state = groupInstance.loadLocalState(true, groupInstance.stateId);
-        if (state && state.isGroupingEnabled) {
-          if (gfGridManagementService.getRowsCount($scope.gridInstanceId) > gfGridManagementService.getMaxRowsCount($scope.gridInstanceId)) {
-            setGrouping([]);
-            maxRowsCountExceeded = true;
-          } else {
-            if (!maxRowsCountExceeded) {
-              return;
-            }
-            showLoadingRows();
-            setGrouping(groupInstance.getCriteriasIds());
-            gfGridManagementService.loadData($scope.gridInstanceId, false);
-            maxRowsCountExceeded = false;
-          }
-        }
-      });
-    }
-    function getCriteriasIds(criterias) {
-      return _.pluck(criterias, "id");
-    }
-    function setGrouping(groups, isUserAction) {
-      gfGridManagementService.setGrouping($scope.gridInstanceId, groups, isUserAction);
-    }
-    function showLoadingRows() {
-      gfGridManagementService.startLoading($scope.gridInstanceId, gridReport.model.GridContentPlacement.Rows, gridReport.model.LoadingReasons.Grouping);
-    }
-    $scope.openGroupingManagerDialog = function() {
-      gfGroupingManagerDialogService.openGroupingManagerDialog($scope.gridInstanceId, $scope.isAutoSaveState, $scope.maxGroupsCount);
-    };
-    $scope.$watch("gridInstanceId", function(newVal, oldVal) {
-      if (newVal === oldVal) {
-        return;
-      }
-      subscribe();
-    });
-    if ($scope.gridInstanceId) {
-      subscribe($scope.gridInstanceId);
-      gfGroupStateRestoreService.instance($scope.gridInstanceId, $scope.isAutoSaveState);
-    }
-  }], templateUrl:"scripts/directives/groupingButton/GroupingButton.html", link:function(scope, element) {
-    element.bind("$destroy", function() {
-      gfGroupStateRestoreService.clear(scope.gridInstanceId);
-    });
-  }};
-}]);
-goog.provide("gridReport.directives.ExportToPdfContextMenuOptions");
-gridReport.directives.ExportToPdfContextMenuOptions = function(options) {
-  gridReport.jsUtils.mergeProperties(this, options, ["canPrintLandscape", "canPrintPortrait"]);
-};
-gridReport.directives.ExportToPdfContextMenuOptions.prototype.canExportLandscape = true;
-gridReport.directives.ExportToPdfContextMenuOptions.prototype.canExportPortrait = true;
-goog.provide("gridReport.directives.ExportToPdfDirective");
-goog.require("gridReport.directives.ButtonWithContextMenuDirective");
-goog.require("gridReport.directives.ExportToPdfContextMenuOptions");
-gridReport.Module.directive("gfExportToPdf", [function() {
-  return{restrict:"E", transclude:false, scope:{gridInstanceId:"=", isEnabled:"=", options:"=?", allTickers:"=", buttonWithMenuOptions:"=?", headerDescription:"=?", header:"=?", footer:"=?"}, replace:true, templateUrl:"scripts/directives/exportToPdf/ExportToPdf.html", controller:["$scope", "$translate", "gfGridManagementService", "gfEventsAggregator", "gfNotificationService", function($scope, $translate, gfGridManagementService, gfEventsAggregator, gfNotificationService) {
-    function subscribe() {
-      var aggregator = gfEventsAggregator.getChildAggregator($scope.gridInstanceId);
-      aggregator.addHandler(gridReport.model.GridEvents.loadingStarted, function() {
-        $scope.isDataLoading = true;
-      });
-      aggregator.addHandler(gridReport.model.GridEvents.loadingEnded, function() {
-        $scope.isDataLoading = false;
-      });
-    }
-    function getExportFilename() {
-      var date = new Date;
-      var dateString = [date.getMonthName(), date.getDate(), date.getFullYear(), date.getHours(), date.getMinutes(), date.getSeconds()].join("_");
-      return "GridExport_" + dateString;
-    }
-    function getTitle() {
-      var selectedTemplate = gfGridManagementService.getSelectedTemplate($scope.gridInstanceId), timePattern = "MMMM dd, yyyy HH:mm:ss", date;
-      date = Date.now().toString(timePattern);
-      return selectedTemplate ? selectedTemplate.name + " - " + date : date;
-    }
-    function exportToPdfAction(pageOrientation) {
-      var aggregator = gfEventsAggregator.getChildAggregator($scope.gridInstanceId);
-      if (pageOrientation === pdfExporter.models.PageOrientation.Landscape) {
-        aggregator.raiseEvent(gridReport.model.GridEvents.exportToPdfLandscape);
-      } else {
-        aggregator.raiseEvent(gridReport.model.GridEvents.exportToPdfPortrait);
-      }
-      var title = getTitle();
-      gfGridManagementService.exportToPdf($scope.gridInstanceId, {fileName:getExportFilename(), title:title, exportAll:true, printingOptions:new pdfExporter.models.PrintingOptions({pageOrientation:pageOrientation, header:$scope.header || title, headerDescription:$scope.headerDescription, footer:$scope.footer || $translate.instant("TR_COPYRIGHT", {year:(new Date).getFullYear()}), printCollapsedGroups:false, usePagedMedia:true})}).then(null, function() {
-        gfNotificationService.error($translate.instant("EXPORT_PDF_FAILED"));
-      });
-    }
-    var options = $scope.options || new gridReport.directives.ExportToPdfContextMenuOptions;
-    $scope.menuItems = [{label:$translate.instant("EXPORT_PDF_LANDSCAPE"), action:function() {
-      exportToPdfAction(pdfExporter.models.PageOrientation.Landscape);
-    }, disabled:function() {
-      return!$scope.isEnabled && $scope.isDataLoading;
-    }, visible:function() {
-      return options.canExportLandscape;
-    }}, {label:$translate.instant("EXPORT_PDF_PORTRAIT"), action:function() {
-      exportToPdfAction(pdfExporter.models.PageOrientation.Portrait);
-    }, disabled:function() {
-      return!$scope.isEnabled && $scope.isDataLoading;
-    }, visible:function() {
-      return options.canExportPortrait;
-    }}];
-    $scope.getDefaultMenuItem = function() {
-      return $scope.menuItems[0];
-    };
-    $scope.isExportEnabled = function() {
-      return $scope.isEnabled && (!$scope.isDataLoading && !_.isEmpty($scope.allTickers));
-    };
-    if ($scope.gridInstanceId) {
-      subscribe();
-    }
-    $scope.$watch("gridInstanceId", function(newVal, oldVal) {
-      if (newVal === oldVal) {
-        return;
-      }
-      subscribe();
-    });
-    $scope.$watch("options", function() {
-      options = $scope.options || new gridReport.directives.ExportToPdfContextMenuOptions;
-    });
-  }]};
-}]);
-goog.provide("gridReport.services.DataProviderResolver");
-gridReport.services.DataProviderResolver = function() {
-  this.resolve = function(providerId) {
-    return this[providerId] || this.defaultService;
-  };
-  this.register = function(providerId, provider) {
-    this[providerId] = provider;
-  };
-  this.unregister = function(providerId) {
-    delete this[providerId];
-  };
+goog.provide("gridReport.model.SectorLevelValue");
+gridReport.model.SectorLevelValue = function(classificationId, sectorId, sectorName, value) {
+  this.sectorId = sectorId;
+  this.classificationId = classificationId;
+  this.sectorName = sectorName;
+  this.value = value;
 };
 goog.provide("gridReport.services.BaseCommandConverter");
 (function() {
@@ -19349,6 +20614,1014 @@ goog.require("gridReport.services.ConverterFactory");
     }).length === 0));
   };
 })();
+goog.provide("gridReport.model.CommandParameter");
+gridReport.model.CommandParameter = function(options) {
+  if (options) {
+    if (options.hasOwnProperty("id")) {
+      this.id = options.id;
+    }
+    if (options.hasOwnProperty("name")) {
+      this.name = options.name;
+    }
+    if (options.hasOwnProperty("value")) {
+      this.value = options.value;
+    }
+    if (options.hasOwnProperty("defaultValue")) {
+      this.defaultValue = options.defaultValue;
+    }
+    if (options.hasOwnProperty("isVisible")) {
+      this.isVisible = options.isVisible;
+    }
+    if (options.hasOwnProperty("isMultiSelect")) {
+      this.isMultiSelect = options.isMultiSelect;
+    }
+    if (options.hasOwnProperty("values")) {
+      this.values = options.values;
+    }
+  }
+};
+gridReport.model.CommandParameter.prototype.id = null;
+gridReport.model.CommandParameter.prototype.name = null;
+gridReport.model.CommandParameter.prototype.value = null;
+gridReport.model.CommandParameter.prototype.isVisible = true;
+gridReport.model.CommandParameter.prototype.defaultValue = null;
+gridReport.model.CommandParameter.prototype.isMultiSelect = false;
+gridReport.model.CommandParameter.prototype.values = null;
+gridReport.model.CommandParameter.prototype.getValues = function() {
+  return this.values;
+};
+gridReport.model.CommandParameter.prototype.getValue = function() {
+  return this.value;
+};
+gridReport.model.CommandParameter.prototype.getDefaultValue = function() {
+  return this.defaultValue;
+};
+gridReport.model.CommandParameter.prototype.getValueOrDefault = function() {
+  return this.value != undefined && this.value != "" ? this.value : this.defaultValue;
+};
+gridReport.model.CommandParameter.convertAdcParameter = function(adcParameter) {
+  if (!adcParameter) {
+    throw "adcParameter should be provided.";
+  }
+  var isMultiSelect = !adcParameter.metadata ? false : adcParameter.metadata.isMultiSelection;
+  var getSelectedValues = function(adcParameter, isMultiSelect) {
+    if (!isMultiSelect) {
+      return null;
+    }
+    if (_.isEmpty(adcParameter.getValue())) {
+      return[];
+    }
+    var values = [];
+    var valIds = adcParameter.getValue().split(",");
+    for (var i = 0;i < valIds.length;i++) {
+      values.push({id:valIds[i], value:_.findWhere(adcParameter.getValues(), {id:valIds[i]}).name});
+    }
+    return values;
+  };
+  return new gridReport.model.CommandParameter({id:adcParameter.id, name:adcParameter.name, value:adcParameter.getValue(), defaultValue:adcParameter.getDefault(), isMultiSelect:isMultiSelect, values:getSelectedValues(adcParameter, isMultiSelect)});
+};
+gridReport.model.CommandParameter.convertAdcParameters = function(adcParameters) {
+  if (!adcParameters) {
+    throw "adcParameters should be provided.";
+  }
+  var commandParameters = [];
+  angular.forEach(adcParameters, function(parameter) {
+    commandParameters.push(gridReport.model.CommandParameter.convertAdcParameter(parameter));
+  });
+  return commandParameters;
+};
+goog.provide("gridReport.services.CurrencyService");
+goog.require("gridReport.Module");
+gridReport.Module.factory("gfCurrencies", ["gfConfig", "$q", "$translate", "$rootScope", function(gfConfig, $q, $translate, $rootScope) {
+  var cache = {}, udipEnvironmentConfig = gfConfig.udipOptions ? gfConfig.udipOptions.udipEnvironmentConfig : undefined, service = new UdipMetadataService(udipEnvironmentConfig);
+  function listAsync() {
+    var deferred = $q.defer();
+    if (cache.list) {
+      deferred.resolve(cache.list);
+      if (!$rootScope.$$phase) {
+        $rootScope.$apply();
+      }
+    } else {
+      service.loadCurrencies(function(response) {
+        cache.list = response;
+        deferred.resolve(response);
+        if (!$rootScope.$$phase) {
+          $rootScope.$apply();
+        }
+      });
+    }
+    return deferred.promise;
+  }
+  return{listAsync:listAsync};
+}]);
+goog.provide("gridReport.filters.DateFormatter");
+gridReport.Module.filter("gfDateFormatter", function() {
+  return function(date) {
+    return _.isDate(date) ? date.toString("MMM dd, yyyy") : date;
+  };
+});
+goog.provide("gridReport.directives.MenuController");
+gridReport.Module.controller("MenuController", ["$scope", "$timeout", function($scope, $timeout) {
+  var DEFAULT_OPTIONS = {width:null, position:{x:0, y:0}};
+  function executeMenuAction($event, item) {
+    if (!$scope.getResultOrValue(item.isDisabled) && (item.action && item.action != angular.noop)) {
+      item.action($event);
+      $scope.isVisible = false;
+    }
+    $event.stopPropagation();
+  }
+  function _onClickOutside() {
+    $scope.isVisible = false;
+    $scope.$apply($scope.onClickOutside);
+  }
+  function tryCollapseAll() {
+    var widget = getWidget();
+    if (widget) {
+      var initialDelay = widget.delay;
+      widget.delay = 0;
+      widget.collapseAll(null, true);
+      $timeout(function() {
+        widget.delay = initialDelay;
+      });
+    }
+  }
+  function getWidget() {
+    return $scope.menuElement.data("ui-menu");
+  }
+  function init() {
+    $scope.$watch("isVisible", function(value) {
+      if (value) {
+        tryCollapseAll();
+        $timeout(function() {
+          $scope.menuElement.menu();
+          $scope.menuElement.show();
+          $(document).on("click", _onClickOutside);
+        });
+      } else {
+        $scope.menuElement.hide();
+        $(document).off("click", _onClickOutside);
+      }
+    });
+    $scope.$on("$destroy", function() {
+      $(document).off("click", _onClickOutside);
+      getWidget() && $scope.menuElement.menu("destroy");
+    });
+  }
+  $scope.options = $.extend({}, DEFAULT_OPTIONS, $scope.options);
+  $scope.executeMenuAction = executeMenuAction;
+  $scope.getResultOrValue = gridReport.jsUtils.getResultOrValue;
+  $scope.onClickOutside = $scope.onClickOutside || angular.noop;
+  init();
+}]);
+goog.provide("gridReport.directives.MenuDirective");
+goog.require("gridReport.directives.MenuController");
+gridReport.Module.directive("gfMenu", [function() {
+  return{restrict:"E", scope:{options:"=", items:"=", isVisible:"=", onClickOutside:"="}, controller:"MenuController", templateUrl:"scripts/directives/menu/Menu.html", link:function(scope, element) {
+    scope.menuElement = $(element).find(".gf-menu");
+  }};
+}]);
+goog.provide("gridReport.directives.ContextMenuDirective");
+gridReport.Module.directive("gfContextMenu", ["$timeout", function($timeout) {
+  return{restrict:"E", template:"<div></div>", scope:{options:"=", menuItems:"=", visible:"=", position:"=", openDirection:"="}, link:function(scope, element) {
+    var menuId = 0;
+    var jqxContextMenu = element.jqxMenu({});
+    scope.$watch("options", function() {
+      jqxContextMenu.jqxMenu(scope.options);
+    }, true);
+    scope.$watch("menuItems", function() {
+      menuId = 0;
+      _.each(scope.menuItems, updateIds);
+      _.each(scope.menuItems, setupWatches);
+      jqxContextMenu.jqxMenu({source:scope.menuItems});
+    });
+    scope.$watch("openDirection", function() {
+      updateOpenDirection();
+    });
+    scope.$watch("visible", function() {
+      if (scope.visible) {
+        updateOpenDirection();
+        jqxContextMenu.jqxMenu("open", scope.position.x, scope.position.y);
+      } else {
+        jqxContextMenu.jqxMenu("close");
+      }
+    });
+    jqxContextMenu.on("itemclick", function(event) {
+      var item = getContextMenuItem(scope.menuItems, event.args.id);
+      if (item && (!item.disabled && item.action)) {
+        item.action(event);
+      }
+    });
+    jqxContextMenu.on("closed", function() {
+      if (arguments[0].args.hasOwnProperty("menuElements")) {
+        $timeout(function() {
+          scope.visible = false;
+        });
+      }
+    });
+    function updateOpenDirection() {
+      var direction = scope.openDirection ? scope.openDirection : "right";
+      _.forEach(scope.menuItems, function(menuItem) {
+        jqxContextMenu.jqxMenu("setItemOpenDirection", menuItem.id, direction, "down");
+      });
+    }
+    function getContextMenuItem(items, id) {
+      for (var key in items) {
+        if (items[key].id === id) {
+          return items[key];
+        }
+        var item = getContextMenuItem(items[key].items, id);
+        if (item) {
+          return item;
+        }
+      }
+      return undefined;
+    }
+    function generateMenuId() {
+      return "" + menuId++;
+    }
+    function updateIds(menuItem) {
+      walk(menuItem, function(item) {
+        _.extend(item, {id:generateMenuId()});
+      });
+    }
+    function setupWatches(menuItem) {
+      walk(menuItem, function(item) {
+        if (typeof item.disabled == "function") {
+          var isDisabledFunction = item.disabled;
+          item.disabled = isDisabledFunction();
+          var isDisabledScopeFunctionName = "menuItem_" + item.id + "_disabled";
+          scope[isDisabledScopeFunctionName] = isDisabledFunction;
+          scope.$watch(isDisabledScopeFunctionName + "()", function(newValue) {
+            item.disabled = newValue;
+            jqxContextMenu.jqxMenu("disable", item.id, newValue);
+          });
+        }
+      });
+    }
+    function walk(menuItem, fn) {
+      fn(menuItem);
+      if (menuItem.items) {
+        for (var key in menuItem.items) {
+          walk(menuItem.items[key], fn);
+        }
+      }
+    }
+    scope.$on("$destroy", function() {
+      jqxContextMenu.jqxMenu("destroy");
+    });
+  }};
+}]);
+goog.provide("gridReport.columnMath.ExressionEditorDirective");
+goog.require("gridReport.columnMath.ExpressionParser");
+gridReport.Module.directive("gfExpressionEditor", ["$translate", "gfExpressionParser", function($translate, gfExpressionParser) {
+  return{restrict:"E", replace:true, scope:{model:"=", enterPressed:"&"}, template:'<div class="gf-expression-editor">' + '<div class="gf-expression-editor-placeholder"></div>' + '<span class="textEditor-errorLabel" ' + 'ng-show="model.validationMessage">{{model.validationMessage}}</span>' + "</div>", link:function(scope, element) {
+    var model = scope.model;
+    var expressionEditor = CodeMirror(element.find(".gf-expression-editor-placeholder")[0], {value:model.expression, lineWrapping:true, autoCloseBrackets:true, placeholder:$translate.instant("CLICK_ON_ANY_COLUMN"), extraKeys:{"Enter":function() {
+      (scope.enterPressed || angular.noop)();
+    }}});
+    updateColors(expressionEditor);
+    model.expressionInserted = function(expression) {
+      setTextAtCursor(expression);
+    };
+    expressionEditor.on("change", function() {
+      var expressionValue = expressionEditor.getValue();
+      if (model.expression != expressionValue) {
+        scope.$apply(function() {
+          model.setExpression(expressionValue);
+          updateColors(expressionEditor);
+        });
+      }
+    });
+    scope.$on("$destroy", function() {
+      model.expressionInserted = null;
+      expressionEditor.off("change");
+    });
+    function updateColors(editor) {
+      var lineIndex = 0;
+      editor.eachLine(function(lineHandle) {
+        var tokens = null;
+        try {
+          tokens = gfExpressionParser.tokenize(lineHandle.text);
+        } catch (e) {
+        }
+        _.each(tokens, function(token) {
+          if (token.type == "string") {
+            editor.markText({line:lineIndex, ch:token.from}, {line:lineIndex, ch:token.to}, {atomic:true, className:scope.model.getExpressionClassName(token.value)});
+          }
+        });
+        lineIndex++;
+      });
+    }
+    function setTextAtCursor(text) {
+      var startPos = expressionEditor.getCursor(true);
+      expressionEditor.replaceRange(text, startPos, null);
+      expressionEditor.focus();
+    }
+  }};
+}]);
+goog.provide("gridReport.columnMath.ColumnSelectionColors");
+gridReport.Module.value("gfColumnSelectionColors", ["#0082FF", "#008000", "#9924CC", "#FF7F7F", "#00CC33", "#FF6600", "#CC0099"]);
+goog.provide("gridReport.columnMath.IdentifierCssClasses");
+gridReport.Module.value("gfIdentifierCssClasses", {"#0082FF":"first-identifier", "#008000":"second-identifier", "#9924CC":"third-identifier", "#FF7F7F":"fourth-identifier", "#00CC33":"fifth-identifier", "#FF6600":"sixth-identifier", "#CC0099":"seventh-identifier"});
+goog.provide("gridReport.utils.IdentifierHelper");
+gridReport.Module.factory("gfIdentifierHelper", function() {
+  var service = {}, symbols = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  service.getIdentifier = function(index) {
+    var dividend = index + 1, columnName = "", modulo;
+    while (dividend > 0) {
+      modulo = (dividend - 1) % 26;
+      columnName = symbols[modulo].toString() + columnName;
+      dividend = Math.floor((dividend - modulo) / 26);
+    }
+    return columnName;
+  };
+  return service;
+});
+goog.provide("gridReport.columnMath.ColumnMathManager");
+goog.require("gridReport.columnMath.ExpressionParser");
+goog.require("gridReport.model.Formula");
+goog.require("gridReport.services.FormulaValidator");
+goog.require("gridReport.columnMath.ColumnSelectionColors");
+goog.require("gridReport.columnMath.IdentifierCssClasses");
+goog.require("gridReport.utils.IdentifierHelper");
+gridReport.Module.service("gfColumnMathManager", ["gfExpressionParser", "gfFormulaValidator", "gfColumnSelectionColors", "gfIdentifierCssClasses", "gfIdentifierHelper", function(gfExpressionParser, gfFormulaValidator, gfColumnSelectionColors, gfIdentifierCssClasses, gfIdentifierHelper) {
+  var ColumnMathModel = function() {
+    this.columnsDictionary_ = {};
+    this.columns = [];
+    this.tokens_ = [];
+    this.columnAliases_ = {};
+  };
+  ColumnMathModel.prototype.expression = "";
+  ColumnMathModel.prototype.tokens_ = undefined;
+  ColumnMathModel.prototype.currentColorIndex_ = 0;
+  ColumnMathModel.prototype.columnsDictionary_ = null;
+  ColumnMathModel.prototype.columnAliases_ = null;
+  ColumnMathModel.prototype.columns = null;
+  ColumnMathModel.prototype.validationMessage = "";
+  ColumnMathModel.prototype.expressionInserted = null;
+  ColumnMathModel.prototype.expressionChanged = null;
+  ColumnMathModel.prototype.initialColumnId = null;
+  ColumnMathModel.prototype.getNextColor_ = function() {
+    if (this.currentColorIndex_ + 1 > gfColumnSelectionColors.length) {
+      this.currentColorIndex_ = 0;
+    }
+    return gfColumnSelectionColors[this.currentColorIndex_++];
+  };
+  ColumnMathModel.prototype.insertColumn = function(column, parentColumn) {
+    if (!column) {
+      throw new Error("column should be provided.");
+    }
+    var columnId = parentColumn == null ? column.id : this.addPostfix_(column.id, parentColumn);
+    if (this.columnsDictionary_[columnId] == null) {
+      this.columnsDictionary_[columnId] = {column:column};
+    }
+    var color;
+    if (this.columnsDictionary_[columnId].color) {
+      color = this.columnsDictionary_[columnId].color;
+    } else {
+      color = this.columnsDictionary_[columnId].color = this.getNextColor_();
+    }
+    (this.expressionInserted || angular.noop)("'" + columnId + "'", color);
+    return color;
+  };
+  ColumnMathModel.prototype.setFormula = function(formula) {
+    if (!formula) {
+      throw new Error("formula should be provided");
+    }
+    var tokens = gfExpressionParser.tokenize(formula.expression);
+    _.each(tokens, function(token) {
+      if (token.type === "name") {
+        var columnId, item = formula.columnIds[token.value];
+        if (item) {
+          if (item.id && item.parentId) {
+            columnId = this.addPostfix_(item.id, _.findWhere(this.columns, {id:item.parentId}));
+          } else {
+            columnId = item;
+          }
+          token.value = "'" + columnId + "'";
+        }
+      }
+    }, this);
+    this.setExpression(_.pluck(tokens, "value").join(""));
+  };
+  ColumnMathModel.prototype.getExpression = function() {
+    return this.expression.trim();
+  };
+  ColumnMathModel.prototype.getFormula = function() {
+    var columnIds = {}, index = 0, usedColumns = {}, tokens = gfExpressionParser.tokenize(this.getExpression());
+    _.each(tokens, function(token) {
+      if (token.type === "string" && this.columnsDictionary_[token.value]) {
+        var identifier;
+        if (usedColumns[token.value]) {
+          identifier = usedColumns[token.value];
+        } else {
+          identifier = gfIdentifierHelper.getIdentifier(index++);
+          usedColumns[token.value] = identifier;
+          var clmn = this.columnsDictionary_[token.value].column;
+          if (clmn && clmn.parentColumn) {
+            columnIds[identifier] = {id:clmn.id, parentId:clmn.parentColumn};
+          } else {
+            columnIds[identifier] = token.value;
+          }
+        }
+        token.value = identifier;
+      }
+    }, this);
+    return new gridReport.model.Formula({expression:_.pluck(tokens, "value").join(""), columnIds:columnIds});
+  };
+  ColumnMathModel.prototype.getAdcExpression = function() {
+    var tokens = gfExpressionParser.tokenize(this.expression);
+    _.each(tokens, function(token) {
+      if (token.type === "string" && this.columnsDictionary_[token.value]) {
+        token.value = "(" + this.columnsDictionary_[token.value].column.id + ")";
+      }
+    }, this);
+    return _.pluck(tokens, "value").join("");
+  };
+  ColumnMathModel.prototype.setExpression = function(expression) {
+    this.expression = expression;
+    this.parseExpression_();
+    this.validate();
+    (this.expressionChanged || angular.noop)(expression);
+  };
+  ColumnMathModel.prototype.flatten_ = function(columns) {
+    var flattenList = [];
+    _.each(columns, function(column) {
+      flattenList.push(column);
+      _.each(column.gridColumns, function(subColumn) {
+        flattenList.push(subColumn);
+      }, this);
+    }, this);
+    return flattenList;
+  };
+  ColumnMathModel.prototype.addPostfix_ = function(expression, parentColumn) {
+    return parentColumn ? expression + "/*" + this.getColumnAlias_(parentColumn) + "*/" : expression;
+  };
+  ColumnMathModel.prototype.setColumns = function(columns) {
+    this.columns = this.flatten_(columns);
+    this.columnsDictionary_ = {};
+    _.each(this.columns, function(column) {
+      var columnId;
+      if (column.parentColumn && this.columnsDictionary_[column.parentColumn]) {
+        columnId = this.addPostfix_(column.id, this.columnsDictionary_[column.parentColumn].column);
+      } else {
+        columnId = column.id;
+      }
+      this.columnsDictionary_[columnId] = {column:column};
+    }, this);
+    this.parseExpression_();
+  };
+  ColumnMathModel.prototype.parseExpression_ = function() {
+    if (this.isValid()) {
+      var tokens = gfExpressionParser.tokenize(this.getExpression());
+      _.each(tokens, function(token) {
+        if (token.type === "string") {
+          if (this.columnsDictionary_[token.value] && this.columnsDictionary_[token.value].color == null) {
+            this.columnsDictionary_[token.value].color = this.getNextColor_();
+          }
+        }
+      }, this);
+      this.tokens_ = tokens;
+    }
+  };
+  ColumnMathModel.prototype.getExpressionColors = function() {
+    var colors = {};
+    _.each(this.columnsDictionary_, function(value, key) {
+      if (value.color) {
+        colors[key] = value.color;
+      }
+    });
+    return colors;
+  };
+  ColumnMathModel.prototype.getExpressionColor = function(expression) {
+    return this.columnsDictionary_[expression] && _.findWhere(this.tokens_, {value:expression}) ? this.columnsDictionary_[expression].color : undefined;
+  };
+  ColumnMathModel.prototype.getExpressionClassName = function(expression) {
+    return gfIdentifierCssClasses[this.getExpressionColor(expression)];
+  };
+  ColumnMathModel.prototype.isValid = function() {
+    return!_.isEmpty(this.getExpression()) && this.getValidationResult_().isValid;
+  };
+  ColumnMathModel.prototype.validate = function() {
+    var validationResult = this.getValidationResult_();
+    this.validationMessage = _.isEmpty(validationResult.errorMessages) ? "" : validationResult.errorMessages[0];
+  };
+  ColumnMathModel.prototype.getValidIdentifiers_ = function() {
+    var validIdentifiers = [];
+    _.each(this.columns, function(column) {
+      validIdentifiers.push(column.id);
+      _.each(column.gridColumns, function(subColumn) {
+        validIdentifiers.push(this.addPostfix_(subColumn.id, _.findWhere(this.columns, {id:column.id})));
+      }, this);
+    }, this);
+    return validIdentifiers;
+  };
+  ColumnMathModel.prototype.getValidationResult_ = function() {
+    var expression = this.getExpression(), validationResult = gfFormulaValidator.validateExpression(expression, this.getValidIdentifiers_());
+    if (this.initialColumnId && this.columnsDictionary_[this.initialColumnId]) {
+      var additionalValidationResult = gfFormulaValidator.validateForCyclicDependencies(expression, this.initialColumnId, this.columns);
+      validationResult.isValid = validationResult.isValid && additionalValidationResult.isValid;
+      validationResult.errorMessages = _.union(validationResult.errorMessages, additionalValidationResult.errorMessages);
+    }
+    return validationResult;
+  };
+  ColumnMathModel.prototype.getColumnAlias_ = function(column) {
+    if (!column) {
+      throw new Error("column should be provided");
+    }
+    if (!this.columnAliases_[column.id]) {
+      this.columnAliases_[column.id] = column.header;
+    }
+    return this.columnAliases_[column.id];
+  };
+  return{createInstance:function() {
+    return new ColumnMathModel;
+  }};
+}]);
+goog.provide("gridReport.columnMath.ColumnMathDialogController");
+goog.require("gridReport.columnMath.ColumnMathManager");
+goog.require("gridReport.services.UuidGenerator");
+gridReport.Module.controller("gfColumnMathDialogController", ["$scope", "$modalInstance", "settings", "gfGridManagementService", "gfEventsAggregator", "$timeout", "gfColumnMathManager", "$translate", "gfFormulaValidator", "gfUuidGenerator", function($scope, $modalInstance, settings, gfGridManagementService, gfEventsAggregator, $timeout, gfColumnMathManager, $translate, gfFormulaValidator, gfUuidGenerator) {
+  var eventsAggregator = gfEventsAggregator.getChildAggregator(settings.gridInstanceId);
+  eventsAggregator.addHandler(gridReport.model.GridEvents.columnSelected, function(args) {
+    if (args.column && (args.column.command && (args.column.isNumber() && (args.column.command.isDataCloud() && (!args.column.command.isVector() && (!args.column.command.isMultiSelect() && (!args.column.command.isMultiOutput() && (!args.column.command.isFactorRank() && (!(isInEditMode() && args.column.id == settings.column.id) && (args.parentColumn == null || args.parentColumn.command && args.parentColumn.command.isDataBlock())))))))))) {
+      var color = $scope.model.insertColumn(args.column, args.parentColumn);
+      gfGridManagementService.selectColumn(settings.gridInstanceId, args.column.id, color);
+    }
+  });
+  function getSuggestedName() {
+    var columnNumber = 1, columns = gfGridManagementService.getGridColumns(settings.gridInstanceId), suggestedName;
+    do {
+      suggestedName = $translate.instant("COLUMN_N", {columnNumber:columnNumber++});
+    } while (_.findWhere(columns, {header:suggestedName}) != null);
+    return suggestedName;
+  }
+  function createCommand() {
+    var id, name, formula, enableHeatMap;
+    if (isInEditMode()) {
+      id = settings.column.command.id;
+      name = settings.column.command.name;
+    } else {
+      id = gfUuidGenerator.get();
+      name = getSuggestedName();
+    }
+    formula = $scope.model.getFormula();
+    enableHeatMap = gfFormulaValidator.isHeatMapEnabled(formula, gfGridManagementService.getGridColumns(settings.gridInstanceId));
+    return new gridReport.model.Command({id:id, name:name, expression:$scope.model.getAdcExpression(), formula:formula, dataProviderId:gridReport.model.Command.ADC_DATA_PROVIDER_ID, returnType:scr.DataTypes.Float, enableHeatMap:enableHeatMap, decimalDigits:1, metadata:{type:"columnmath"}});
+  }
+  function expressionChanged() {
+    var gridColumns = gfGridManagementService.getGridColumns(settings.gridInstanceId);
+    _.each(gridColumns, function(column) {
+      gfGridManagementService.selectColumn(settings.gridInstanceId, column.id, $scope.model.getExpressionColor(column.id));
+      if (column.gridColumns) {
+        _.each(column.gridColumns, function(subColumn) {
+          if (subColumn.parentColumn) {
+            var parentColumn = _.findWhere(gridColumns, {id:subColumn.parentColumn});
+            if (parentColumn) {
+              gfGridManagementService.selectColumn(settings.gridInstanceId, subColumn.id, $scope.model.getExpressionColor(subColumn.id + "/*" + parentColumn.header + "*/"));
+            }
+          }
+        });
+      }
+    });
+  }
+  function init() {
+    gfGridManagementService.columnSelectionState(settings.gridInstanceId, true);
+    $scope.model = gfColumnMathManager.createInstance();
+    $scope.model.setColumns(gfGridManagementService.getGridColumns(settings.gridInstanceId));
+    $scope.model.expressionChanged = expressionChanged;
+    if (isInEditMode()) {
+      $scope.model.initialColumnId = settings.column.id;
+      $scope.model.setFormula(settings.column.command.formula);
+    }
+  }
+  function isInEditMode() {
+    return settings.column != null && settings.mode === "edit";
+  }
+  $scope.ok = function() {
+    $scope.closeDialog();
+    $timeout(function() {
+      if (settings.mode === "edit" || settings.mode === "insert") {
+        var eventType = isInEditMode() ? gridReport.model.InternalEvents.changeCommand : gridReport.model.InternalEvents.insertCommand;
+        var prevCommand = settings.column ? settings.column.command : null;
+        var curCommand = createCommand();
+        if (eventType === gridReport.model.InternalEvents.changeCommand && (prevCommand && prevCommand.expression === curCommand.expression)) {
+          return;
+        }
+        eventsAggregator.raiseEvent(eventType, {previousCommand:prevCommand, newCommand:curCommand, isUserTriggered:true, isFromUDIP:false});
+      } else {
+        eventsAggregator.raiseEvent(gridReport.model.InternalEvents.addCommand, {command:createCommand(), isUserTriggered:true, isFromUDIP:false});
+      }
+    });
+  };
+  $scope.closeDialog = function() {
+    gfGridManagementService.columnSelectionState(settings.gridInstanceId, false);
+    $modalInstance.close();
+    $scope.$destroy();
+  };
+  $scope.onHeaderHover = function() {
+    $(".gf-modal").draggable({handle:".modal-header"});
+  };
+  $scope.onEnterPressed = function() {
+    if ($scope.model.isValid() === true) {
+      $scope.ok();
+    }
+  };
+  $scope.$on("$destory", function() {
+    eventsAggregator.removeAllHandlers();
+  });
+  init();
+}]);
+goog.provide("gridReport.columnMath.ColumnMathDialogService");
+goog.require("gridReport.columnMath.ColumnMathDialogController");
+goog.require("gridReport.columnMath.ExressionEditorDirective");
+gridReport.Module.service("gfColumnMathDialogService", ["$modal", function($modal) {
+  var service = {};
+  service.openDialog = function(gridInstanceId, options) {
+    options = options || {};
+    return $modal.open({windowClass:"gf-modal gf-column-math-dialog", templateUrl:"scripts/services/columnMath/ColumnMathDialog.html", controller:"gfColumnMathDialogController", backdrop:false, keyboard:false, resolve:{settings:function() {
+      return{gridInstanceId:gridInstanceId, column:options.column, mode:options.mode};
+    }}});
+  };
+  return service;
+}]);
+goog.provide("gridReport.directives.GridColumnContextMenuDirective");
+goog.require("gridReport.directives.ContextMenuDirective");
+goog.require("gridReport.Module");
+goog.require("gridReport.model.SortingTypes");
+goog.require("gridReport.columnMath.ColumnMathDialogService");
+gridReport.Module.directive("gridColumnContextMenu", ["$translate", "$timeout", "gfColumnMathDialogService", "gfConditionalValueFormattingService", function($translate, $timeout, gfColumnMathDialogService, gfConditionalValueFormattingService) {
+  return{restrict:"E", replace:true, require:"^gridReport", scope:{actions:"=", gridInstanceId:"="}, template:"<div>" + '<gf-context-menu menu-items="contextMenu.menuItems" ' + 'options="contextMenu.options" ' + 'visible="contextMenu.visible" ' + 'position="contextMenu.position" ' + 'open-direction="contextMenu.openDirection">' + "</gf-context-menu>" + "</div>", link:function(scope, element, attrs, controller) {
+    scope.clickedColumn = {};
+    var contextMenuWidth = 160;
+    var gridReportContainer = element.closest(".gridReportContainer").first();
+    scope.contextMenu = {openDirection:"right", menuItems:[], options:{width:contextMenuWidth + "px", height:"140px", autoCloseOnClick:true, autoOpenPopup:false, mode:"popup", theme:controller.theme.theme, animationShowDuration:0, animationHideDuration:0}};
+    function tooggleMenuVisibility(value) {
+      scope.contextMenu.visible = !!value;
+      $timeout(angular.noop);
+    }
+    function transposedGridContainerMouseDownHandler(event) {
+      var result, columnId, content = $(event.target).closest('[column-key="columnName"]').first(), isFirstColumn = true;
+      if (_.size(content) < 1) {
+        isFirstColumn = false;
+        content = $(event.target).closest('[role="gridcell"]').first();
+      }
+      if (_.size(content) > 0) {
+        columnId = decodeURI($(event.target).closest("[row-key]").attr("row-key"));
+        if (!columnId || columnId === "undefined") {
+          return true;
+        }
+        scope.clickedColumn = controller.updateClickedColumnById(columnId);
+        scope.contextMenu.menuItems = (isFirstColumn ? getMenuItems : getSimpleTransposedMenuItems)(scope.clickedColumn);
+        calculatePosition(event);
+        if (scope.contextMenu.visible) {
+          scope.$apply(function() {
+            scope.contextMenu.visible = false;
+          });
+        }
+        tooggleMenuVisibility(true);
+        result = false;
+      } else {
+        scope.contextMenu.visible = false;
+        result = true;
+      }
+      scope.$apply();
+      return result;
+    }
+    function calculatePosition(event) {
+      var initialXPos = parseInt(event.clientX) + 5 + $(window).scrollLeft();
+      var finalXPos = initialXPos + contextMenuWidth >= $(document).width() ? initialXPos - contextMenuWidth : initialXPos;
+      var finalYPos = parseInt(event.clientY) + 5 + $(window).scrollTop();
+      scope.contextMenu.openDirection = finalXPos + contextMenuWidth * 2 <= $(document).width() ? "right" : "left";
+      scope.contextMenu.position = {x:finalXPos, y:finalYPos};
+    }
+    function getColId(element) {
+      var items = element.attr("class").match(/jqx-column-id-(\S+)/);
+      if (items == undefined || items.length < 2) {
+        return null;
+      }
+      return decodeURI(items[1]);
+    }
+    function gridReportContainerMouseDownHandler(event) {
+      var result;
+      var columnHeader = $(event.target).closest(".jqx-grid-column-header").first();
+      if (columnHeader.length > 0) {
+        var columnId = getColId(columnHeader);
+        if (columnId == null) {
+          scope.contextMenu.visible = false;
+          result = true;
+        } else {
+          var subColId = getColId($(event.target).closest(".jqx-column-command-header").first());
+          scope.clickedColumn = controller.updateClickedColumnById(columnId, subColId == columnId ? null : subColId);
+          scope.contextMenu.menuItems = getMenuItems(scope.clickedColumn);
+          if (_.isEmpty(scope.contextMenu.menuItems)) {
+            return true;
+          }
+          calculatePosition(event);
+          if (scope.contextMenu.visible) {
+            scope.$apply(function() {
+              scope.contextMenu.visible = false;
+            });
+          }
+          tooggleMenuVisibility(true);
+          result = false;
+        }
+      } else {
+        scope.contextMenu.visible = false;
+        result = true;
+      }
+      scope.$apply();
+      return result;
+    }
+    function bodyMouseDownHandler(event) {
+      if (scope.contextMenu.visible && (event.which != 3 && $(event.originalEvent.srcElement).closest(".jqx-menu-item, .jqx-menu-item-top").length == 0)) {
+        scope.contextMenu.visible = false;
+        scope.$apply();
+      }
+    }
+    function mouseDownHandler(event) {
+      if (event.which != 3 || !controller.isColumnContextMenuActive()) {
+        return true;
+      }
+      return controller.getIsTransposed() ? transposedGridContainerMouseDownHandler(event) : gridReportContainerMouseDownHandler(event);
+    }
+    angular.element(gridReportContainer).mousedown(mouseDownHandler);
+    angular.element("body,html").mousedown(bodyMouseDownHandler);
+    function getSimpleTransposedMenuItems(clickedColumn) {
+      var menuItems = [], clickedColumnModel = clickedColumn.subColModel || clickedColumn.model;
+      if (controller.canInsertBlankRow()) {
+        menuItems.push({label:$translate.instant("INSER_BLANK_ROW"), action:function() {
+          controller.insertBlankColumn(clickedColumnModel.id, "before");
+        }});
+      }
+      return menuItems;
+    }
+    function getMenuItems(clickedColumn) {
+      var menuItems = [];
+      var isTransposedGrid = controller.getIsTransposed();
+      var clickedColumnModel = clickedColumn.subColModel || clickedColumn.model;
+      if (isTransposedGrid && controller.canInsertBlankRow()) {
+        menuItems.push({label:$translate.instant("INSER_BLANK_ROW"), action:function() {
+          controller.insertBlankColumn(clickedColumnModel.id, "before");
+        }});
+      }
+      if (controller.columnContextMenuOptions.canPin && (!clickedColumnModel.forcePinned && (clickedColumnModel.canPin && !isTransposedGrid))) {
+        menuItems.push(!clickedColumnModel.pinned ? {label:$translate.instant("PIN"), action:controller.pinColumn} : {label:$translate.instant("UNPIN"), action:controller.unpinColumn});
+      }
+      if (controller.columnContextMenuOptions.canAdd && clickedColumnModel.canAdd) {
+        menuItems.push({label:!isTransposedGrid ? $translate.instant("ADD_COLUMN") : $translate.instant("ADD_FIELD"), action:controller.insertColumn});
+      }
+      if (controller.columnContextMenuOptions.canAddFormula && clickedColumnModel.canAddFormula) {
+        menuItems.push({label:$translate.instant("ADD_FORMULA"), action:function() {
+          gfColumnMathDialogService.openDialog(scope.gridInstanceId, {column:clickedColumnModel, mode:"insert"});
+        }});
+      }
+      if (controller.columnContextMenuOptions.canAddRank && (isColumnCanBeConvertedToMfr(clickedColumnModel) && clickedColumn.subColModel == null)) {
+        menuItems.push(getAddRankForColumnMenuSection(clickedColumnModel));
+      }
+      if (controller.columnContextMenuOptions.canEdit && (clickedColumnModel.canEdit && !clickedColumnModel.command.isDeleted())) {
+        menuItems.push({label:$translate.instant("EDIT_COLUMN"), action:controller.editColumn});
+      }
+      if (controller.columnContextMenuOptions.canDelete && clickedColumnModel.canDelete) {
+        menuItems.push({label:$translate.instant("REMOVE_COLUMN"), action:controller.deleteColumn});
+      }
+      if (controller.columnContextMenuOptions.canRename && (clickedColumnModel.canRename && (!clickedColumnModel.command.isFactorRank() && !clickedColumnModel.command.isDeleted()))) {
+        menuItems.push({label:$translate.instant("RENAME_COLUMN"), action:controller.renameColumn});
+      }
+      if (controller.columnContextMenuOptions.canRename && (clickedColumnModel.canRename && !clickedColumnModel.command.isFactorRank())) {
+        menuItems.push({label:$translate.instant("REVERT_RENAMING"), action:controller.resetHeaderToDefault, disabled:!clickedColumnModel.isHeaderChanged()});
+      }
+      if (controller.columnContextMenuOptions.canHideParameters && (clickedColumnModel.canHideParameters && (clickedColumnModel.command && clickedColumnModel.command.hasParameters()))) {
+        menuItems.push(clickedColumnModel.areParametersVisible ? {label:$translate.instant("HIDE_PARAMETERS"), action:_.partial(controller.setColumnParametersVisibility, false)} : {label:$translate.instant("SHOW_PARAMETERS"), action:_.partial(controller.setColumnParametersVisibility, true)});
+      }
+      if (controller.columnContextMenuOptions.canChangeCellsFormatting && (clickedColumnModel.isNumber() || clickedColumnModel.isDate())) {
+        menuItems.push(getFormatCellsMenuSection(clickedColumn));
+      }
+      if (controller.columnContextMenuOptions.canChangeSortingType && clickedColumnModel.isNumber()) {
+        menuItems.push(getColumnSortingTypeMenuSection(clickedColumn));
+      }
+      if (controller.columnContextMenuOptions.canChangeStatistics && (clickedColumnModel.canChangeStatistics && (clickedColumnModel.totalCalculations && (clickedColumnModel.totalCalculations.length > 0 && !isTransposedGrid)))) {
+        menuItems.push(getColumnStatisticsMenuSection(clickedColumn));
+      }
+      return menuItems;
+    }
+    function getColumnSortingTypeMenuSection(column) {
+      var isSelectedAction = function(sortingType) {
+        return column.model.sortingType == sortingType;
+      };
+      var getItem = function(text, value) {
+        return{action:_.partial(controller.setColumnSortingType, column.model.id, value, true), selected:isSelectedAction(value), html:formatLabel(text, isSelectedAction(value))};
+      };
+      return{label:$translate.instant("SORTING_TYPE"), items:[getItem($translate.instant("BY_VALUE"), gridReport.model.SortingTypes.ByValue), getItem($translate.instant("BY_ABSOLUTE_VALUE"), gridReport.model.SortingTypes.ByAbsoluteValue)]};
+    }
+    function getColumnFormattingMenuSection(gridColumn) {
+      var isSelectedAction = function(numOfDigits) {
+        return gridColumn.cellsFormat.decimalDigits === numOfDigits;
+      };
+      var getFormattingItem = function(text, value) {
+        return{action:function() {
+          gridColumn.cellsFormat.decimalDigits = value;
+          controller.applyCellsFormatting();
+        }, selected:isSelectedAction(value), html:formatTickedLabel(text, isSelectedAction(value))};
+      };
+      return{html:formatTickedLabel($translate.instant("PRECISION")), subMenuWidth:"140px", items:[getFormattingItem($translate.instant("FORMAT_NO_SYMBOLS"), 0), getFormattingItem($translate.instant("FORMAT_ONE_SYMBOLS"), 1), getFormattingItem($translate.instant("FORMAT_TWO_SYMBOLS"), 2), getFormattingItem($translate.instant("FORMAT_THREE_SYMBOLS"), 3), getFormattingItem($translate.instant("FORMAT_FOUR_SYMBOLS"), 4)]};
+    }
+    function getDateMenuSection(gridColumn) {
+      var items = [getDateFormatSubMenuItem(gridColumn, $translate.instant("DD_MM_YYYY"), $translate.instant("DD_MM_YYYY_F")), getDateFormatSubMenuItem(gridColumn, $translate.instant("DD_MM_YY"), $translate.instant("DD_MM_YY_F")), getDateFormatSubMenuItem(gridColumn, $translate.instant("DD_MM"), $translate.instant("DD_MM_F")), getDateFormatSubMenuItem(gridColumn, $translate.instant("MM_DD_YYYY"), $translate.instant("MM_DD_YYYY_F")), getDateFormatSubMenuItem(gridColumn, $translate.instant("MM_DD_YY"), 
+      $translate.instant("MM_DD_YY_F")), getDateFormatSubMenuItem(gridColumn, $translate.instant("MM_DD"), $translate.instant("MM_DD_F")), getDateFormatSubMenuItem(gridColumn, $translate.instant("MM_YYYY"), $translate.instant("MM_YYYY_F")), getDateFormatSubMenuItem(gridColumn, $translate.instant("MM_YY"), $translate.instant("MM_YY_F"))];
+      if ($translate.instant("SHOW_ABBREVIATIONS") === "true") {
+        items.push(getDateFormatSubMenuItem(gridColumn, $translate.instant("DAY_MONTHDATE_YEAR"), "dddd, MMMM d, yyyy"));
+        items.push(getDateFormatSubMenuItem(gridColumn, $translate.instant("DATE_ABBREVIATEDMONTH"), "d-MMM"));
+        items.push(getDateFormatSubMenuItem(gridColumn, $translate.instant("DATE_ABBREVIATEDMONYH_YEARE"), "d-MMM-yyyy"));
+        items.push(getDateFormatSubMenuItem(gridColumn, $translate.instant("MONTH_YEAR"), "MM-yyyy"));
+        items.push(getDateFormatSubMenuItem(gridColumn, $translate.instant("ABBREVIATEMONYH_ABBREVIATEDYEAR"), "MMM-yy"));
+      }
+      items = _.filter(items, function(item) {
+        return item != null;
+      });
+      return{html:formatTickedLabel($translate.instant("DATE")), subMenuWidth:"250px", items:items};
+    }
+    function getNegativeNumberMenuSection(gridColumn) {
+      var disabled = gridColumn.getReturnType() === scr.DataTypes.Score;
+      return{html:formatTickedLabel($translate.instant("NUMBER")), subMenuWidth:"140px", items:[getNegativeNumberFormatSubMenuItem(gridColumn, gridReport.model.NegativeNumberFormats.Default, {label:"-12345"}, disabled), getNegativeNumberFormatSubMenuItem(gridColumn, gridReport.model.NegativeNumberFormats.ColoredDefault, {label:"-12345", color:"red"}, disabled), getNegativeNumberFormatSubMenuItem(gridColumn, gridReport.model.NegativeNumberFormats.Colored, {label:"12345", color:"red"}, disabled), getNegativeNumberFormatSubMenuItem(gridColumn, 
+      gridReport.model.NegativeNumberFormats.Brackets, {label:"(12345)"}, disabled), getNegativeNumberFormatSubMenuItem(gridColumn, gridReport.model.NegativeNumberFormats.ColoredBrackets, {label:"(12345)", color:"red"}, disabled)], disabled:disabled};
+    }
+    function getPercentageMenuSection(gridColumn) {
+      var selected = !!gridColumn.cellsFormat.percentage;
+      return{html:formatTickedLabel($translate.instant("PERCENTAGE"), selected), action:function() {
+        gridColumn.cellsFormat.setPercentage(!gridColumn.cellsFormat.percentage);
+        gridColumn.conditionalValueFormatting = gfConditionalValueFormattingService.create(gridColumn);
+        controller.applyCellsFormatting();
+      }, selected:selected};
+    }
+    function getThousandsSeparatorMenuSection(gridColumn) {
+      return{html:formatTickedLabel($translate.instant("THOUSANDS_SEPARATOR")), subMenuWidth:"140px", items:[getThousandsSepratorSubMenuItem(gridColumn, $translate.instant("NONE"), ""), getThousandsSepratorSubMenuItem(gridColumn, ".", "."), getThousandsSepratorSubMenuItem(gridColumn, ",", ",")]};
+    }
+    function getFormatCellsMenuSection(clickedColumn) {
+      var menuItems = [], gridColumn = clickedColumn.subColModel || clickedColumn.model;
+      if (gridColumn.isDate()) {
+        menuItems.push(getDateMenuSection(gridColumn));
+      }
+      if (gridColumn.isNumber()) {
+        menuItems.push(getNegativeNumberMenuSection(gridColumn));
+      }
+      if (gridColumn.isNumber()) {
+        menuItems.push(getPercentageMenuSection(gridColumn));
+      }
+      if (controller.columnContextMenuOptions.canChangeValueFormatting && (gridColumn.canChangeValueFormatting && gridColumn.isNumber())) {
+        menuItems.push(getColumnFormattingMenuSection(gridColumn));
+      }
+      if (gridColumn.isNumber()) {
+        menuItems.push(getThousandsSeparatorMenuSection(gridColumn));
+      }
+      return{label:$translate.instant("FORMAT_CELLS"), items:menuItems};
+    }
+    function getThousandsSepratorSubMenuItem(gridColumn, label, thousandsSeparator) {
+      var selected = gridColumn.cellsFormat.thousandsSeparator === thousandsSeparator;
+      return{html:formatTickedLabel(label, selected), action:function() {
+        gridColumn.cellsFormat.thousandsSeparator = thousandsSeparator;
+        controller.applyCellsFormatting();
+      }, selected:selected};
+    }
+    function getNegativeNumberFormatSubMenuItem(gridColumn, negativeNumberFormat, options, disabled) {
+      var selected = gridColumn.cellsFormat.negativeNumberFormat === negativeNumberFormat;
+      return{action:function() {
+        gridColumn.cellsFormat.setNegativeNumberFormat(negativeNumberFormat);
+        gridColumn.conditionalValueFormatting = gfConditionalValueFormattingService.create(gridColumn);
+        controller.applyCellsFormatting();
+      }, selected:selected, html:formatTickedLabel(options.label, selected, options.color), disabled:disabled};
+    }
+    function getDateFormatSubMenuItem(gridColumn, label, dateFormat) {
+      if (label == "" || dateFormat == "") {
+        return null;
+      }
+      var selected = gridColumn.cellsFormat.dateFormat === dateFormat;
+      return{html:formatTickedLabel(label, selected), action:function() {
+        gridColumn.cellsFormat.dateFormat = dateFormat;
+        controller.applyCellsFormatting();
+      }, selected:selected};
+    }
+    function getAddRankForColumnMenuSection(gridColumn) {
+      return{label:$translate.instant("ADD_RANK_FOR_THIS_COLUMN"), items:[getAddRankForColumnItem($translate.instant("PERCENTILE"), scr.mfr.MFMethodology.PercentileScoring, gridColumn), getAddRankForColumnItem($translate.instant("DECILE"), scr.mfr.MFMethodology.DecileScoring, gridColumn), getAddRankForColumnItem($translate.instant("QUINTILE"), scr.mfr.MFMethodology.QuintileScoring, gridColumn), getAddRankForColumnItem($translate.instant("QUARTILE"), scr.mfr.MFMethodology.OuartileScoring, gridColumn), 
+      getAddRankForColumnItem($translate.instant("RANK"), scr.mfr.MFMethodology.NScoring, gridColumn), getAddRankForColumnItem($translate.instant("ZSCORE"), scr.mfr.MFMethodology.ZScores, gridColumn)]};
+    }
+    function isColumnCanBeConvertedToMfr(gridColumn) {
+      return gridColumn && (gridColumn.canAddRank && (gridColumn.command && ((gridColumn.command.isNumber() || gridColumn.command.isBoolean()) && (!gridColumn.command.isMultiFactorRank() && (!gridColumn.command.isFactorRank() && (!gridColumn.command.isColumnMath() && !gridColumn.command.isVector()))))));
+    }
+    function getAddRankForColumnItem(label, methodology, gridColumn) {
+      return{label:label, action:function() {
+        controller.addRankForColumn(gridColumn, methodology);
+      }};
+    }
+    function getColumnStatisticsMenuSection(column) {
+      var isDisabled = !controller.canChangeStatistics();
+      var statisticsSubItems = [];
+      var columnModel = column.subColModel || column.model;
+      if (!isDisabled) {
+        statisticsSubItems = _.foldl(columnModel.totalCalculations, function(list, totalCalc) {
+          var selected = isSelected(column, totalCalc);
+          list.push({selected:selected, html:formatTickedLabel(totalCalc.displayText, selected), action:_.partial(controller.setTotalCalculation, totalCalc), disabled:isDisabled});
+          return list;
+        }, []);
+      }
+      return{label:$translate.instant("SUMMARY_STATISTICS"), items:statisticsSubItems, disabled:isDisabled};
+    }
+    function formatTickedLabel(text, selected, color) {
+      var result = "";
+      var notSelectedClass = "gf-context-menuitem-tick";
+      if (selected) {
+        result = '<span class="icon-tick gf-selected" style="margin-right:3px;"></span>';
+      } else {
+        notSelectedClass = "gf-context-menuitem-no-tick";
+      }
+      if (color) {
+        result += '<span class="' + notSelectedClass + '" style="color:' + color + '">' + text + "</span>";
+      } else {
+        result += '<span class="' + notSelectedClass + '">' + text + "</span>";
+      }
+      return result;
+    }
+    function formatLabel(text, selected, color) {
+      if (selected) {
+        return'<span style="color:#ff9c00">' + text + "</span>";
+      }
+      if (color) {
+        return'<span style="color:' + color + '">' + text + "</span>";
+      }
+      return "<span>" + text + "</span>";
+    }
+    function isSelected(clickedColumn, calc) {
+      var gridColumn = clickedColumn.subColModel || clickedColumn.model;
+      return!gridColumn.selectedTotalsCalculation && calc.isNone || gridColumn.selectedTotalsCalculation && calc.name == gridColumn.selectedTotalsCalculation.name;
+    }
+    function hideContextMenu() {
+      if (scope.contextMenu.visible) {
+        tooggleMenuVisibility(false);
+      }
+    }
+    if (scope.actions) {
+      scope.actions = {hideContextMenu:hideContextMenu};
+    }
+    gridReportContainer.on("contextmenu", function() {
+      return false;
+    });
+    element.bind("$destroy", function() {
+      angular.element("body,html").unbind("mousedown", bodyMouseDownHandler);
+      angular.element(gridReportContainer).unbind("mousedown", gridReportContainerMouseDownHandler);
+    });
+  }};
+}]);
+goog.provide("gridReport.gridReportVersion");
+gridReport.gridReportVersion = "20.0.19";
+goog.provide("gridReport.localization.ja");
+gridReport.localization = gridReport.localization || {};
+gridReport.localization.ja = {TOGGLE:"\u5207\u308a\u66ff\u3048", GROUPING:"\u30b0\u30eb\u30fc\u30d7\u5316", PRECISION:"\u6841\u6570", DEFAULT:"\u521d\u671f\u5024", FORMAT_NO_SYMBOLS:"0", FORMAT_ONE_SYMBOLS:"0.0", FORMAT_TWO_SYMBOLS:"0.00", FORMAT_THREE_SYMBOLS:"0.000", FORMAT_FOUR_SYMBOLS:"0.0000", STATISTICS:"\u7d71\u8a08", ADD_COLUMN:"\u5217\u3092\u8ffd\u52a0", EDIT_COLUMN:"\u7de8\u96c6", REMOVE_COLUMN:"\u524a\u9664", RENAME_COLUMN:"\u540d\u524d\u5909\u66f4", REVERT_RENAMING:"\u540d\u524d\u5909\u66f4\u3092\u5143\u306b\u623b\u3059", 
+PIN:"\u5217\u3092\u56fa\u5b9a", UNPIN:"\u5217\u306e\u56fa\u5b9a\u89e3\u9664", HIDE_PARAMETERS:"\u30d1\u30e9\u30e1\u30fc\u30bf\u30fc\u3092\u975e\u8868\u793a", SHOW_PARAMETERS:"\u30d1\u30e9\u30e1\u30fc\u30bf\u30fc\u3092\u8868\u793a", SELECT_ALL:"\u3059\u3079\u3066\u9078\u629e", DESELECT_ALL:"\u3059\u3079\u3066\u9078\u629e\u89e3\u9664", UNGROUP:"\u30b0\u30eb\u30fc\u30d7\u89e3\u9664", NEW:"\u65b0\u898f\u4f5c\u6210", OBJECT_MANAGER:"\u30aa\u30d6\u30b8\u30a7\u30af\u30c8 \u30de\u30cd\u30fc\u30b8\u30e3\u30fc", 
+SAVE:"\u4fdd\u5b58", REVERT:"\u623b\u308b", EXCLUDE:"\u9664\u5916", INCLUDE:"\u542b\u3080", ADDITIONAL_ACTIONS:"\u305d\u306e\u4ed6\u306e\u30a2\u30af\u30b7\u30e7\u30f3", ACTIONS:"\u30a2\u30af\u30b7\u30e7\u30f3", ADD_ALL_TO_LIST:"\u3059\u3079\u3066\u306e\u9805\u76ee\u3092\u30ea\u30b9\u30c8\u306b\u8ffd\u52a0", ADD_SELECTED_TO_LIST:"\u9078\u629e\u3057\u305f\u9805\u76ee\u3092\u30ea\u30b9\u30c8\u306b\u8ffd\u52a0", WARNING:"\u8b66\u544a", OK:"OK", CANCEL:"\u30ad\u30e3\u30f3\u30bb\u30eb", DONT_ASK_AGAIN:"\u6b21\u56de\u304b\u3089\u78ba\u8a8d\u3057\u306a\u3044", 
+RECALL:"\u547c\u3073\u51fa\u3057", CLOSE:"\u9589\u3058\u308b", PERSONAL:"\u500b\u4eba\u7528\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8", GLOBAL:"Thomson Reuters \u30c6\u30f3\u30d7\u30ec\u30fc\u30c8", RECENT:"\u6700\u8fd1\u306e\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8", CUSTOM_EXPRESSIONS:"\u30ab\u30b9\u30bf\u30e0\u5f0f", FORMAT_WAS_CHANGED_CONFIRMATION:"'{{name}}' \u306e\u5909\u66f4\u3092\u4fdd\u5b58\u3057\u307e\u3059\u304b?", RESULTS_WITH_COUNT:"\u7d50\u679c ({{count}})", EXCLUDED_WITH_COUNT:"\u9664\u5916\u9805\u76ee ({{count}})", 
+ALL_SECURITIES_WITH_COUNT:"\u3059\u3079\u3066\u306e\u8a3c\u5238 ({{count}})", IDENTIFIERS_ADDED_WITH_COUNT_INFO_MSG:"{{count}} \u4ef6\u306e\u8b58\u5225\u30b3\u30fc\u30c9\u304c\u9664\u5916\u9805\u76ee\u306b\u8ffd\u52a0\u3055\u308c\u307e\u3057\u305f\u3002", IDENTIFIERS_REMOVED_WITH_COUNT_INFO_MSG:"{{count}} \u4ef6\u306e\u8b58\u5225\u30b3\u30fc\u30c9\u304c\u9664\u5916\u9805\u76ee\u304b\u3089\u524a\u9664\u3055\u308c\u307e\u3057\u305f\u3002", FORMAT_WILL_BE_REVERTED_CONFIRMATION:"\u5f62\u5f0f\u304c\u521d\u671f\u8a2d\u5b9a\u306b\u623b\u308a\u307e\u3059\u3002", 
+SEARCH:"\u691c\u7d22", NAME:"\u540d\u79f0", NUMBER_OF_FIELDS:"\u30d5\u30a3\u30fc\u30eb\u30c9\u6570", SHARP:"#", FIELD_NAME:"\u30d5\u30a3\u30fc\u30eb\u30c9\u540d", PREVIEW:"\u30d7\u30ec\u30d3\u30e5\u30fc", LAST_MODIFIED:"\u6700\u7d42\u66f4\u65b0\u65e5", IDENTIFIER:"\u8b58\u5225\u30b3\u30fc\u30c9", ERROR:"\u30a8\u30e9\u30fc", INFORMATION:"\u60c5\u5831", GROUPED_BY:"\u30b0\u30eb\u30fc\u30d7\u5225\u8868\u793a:", SUM:"\u5408\u8a08", AVERAGE:"\u5e73\u5747", MEDIAN:"\u4e2d\u592e\u5024", SERVER_SIDE:"\u30b5\u30fc\u30d0\u30fc\u5074", 
+NONE:"\u306a\u3057", TEMPLATE_MANAGER:"\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8 \u30de\u30cd\u30fc\u30b8\u30e3\u30fc", REPORT_TEMPLATE_MANAGER:"\u30ec\u30dd\u30fc\u30c8 \u30c6\u30f3\u30d7\u30ec\u30fc\u30c8 \u30de\u30cd\u30fc\u30b8\u30e3\u30fc", SERVICE_UNAVAILABLE:"\u30b5\u30fc\u30d3\u30b9\u304c\u5229\u7528\u3067\u304d\u307e\u305b\u3093\u3002", UNABLE_TO_LOAD_TEMPLATE:"\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8\u3092\u30ed\u30fc\u30c9\u3067\u304d\u307e\u305b\u3093\u3002", UNABLE_TO_LOAD_GLOBAL_TEMPLATES:"\u30b0\u30ed\u30fc\u30d0\u30eb \u30c6\u30f3\u30d7\u30ec\u30fc\u30c8\u3092\u30ed\u30fc\u30c9\u3067\u304d\u307e\u305b\u3093\u3002", 
+UNABLE_TO_SAVE_TEMPLATE:"\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8\u3092\u4fdd\u5b58\u3067\u304d\u307e\u305b\u3093\u3002", UNABLE_TO_LOAD_PERSONAL_TEMPLATES:"\u500b\u4eba\u7528\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8\u3092\u30ed\u30fc\u30c9\u3067\u304d\u307e\u305b\u3093\u3002", UNABLE_TO_DELETE_TEMPLATE:"\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8\u3092\u524a\u9664\u3067\u304d\u307e\u305b\u3093\u3002", UNABLE_TO_RENAME_TEMPLATE:"\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8\u540d\u3092\u5909\u66f4\u3067\u304d\u307e\u305b\u3093\u3002", 
+UNABLE_TO_COPY_TEMPLATE:"\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8\u3092\u30b3\u30d4\u30fc\u3067\u304d\u307e\u305b\u3093\u3002", INVALID_CHARACTER:"\u7121\u52b9\u306a\u6587\u5b57\u5217", NAME_IS_REQUIRED:"\u540d\u79f0\u3092\u6307\u5b9a\u3057\u3066\u304f\u3060\u3055\u3044\u3002", NEW_TEMPLATE:"\u65b0\u898f\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8", SAVE_TEMPLATE:"\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8\u3092\u4fdd\u5b58", SERVICE_UNAVAILABLE_RESUBMIT_YOUR_REQUEST:"\u30b5\u30fc\u30d3\u30b9\u304c\u5229\u7528\u3067\u304d\u307e\u305b\u3093\u3002\u30ea\u30af\u30a8\u30b9\u30c8\u3092\u518d\u5ea6\u5b9f\u884c\u3057\u3066\u304f\u3060\u3055\u3044\u3002", 
+FAILED_TO_RESOLVE_UNIVERSE:"\u30e6\u30cb\u30d0\u30fc\u30b9\u3092\u89e3\u6c7a\u3067\u304d\u307e\u305b\u3093\u3067\u3057\u305f\u3002", THERE_ARE_NO_ITEMS_TO_DISPLAY:"\u8868\u793a\u3059\u308b\u9805\u76ee\u306f\u3042\u308a\u307e\u305b\u3093\u3002", MAX_ROWS_COUNT_EXCEEDED_INDUSTRY_MESSAGE:"\u9078\u629e\u3057\u305f\u6761\u4ef6\u306e\u7d50\u679c\u306f\u3001{{maxRowsCount}} \u884c\u3092\u8d85\u3048\u3066\u3044\u307e\u3059\u3002\u7d50\u679c\u3092\u8868\u793a\u3059\u308b\u306b\u306f\u3001\u3088\u308a\u8a73\u7d30\u306a\u6761\u4ef6\u3092\u9078\u629e\u3057\u3066\u304f\u3060\u3055\u3044\u3002", 
+RENAME:"\u540d\u79f0\u3092\u5909\u66f4", DUPLICATE:"\u30b3\u30d4\u30fc", DELETE:"\u524a\u9664", COLUMN_ALREADY_EXISTS:'\u5217\u540d\u3001"{{name}}" \u306f\u3001\u3059\u3067\u306b\u5b58\u5728\u3059\u308b\u305f\u3081\u4f7f\u7528\u3059\u308b\u3053\u3068\u306f\u3067\u304d\u307e\u305b\u3093\u3002', NOT_AVAILABLE:"\u5229\u7528\u3067\u304d\u307e\u305b\u3093", NOT_AVAILABLE_ABBREVIATION:"N/A", NO_MATCHING_DATA_ITEMS:"\u4e00\u81f4\u3059\u308b\u30c7\u30fc\u30bf\u9805\u76ee\u304c\u3042\u308a\u307e\u305b\u3093\u3002", 
+SEARCH_RESULTS:"\u691c\u7d22\u7d50\u679c", PRINT:"\u5370\u5237", LOAD:"\u30ed\u30fc\u30c9", CREATE_TEMPLATE:"\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8\u3092\u4f5c\u6210", MANAGE_TEMPLATES:"\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8\u3092\u7ba1\u7406", UNSAVED_TEMPLATE:"\u672a\u4fdd\u5b58\u306e\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8", CLICK_TO_VIEW_FIELDS_IN_TEMPLATE:"\u30af\u30ea\u30c3\u30af\u3057\u3066\u30d5\u30a3\u30fc\u30eb\u30c9\u3092\u8868\u793a", SEARCH_FOR_TEMPLATES:"\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8\u3092\u691c\u7d22", 
+TEMPLATE_NAME:"\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8\u540d", NAME_ALREADY_EXISTS:"\u3053\u306e\u540d\u524d\u306f\u65e2\u306b\u5b58\u5728\u3057\u3066\u3044\u307e\u3059\u3002", DO_NOT_SAVE:"\u4fdd\u5b58\u3057\u306a\u3044", SAVE_AS:"\u540d\u524d\u3092\u4ed8\u3051\u3066\u4fdd\u5b58", EXPORT_ALL_AS_VALUES:"\u3059\u3079\u3066\u3092\u5024\u3068\u3057\u3066\u30a8\u30af\u30b9\u30dd\u30fc\u30c8", EXPORT_ALL_AS_FORMULAS:"\u3059\u3079\u3066\u3092\u95a2\u6570\u3068\u3057\u3066\u30a8\u30af\u30b9\u30dd\u30fc\u30c8", 
+EXPORT_SELECTED_AS_VALUES:"\u9078\u629e\u3057\u305f\u5024\u3092\u30a8\u30af\u30b9\u30dd\u30fc\u30c8", EXPORT_SELECTED_AS_FORMULAS:"\u9078\u629e\u3057\u305f\u95a2\u6570\u3092\u30a8\u30af\u30b9\u30dd\u30fc\u30c8", OPEN_ALL_IN_QUOTE_OBJECT:"\u3059\u3079\u3066\u3092\u30af\u30a9\u30fc\u30c8\u3067\u958b\u304f", OPEN_SELECTED_IN_QUOTE_OBJECT:"\u9078\u629e\u3057\u305f\u9805\u76ee\u3092\u30af\u30a9\u30fc\u30c8\u3067\u958b\u304f", TEMPLATE_ALREADY_EXISTS_CONFIRMATION:"\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8\u540d '{{name}}' \u306f\u65e2\u306b\u5b58\u5728\u3057\u307e\u3059\u3002\u3053\u306e\u30ec\u30dd\u30fc\u30c8 \u30c6\u30f3\u30d7\u30ec\u30fc\u30c8\u306b\u7f6e\u304d\u63db\u3048\u307e\u3059\u304b?", 
+REPORT_TEMPLATE:"\u30ec\u30dd\u30fc\u30c8 \u30c6\u30f3\u30d7\u30ec\u30fc\u30c8", SEE_ERROR_DETAILS:"\u30a8\u30e9\u30fc\u306e\u8a73\u7d30\u3092\u53c2\u7167\u3057\u3066\u304f\u3060\u3055\u3044\u3002", REPORT_TEMPLATE_SUCCESSFULLY_SAVED_INFO_MSG:"\u30ec\u30dd\u30fc\u30c8 \u30c6\u30f3\u30d7\u30ec\u30fc\u30c8\u304c\u6b63\u5e38\u306b\u4fdd\u5b58\u3055\u308c\u307e\u3057\u305f\u3002", MAX_LENGTH_EXCEEDED:"\u6587\u5b57\u6570\u304c\u5236\u9650\u3092\u8d85\u3048\u3066\u3044\u307e\u3059\u3002", TEMPLATE_DETAILS:"\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8\u306e\u8a73\u7d30", 
+ADD_SECURITY:"\u8a3c\u5238\u3092\u8ffd\u52a0", CRITERIA_FOR_GROUPING_ROWS:"\u30b0\u30eb\u30fc\u30d7\u306b\u5bfe\u3059\u308b\u6761\u4ef6", ORDER:"\u9806\u5e8f", CRITERIA:"\u6761\u4ef6", ENABLE_GROUPING:"\u30b0\u30eb\u30fc\u30d7\u5316\u3059\u308b", REGION:"\u5730\u57df", COUNTRY:"\u56fd", INDUSTRY:"\u696d\u7a2e", GICS:"GICS", TRBC:"TRBS", BUSINESS_SECTOR:"\u4e8b\u696d\u30bb\u30af\u30bf\u30fc", ECONOMIC_SECTROR:"\u7d4c\u6e08\u30bb\u30af\u30bf\u30fc", INDUSTRY_GROUP:"\u696d\u7a2e\u30b0\u30eb\u30fc\u30d7", 
+INDUSTRY_NAME:"\u696d\u7a2e\u540d", SECTOR_NAME:"\u30bb\u30af\u30bf\u30fc\u540d", SUBINDUSTRY_NAME:"\u526f\u696d\u7a2e\u540d", COUNTRY_OF_EXCHANGE:"\u53d6\u5f15\u6240\u56fd", COUNTRY_OF_HEADQURTERS:"\u672c\u793e\u6240\u5728\u56fd", SELECT_FIELD:"\u30d5\u30a3\u30fc\u30eb\u30c9\u3092\u9078\u629e", EDIT:"\u7de8\u96c6", GROUP_ROWS:"\u30b0\u30eb\u30fc\u30d7", REMOVE_ROW:"\u524a\u9664", ADVANCED_SETTINGS_BUTTON_TITLE:"\u8a73\u7d30\u8a2d\u5b9a", ADVANCED_SETTINGS_DEFAULT_CURRENCY:"\u65e2\u5b9a\u901a\u8ca8", 
+ADVANCED_SETTINGS_NO_DEFAULT_CURRENCY:"\u306a\u3057", ADVANCED_SETTINGS_UPDATE:"\u30ec\u30dd\u30fc\u30c8\u3092\u66f4\u65b0", ADVANCED_SETTINGS_CANCEL:"\u30ad\u30e3\u30f3\u30bb\u30eb", STATISTICS_CONTROL_COLUMN_STATISTICS:"\u7d71\u8a08\u5024", STATISTICS_CONTROL_COLUMN_PREMIUM_DISCOUNT:"\u30d7\u30ec\u30df\u30a2\u30e0/\u30c7\u30a3\u30b9\u30ab\u30a6\u30f3\u30c8", FOCUS_STOCK_FINANCIALS:"\u5f53\u8a72\u9298\u67c4 (\u30d5\u30a1\u30a4\u30ca\u30f3\u30b7\u30e3\u30eb: {{currencyId}})", FOCUS_STOCK_PRICING:"\u5f53\u8a72\u9298\u67c4 (\u30d7\u30e9\u30a4\u30b7\u30f3\u30b0: {{currencyId}})", 
+PRESS_REFRESH_TO_DISPLAY_NUMBER_OF_FIELDS:"\u66f4\u65b0\u3057\u3066\u30d5\u30a3\u30fc\u30eb\u30c9\u6570\u3092\u8868\u793a\u3059\u308b\u3002", SECURITY_ALREADY_ADDED:'\u8a3c\u5238 "{{ric}}" \u306f\u3001\u65e2\u306b\u5b58\u5728\u3057\u307e\u3059\u3002', SECURITIES_ALREADY_ADDED:'\u8a3c\u5238 "{{rics}}" \u306f\u3001\u65e2\u306b\u5b58\u5728\u3057\u307e\u3059\u3002', ADD_RANK:"\u30e9\u30f3\u30af\u3092\u8ffd\u52a0", SHOW_FACTOR_RANKS:"\u30d5\u30a1\u30af\u30bf\u30fc\u30e9\u30f3\u30af\u3092\u8868\u793a", 
+FIELD_DEFINITION:"\u9805\u76ee\u306e\u5b9a\u7fa9", THOMSON_REUTERS_EIKON_EXCEL_FUNCTION:"Thomson Reuters Eikon Excel \u95a2\u6570", SUM_SYMBOL:"\u03a3", EXCLUDED:"\u9664\u5916", INCLUDE_ALL:"\u3059\u3079\u3066\u3092\u542b\u3080", COMPANY_NAME:"\u4f1a\u793e\u540d", EXPAND_ALL:"\u3059\u3079\u3066\u5c55\u958b", COLLAPSE_ALL:"\u3059\u3079\u3066\u6298\u308a\u305f\u305f\u3080", NATIVE_CURRENCY:"\u81ea\u56fd\u901a\u8ca8", MULTIPLE_VALUES:"\u8907\u6570\u306e\u5024", COLUMNS_RETURN_MULTIPLE_VALUES:"\u8907\u6570\u306e\u5024\u304c\u542b\u307e\u308c\u3066\u3044\u308b\u305f\u3081\u3001\u6b63\u3057\u304f\u8868\u793a\u3067\u304d\u307e\u305b\u3093\u3002", 
+DATA_ITEM_IS_NO_LONGER_SUPPORTED:"\u3053\u306e\u30c7\u30fc\u30bf\u9805\u76ee\u306f\u73fe\u5728\u30b5\u30dd\u30fc\u30c8\u3055\u308c\u3066\u3044\u307e\u305b\u3093\u3002", PREMIUM_DISCOUNT_TITLE:"\u5bfe {{statisticsName}}", DISPLAY_OPTIONS:"\u8868\u793a\u30aa\u30d7\u30b7\u30e7\u30f3", SMALL:"\u5c0f", LARGE:"\u5927", MEDIUM:"\u4e2d", FONT_SIZE_AND_ROW_HEIGHT:"\u30d5\u30a9\u30f3\u30c8 \u30b5\u30a4\u30ba\u3068\u884c\u306e\u9ad8\u3055", CURRENCY:"\u901a\u8ca8", SELECT_UP_TO_MAX_GROUPS_COUNT:"\u6700\u5927 {{maxGroupsCount}} \u9805\u76ee\u307e\u3067\u9078\u629e\u3067\u304d\u307e\u3059", 
+HIGH:"\u6700\u9ad8\u5024", LOW:"\u6700\u4f4e\u5024", FIRST_QAURTILE:"\u7b2c1\u56db\u5206\u4f4d\u6570", THIRD_QAURTILE:"\u7b2c3\u56db\u5206\u4f4d\u6570", DISPLAYING_FACTOR_RANKS:"\u30d5\u30a1\u30af\u30bf\u30fc\u30e9\u30f3\u30af\u8868\u793a", ADD_ALL_TO_EXISTING_LIST:"\u3059\u3079\u3066\u306e\u9805\u76ee\u3092\u65e2\u5b58\u306e\u30ea\u30b9\u30c8\u306b\u8ffd\u52a0", ADD_SELECTED_TO_EXISTING_LIST:"\u9078\u629e\u3057\u305f\u9805\u76ee\u3092\u65e2\u5b58\u306e\u30ea\u30b9\u30c8\u306b\u8ffd\u52a0", WATCHLIST_WAS_SUCCESSFULLY_UPDATED:'\u30a6\u30a9\u30c3\u30c1\u30ea\u30b9\u30c8 "{{watchlistName}}" \u306f\u6b63\u5e38\u306b\u66f4\u65b0\u3055\u308c\u307e\u3057\u305f\u3002', 
+PERSONAL_WATCHLIST_SHOULD_BE_SELECTED:"\u500b\u4eba\u7528\u30a6\u30a9\u30c3\u30c1\u30ea\u30b9\u30c8\u3092\u9078\u629e\u3057\u3066\u304f\u3060\u3055\u3044\u3002", CLEAR_ALL:"\u3059\u3079\u3066\u30af\u30ea\u30a2", SHOW_FACTOR_RANK:"\u30d5\u30a1\u30af\u30bf\u30fc\u30e9\u30f3\u30af\u3092\u8868\u793a", ADD_FIELD:"\u9805\u76ee\u3092\u8ffd\u52a0", TRANSPOSE:"\u884c\u5217\u306e\u5165\u308c\u66ff\u3048", SUMMARY:"\u30b5\u30de\u30ea\u30fc", SUMMARY_STATISTICS:"\u7d71\u8a08\u30b5\u30de\u30ea\u30fc", VECTOR_NOT_SUPPORTED:"\u3053\u306e\u884c\u3068\u5217\u306e\u5165\u308c\u66ff\u3048\u306f\u30b5\u30dd\u30fc\u30c8\u3055\u308c\u3066\u3044\u307e\u305b\u3093", 
+EXCLUDE_ALL_SELECTED:"\u9078\u629e\u9805\u76ee\u3092\u3059\u3079\u3066\u9664\u5916", ENABLE_TRANSPOSE:"\u884c\u5217\u306e\u5165\u308c\u66ff\u3048\u3092\u3059\u308b", DISABLE_TRANSPOSE:"\u884c\u5217\u306e\u5165\u308c\u66ff\u3048\u3092\u5143\u306b\u623b\u3059", ALL:"\u3059\u3079\u3066", SAMPLE_TEMPLATES:"\u30b5\u30f3\u30d7\u30eb \u30c6\u30f3\u30d7\u30ec\u30fc\u30c8", VIEW_MORE:"\u3055\u3089\u306b {{count}} \u30c6\u30f3\u30d7\u30ec\u30fc\u30c8\u3092\u8868\u793a", VIEW_AND_MANAGE_ALL_TEMPLATES:"\u3059\u3079\u3066\u306e\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8\u3092\u8868\u793a/\u7ba1\u7406", 
+CREATE_NEW_TEMPLATE:"\u65b0\u898f\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8\u3092\u4f5c\u6210", ADVANCED_SORT:"\u4e26\u3079\u66ff\u3048\u8a2d\u5b9a", ENABLE_ADVANCED_SORT:"\u4e26\u3079\u66ff\u3048\u3092\u6709\u52b9\u306b\u3059\u308b", SORT_BY:"\u4e26\u3079\u66ff\u3048\u57fa\u6e96", ASCENDING:"\u6607\u9806", DESCENDING:"\u964d\u9806", SUMMARY_ROW:"\u96c6\u8a08\u884c", ELLIPSIS:"...", HEAT_MAP:"\u4e0a\u4f4d/\u4e0b\u4f4d\u306e\u5024\u3092\u30cf\u30a4\u30e9\u30a4\u30c8", WATCHLIST_FAILED_UPDATE:'T\u30a6\u30a9\u30c3\u30c1\u30ea\u30b9\u30c8\u3001"{{watchlistName}}" \u306e\u66f4\u65b0\u306b\u5931\u6557\u3057\u307e\u3057\u305f\u3002', 
+ADD_RANK_FOR_THIS_COLUMN:"\u3053\u306e\u5217\u306b\u30e9\u30f3\u30af\u3092\u8ffd\u52a0", PERCENTILE:"\u767e\u5206\u4f4d", DECILE:"\u5341\u5206\u4f4d", QUINTILE:"\u4e94\u5206\u4f4d", QUARTILE:"\u56db\u5206\u4f4d", RANK:"\u30e9\u30f3\u30af", ZSCORE:"Z \u30b9\u30b3\u30a2", SORTING_TYPE:"\u4e26\u3079\u66ff\u3048", BY_VALUE:"\u5024\u57fa\u6e96", BY_ABSOLUTE_VALUE:"\u7d76\u5bfe\u5024\u57fa\u6e96", TIME_SERIES_CHART:"\u6642\u7cfb\u5217\u30c1\u30e3\u30fc\u30c8", TORNADO_CHART:"\u30c8\u30eb\u30cd\u30fc\u30c9\u30c1\u30e3\u30fc\u30c8", 
+EXCLUDE_FROM_STATISTICS:"\u96c6\u8a08\u304b\u3089\u9664\u5916\u3059\u308b", EXCLUDED_FROM_STATISTICS:"\u96c6\u8a08\u304b\u3089\u9664\u5916\u3057\u305f\u9298\u67c4", EXCLUDE_ALL_SELECTED_FROM_STATISTICS:"\u3059\u3079\u3066\u306e\u9078\u629e\u9805\u76ee\u3092\u96c6\u8a08\u304b\u3089\u9664\u5916", EXPORT_TEMPLATE:"\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8\u3092\u30a8\u30af\u30b9\u30dd\u30fc\u30c8", IMPORT_TEMPLATE:"\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8\u3092\u30a4\u30f3\u30dd\u30fc\u30c8", APPLY:"\u9069\u7528", 
+REMOVE_ALL_FILTERS:"\u3059\u3079\u3066\u89e3\u9664", UNIQUE_VALUE:"\u9805\u76ee", DEFINE_RANGE:"\u7bc4\u56f2\u3092\u6307\u5b9a", TOP_BOTTOM:"\u4e0a\u4f4d/\u4e0b\u4f4d", CLEAR:"\u30af\u30ea\u30a2", FROM:"\u6700\u4f4e\u5024", TO:"\u6700\u9ad8\u5024", NUMBER_OF_ROWS:"\u884c\u6570", KEYWORD_SEARCH:"\u30ad\u30fc\u30ef\u30fc\u30c9\u691c\u7d22", FILTER_RESULTS:"\u7d50\u679c\u306e\u7d5e\u308a\u8fbc\u307f", INPUT_DATE:"\u65e5\u4ed8\u3092\u9078\u629e\u3057\u3066\u304f\u3060\u3055\u3044", NPUT_NUMBER:"\u6570\u5024\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044", 
+FREEZE_FOCUS_STOCK_ON_TOP:"\u5f53\u8a72\u9298\u67c4\u3092\u4e0a\u4f4d\u306b\u56fa\u5b9a", FACTOR:"\u30d5\u30a1\u30af\u30bf\u30fc", ADD_FORMULA:"\u8a08\u7b97\u5f0f\u3092\u4f7f\u7528\u3057\u3066\u5217\u3092\u8ffd\u52a0", FORMULA_EDITOR:"\u8a08\u7b97\u5f0f\u306e\u8a2d\u5b9a", COLUMN_N:"\u5217 {{columnNumber}}", LANDSCAPE:"\u6a2a\u5411\u304d", PORTRAIT:"\u7e26\u5411\u304d", TR_COPYRIGHT:"\u00a9 {{year}} Thomson Reuters. All rights reserved.", CLICK_ON_ANY_COLUMN:"\u8a08\u7b97\u5f0f\u306b\u4f7f\u7528\u3059\u308b\u9805\u76ee\u3092\u30ec\u30dd\u30fc\u30c8\u306e\u5217\u304b\u3089\u30af\u30ea\u30c3\u30af\u3057\u3066\u304f\u3060\u3055\u3044", 
+FORMAT_CELLS:"\u5024\u306e\u8868\u793a\u8a2d\u5b9a", DATE:"\u65e5\u4ed8\u5f62\u5f0f", NUMBER:"\u6570\u5024\u5f62\u5f0f", PERCENTAGE:"\u30d1\u30fc\u30bb\u30f3\u30c8", THOUSANDS_SEPARATOR:"\u6841\u533a\u5207\u308a", DAY_MONTHDATE_YEAR:"\u65e5\u3001\u6708\u3001\u5e74", DATE_ABBREVIATEDMONTH:"\u65e5 - \u6708\u306e\u77ed\u7e2e\u5f62", DATE_ABBREVIATEDMONYH_YEARE:"\u65e5 - \u6708\u306e\u77ed\u7e2e\u5f62 - \u5e74", MONTH_YEAR:"\u6708 - \u5e74", ABBREVIATEMONYH_ABBREVIATEDYEAR:"\u6708\u306e\u77ed\u7e2e\u5f62 - \u5e74\u306e\u77ed\u7e2e\u5f62", 
+EXPORT_PDF_LANDSCAPE:"PDF \u306b\u30a8\u30af\u30b9\u30dd\u30fc\u30c8(\u6a2a\u5411\u304d)", EXPORT_PDF_PORTRAIT:"PDF \u306b\u30a8\u30af\u30b9\u30dd\u30fc\u30c8(\u7e26\u5411\u304d)", EXPORT_PDF_FAILED:"PDF \u306e\u30a8\u30af\u30b9\u30dd\u30fc\u30c8\u306b\u5931\u6557\u3057\u307e\u3057\u305f\u3002", MAX_ROWS_COUNT_EXCEEDED:"\u6700\u5927\u884c\u6570\u3092\u8d85\u3048\u3066\u3044\u307e\u3059\u3002\u6700\u5927\u884c\u6570\u3092 {{maxRowsCount}} \u884c\u4ee5\u4e0b\u306b\u3057\u3066\u304f\u3060\u3055\u3044\u3002", 
+SHOW_ABBREVIATIONS:"false", DD_MM_YYYY:"YYYY/MM/DD", DD_MM_YYYY_F:"yyyy/MM/dd", DD_MM_YY:"YY/MM/DD", DD_MM_YY_F:"yy/MM/dd", DD_MM:"MM/DD", DD_MM_F:"MM/dd", MM_DD_YYYY:"", MM_DD_YYYY_F:"", MM_DD_YY:"", MM_DD_YY_F:"", MM_DD:"", MM_DD_F:"", MM_YYYY:"YYYY/MM", MM_YYYY_F:"yyyy/MM", MM_YY:"YY/MM", MM_YY_F:"yy/MM", COPY_TO_CLIPBOARD:"\u30af\u30ea\u30c3\u30d7\u30dc\u30fc\u30c9\u306b\u30b3\u30d4\u30fc", ERROR_MESSAGE_HAS_BEEN_COPIED:"\u30a8\u30e9\u30fc \u30e1\u30c3\u30bb\u30fc\u30b8\u304c\u30af\u30ea\u30c3\u30d7\u30dc\u30fc\u30c9\u306b\u30b3\u30d4\u30fc\u3055\u308c\u307e\u3057\u305f", 
+NOTIFY_PRINT_MESSAGE:"\u30d7\u30ea\u30f3\u30bf\u30fc\u306e\u30ed\u30fc\u30ab\u30eb\u8a2d\u5b9a\u3067\u30ec\u30a4\u30a2\u30a6\u30c8\u306e\u65b9\u5411\u3092\u6307\u5b9a\u3057\u3066\u304f\u3060\u3055\u3044\u3002", SHARE:"\u5171\u6709", SHARE_WITH:"\u5171\u6709\u5148", SHARED_TEMPLATES:"\u5171\u6709\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8", UNABLE_TO_LOAD_SHARED_TEMPLATES:"\u5171\u6709\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8\u3092\u8aad\u307f\u8fbc\u3081\u307e\u305b\u3093\u3002", AUTHOR:"\u4f5c\u6210\u8005", 
+SHARED_TO:"\u5171\u6709\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8\u540d", INSER_BLANK_ROW:"\u65b0\u3057\u3044\u884c\u3092\u633f\u5165\u3059\u308b", NUMBER_INPUT_VALIDATION_MESSAGE:"\u5024\u3092\u6570\u5024\u306b\u8a2d\u5b9a\u3057\u3066\u304f\u3060\u3055\u3044", NUMBER_OUT_OF_RANGE_VALIDATION_MESSAGE:"0\u304b\u3089100\u307e\u3067\u306e\u6570\u5024\u3092\u8a2d\u5b9a\u3057\u3066\u304f\u3060\u3055\u3044", T_B_FILTER_TOP_VALUE:"\u9806\u4f4d\u4e0a\u4f4d #", T_B_FILTER_BOTTOM_VALUE:"\u9806\u4f4d\u4e0b\u4f4d #", 
+T_B_FILTER_TOP_PER:"\u767e\u5206\u4f4d\u4e0a\u4f4d %", T_B_FILTER_BOTTOM_PER:"\u767e\u5206\u4f4d\u4e0b\u4f4d %", T_B_FILTER_DEFAULT_FIELD:"\u4e26\u3079\u66ff\u3048\u306e\u6761\u4ef6\u3092\u9078\u629e"};
+goog.provide("gridReport.services.DataProviderResolver");
+gridReport.services.DataProviderResolver = function() {
+  this.resolve = function(providerId) {
+    return this[providerId] || this.defaultService;
+  };
+  this.register = function(providerId, provider) {
+    this[providerId] = provider;
+  };
+  this.unregister = function(providerId) {
+    delete this[providerId];
+  };
+};
 goog.provide("gridReport.services.DefaultGridColumns");
 goog.require("gridReport.model.Command");
 goog.require("gridReport.model.GridColumn");
@@ -20986,261 +23259,130 @@ gridReport.Module.directive("adcGrid", ["$timeout", function($timeout) {
     };
   }};
 }]);
-goog.provide("gridReport.directives.SharingService");
-gridReport.Module.service("gfSharingService", ["$q", "$http", "gfConfig", function($q, $http, gfConfig) {
-  function wrapCall(call) {
-    var canceller = $q.defer();
-    var cancel = function(reason) {
-      canceller.resolve(reason);
-    };
-    var promise = call({timeout:canceller.promise});
-    return angular.extend(promise, {cancel:cancel});
-  }
-  function createGroup(groupItem) {
-    return{id:groupItem.Id, name:groupItem.Name, text:groupItem.Name, shared:groupItem.Shared, sharedLabel:groupItem.ShareLabel};
-  }
-  function getSharingFolderName() {
-    return gfConfig.sharingFolderName || "GridReportFormats";
-  }
-  var service = {};
-  service.getGroupsToShare = function(request) {
-    if (!request) {
-      throw new Error("request should be provided");
-    }
-    return wrapCall(function(options) {
-      return $http.get(gfConfig.host + "State/GroupsToShare/" + getSharingFolderName() + "/" + encodeURIComponent(request.templateName), options).then(function(data) {
-        return _.map(data.data.Groups, createGroup);
-      });
-    });
-  };
-  service.share = function(request) {
-    if (!request) {
-      throw new Error("request should be provided");
-    }
-    return wrapCall(function(options) {
-      var parameters = {GroupId:request.groupId};
-      if (!_.isEmpty(request.templateDescription)) {
-        parameters.Metadata = [{Key:"description", Value:request.templateDescription}];
+goog.provide("gridReport.directives.GridContextMenuDirective");
+goog.require("gridReport.directives.ContextMenuDirective");
+goog.require("gridReport.Module");
+gridReport.Module.directive("gridContextMenu", ["$translate", "$timeout", function($translate, $timeout) {
+  return{restrict:"E", replace:true, require:"^gridReport", scope:{isAnyRowSelected:"=", actions:"="}, template:'<div><gf-context-menu menu-items="contextMenu.menuItems" ' + 'open-direction="contextMenu.openDirection" ' + 'options="contextMenu.options" ' + 'visible="contextMenu.visible" ' + 'position="contextMenu.position"></gf-context-menu></div>', link:function(scope, element, attrs, controller) {
+    var actionParams = {rowKey:undefined}, contextMenuWidth = 160;
+    function getMenuItems(rowKey) {
+      var menuItems = [], isTransposedGrid = controller.getIsTransposed();
+      if (!isTransposedGrid && controller.canInsertBlankRow()) {
+        menuItems.push({label:$translate.instant("INSER_BLANK_ROW"), action:function() {
+          controller.insertBlankRow(rowKey, "before");
+        }});
       }
-      return $http.post(gfConfig.host + "State/Share/" + getSharingFolderName() + "/" + encodeURIComponent(request.templateName), parameters, options).then(function(response) {
-        if (response && response.data) {
-          if (response.data.ErrorCode === 0) {
-            return response.data.Message;
+      if (controller.canExlcuded(rowKey)) {
+        menuItems.push({label:$translate.instant("EXCLUDE"), action:function() {
+          if (!scope.isAnyRowSelected) {
+            controller.excludeRow(rowKey);
           } else {
-            return $q.reject({code:response.data.ErrorCode, message:response.data.Message});
+            controller.excludeSelectedRows();
           }
-        } else {
-          return $q.reject();
-        }
-      });
-    });
-  };
-  service.unshare = function(request) {
-    if (!request) {
-      throw new Error("request should be provided");
-    }
-    return wrapCall(function(options) {
-      var parameters = {GroupId:request.groupId};
-      return $http.post(gfConfig.host + "/State/Unshare/" + getSharingFolderName() + "/" + encodeURIComponent(request.templateName), parameters, options).then(function(response) {
-        if (response && response.data) {
-          if (response.data.ErrorCode === 0) {
-            return response.data.Message;
+        }});
+      }
+      if (controller.canExcludedFromStatistics(rowKey)) {
+        menuItems.push({label:$translate.instant("EXCLUDE_FROM_STATISTICS"), action:function() {
+          if (!scope.isAnyRowSelected) {
+            controller.excludeRowFromStatistics(rowKey);
           } else {
-            return $q.reject(response.data.Message);
+            controller.excludeSelectedRowsFromStatistics();
           }
-        } else {
-          return $q.reject();
-        }
-      });
-    });
-  };
-  return service;
-}]);
-goog.provide("gridReport.directives.SharingDetailsController");
-goog.require("gridReport.directives.SharingService");
-gridReport.Module.controller("gfSharingDetailsController", ["$scope", "$element", "gfSharingService", "gfLogManager", function($scope, $element, gfSharingService, gfLogManager) {
-  function refreshSelection() {
-    $element.find(".group-selector").select2("val", _.map($scope.sharedGroups, "id"));
-  }
-  function stopAndRefresh() {
-    $scope.stopLoading();
-    refreshSelection();
-  }
-  function logError(error) {
-    if (error != null) {
-      gfLogManager.error(error);
+        }});
+      }
+      if (controller.canSelectAll()) {
+        menuItems.push({label:$translate.instant("SELECT_ALL"), action:controller.selectAllRows});
+        menuItems.push({label:$translate.instant("DESELECT_ALL"), action:controller.clearSelection});
+      }
+      return menuItems;
     }
-  }
-  $scope.isLoading = false;
-  $scope.groupsList = [];
-  $scope.sharedGroups = [];
-  $scope.startLoading = function() {
-    $scope.isLoading = true;
-  };
-  $scope.stopLoading = function() {
-    $scope.isLoading = false;
-  };
-  $scope.removeGroup = function(group) {
-    $scope.startLoading();
-    gfSharingService.unshare({templateName:$scope.templateName, groupId:group.id}).then(function() {
-      $scope.sharedGroups = _.without($scope.sharedGroups, group);
-      ($scope.onSharedStateChanged || angular.noop)({templateName:$scope.templateName, shared:!_.isEmpty($scope.sharedGroups)});
-    }, function(error) {
-      logError(error);
-    })["finally"](function() {
-      stopAndRefresh();
-    });
-  };
-  $scope.addGroup = function(group) {
-    $scope.startLoading();
-    gfSharingService.share({templateName:$scope.templateName, templateDescription:$scope.templateDescription, groupId:group.id}).then(function() {
-      $scope.sharedGroups.push(group);
-      ($scope.onSharedStateChanged || angular.noop)({templateName:$scope.templateName, shared:!_.isEmpty($scope.sharedGroups)});
-    }, function(error) {
-      logError(error);
-    })["finally"](function() {
-      stopAndRefresh();
-    });
-  };
-  $scope.startLoading();
-  gfSharingService.getGroupsToShare({templateName:$scope.templateName}).then(function(groups) {
-    _.each(groups, function(group) {
-      $scope.groupsList.push(group);
-      if (group.shared) {
-        $scope.sharedGroups.push(group);
-      }
-    });
-  }, function(error) {
-    logError(error);
-  })["finally"](function() {
-    stopAndRefresh();
-  });
-}]);
-goog.provide("gridReport.directives.SharingDetailsDirective");
-goog.require("gridReport.directives.SharingDetailsController");
-gridReport.Module.directive("gfSharingDetails", ["$translate", function($translate) {
-  return{restrict:"E", scope:{templateName:"=", templateDescription:"=", onSharedStateChanged:"&?"}, templateUrl:"scripts/directives/sharingDetails/SharingDetails.html", controller:"gfSharingDetailsController", link:function(scope, element) {
-    var select = element.find(".group-selector");
-    select.select2({data:scope.groupsList, multiple:true, placeholder:$translate.instant("SHARE_WITH")});
-    select.on("change", function(e) {
-      if (e.added) {
-        scope.addGroup(e.added);
-      }
-      if (e.removed) {
-        scope.removeGroup(e.removed);
-      }
-      scope.$apply();
-    });
-    scope.$watch("isLoading", function() {
-      select.select2(scope.isLoading == true ? "disable" : "enable");
-    });
-  }};
-}]);
-goog.provide("gridReport.directives.GroupingToolbarController");
-goog.require("gridReport.model.GridReportExpandCollapseState");
-goog.require("gridReport.model.GridEvents");
-gridReport.Module.controller("GroupingToolbarController", ["$scope", "gfGridManagementService", "gfEventsAggregator", "$timeout", function($scope, gfGridManagementService, gfEventsAggregator, $timeout) {
-  var expandCollapseState = gridReport.model.GridReportExpandCollapseState.allCollapsed;
-  var currentGroups;
-  function allGroupsExpanded() {
-    return expandCollapseState == gridReport.model.GridReportExpandCollapseState.allExpanded;
-  }
-  function allGroupsCollapsed() {
-    return expandCollapseState == gridReport.model.GridReportExpandCollapseState.allCollapsed;
-  }
-  function expandAll() {
-    gfGridManagementService.toggleAllGroups($scope.gridInstanceId, true);
-  }
-  function collapseAll() {
-    gfGridManagementService.toggleAllGroups($scope.gridInstanceId, false);
-  }
-  function expandCollapseStateChanged() {
-    var prevState = expandCollapseState;
-    expandCollapseState = gfGridManagementService.getExpandCollapseState($scope.gridInstanceId);
-    if (prevState != expandCollapseState) {
+    var gridReportContainer = element.closest(".gridReportContainer").first();
+    scope.contextMenu = {menuItems:[], openDirection:"right", options:{width:contextMenuWidth + "px", height:"140px", autoCloseOnClick:true, autoOpenPopup:false, mode:"popup", theme:controller.theme.theme, animationShowDuration:0, animationHideDuration:0}};
+    function tooggleMenuVisibility(value) {
+      scope.contextMenu.visible = !!value;
       $timeout(angular.noop);
     }
-  }
-  function refreshModel() {
-    currentGroups = gfGridManagementService.getGrouping($scope.gridInstanceId);
-    expandCollapseStateChanged();
-  }
-  var oldIsVisible = false;
-  function isVisible() {
-    var newValue = currentGroups && (currentGroups.length && gfGridManagementService.getVisibleIdentifiers($scope.gridInstanceId).length);
-    if (newValue != oldIsVisible) {
-      gfEventsAggregator.getChildAggregator($scope.gridInstanceId).raiseEvent(gridReport.model.InternalEvents.groupingToolbarVisibilityChanged, {isVisible:newValue});
-      oldIsVisible = newValue;
+    function showContextMenu(rowKey, event) {
+      scope.contextMenu.menuItems = getMenuItems(rowKey);
+      if (scope.contextMenu.menuItems.length == 0) {
+        tooggleMenuVisibility(false);
+        return true;
+      }
+      var initialXPos = parseInt(event.clientX) + 5 + $(window).scrollLeft();
+      var finalXPos = initialXPos + contextMenuWidth >= $(document).width() ? initialXPos - contextMenuWidth : initialXPos;
+      var finalYPos = parseInt(event.clientY) + 5 + $(window).scrollTop();
+      scope.contextMenu.openDirection = finalXPos + contextMenuWidth * 2 <= $(document).width() ? "right" : "left";
+      scope.contextMenu.position = {x:finalXPos, y:finalYPos};
+      if (scope.contextMenu.visible) {
+        scope.$apply(function() {
+          scope.contextMenu.visible = false;
+        });
+      }
+      tooggleMenuVisibility(true);
+      return undefined;
     }
-    return newValue;
-  }
-  function init() {
-    var aggregator = gfEventsAggregator.getChildAggregator($scope.gridInstanceId);
-    aggregator.addHandler(gridReport.model.GridEvents.groupingApplied, refreshModel);
-    aggregator.addHandler(gridReport.model.GridEvents.groupsStateRestored, expandCollapseStateChanged);
-    aggregator.addHandler(gridReport.model.GridEvents.groupExpanded, expandCollapseStateChanged);
-    aggregator.addHandler(gridReport.model.GridEvents.groupCollapsed, expandCollapseStateChanged);
-    aggregator.addHandler(gridReport.model.GridEvents.allGroupsCollapsed, expandCollapseStateChanged);
-    aggregator.addHandler(gridReport.model.GridEvents.allGroupsExpanded, expandCollapseStateChanged);
-  }
-  $scope.allGroupsExpanded = allGroupsExpanded;
-  $scope.allGroupsCollapsed = allGroupsCollapsed;
-  $scope.expandAll = expandAll;
-  $scope.collapseAll = collapseAll;
-  $scope.isVisible = isVisible;
-  if ($scope.gridInstanceId) {
-    init();
-  }
-  $scope.$watch("gridInstanceId", function(newVal, oldVal) {
-    if (newVal === oldVal) {
-      return;
+    function mouseDownHandler(event) {
+      return controller.getIsTransposed() ? transposedGridContainerMouseDownHandler(event) : gridReportContainerMouseDownHandler(event);
     }
-    init();
-  });
-}]);
-goog.provide("gridReport.directives.GroupingToolbarDirective");
-goog.require("gridReport.directives.GroupingToolbarController");
-gridReport.Module.directive("gfGroupingToolbar", [function() {
-  return{restrict:"E", templateUrl:"scripts/directives/groupingToolbar/GroupingToolbar.html", scope:{gridInstanceId:"="}, controller:"GroupingToolbarController"};
-}]);
-goog.provide("gridReport.services.SystemCurrenciesService");
-gridReport.Module.factory("gfSystemCurrenciesService", ["$translate", function($translate) {
-  var systemCurrencies = [], service = {};
-  service.add = function(newCurrency) {
-    if (_.isEmpty(newCurrency)) {
-      throw new Error("No currency was specified.");
+    function gridReportContainerMouseDownHandler(event) {
+      if (event.which != 3 || !controller.isGridContextMenuActive()) {
+        return true;
+      }
+      var result;
+      var content = $(event.target).closest(".jqx-grid-content").first();
+      if (content.length > 0) {
+        actionParams.rowKey = $(event.target).closest("[row-key]").attr("row-key");
+        showContextMenu(actionParams.rowKey, event);
+        result = false;
+      } else {
+        if (scope.contextMenu.visible) {
+          tooggleMenuVisibility(false);
+        }
+        result = true;
+      }
+      return result;
     }
-    systemCurrencies.push(newCurrency);
-  };
-  service.remove = function(id) {
-    var index = systemCurrencies.length;
-    while (index--) {
-      if (systemCurrencies.id === id) {
-        systemCurrencies.splice(index, 1);
+    function transposedGridContainerMouseDownHandler(event) {
+      var result;
+      if (event.which != 3 || !controller.isGridContextMenuActive()) {
+        return true;
+      }
+      var columnHeader = $(event.target).closest(".columnHeader:not(.statistic-row):not(.totals-row)").first();
+      if (columnHeader.length) {
+        var items = columnHeader.closest(".jqx-grid-column-header").attr("class").match(/jqx-column-id-(\S+)/);
+        if (items == undefined || items.length < 2) {
+          scope.contextMenu.visible = false;
+          result = true;
+        } else {
+          var rowKey = decodeURI(items[1]);
+          showContextMenu(rowKey, event);
+          result = false;
+        }
+      } else {
+        scope.contextMenu.visible = false;
+        result = true;
+      }
+      scope.$apply();
+      return result;
+    }
+    function gridReportContainerContextMenuHandler() {
+      return false;
+    }
+    function hideContextMenu() {
+      if (scope.contextMenu.visible) {
+        tooggleMenuVisibility(false);
       }
     }
-  };
-  service.list = function() {
-    return systemCurrencies;
-  };
-  service.clear = function() {
-    systemCurrencies = [];
-  };
-  angular.forEach([{id:null, displayText:$translate.instant("NONE")}, {id:"Native", displayText:$translate.instant("NATIVE_CURRENCY")}], service.add);
-  return service;
-}]);
-goog.provide("gridReport.filters.ValueFormatter");
-gridReport.Module.filter("gfValueFormatter", [function() {
-  return function(value, format) {
-    if ($.jqx.dataFormat.isDate(value)) {
-      return $.jqx.dataFormat.formatdate(value, format, undefined);
-    } else {
-      if ($.jqx.dataFormat.isNumber(value)) {
-        return $.jqx.dataFormat.formatnumber(value, format, undefined);
-      }
+    if (scope.actions) {
+      scope.actions = {hideContextMenu:hideContextMenu};
     }
-    return value;
-  };
+    gridReportContainer.mousedown(mouseDownHandler);
+    gridReportContainer.on("contextmenu", gridReportContainerContextMenuHandler);
+    element.bind("$destroy", function() {
+      angular.element(gridReportContainer).unbind("mousedown", mouseDownHandler);
+      gridReportContainer.off("contextmenu", gridReportContainerContextMenuHandler);
+    });
+  }};
 }]);
 goog.provide("gridReport.services.PAWebApiService");
 gridReport.Module.factory("gfPAWebApiService", ["$q", "$http", "gfConfig", function($q, $http, gfConfig) {
@@ -21342,1137 +23484,6 @@ gridReport.Module.factory("gfPAWebApiService", ["$q", "$http", "gfConfig", funct
     return{header:{code:originalWatchList.header.code, description:originalWatchList.header.description, lastModifiedDateTime:originalWatchList.header.lastModifiedDateTime, name:originalWatchList.header.name, state:originalWatchList.header.state}, watchListStatement:{constituents:mergeConstituents(identifiers, originalWatchList.watchListStatement.constituents)}};
   }
   return service;
-}]);
-goog.provide("gridReport.services.ObjectsImporter");
-goog.require("gridReport.services.DapsStorageProvider");
-gridReport.Module.factory("gfObjectsImporter", ["gfDapsStorageProvider", "$q", function(gfDapsStorageProvider, $q) {
-  function createCustomExpression(command) {
-    return{returnType:command.returnType, name:command.id, path:command.getExpression(false), isValid:true};
-  }
-  function createMfr(command) {
-    return _.extend(command.metadata, {adcSyntax:command.getExpression(false)});
-  }
-  function createDataBlock(command) {
-    return command.metadata;
-  }
-  function createRequest(gridState) {
-    var expressions = {}, mfranks = {}, dblocks = {};
-    _.each(gridState.columns, function(column) {
-      var command = new gridReport.model.Command(column.command);
-      if (command.isCustom()) {
-        expressions[command.id] = createCustomExpression(command);
-      } else {
-        if (command.isMultiFactorRank()) {
-          mfranks[command.id] = createMfr(command);
-        } else {
-          if (command.isDataBlock()) {
-            dblocks[command.id] = createDataBlock(command);
-            _.each(column.gridColumns, function(subColumn) {
-              var subCommand = new gridReport.model.Command(subColumn.command);
-              if (subCommand.isCustom()) {
-                expressions[subCommand.id] = createCustomExpression(subCommand);
-              } else {
-                if (subCommand.isMultiFactorRank()) {
-                  mfranks[subCommand.id] = createMfr(subCommand);
-                }
-              }
-            });
-          }
-        }
-      }
-    });
-    return{expressions:_.toArray(expressions), mfranks:_.toArray(mfranks), dblocks:_.toArray(dblocks)};
-  }
-  var service = {};
-  service.importObjects = function(gridState) {
-    if (!gridState) {
-      throw new Error("gridState should be provided");
-    }
-    var deffered = $q.defer(), request = createRequest(gridState);
-    gfDapsStorageProvider.importObjects(request, function(results) {
-      deffered.resolve(results);
-    });
-    return deffered.promise;
-  };
-  return service;
-}]);
-goog.provide("gridReport.services.MostRecentlyUsedService");
-gridReport.Module.factory("gfMostRecentlyUsedService", ["$q", "gfDapsService", function($q, gfDapsService) {
-  var folderName = "Settings", fileName = "mru";
-  function loadMRUs() {
-    var deferred = $q.defer();
-    gfDapsService.loadFile({folderName:folderName, fileName:fileName}, function(response) {
-      if (response) {
-        var mru = JSON.parse(response);
-        _.each(mru, function(type) {
-          _.each(type, function(item) {
-            if (item.accessDate) {
-              item.accessDate = new Date(item.accessDate);
-            }
-          });
-        });
-        deferred.resolve(mru);
-      } else {
-        deferred.resolve();
-      }
-    }, function() {
-      deferred.resolve();
-    });
-    return deferred.promise;
-  }
-  function addMRU(type, item) {
-    if (!type) {
-      throw new Error("type should be defined");
-    }
-    if (!item) {
-      throw new Error("item should be defined");
-    }
-    var deferred = $q.defer();
-    loadMRUs().then(function(mru) {
-      mru = mru || {};
-      mru[type] = _.filter(mru[type] || [], function(record) {
-        return record.name != item.name;
-      });
-      mru[type].unshift(item);
-      mru[type].length = Math.min(mru[type].length, 10);
-      gfDapsService.saveFile({folderName:folderName, fileName:fileName, state:JSON.stringify(mru)}, function() {
-        deferred.resolve();
-      }, function() {
-        deferred.reject();
-      });
-    }, function() {
-      deferred.reject();
-    });
-    return deferred.promise;
-  }
-  return{loadMRUs:loadMRUs, addMRU:addMRU};
-}]);
-goog.provide("gridReport.services.TemplateStateUpdater");
-goog.require("gridReport.services.GridColumnConverterService");
-goog.require("gridReport.columnMath.ColumnMathColumnsUpdater");
-gridReport.Module.factory("gfTemplateStateUpdater", ["$q", "gfGridColumnConverterService", "gfColumnMathColumnsUpdater", function($q, gfGridColumnConverterService, gfColumnMathColumnsUpdater) {
-  function getListOfColumns(columnsState) {
-    var column = [];
-    _.each(columnsState, function(columnState, key) {
-      column.push(gfGridColumnConverterService.createGridColumnFromState(key, columnState));
-    });
-    return column;
-  }
-  function getColumnsObject(columns) {
-    var columnsState = {};
-    _.each(columns, function(column) {
-      var columnState = {};
-      gfGridColumnConverterService.convertGridColumnToState(columnState, column);
-      columnsState[column.id] = columnState;
-    });
-    return columnsState;
-  }
-  function getColumnsByNameAndType(columns, columnNameCheckFnct, typeCheckFnct) {
-    var foundColumns = [];
-    _.each(columns, function(column) {
-      if ((typeCheckFnct || angular.noop)(column) && (columnNameCheckFnct || angular.noop)(column)) {
-        foundColumns.push(column);
-      }
-      if (column.gridColumns) {
-        var subColumns = getColumnsByNameAndType(column.gridColumns, columnNameCheckFnct, typeCheckFnct);
-        if (subColumns) {
-          foundColumns = foundColumns.concat(subColumns);
-        }
-      }
-    });
-    return foundColumns;
-  }
-  function updateCustomExpressions(columns, customExpressions) {
-    _.each(customExpressions, function(customExpression, previousCustomExpressionName) {
-      if (customExpression == null) {
-        return;
-      }
-      var previousColumns = getColumnsByNameAndType(columns, function(column) {
-        return column.command && column.command.name === previousCustomExpressionName;
-      }, function(column) {
-        return column.command && column.command.isCustom();
-      });
-      _.each(previousColumns, function(previousColumn) {
-        var previousColumnId;
-        previousColumn.header = customExpression.name;
-        previousColumn.initialHeader = customExpression.name;
-        previousColumn.command.id = customExpression.name;
-        previousColumn.command.name = customExpression.name;
-        previousColumn.command.metadata.id = customExpression.name;
-        previousColumn.command.expression = customExpression.path + "/*" + customExpression.name + "*/";
-        previousColumnId = previousColumn.id;
-        previousColumn.id = previousColumn.command.expression;
-        gfColumnMathColumnsUpdater.update(columns, previousColumnId, previousColumn.id);
-      });
-    });
-  }
-  function updateMultiFactorRanks(columns, multiFactorRanks) {
-    _.each(multiFactorRanks, function(multiFactorRank, previousMfrName) {
-      if (multiFactorRank == null) {
-        return;
-      }
-      var previousColumns = getColumnsByNameAndType(columns, function(column) {
-        return column.command && column.command.name === previousMfrName;
-      }, function(column) {
-        return column.command && column.command.isMultiFactorRank();
-      });
-      _.each(previousColumns, function(previousColumn) {
-        previousColumn.header = multiFactorRank.name;
-        previousColumn.initialHeader = multiFactorRank.name;
-        previousColumn.command.id = multiFactorRank.id;
-        previousColumn.command.name = multiFactorRank.name;
-        previousColumn.command.metadata.id = multiFactorRank.id;
-        previousColumn.command.expression = multiFactorRank.adcSyntax + "/*MfrExpression:" + multiFactorRank.name + "*/";
-        previousColumn.id = previousColumn.command.expression;
-      });
-    });
-  }
-  function updateDataBlocks(columns, dataBlocks) {
-    _.each(dataBlocks, function(dataBlock, previousDataBlockName) {
-      if (dataBlock == null) {
-        return;
-      }
-      var previousColumns = getColumnsByNameAndType(columns, function(column) {
-        return column.command && column.command.name === previousDataBlockName;
-      }, function(column) {
-        return column.command && column.command.isDataBlock();
-      });
-      _.each(previousColumns, function(previousColumn) {
-        previousColumn.header = dataBlock.name;
-        previousColumn.initialHeader = dataBlock.name;
-        previousColumn.command.id = dataBlock.id;
-        previousColumn.command.name = dataBlock.name;
-        previousColumn.command.metadata.id = dataBlock.id;
-        previousColumn.id = previousColumn.command.id;
-      });
-    });
-    _.each(columns, function(column) {
-      if (column.command && column.command.isDataBlock()) {
-        var subColumns = _.values(column.gridColumns);
-        column.gridColumns = {};
-        _.each(subColumns, function(subColumn) {
-          column.gridColumns[subColumn.id] = subColumn;
-        });
-      }
-    });
-  }
-  var service = {};
-  service.updateState = function(templateData, request) {
-    if (!templateData) {
-      throw new Error("templateData should be provided");
-    }
-    var deffered = $q.defer();
-    if (request) {
-      var columns = getListOfColumns(templateData.state.gridState.columns);
-      updateCustomExpressions(columns, request.expressions);
-      updateMultiFactorRanks(columns, request.mfranks);
-      updateDataBlocks(columns, request.dblocks);
-      templateData.state.gridState.columns = getColumnsObject(columns);
-    }
-    deffered.resolve(templateData);
-    return deffered.promise;
-  };
-  return service;
-}]);
-goog.provide("gridReport.services.ReportTemplatesModel");
-goog.require("gridReport.directives.ReportTemplateManagerDialogService");
-goog.require("gridReport.services.FormatsService");
-goog.require("gridReport.services.StateProvideService");
-goog.require("gridReport.services.MostRecentlyUsedService");
-goog.require("gridReport.services.ObjectsImporter");
-goog.require("gridReport.services.TemplateStateUpdater");
-gridReport.services.ReportTemplatesModel = function($translate, $q, gfFormatsService, gfGridManagementService, gfNotificationService, gfEventsAggregator, localStorageService, gfLogManager, gfDefaultToolbarState, gfReportTemplateManagerDialogService, gridInstanceId, gfGridStateService, gfStateProviderService, gfMostRecentlyUsedService, gfObjectsImporter, gfTemplateStateUpdater) {
-  var REPORT_TEMPLATES_STATE_POSTFIX = "REPORT_TEMPLATES";
-  var BLANK_TEMPLATE = new gridReport.model.ReportTemplate({name:$translate.instant("UNSAVED_TEMPLATE"), type:gridReport.model.ReportTemplate.types.newTemplate});
-  var currentStateId;
-  var model = this;
-  var restoredState;
-  var universeContext = scr.UniverseType.Public;
-  var templateManagerCustomClass = null;
-  model.gridInstanceId = gridInstanceId;
-  model.isTemplateSaved = false;
-  model.isTemplateChanged = false;
-  model.isConfirmationAllowed = true;
-  gfEventsAggregator = gfEventsAggregator.getChildAggregator(gridInstanceId);
-  model.setBlankTemplateSelected = function() {
-    createNewTemplate();
-    saveLocalState();
-  };
-  model.createBlankTemplate = function() {
-    if (model.isTemplateChanged && model.isConfirmationAllowed) {
-      gfNotificationService.confirmSave($translate.instant("FORMAT_WAS_CHANGED_CONFIRMATION", {name:getSuggestedTemplateName(model.selectedTemplate)}), function() {
-        model.tryToSaveTemplate().then(function() {
-          createNewTemplate();
-        });
-      }, createNewTemplate);
-    } else {
-      createNewTemplate();
-    }
-  };
-  function createNewTemplate(supressLoadData) {
-    gfGridManagementService.createNew(model.gridInstanceId, currentStateId);
-    if (!supressLoadData) {
-      gfGridManagementService.loadData(model.gridInstanceId, true);
-    }
-    model.selectedTemplate = BLANK_TEMPLATE;
-    model.isTemplateSaved = false;
-    model.isTemplateChanged = false;
-    model.isPersonalTemplate = false;
-    saveLocalState();
-    gfEventsAggregator.raiseEvent(gridReport.model.GridEvents.templateCreated);
-    gfEventsAggregator.raiseEvent(gridReport.model.GridEvents.componentStateChanged, {component:gridReport.services.StateProvideService.components.templates});
-  }
-  model.setSelectedCustomItem = function(item) {
-    var template = new gridReport.model.ReportTemplate({name:item.text, type:gridReport.model.ReportTemplate.types.custom});
-    template.isCustom = true;
-    template.customItem = item;
-    model.selectedTemplate = template;
-    model.isTemplateChanged = item.isTemplateChanged;
-    model.isTemplateSaved = item.isTemplateSaved;
-    saveLocalState();
-    gfEventsAggregator.raiseEvent(gridReport.model.GridEvents.componentStateChanged, {component:gridReport.services.StateProvideService.components.templates});
-  };
-  model.resolveTemplateName = function(name, templatesNames) {
-    if (!_.contains(templatesNames, name)) {
-      return name;
-    }
-    return model.resolveTemplateName(name + " (copy)", templatesNames);
-  };
-  function getTemplateNames() {
-    return _.pluck(_.union(model.templates.globalFormats, model.templates.personalFormats, model.templates.sharedFormats), "name");
-  }
-  model.saveAndSelectImportedTemplate = function(templateData) {
-    checkTemplateChangesAndInvokeAction(function() {
-      model.importTemplate(templateData);
-    });
-  };
-  model.loadSelectedTemplate = function(newTemplate) {
-    gfGridManagementService.startLoading(model.gridInstanceId, gridReport.model.GridContentPlacement.All, gridReport.model.LoadingReasons.TemplateLoading);
-    gfEventsAggregator.raiseEvent(gridReport.model.GridEvents.templateLoadingStarted);
-    model.selectedTemplate = newTemplate;
-    gfFormatsService.loadTemplate(newTemplate).then(function(state) {
-      gfGridManagementService.setGridState(model.gridInstanceId, state, function() {
-        gfGridManagementService.endLoading(model.gridInstanceId, gridReport.model.GridContentPlacement.All, gridReport.model.LoadingReasons.TemplateLoading);
-        gfEventsAggregator.raiseEvent(gridReport.model.GridEvents.templateLoadingEnded);
-      });
-      newTemplate.accessDate = new Date;
-      model.isTemplateSaved = true;
-      model.isTemplateChanged = false;
-      model.isPersonalTemplate = model.selectedTemplate && !model.selectedTemplate.isGlobal();
-      if (!model.isPersonalTemplate) {
-        gfMostRecentlyUsedService.addMRU(gridReport.model.ReportTemplate.types.global, {name:model.selectedTemplate.name, accessDate:newTemplate.accessDate});
-      }
-      saveLocalState();
-      gfEventsAggregator.raiseEvent(gridReport.model.GridEvents.componentStateChanged, {component:gridReport.services.StateProvideService.components.templates});
-    }, function() {
-      gfGridManagementService.endLoading(model.gridInstanceId, gridReport.model.GridContentPlacement.All, gridReport.model.LoadingReasons.TemplateLoading);
-      gfEventsAggregator.raiseEvent(gridReport.model.GridEvents.templateLoadingEnded);
-    });
-  };
-  model.setSelectedTemplate = function(newTemplate) {
-    var loadTemplateAction = function() {
-      model.loadSelectedTemplate(newTemplate);
-    };
-    checkTemplateChangesAndInvokeAction(loadTemplateAction);
-  };
-  function checkTemplateChangesAndInvokeAction(callback) {
-    if (model.isTemplateChanged && model.isConfirmationAllowed) {
-      gfNotificationService.confirmSave($translate.instant("FORMAT_WAS_CHANGED_CONFIRMATION", {name:getSuggestedTemplateName(model.selectedTemplate)}), function() {
-        model.tryToSaveTemplate().then(callback);
-      }, callback);
-    } else {
-      callback();
-    }
-  }
-  model.tryToSaveTemplate = function() {
-    var deffered = $q.defer();
-    if (model.selectedTemplate) {
-      model.openReportTemplateManager(getSuggestedTemplateName(model.selectedTemplate), function() {
-        deffered.resolve("saved");
-      }, !model.selectedTemplate.isGlobal());
-    } else {
-      deffered.reject(new Error("template should be selected"));
-    }
-    return deffered.promise;
-  };
-  function getSuggestedTemplateName(template, preferredTemplateName) {
-    if (template.isGlobal() || template.isShared()) {
-      var templateName = preferredTemplateName || template.name + " (copy)";
-      var existedTemplate = _.findWhere(model.templates.personalFormats, {name:templateName});
-      if (existedTemplate) {
-        return getSuggestedTemplateName(template, templateName + " (copy)");
-      } else {
-        return templateName;
-      }
-    } else {
-      return template.name;
-    }
-  }
-  model.saveAs = function() {
-    if (model.selectedTemplate) {
-      var saveAsSuccessfullAction = function(templateName) {
-        selectCreatedTemplate(templateName);
-      };
-      model.openReportTemplateManager(getSuggestedTemplateName(model.selectedTemplate), saveAsSuccessfullAction, !model.selectedTemplate.isGlobal());
-    }
-  };
-  function selectCreatedTemplate(templateName) {
-    var tempalte = getTemplate(templateName, gridReport.model.ReportTemplate.types.personal);
-    if (tempalte) {
-      model.selectedTemplate = tempalte;
-      model.isTemplateSaved = true;
-      model.isTemplateChanged = false;
-      model.isPersonalTemplate = model.selectedTemplate && !model.selectedTemplate.isGlobal();
-    }
-  }
-  function setTemplateManagerDialogClassCallback(customClass) {
-    templateManagerCustomClass = customClass;
-  }
-  model.save = function() {
-    if (model.selectedTemplate && !model.selectedTemplate.isGlobal()) {
-      saveFormatHandler(model.selectedTemplate.name);
-    }
-  };
-  model["export"] = function() {
-    if (model.selectedTemplate) {
-      exportFormatHandler();
-    }
-  };
-  model.openReportTemplateManager = function(formatName, successCallback, isOverwriteWithoutConfirmation, templateType) {
-    var settings = {universeContext:universeContext, templateType:templateType, saveModeSettings:formatName ? {selectedFormatName:formatName, initialSelectedFormatName:formatName, isOverwriteWithoutConfirmation:isOverwriteWithoutConfirmation} : null, onDeleteFormat:templateDeletedHandler, onRenameFormat:templateRenamedHandler, onSaveFormat:function(templateName) {
-      saveFormatHandler(templateName, successCallback);
-    }, onLoadFormat:function(format) {
-      if (format) {
-        var template = getTemplate(format.name, format.type);
-        if (!template) {
-          template = new gridReport.model.ReportTemplate({type:format.type, name:format.name, path:format.path, accessDate:new Date});
-          model.templates.personalFormats.push(template);
-        }
-        gfEventsAggregator.raiseEvent(gridReport.model.GridEvents.templateManagerTemplateSelected);
-        model.setSelectedTemplate(template);
-      }
-    }};
-    if (templateManagerCustomClass) {
-      settings.templateManagerCustomClass = templateManagerCustomClass;
-    }
-    gfReportTemplateManagerDialogService.openDialog(settings);
-  };
-  model.setUniverseContext = function(newUniverseContext) {
-    if (newUniverseContext && universeContext != newUniverseContext) {
-      universeContext = newUniverseContext;
-      loadTemplates();
-    }
-  };
-  model.getUniverseContext = function() {
-    return universeContext || scr.UniverseType.Public;
-  };
-  model.importTemplate = function(templateData) {
-    if (!templateData) {
-      throw new Error("templateData should be provided");
-    }
-    gfGridManagementService.startLoading(model.gridInstanceId, gridReport.model.GridContentPlacement.All, gridReport.model.LoadingReasons.TemplateSaving);
-    var allTemplatesNames = getTemplateNames();
-    templateData.name = model.resolveTemplateName(templateData.name + " Imported", allTemplatesNames);
-    return gfObjectsImporter.importObjects(templateData.state.gridState).then(function(response) {
-      return gfTemplateStateUpdater.updateState(templateData, response).then(function() {
-        return gfFormatsService.saveTemplate(templateData.name, templateData.state, templateData.description).then(function() {
-          gfGridManagementService.endLoading(model.gridInstanceId, gridReport.model.GridContentPlacement.All, gridReport.model.LoadingReasons.TemplateSaving);
-          if (!_.contains(getTemplateNames(), templateData.name)) {
-            loadTemplates();
-          }
-          gfEventsAggregator.raiseEvent(gridReport.model.GridEvents.templateImported, {templateName:templateData.name});
-        }).then(function() {
-          model.loadSelectedTemplate(new gridReport.model.ReportTemplate(templateData));
-        }, function() {
-          throw new Error("Imported template wasn't saved because of some server error");
-        });
-      });
-    });
-  };
-  function getState() {
-    return{isTemplateSaved:model.isTemplateSaved, isTemplateChanged:model.isTemplateChanged, selectedTemplate:model.selectedTemplate};
-  }
-  function setState(state, forceLoad) {
-    if (!state || !state.selectedTemplate) {
-      state = getEmptyState();
-    }
-    if (state.selectedTemplate.name == BLANK_TEMPLATE.name) {
-      model.selectedTemplate = BLANK_TEMPLATE;
-    } else {
-      if (state.selectedTemplate.isCustom) {
-        model.setSelectedCustomItem(state.selectedTemplate.customItem);
-      } else {
-        if (forceLoad && (state.selectedTemplate && state.selectedTemplate.type == gridReport.model.ReportTemplate.types.global)) {
-          model.loadSelectedTemplate(new gridReport.model.ReportTemplate(state.selectedTemplate));
-        }
-        if (model.templates) {
-          var template = getTemplate(state.selectedTemplate.name, state.selectedTemplate.type);
-          if (template) {
-            model.selectedTemplate = template;
-          } else {
-            model.selectedTemplate = BLANK_TEMPLATE;
-            state.isTemplateSaved = false;
-            state.isTemplateChanged = true;
-          }
-        }
-      }
-    }
-    model.isTemplateSaved = state.isTemplateSaved;
-    model.isTemplateChanged = state.isTemplateChanged;
-    if (model.selectedTemplate != BLANK_TEMPLATE) {
-      model.isPersonalTemplate = model.selectedTemplate && !model.selectedTemplate.isGlobal();
-    }
-  }
-  function loadLocalState() {
-    return localStorageService.get(currentStateId + REPORT_TEMPLATES_STATE_POSTFIX);
-  }
-  function saveLocalState() {
-    if (!model.isAutoSaveState) {
-      gfLogManager.trace("REPORT_TEMPLATE. unable to save state for isAutoSaveState == false");
-      return;
-    }
-    if (currentStateId === undefined) {
-      gfLogManager.trace("REPORT_TEMPLATE. trying to save state with undefined id");
-      return;
-    }
-    var state = getState();
-    localStorageService.add(currentStateId + REPORT_TEMPLATES_STATE_POSTFIX, JSON.stringify(state));
-    gfLogManager.trace("REPORT_TEMPLATE. Request to save state [id: " + (currentStateId + REPORT_TEMPLATES_STATE_POSTFIX) + "]");
-  }
-  function getIsTemplateSavedCallback() {
-    return model.isTemplateSaved;
-  }
-  function getIsTemplateChangedCallback() {
-    return model.isTemplateChanged;
-  }
-  function restoreStateCallback(stateId) {
-    if (stateId == undefined) {
-      gfLogManager.trace("REPORT_TEMPLATE. trying to restore state with undefined id");
-      return;
-    }
-    currentStateId = stateId;
-    gfLogManager.trace("REPORT_TEMPLATE. restore state id: " + stateId);
-    restoredState = loadLocalState();
-    if (!model.selectedTemplate) {
-      if (restoredState && restoredState.selectedTemplate) {
-        setState(restoredState);
-      } else {
-        var state = getEmptyState();
-        setState(state, true);
-        if (state.selectedTemplate == BLANK_TEMPLATE) {
-          gfGridManagementService.createNew(model.gridInstanceId, currentStateId);
-          gfEventsAggregator.raiseEvent(gridReport.model.GridEvents.newStateApplied);
-        }
-      }
-    }
-  }
-  function getEmptyState() {
-    var state = {};
-    state.isTemplateChanged = false;
-    state.isTemplateSaved = false;
-    state.selectedTemplate = BLANK_TEMPLATE;
-    if (gfDefaultToolbarState && gfDefaultToolbarState.selectedTemplate) {
-      state.isTemplateChanged = gfDefaultToolbarState.isTemplateChanged;
-      state.isTemplateSaved = gfDefaultToolbarState.isTemplateSaved;
-      state.selectedTemplate = gfDefaultToolbarState.selectedTemplate;
-    }
-    return state;
-  }
-  function createNewCallback(newStateId) {
-    if (model.isAutoSaveState) {
-      currentStateId = newStateId;
-    }
-    model.isTemplateSaved = false;
-    model.isTemplateChanged = false;
-    saveLocalState();
-    gfEventsAggregator.raiseEvent(gridReport.model.GridEvents.componentStateChanged, {component:gridReport.services.StateProvideService.components.templates});
-  }
-  function getSelectedTemplateCalback() {
-    return new gridReport.model.ReportTemplate(model.selectedTemplate);
-  }
-  function setSelectedTemplateCallback(template) {
-    model.loadSelectedTemplate(new gridReport.model.ReportTemplate(template));
-  }
-  function setSelectedCustomItemCallback(item) {
-    model.setSelectedCustomItem(item);
-  }
-  function setSelectedNewTemplateCallback(needLoadData) {
-    createNewTemplate(!needLoadData);
-  }
-  function saveFormatCallback(templateName, successCallback, failCallback) {
-    saveFormatHandler(templateName, successCallback, failCallback);
-  }
-  function saveSelectedTemplateAsCallback(templateName, successCallback, failCallback) {
-    saveFormatHandler(templateName, function() {
-      selectCreatedTemplate(templateName);
-      (successCallback || angular.noop)();
-    }, failCallback);
-  }
-  function getIsTemplateExistsCallback(templateName, templateType) {
-    return getTemplate(templateName, templateType) != null;
-  }
-  var callbacksArray = [[gfGridManagementService.getIsTemplateSaved, getIsTemplateSavedCallback], [gfGridManagementService.getIsTemplateChanged, getIsTemplateChangedCallback], [gfGridManagementService.restoreState, restoreStateCallback], [gfGridManagementService.createNew, createNewCallback], [gfGridManagementService.getSelectedTemplate, getSelectedTemplateCalback], [gfGridManagementService.saveTemplate, saveFormatCallback], [gfGridManagementService.saveTemplateAs, saveSelectedTemplateAsCallback], 
-  [gfGridManagementService.getIsTemplateExists, getIsTemplateExistsCallback], [gfGridManagementService.setSelectedTemplate, setSelectedTemplateCallback], [gfGridManagementService.setSelectedCustomItem, setSelectedCustomItemCallback], [gfGridManagementService.setSelectedNewTemplate, setSelectedNewTemplateCallback], [gfGridManagementService.setTemplateManagerDialogClass, setTemplateManagerDialogClassCallback]];
-  function registerManagementSerivceCallbacks(gridId) {
-    gfGridManagementService.registerCallbacks(gridId, callbacksArray);
-  }
-  function unregisterManagementSerivceCallbacks(gridId) {
-    gfGridManagementService.unregisterCallbacks(gridId, callbacksArray);
-  }
-  model.destroy = function() {
-    unregisterManagementSerivceCallbacks(model.gridInstanceId);
-    unregisterStateCallbacks(model.gridInstanceId);
-  };
-  function registerStateCallbacks(gridId) {
-    gfStateProviderService.register(gridReport.services.StateProvideService.components.templates, gridId, {getStateCallback:getState, setStateCallback:function(state) {
-      restoredState = state;
-      setState(state);
-    }});
-  }
-  function unregisterStateCallbacks(gridId) {
-    gfStateProviderService.unregister(gridReport.services.StateProvideService.components.templates, gridId);
-  }
-  gfEventsAggregator.addHandler(gridReport.model.GridEvents.stateChanged, function(cause) {
-    if (cause == gridReport.model.StateChangesCause.ColumnProgrammaticallyAddedToSavedTemplate) {
-      if (model.isTemplateSaved) {
-        model.isTemplateChanged = true;
-        saveLocalState();
-        gfEventsAggregator.raiseEvent(gridReport.model.GridEvents.componentStateChanged, {component:gridReport.services.StateProvideService.components.templates});
-      }
-    } else {
-      model.isTemplateChanged = true;
-      saveLocalState();
-      gfEventsAggregator.raiseEvent(gridReport.model.GridEvents.componentStateChanged, {component:gridReport.services.StateProvideService.components.templates});
-    }
-  }, true);
-  gfEventsAggregator.addHandler(gridReport.model.InternalEvents.gridStateNotFound, function() {
-    setState(getEmptyState(), true);
-  });
-  function getTemplate(name, type) {
-    switch(type) {
-      case gridReport.model.ReportTemplate.types.global:
-        return _.findWhere(model.templates.globalFormats, {name:name});
-      case gridReport.model.ReportTemplate.types.personal:
-        return _.findWhere(model.templates.personalFormats, {name:name});
-      case gridReport.model.ReportTemplate.types.shared:
-        return _.findWhere(model.templates.sharedFormats, {name:name});
-      default:
-        return undefined;
-    }
-  }
-  function filterTemplates(templates) {
-    return _.filter(templates, function(template) {
-      return template.getUniverseContext() == universeContext;
-    });
-  }
-  function filterTemplatesGroups(templatesGroups) {
-    return{globalFormats:filterTemplates(templatesGroups.globalFormats), personalFormats:filterTemplates(templatesGroups.personalFormats), sharedFormats:filterTemplates(templatesGroups.sharedFormats)};
-  }
-  function loadTemplates() {
-    model.isTemplatesLoading = true;
-    var deffered = $q.defer();
-    gfMostRecentlyUsedService.loadMRUs().then(function(mrus) {
-      gfFormatsService.loadFormats(function(response) {
-        model.templates = filterTemplatesGroups(response.formats);
-        if (mrus && mrus.global) {
-          _.each(model.templates.globalFormats, function(format) {
-            var t = _.findWhere(mrus.global, {name:format.name});
-            if (t) {
-              format.accessDate = t.accessDate;
-            }
-          });
-        }
-        _.each(response.fails, function(fail) {
-          gfLogManager.error(fail);
-        });
-        model.isTemplatesLoading = false;
-        deffered.resolve();
-        gfEventsAggregator.raiseEvent(gridReport.model.GridEvents.templateSelectorComponentInitialized);
-      });
-    }, function() {
-    });
-    return deffered.promise;
-  }
-  function templateDeletedHandler(templateName) {
-    var deletedTemplate = getTemplate(templateName, gridReport.model.ReportTemplate.types.personal);
-    if (_.isEqual(model.selectedTemplate, deletedTemplate)) {
-      model.createBlankTemplate();
-    }
-    model.templates.personalFormats.splice(model.templates.personalFormats.indexOf(deletedTemplate), 1);
-    gfEventsAggregator.raiseEvent(gridReport.model.GridEvents.templateDeleted, {templateName:templateName});
-  }
-  function templateRenamedHandler(oldName, newName) {
-    var renamedTemplate = getTemplate(oldName, gridReport.model.ReportTemplate.types.personal);
-    if (renamedTemplate) {
-      renamedTemplate.name = newName;
-    }
-    saveLocalState();
-    gfEventsAggregator.raiseEvent(gridReport.model.GridEvents.templateRenamed, {oldName:oldName, newName:newName});
-    gfEventsAggregator.raiseEvent(gridReport.model.GridEvents.componentStateChanged, {component:gridReport.services.StateProvideService.components.templates});
-  }
-  function exportFormatHandler() {
-    var templateData = gfGridManagementService.exportSelectedTemplate(model.gridInstanceId);
-    var text = JSON.stringify(templateData);
-    var blob = new Blob([text], {type:"text/plain;charset=utf-8"});
-    saveAs(blob, model.selectedTemplate.name + ".ugrf");
-  }
-  function saveFormatHandler(templateName, successCallback, failCallback) {
-    model.isSaving = true;
-    gfGridManagementService.startLoading(model.gridInstanceId, gridReport.model.GridContentPlacement.All, gridReport.model.LoadingReasons.TemplateSaving);
-    gfFormatsService.saveTemplate(templateName, gfGridStateService.getState(model.gridInstanceId), gfGridStateService.getGridDescription(model.gridInstanceId)).then(function() {
-      model.isTemplateSaved = true;
-      model.isTemplateChanged = false;
-      updateSavedTemplate(templateName);
-      model.isSaving = false;
-      gfGridManagementService.endLoading(model.gridInstanceId, gridReport.model.GridContentPlacement.All, gridReport.model.LoadingReasons.TemplateSaving);
-      gfReportTemplateManagerDialogService.closeDialog();
-      (successCallback || angular.noop)(templateName);
-      saveLocalState();
-    }, function(error) {
-      model.isSaving = false;
-      gfGridManagementService.endLoading(model.gridInstanceId, gridReport.model.GridContentPlacement.All, gridReport.model.LoadingReasons.TemplateSaving);
-      (failCallback || angular.noop)(error);
-    });
-  }
-  function updateSavedTemplate(templateName) {
-    var savedTemplate = getTemplate(templateName, gridReport.model.ReportTemplate.types.personal);
-    if (savedTemplate) {
-      savedTemplate.accessDate = new Date;
-    } else {
-      model.templates.personalFormats.push(new gridReport.model.ReportTemplate({type:gridReport.model.ReportTemplate.types.personal, name:templateName, accessDate:new Date}));
-    }
-  }
-  registerManagementSerivceCallbacks(model.gridInstanceId);
-  registerStateCallbacks(model.gridInstanceId);
-  gfEventsAggregator.raiseEvent(gridReport.model.GridEvents.templateSelectorComponentRegistered, {gridInstanceId:model.gridInstanceId});
-  var stateId = gfStateProviderService.getStateId(model.gridInstanceId);
-  if (!_.isUndefined(stateId) && !_.isNull(stateId)) {
-    restoreStateCallback(stateId);
-  }
-  loadTemplates().then(function() {
-    if (model.selectedTemplate && (model.selectedTemplate.type == gridReport.model.ReportTemplate.types.global || (model.selectedTemplate.type == gridReport.model.ReportTemplate.types.personal || model.selectedTemplate.type == gridReport.model.ReportTemplate.types.shared))) {
-      model.selectedTemplate = getTemplate(model.selectedTemplate.name, model.selectedTemplate.type);
-    }
-    if (restoredState && !model.selectedTemplate) {
-      setState(restoredState);
-    }
-  });
-};
-gridReport.services.ReportTemplatesModel["$inject"] = ["$translate", "$q", "gfFormatsService", "gfGridManagementService", "gfNotificationService", "gfEventsAggregator", "localStorageService", "gfLogManager", "gfDefaultToolbarState", "gfReportTemplateManagerDialogService", "gridInstanceId", "gfGridStateService", "gfStateProviderService", "gfMostRecentlyUsedService", "gfObjectsImporter", "gfTemplateStateUpdater"];
-goog.provide("gridReport.services.ReportTemplatesModelFactory");
-goog.require("gridReport.services.ReportTemplatesModel");
-gridReport.Module.service("gfReportTemplatesModelFactory", ["$injector", function($injector) {
-  var models = {};
-  var service = {getReportTemplateModel:function(gridInstanceId) {
-    if (!models[gridInstanceId]) {
-      models[gridInstanceId] = $injector.instantiate(gridReport.services.ReportTemplatesModel, {gridInstanceId:gridInstanceId});
-    }
-    return models[gridInstanceId];
-  }, destroyReportTemplateModel:function(gridInstanceId) {
-    if (models[gridInstanceId]) {
-      models[gridInstanceId].destroy();
-      models[gridInstanceId].templates = null;
-      models[gridInstanceId] = undefined;
-    }
-  }};
-  return service;
-}]);
-goog.provide("gridReport.directives.ReportTemplateSelectorController");
-goog.require("gridReport.services.ReportTemplatesModelFactory");
-goog.require("gridReport.services.NotificationService");
-goog.require("gridReport.utils.LogManager");
-gridReport.Module.controller("ReportTemplateSelectorController", ["$scope", "$translate", "gfReportTemplatesModelFactory", "gfEventsAggregator", "gfNotificationService", "gfGridManagementService", "gfLogManager", function($scope, $translate, gfReportTemplatesModelFactory, gfEventsAggregator, gfNotificationService, gfGridManagementService, gfLogManager) {
-  $scope.onFileUploaded = function(fileName, fileData) {
-    if (fileData) {
-      try {
-        var templateData = JSON.parse(fileData);
-        $scope.model.saveAndSelectImportedTemplate(templateData);
-      } catch (e) {
-        gfLogManager.error(e, true);
-      }
-    }
-  };
-  function setSelectedTemplateByNameCallback(name, type) {
-    var template = new gridReport.model.ReportTemplate({name:name, type:type});
-    $scope.model.setSelectedTemplate(template);
-  }
-  function importTemplateCallback(templateData) {
-    return $scope.model.importTemplate(templateData);
-  }
-  $scope.mruOptions = {filter:function(template) {
-    return template.accessDate != undefined;
-  }};
-  $scope.numberOfItemsPerCategory = angular.isDefined($scope.numberOfItemsPerCategory) ? $scope.numberOfItemsPerCategory : 10;
-  $scope.canCreateBlankTemplate = angular.isDefined($scope.canCreateBlankTemplate) ? $scope.canCreateBlankTemplate : true;
-  $scope.canImportTemplate = angular.isDefined($scope.canImportTemplate) ? $scope.canImportTemplate : true;
-  $scope.canOpenTemplateManager = angular.isDefined($scope.canOpenTemplateManager) ? $scope.canOpenTemplateManager : true;
-  $scope.isConfirmationAllowed = angular.isDefined($scope.isConfirmationAllowed) ? $scope.isConfirmationAllowed : true;
-  $scope.useDateSortingForGlobals = angular.isDefined($scope.useDateSortingForGlobals) ? $scope.useDateSortingForGlobals : true;
-  $scope.getGlobalText = function() {
-    if ($scope.globalSectionText) {
-      return $scope.globalSectionText;
-    }
-    return $translate.instant("SAMPLE_TEMPLATES");
-  };
-  $scope.getPersonalText = function() {
-    if ($scope.personalSectionText) {
-      return $scope.personalSectionText;
-    }
-    return $translate.instant("PERSONAL");
-  };
-  $scope.getRecentText = function() {
-    if ($scope.recentSectionText) {
-      return $scope.recentSectionText;
-    }
-    return $translate.instant("RECENT");
-  };
-  $scope.getSharedText = function() {
-    return $scope.sharedSectionText ? $scope.sharedSectionText : $translate.instant("SHARED_TEMPLATES");
-  };
-  $scope.getFormattedTemplateName = function() {
-    var getSelectedTemplateNameCallback = $scope.getSelectedTemplateName();
-    if (getSelectedTemplateNameCallback) {
-      return getSelectedTemplateNameCallback($scope.model.selectedTemplate);
-    }
-    return $scope.model.selectedTemplate ? $scope.model.selectedTemplate.name : "";
-  };
-  $scope.createBlankTemplate = function() {
-    var onCreateBlankCallback = $scope.onCreateBlank();
-    if (onCreateBlankCallback) {
-      var promise = onCreateBlankCallback();
-      promise && promise.then($scope.model.setBlankTemplateSelected);
-    } else {
-      $scope.model.createBlankTemplate();
-    }
-  };
-  $scope.setSelectedCustomItem = function(event, item) {
-    var selectCustomItem = function() {
-      if (item.isItem() || item.isDefaultAction()) {
-        $scope.model.setSelectedCustomItem(item);
-      }
-    };
-    if (item.action) {
-      var promise = item.action($scope.model.selectedTemplate, item);
-      promise && promise.then(selectCustomItem);
-    } else {
-      selectCustomItem();
-    }
-  };
-  $scope.setSelectedTemplate = function(template) {
-    if (template == $scope.model.selectedTemplate) {
-      return;
-    }
-    var onTemplateSelectedCallback = $scope.onTemplateSelected();
-    gfEventsAggregator.getChildAggregator($scope.gridInstanceId).raiseEvent(gridReport.model.GridEvents.templateSelectorTemplateSelected);
-    if (onTemplateSelectedCallback) {
-      var oldTemplate = $scope.model.selectedTemplate;
-      var promise = onTemplateSelectedCallback(oldTemplate, template);
-      promise && promise.then(function() {
-        $scope.model.loadSelectedTemplate(template);
-      });
-    } else {
-      $scope.model.setSelectedTemplate(template);
-    }
-  };
-  $scope.$watch("gridInstanceId", function(newValue, oldValue) {
-    if (oldValue == newValue) {
-      return;
-    }
-    if (oldValue) {
-      gfReportTemplatesModelFactory.destroyReportTemplateModel(oldValue);
-    }
-    setModel($scope.gridInstanceId);
-  });
-  $scope.$watch("isAutoSaveState", function() {
-    if ($scope.model) {
-      $scope.model.isAutoSaveState = $scope.isAutoSaveState;
-    }
-  });
-  $scope.$watch("isConfirmationAllowed", function() {
-    if ($scope.model) {
-      $scope.model.isConfirmationAllowed = $scope.isConfirmationAllowed;
-    }
-  });
-  $scope.$watch("universeContext", function() {
-    if ($scope.model) {
-      $scope.model.setUniverseContext($scope.universeContext);
-    }
-  });
-  $scope.getGlobalViewMoreText = function() {
-    return $translate.instant("VIEW_MORE", {count:$scope.model.templates.globalFormats.length - $scope.numberOfItemsPerCategory});
-  };
-  $scope.getPersonalViewMoreText = function() {
-    return $translate.instant("VIEW_MORE", {count:$scope.model.templates.personalFormats.length - $scope.numberOfItemsPerCategory});
-  };
-  $scope.getSharedViewMoreText = function() {
-    return $translate.instant("VIEW_MORE", {count:$scope.model.templates.sharedFormats.length - $scope.numberOfItemsPerCategory});
-  };
-  function setModel(gridInstanceId) {
-    if (gridInstanceId) {
-      $scope.model = gfReportTemplatesModelFactory.getReportTemplateModel($scope.gridInstanceId);
-      $scope.model.setUniverseContext($scope.universeContext);
-    }
-  }
-  $scope.showReportTemplateManager = function(templateType) {
-    $scope.model.openReportTemplateManager(undefined, undefined, undefined, templateType);
-  };
-  setModel($scope.gridInstanceId);
-  $scope.model.isAutoSaveState = $scope.isAutoSaveState;
-  $scope.model.isConfirmationAllowed = $scope.isConfirmationAllowed;
-  $scope.$on("$destroy", function() {
-    gfReportTemplatesModelFactory.destroyReportTemplateModel($scope.gridInstanceId);
-  });
-  var callbackArray = [[gfGridManagementService.setSelectedTemplateByName, setSelectedTemplateByNameCallback], [gfGridManagementService.importTemplate, importTemplateCallback]];
-  gfGridManagementService.registerCallbacks($scope.model.gridInstanceId, callbackArray);
-}]);
-goog.provide("gridReport.model.TemplateSelectorCustomItem");
-gridReport.model.TemplateSelectorCustomItem = function(options) {
-  if (options) {
-    if (options.hasOwnProperty("itemType")) {
-      this.itemType = options.itemType;
-    }
-    if (options.hasOwnProperty("text")) {
-      this.text = options.text;
-    }
-    if (options.hasOwnProperty("action")) {
-      this.action = options.action;
-    }
-    if (options.hasOwnProperty("isTemplateSaved")) {
-      this.isTemplateSaved = options.isTemplateSaved;
-    }
-    if (options.hasOwnProperty("isTemplateChanged")) {
-      this.isTemplateChanged = options.isTemplateChanged;
-    }
-  }
-};
-gridReport.model.TemplateSelectorCustomItem.itemTypes = {header:"header", link:"link", item:"item", defaultAction:"default"};
-gridReport.model.TemplateSelectorCustomItem.prototype.itemType = gridReport.model.TemplateSelectorCustomItem.itemTypes.item;
-gridReport.model.TemplateSelectorCustomItem.prototype.text = "";
-gridReport.model.TemplateSelectorCustomItem.prototype.action = null;
-gridReport.model.TemplateSelectorCustomItem.prototype.isHeader = function() {
-  return this.itemType === gridReport.model.TemplateSelectorCustomItem.itemTypes.header;
-};
-gridReport.model.TemplateSelectorCustomItem.prototype.isLink = function() {
-  return this.itemType === gridReport.model.TemplateSelectorCustomItem.itemTypes.link;
-};
-gridReport.model.TemplateSelectorCustomItem.prototype.isItem = function() {
-  return this.itemType === gridReport.model.TemplateSelectorCustomItem.itemTypes.item;
-};
-gridReport.model.TemplateSelectorCustomItem.prototype.isDefaultAction = function() {
-  return this.itemType === gridReport.model.TemplateSelectorCustomItem.itemTypes.defaultAction;
-};
-goog.provide("gridReport.services.FileUploadService");
-gridReport.Module.factory("gfFileUploadService", function() {
-  var service = {};
-  function createInput(triggerEl, accept, dataUploadedCallback) {
-    var fileEl = $("<input type='file'>").attr("accept", accept);
-    triggerEl.parent().append(fileEl);
-    fileEl.hide();
-    fileEl.change(getInputnChangeHandler(dataUploadedCallback));
-    triggerEl.data("gfFileUploadService", fileEl);
-    return fileEl;
-  }
-  function getInputnChangeHandler(dataUploadedCallback) {
-    return function(e) {
-      var inputEl = $(e.target);
-      var files = inputEl.get(0).files;
-      if (files.length != 1) {
-        return;
-      }
-      var reader = new FileReader;
-      reader.onload = function(e) {
-        var name = files[0].name;
-        var fileData = e.target.result;
-        dataUploadedCallback(name, fileData);
-        inputEl.val("");
-      };
-      reader.readAsText(files[0]);
-    };
-  }
-  service.applyTo = function(triggerEl, dataUploadedCallback, accept) {
-    triggerEl.on("remove", function() {
-      var fileEl = triggerEl.data("gfFileUploadService");
-      if (fileEl && _.isFunction(fileEl.remove)) {
-        fileEl.remove();
-      }
-    });
-    triggerEl.click(function() {
-      var fileEl = triggerEl.data("gfFileUploadService") || createInput(triggerEl, accept, dataUploadedCallback);
-      fileEl.click();
-    });
-  };
-  return service;
-});
-goog.provide("gridReport.directives.ReportTemplateSelectorDirective");
-goog.require("gridReport.model.TemplateSelectorCustomItem");
-goog.require("gridReport.directives.ReportTemplateSelectorController");
-goog.require("gridReport.services.FileUploadService");
-gridReport.Module.directive("gfReportTemplateSelector", ["gfFileUploadService", function(gfFileUploadService) {
-  return{restrict:"E", replace:true, transclude:false, templateUrl:"scripts/directives/reportTemplateSelector/ReportTemplateSelector.html", scope:{globalSectionText:"=", personalSectionText:"=", sharedSectionText:"=", recentSectionText:"=", isEnabled:"=", isAutoSaveState:"=", customItems:"=", gridInstanceId:"=", getSelectedTemplateName:"&", universeContext:"=", numberOfItemsPerCategory:"=?", onTemplateSelected:"&", onCreateBlank:"&", canCreateBlankTemplate:"=?", canImportTemplate:"=?", canOpenTemplateManager:"=?", 
-  isConfirmationAllowed:"=?", useDateSortingForGlobals:"=?"}, controller:"ReportTemplateSelectorController", link:function(scope, element) {
-    var listener = function(event) {
-      event.preventDefault();
-      event.stopPropagation();
-    };
-    gfFileUploadService.applyTo(element.find("#gfRTS_importTempalteLink"), scope.onFileUploaded, ".ugrf");
-    scope.element = element;
-    function scollToTop() {
-      element.find(".gf-template-selector-list-container").scrollTop(0);
-    }
-    var isOpen = false;
-    function closeMenu(e) {
-      $(document).off("mousedown", closeMenu);
-      if ($(e.target).closest(element.find(".dropdown-menu")).length > 0) {
-        isOpen = false;
-        return;
-      }
-      if ($(e.target).closest(element).length > 0) {
-        return;
-      }
-      element.find(".dropdown-toggle").trigger("click");
-    }
-    element.find(".dropdown-toggle").on("click", function() {
-      if (!isOpen) {
-        scollToTop();
-        $(document).on("mousedown", closeMenu);
-      }
-      isOpen = !isOpen;
-    });
-    element.find(".gf-template-selector-item-header").on("click", listener);
-    element.on("$destroy", function() {
-      element.find(".gf-template-selector-item-header").off("click", listener);
-      element.find(".dropdown-toggle").off("click", scollToTop);
-      scope.onCreateBlank = null;
-      scope.onTemplateSelected = null;
-      scope.getSelectedTemplateName = null;
-      scope.$destroy();
-    });
-  }};
-}]);
-goog.provide("gridReport.directives.DatepickerDirective");
-gridReport.Module.directive("gfDatepicker", ["$translate", function($translate) {
-  return{restrict:"E", scope:{isEnabled:"=", date:"=", selected:"=", placeholder:"=?", dateFormat:"=?", min:"=?", max:"=?"}, template:'<input type="text" ' + 'class="gf-datepicker-container" ' + 'ng-attr-placeholder="{{placeholder}}" ' + 'style="width:100px"></input>', link:function(scope, element) {
-    var $datepicker = element.find(".gf-datepicker-container");
-    scope.placeholder = scope.placeholder || $translate.instant("INPUT_DATE");
-    scope.dateFormat = scope.dateFormat || "mm/dd/yy";
-    $datepicker.datepicker({showOn:"both", dateFormat:scope.dateFormat, firstDay:0, minDate:scope.min, maxDate:scope.max, onSelect:function() {
-      scope.$apply(function() {
-        scope.date = $datepicker.datepicker("getDate");
-        (scope.selected || angular.noop)({date:scope.date});
-      });
-    }});
-    scope.$watch("isEnabled", function() {
-      if (scope.isEnabled !== false) {
-        $datepicker.datepicker("enable");
-      } else {
-        $datepicker.datepicker("disable");
-      }
-    });
-    scope.$watch("date", function() {
-      $datepicker.datepicker("setDate", $.datepicker.formatDate(scope.dateFormat, scope.date));
-    });
-    scope.$on("$destroy", function() {
-      $datepicker.datepicker("destroy");
-    });
-  }};
-}]);
-goog.provide("gridReport.directives.SaveControlController");
-goog.require("gridReport.services.ReportTemplatesModelFactory");
-gridReport.Module.controller("gfSaveControlController", ["$scope", "$translate", "gfReportTemplatesModelFactory", function($scope, $translate, gfReportTemplatesModelFactory) {
-  var defaultIcon = "gf-icon-save-template";
-  var activeIcon = "gf-icon-save-template-active";
-  $scope.isSaveDisabled = false;
-  $scope.isSaveAsDisabled = false;
-  $scope.buttonIconClass = defaultIcon;
-  $scope.menuItemOptions = {openDirection:"right"};
-  $scope.$watch("model.isTemplateChanged", function() {
-    if ($scope.model) {
-      $scope.buttonIconClass = $scope.model.isTemplateChanged ? activeIcon : defaultIcon;
-      $scope.buttonIconClass += " icon-save";
-    }
-    updateIsSaveDisabledFlag();
-  });
-  $scope.$watch("model.isPersonalTemplate", function() {
-    updateIsSaveDisabledFlag();
-  });
-  function updateIsSaveDisabledFlag() {
-    if ($scope.model) {
-      $scope.isSaveDisabled = !$scope.model.isPersonalTemplate || !$scope.model.isTemplateChanged;
-    }
-  }
-  $scope.saveMenuItemClicked = function() {
-    callSaveAction();
-  };
-  $scope.saveAsMenuItemClicked = function() {
-    callSaveAsAction();
-  };
-  $scope.exportTemplate = function() {
-    $scope.model && $scope.model["export"]();
-  };
-  $scope.menuItems = [{label:$translate.instant("SAVE"), action:$scope.saveMenuItemClicked, disabled:function() {
-    return $scope.isSaveDisabled;
-  }, visible:true}, {label:$translate.instant("SAVE_AS"), action:$scope.saveAsMenuItemClicked, disabled:function() {
-    return $scope.isSaveAsDisabled;
-  }, bottomDelimiter:true, visible:true}, {label:$translate.instant("EXPORT_TEMPLATE"), action:$scope.exportTemplate, disabled:function() {
-    return $scope.isSaveAsDisabled;
-  }, visible:true}];
-  function callSaveAction() {
-    var onSaveCallback = $scope.onSave();
-    if (onSaveCallback) {
-      onSaveCallback();
-    } else {
-      if ($scope.model) {
-        $scope.model.save();
-      }
-    }
-  }
-  function callSaveAsAction() {
-    var onSaveAsCallback = $scope.onSaveAs();
-    if (onSaveAsCallback) {
-      onSaveAsCallback();
-    } else {
-      if ($scope.model) {
-        $scope.model.saveAs();
-      }
-    }
-  }
-  function getMenuItemByLabel(label) {
-    return _.find($scope.menuItems, function(item) {
-      return item.label == $translate.instant(label);
-    });
-  }
-  $scope.getDefaultMenuItem = function() {
-    if ($scope.model) {
-      if ($scope.isSaveDisabled && !$scope.isSaveAsDisabled) {
-        return getMenuItemByLabel("SAVE_AS");
-      } else {
-        if (!$scope.isSaveDisabled) {
-          return getMenuItemByLabel("SAVE");
-        }
-      }
-    }
-    return undefined;
-  };
-  $scope.$watch("gridInstanceId", function() {
-    setModel($scope.gridInstanceId);
-  });
-  $scope.$watch("universeContext", function() {
-    if ($scope.model) {
-      $scope.model.setUniverseContext($scope.universeContext);
-    }
-  });
-  function setModel(gridInstanceId) {
-    if (gridInstanceId) {
-      $scope.model = gfReportTemplatesModelFactory.getReportTemplateModel($scope.gridInstanceId);
-      $scope.model.setUniverseContext($scope.universeContext);
-    }
-  }
-  setModel($scope.gridInstanceId);
-}]);
-goog.provide("gridReport.directives.SaveControlDirective");
-goog.require("gridReport.directives.SaveControlController");
-gridReport.Module.directive("gfSaveControl", [function() {
-  return{restrict:"E", scope:{gridInstanceId:"=", isEnabled:"=", onSave:"&", onSaveAs:"&", universeContext:"="}, templateUrl:"scripts/directives/saveControl/SaveControl.html", controller:"gfSaveControlController"};
 }]);
 goog.provide("gridReport.directives.ExclusionsToolbarController");
 gridReport.Module.controller("ExclusionsToolbarController", ["$scope", "$translate", "gfExclusions", "gfStatisticsExclusions", "gfEventsAggregator", "localStorageService", "gfLogManager", "gfGridManagementService", "gfStateProviderService", "gfExclusionManagerDialogService", function($scope, $translate, gfExclusions, gfStatisticsExclusions, gfEventsAggregator, localStorageService, gfLogManager, gfGridManagementService, gfStateProviderService, gfExclusionManagerDialogService) {
@@ -22632,329 +23643,6 @@ goog.require("gridReport.model.ExclusionsTypes");
 gridReport.Module.directive("gfExclusionsToolbar", [function() {
   return{restrict:"E", replace:true, templateUrl:"scripts/directives/exclusionsToolbar/ExclusionsToolbar.html", scope:{identifiers:"=", gridInstanceId:"=", isEnabled:"=", isAutoSaveState:"=", exclusionsType:"="}, controller:"ExclusionsToolbarController"};
 }]);
-goog.provide("gridReport.datacloud.service.DataCloudCommandService");
-goog.require("gridReport.services.CategoryServiceFactory");
-gridReport.Module.factory("gfDataCloudCommandService", ["gfCategoryServiceFactory", "gfDapsStorageProvider", "$timeout", "$q", "$rootScope", "gfConditionalValueFormattingService", function(gfCategoryServiceFactory, gfDapsStorageProvider, $timeout, $q, $rootScope, gfConditionalValueFormattingService) {
-  function get() {
-    var cache = {}, requests = [], categoryService = gfCategoryServiceFactory.createInstance();
-    function updateField(command, metadata) {
-      command.name = metadata.name;
-      command.expression = gridReport.model.Command.getExpression(command, metadata);
-      command.description = metadata.description;
-      command.defaultOrder = metadata.defaultOrder;
-      command.enableHeatMap = metadata.enableHeatMap;
-      command.isTimeSeriesable = metadata.isTimeSeriesable;
-      command.isAbsComp = metadata.isAbsComp;
-      if (command.outputColumn && (!_.isArray(command.outputColumn) && !command.outputColumn.isValueOutputColumn())) {
-        if (metadata.outputColumns && metadata.outputColumns.columns) {
-          var out = _.findWhere(metadata.outputColumns.columns, {id:command.outputColumn.id});
-          if (out) {
-            command.outputColumn.name = out.name;
-          }
-        }
-      } else {
-        command.returnType = metadata.dataType;
-      }
-      if (command.metadata) {
-        command.metadata.isGrid = metadata.isGrid;
-      }
-      if (metadata.parameterSet != undefined) {
-        command.pSetId = metadata.parameterSet.pSetId;
-        if (command.parameters != undefined && metadata.parameterSet.parameters != undefined) {
-          _.each(metadata.parameterSet.parameters, function(parameter) {
-            var cmdParam = _.findWhere(command.parameters, {id:parameter.id});
-            if (cmdParam != undefined) {
-              cmdParam.defaultValue = parameter["default"];
-            }
-          });
-        }
-      }
-    }
-    function updateExpression(command, expression) {
-      command.description = expression.description;
-      command.returnType = expression.returnType;
-      command.expression = expression.path + "/*" + expression.name + "*/";
-    }
-    function updateColumn(column, command) {
-      if (column.header == column.initialHeader) {
-        column.header = command.name;
-      }
-      column.initialHeader = command.name;
-      column.conditionalValueFormatting = gfConditionalValueFormattingService.create(column);
-      if (column.command == null || column.command.isDataBlock() == false) {
-        column.id = command.expression;
-      }
-    }
-    function getFromCache(commandId) {
-      var val = null;
-      if (commandId) {
-        val = cache[commandId];
-        if (!val) {
-          val = cache[commandId.toUpperCase()];
-        }
-      }
-      return val;
-    }
-    function getRequest(columns) {
-      var fieldIds = [], expressionNames = [], mfrIds = [], dataBlockIds = [];
-      _.each(columns, function(column) {
-        var command = column.command;
-        if (command == undefined || (command.id == undefined || command.id == "")) {
-          return;
-        }
-        if (command.isCustom()) {
-          expressionNames.push(command.id);
-        } else {
-          if (command.isMultiFactorRank()) {
-            mfrIds.push(command.id);
-          } else {
-            if (command.isDataBlock()) {
-              dataBlockIds.push(command.id);
-            } else {
-              fieldIds.push(command.id);
-            }
-          }
-        }
-      });
-      return{fieldIds:fieldIds, expressionNames:expressionNames, mfrIds:mfrIds, dataBlockIds:dataBlockIds};
-    }
-    function updateMfr(command, mfr, fields) {
-      command.expression = mfr.adcSyntax + "/*MfrExpression:" + mfr.name + "*/";
-      command.metadata = mfr;
-      command.defaultOrder = mfr.nTileOrder == scr.mfr.MFNTileOrder.Ascending ? scr.mfr.Order.LowerIsBetter : scr.mfr.Order.HigherIsBetter;
-      command.name = mfr.name;
-      var formattingInfo = gridReport.services.MultiFactorRankToCommandConverter.getFormattingInfo(mfr);
-      command.returnType = formattingInfo.returnType;
-      command.decimalDigits = formattingInfo.decimalDigits;
-      var removedFactors = [];
-      _.each(command.factors, function(f) {
-        var mfrFactor = _.find(mfr.factors, function(fc) {
-          return fc.field.id == f.id;
-        });
-        if (mfrFactor === undefined) {
-          removedFactors.push(f);
-        } else {
-          f.metadata = mfrFactor;
-        }
-      });
-      _.each(removedFactors, function(f) {
-        var indexOfFactor = _.indexOf(command.factors, f);
-        command.factors.splice(indexOfFactor, 1);
-      });
-      var addedFactors = _.filter(mfr.factors, function(mfrFactor) {
-        return _.find(command.factors, function(f) {
-          return f.id == mfrFactor.field.id;
-        }) == undefined;
-      });
-      var addedConvertedFactors = [];
-      _.each(addedFactors, function(newFactor) {
-        if (!fields[newFactor.field.id]) {
-          return;
-        }
-        var factor = gridReport.model.Command.convert(new scr.output.Field(fields[newFactor.field.id]));
-        factor.metadata = newFactor;
-        command.factors.push(factor);
-        addedConvertedFactors.push(factor);
-      });
-      return{addedFactors:addedConvertedFactors, removedFactors:removedFactors};
-    }
-    function updateColumns(columns, response) {
-      var removedColumns = [];
-      _.each(columns, function(column) {
-        if (column.command == undefined || (column.command.id == undefined || column.command.id == "")) {
-          return;
-        }
-        response = response || {};
-        var expressions = response.expressions, mfrs = response.mfrs ? response.mfrs.results : [], fields = response.fields ? response.fields.fields : [];
-        if (column.command.isCustom()) {
-          var expression = _.findWhere(expressions, {name:column.command.id});
-          if (expression) {
-            updateExpression(column.command, expression);
-            delete column.command.metadata.deleted;
-          } else {
-            column.command.metadata.deleted = true;
-          }
-        } else {
-          if (column.command.isMultiFactorRank()) {
-            var mfr = _.findWhere(mfrs, {id:column.command.id});
-            var removeRanks = false;
-            if (mfr && mfr.value != null) {
-              updateMfr(column.command, JSON.parse(mfr.value), response.mfrs.metadata.fields);
-              if (column.id != column.command.expression) {
-                removeRanks = true;
-              }
-            } else {
-              if (!column.command.metadata.isBasedOnColumn) {
-                removeRanks = true;
-                column.command.metadata.deleted = true;
-              }
-            }
-            if (removeRanks) {
-              removedColumns = removedColumns.concat(_.filter(columns, function(c) {
-                return c.parentColumn == column.id;
-              }));
-            }
-          } else {
-            var field = _.findWhere(fields, {id:column.command.id});
-            if (field) {
-              updateField(column.command, field);
-            }
-          }
-        }
-        updateColumn(column, column.command);
-      });
-      _.each(removedColumns, function(removedCol) {
-        var ind = _.indexOf(columns, removedCol);
-        columns.splice(ind, 1);
-      });
-    }
-    var service = {};
-    function putMetadatasToCache(fields) {
-      _.each(fields, function(field) {
-        service.putMetadataToCache(field.id, field);
-      });
-    }
-    service.getCommandById = function(id, successCallback, failCallback) {
-      if (!id) {
-        throw new Error("id should be provided");
-      }
-      var cachedCommand = getFromCache(id);
-      if (cachedCommand) {
-        (successCallback || angular.noop)(cachedCommand);
-      }
-      var gfCategoryService = gfCategoryServiceFactory.createInstance();
-      gfCategoryService.getField(id, function(response) {
-        if (response) {
-          service.putMetadataToCache(id, response);
-          (successCallback || angular.noop)(response);
-        } else {
-          if (failCallback) {
-            failCallback();
-          }
-        }
-      });
-    };
-    service.updateGridColumns = function(columns) {
-      if (!columns) {
-        throw new Error("columns should be provided.");
-      }
-      var deffered = $q.defer(), request;
-      request = getRequest(columns);
-      requests.push(request);
-      categoryService.getObjects(request.fieldIds, request.expressionNames, request.mfrIds, request.dataBlockIds, function(response) {
-        if (requests.indexOf(request) == -1) {
-          deffered.reject();
-        } else {
-          if (response) {
-            putMetadatasToCache(response.fields ? response.fields.fields : []);
-            updateColumns(columns, response);
-          }
-          deffered.resolve(columns);
-        }
-      }, undefined, false);
-      return deffered.promise;
-    };
-    service.abortUpdateGridColumns = function() {
-      requests = [];
-    };
-    service.clearCache = function() {
-      cache = {};
-    };
-    service.putMetadataToCache = function(commandId, metadata) {
-      cache[commandId] = metadata;
-    };
-    service.getSavedMultiFactorRankById = function(commandId) {
-      if (!commandId) {
-        throw new Error("commandId should be provided");
-      }
-      var deffered = $q.defer();
-      gfDapsStorageProvider.load({id:commandId, type:scr.ObjectType.MultiFactorRank}, function(items, metadata, success) {
-        if (success && !_.isEmpty(items)) {
-          deffered.resolve(items[0]);
-        } else {
-          deffered.reject(new Error("Unable to get command metadata"));
-        }
-        $timeout(angular.noop);
-      });
-      return deffered.promise;
-    };
-    service.getExpressionByName = function(name) {
-      if (!name) {
-        throw new Error("name should be provided");
-      }
-      var deffered = $q.defer();
-      gfDapsStorageProvider.load({name:name, type:scr.ObjectType.Expression}, function(items, metadata, success) {
-        if (success && !_.isEmpty(items)) {
-          deffered.resolve(items[0]);
-        } else {
-          deffered.reject(new Error("Unable to get command metadata"));
-        }
-        $timeout(angular.noop);
-      });
-      return deffered.promise;
-    };
-    service.getCommandMetadataById = function(commandId) {
-      if (!commandId) {
-        throw new Error("commandId should be provided");
-      }
-      var deffered = $q.defer();
-      var cachedCommand = getFromCache(commandId);
-      if (cachedCommand) {
-        deffered.resolve(cachedCommand);
-        if (!$rootScope.$$phase) {
-          $rootScope.$apply();
-        }
-      } else {
-        var gfCategoryService = gfCategoryServiceFactory.createInstance();
-        gfCategoryService.getField(commandId, function(response) {
-          if (response) {
-            service.putMetadataToCache(commandId, response);
-            deffered.resolve(response);
-          } else {
-            deffered.reject(new Error("Unable to get command metadata"));
-          }
-          if (!$rootScope.$$phase) {
-            $rootScope.$apply();
-          }
-        });
-      }
-      return deffered.promise;
-    };
-    return service;
-  }
-  var services = {};
-  return{get:function(id) {
-    return services[id] || (services[id] = get());
-  }, putMetadataToCache:function(commandId, metadata) {
-    _.values(services).forEach(function(service) {
-      service.putMetadataToCache(commandId, metadata);
-    });
-  }};
-}]);
-goog.provide("gridReport.services.gfExclusionManagerDialogService");
-gridReport.Module.service("gfExclusionManagerDialogService", ["$modal", "$log", "$translate", function($modal, $log, $translate) {
-  var service = {}, popup;
-  service.closeDialog = function() {
-    if (popup) {
-      try {
-        popup.close();
-        popup = null;
-      } catch (e) {
-      }
-    }
-  };
-  service.openExclusionManagerDialog = function(gridInstanceId, identifiers, exclusionsType) {
-    var settings = {gridInstanceId:gridInstanceId, identifiers:identifiers, exclusionsType:exclusionsType};
-    service.closeDialog();
-    popup = $modal.open({windowClass:"gf-exclusions-manager-modal gf-modal modal", templateUrl:"scripts/services/exclusionDialog/ExclusionManagerDialog.html", controller:["$scope", "$modalInstance", "settings", function($scope, $modalInstance, settings) {
-      $scope.settings = settings;
-    }], resolve:{settings:function() {
-      return settings;
-    }}});
-    return popup;
-  };
-  return service;
-}]);
 goog.provide("gridReport.directives.onEnterDirective");
 gridReport.Module.directive("onEnter", function() {
   return{link:function(scope, element, attrs) {
@@ -22969,36 +23657,6 @@ gridReport.Module.directive("onEnter", function() {
     });
   }};
 });
-goog.provide("gridReport.model.SectorLevelValue");
-gridReport.model.SectorLevelValue = function(classificationId, sectorId, sectorName, value) {
-  this.sectorId = sectorId;
-  this.classificationId = classificationId;
-  this.sectorName = sectorName;
-  this.value = value;
-};
-goog.provide("gridReport.localization.en");
-gridReport.localization = gridReport.localization || {};
-gridReport.localization.en = {TOGGLE:"Toggle", GROUPING:"Grouping", PRECISION:"Precision", DEFAULT:"Default", FORMAT_NO_SYMBOLS:"0", FORMAT_ONE_SYMBOLS:"0.0", FORMAT_TWO_SYMBOLS:"0.00", FORMAT_THREE_SYMBOLS:"0.000", FORMAT_FOUR_SYMBOLS:"0.0000", STATISTICS:"Statistics", ADD_COLUMN:"Add Column", EDIT_COLUMN:"Edit", REMOVE_COLUMN:"Remove", RENAME_COLUMN:"Rename", REVERT_RENAMING:"Revert Renaming", PIN:"Pin Column", UNPIN:"Unpin Column", HIDE_PARAMETERS:"Hide Parameters", SHOW_PARAMETERS:"Show Parameters", 
-SELECT_ALL:"Select All", DESELECT_ALL:"Deselect All", UNGROUP:"Ungroup", NEW:"New", OBJECT_MANAGER:"Object Manager", SAVE:"Save", REVERT:"Revert", EXCLUDE:"Exclude", INCLUDE:"Include", ADDITIONAL_ACTIONS:"Additional Actions", ACTIONS:"Actions", ADD_ALL_TO_LIST:"Add All to List", ADD_SELECTED_TO_LIST:"Add Selected to List", WARNING:"Warning", OK:"OK", CANCEL:"Cancel", DONT_ASK_AGAIN:"Don't ask again", RECALL:"Recall", CLOSE:"Close", PERSONAL:"Personal Templates", GLOBAL:"Thomson Reuters Templates", 
-RECENT:"Recent Templates", CUSTOM_EXPRESSIONS:"Custom Expressions", FORMAT_WAS_CHANGED_CONFIRMATION:"Would you like to save your changes to '{{name}}'?", RESULTS_WITH_COUNT:"Results ({{count}})", EXCLUDED_WITH_COUNT:"Excluded ({{count}})", ALL_SECURITIES_WITH_COUNT:"All Securities ({{count}})", IDENTIFIERS_ADDED_WITH_COUNT_INFO_MSG:"{{count}} identifier(s) added to exclusions.", IDENTIFIERS_REMOVED_WITH_COUNT_INFO_MSG:"{{count}} identifier(s) removed from exclusions.", FORMAT_WILL_BE_REVERTED_CONFIRMATION:"Format will be reverted to its initial state.", 
-SEARCH:"Search", NAME:"Name", NUMBER_OF_FIELDS:"# of Fields", SHARP:"#", FIELD_NAME:"Field Name", PREVIEW:"Preview", LAST_MODIFIED:"Last Modified", IDENTIFIER:"Identifier", ERROR:"Error", INFORMATION:"Information", GROUPED_BY:"Grouped by:", SUM:"Sum", AVERAGE:"Average", MEDIAN:"Median", SERVER_SIDE:"Server side", NONE:"None", TEMPLATE_MANAGER:"Template Manager", REPORT_TEMPLATE_MANAGER:"Report Template Manager", SERVICE_UNAVAILABLE:"Service unavailable.", UNABLE_TO_LOAD_TEMPLATE:"Unable to load template.", 
-UNABLE_TO_LOAD_GLOBAL_TEMPLATES:"Unable to load global templates.", UNABLE_TO_SAVE_TEMPLATE:"Unable to save template.", UNABLE_TO_LOAD_PERSONAL_TEMPLATES:"Unable to load personal templates.", UNABLE_TO_DELETE_TEMPLATE:"Unable to delete template.", UNABLE_TO_RENAME_TEMPLATE:"Unable to rename template.", UNABLE_TO_COPY_TEMPLATE:"Unable to copy template.", INVALID_CHARACTER:"Invalid character", NAME_IS_REQUIRED:"A name is required.", NEW_TEMPLATE:"New Template", SAVE_TEMPLATE:"Save Template", SERVICE_UNAVAILABLE_RESUBMIT_YOUR_REQUEST:"Service unavailable. Please resubmit your request.", 
-FAILED_TO_RESOLVE_UNIVERSE:"Failed to resolve universe.", THERE_ARE_NO_ITEMS_TO_DISPLAY:"There are no items to display.", MAX_ROWS_COUNT_EXCEEDED:"Max rows count exceeded. Expected not more than {{maxRowsCount}}.", MAX_ROWS_COUNT_EXCEEDED_INDUSTRY_MESSAGE:"The selected universe contains greater than {{maxRowsCount}} securities. Please select a more detailed universe parameter in order to view additional metrics.", RENAME:"Rename", DUPLICATE:"Duplicate", DELETE:"Delete", COLUMN_ALREADY_EXISTS:'The column "{{name}}" cannot be used because it is identical to an already existing one', 
-NOT_AVAILABLE:"Not Available", NOT_AVAILABLE_ABBREVIATION:"N/A", NO_MATCHING_DATA_ITEMS:"No Matching Data Items", SEARCH_RESULTS:"Search Result", PRINT:"Print", LOAD:"Load", CREATE_TEMPLATE:"Create Template", MANAGE_TEMPLATES:"Manage Templates", UNSAVED_TEMPLATE:"Unsaved Template", CLICK_TO_VIEW_FIELDS_IN_TEMPLATE:"Click to view fields in template", SEARCH_FOR_TEMPLATES:"Search for Templates", TEMPLATE_NAME:"Template Name", NAME_ALREADY_EXISTS:"Name already exists", DO_NOT_SAVE:"Don't Save", EXPORT_ALL_AS_VALUES:"Export All as Values", 
-EXPORT_ALL_AS_FORMULAS:"Export All as Formulas", EXPORT_SELECTED_AS_VALUES:"Export Selected as Values", EXPORT_SELECTED_AS_FORMULAS:"Export Selected as Formulas", OPEN_ALL_IN_QUOTE_OBJECT:"Open All in Quote Object", OPEN_SELECTED_IN_QUOTE_OBJECT:"Open Selected in Quote Object", SAVE_AS:"Save As", TEMPLATE_ALREADY_EXISTS_CONFIRMATION:"Template '{{name}}' already exists. Do you want to replace this report template?", REPORT_TEMPLATE:"Report Template", SEE_ERROR_DETAILS:"See error details", REPORT_TEMPLATE_SUCCESSFULLY_SAVED_INFO_MSG:"The report template was successfully saved.", 
-MAX_LENGTH_EXCEEDED:"Max length exceeded.", ADD_SECURITY:"Add Security", TEMPLATE_DETAILS:"Template Details", CRITERIA_FOR_GROUPING_ROWS:"Criteria for grouping rows", ORDER:"Order", CRITERIA:"Criteria", ENABLE_GROUPING:"Enable Grouping", REGION:"Region", COUNTRY:"Country", INDUSTRY:"Industry", GICS:"GICS", TRBC:"TRBS", BUSINESS_SECTOR:"Business Sector", ECONOMIC_SECTROR:"Economic Sector", INDUSTRY_GROUP:"Industry Group", INDUSTRY_NAME:"Industry Name", SECTOR_NAME:"Sector Name", SUBINDUSTRY_NAME:"Sub-Industry Name", 
-COUNTRY_OF_EXCHANGE:"Country of Exchange", COUNTRY_OF_HEADQURTERS:"Country of Headquarters", SELECT_FIELD:"Select field", EDIT:"Edit", GROUP_ROWS:"Group", REMOVE_ROW:"Remove", ADVANCED_SETTINGS_BUTTON_TITLE:"Advanced Settings", ADVANCED_SETTINGS_DEFAULT_CURRENCY:"Default Currency", ADVANCED_SETTINGS_NO_DEFAULT_CURRENCY:"None", ADVANCED_SETTINGS_UPDATE:"Update Report", ADVANCED_SETTINGS_CANCEL:"Cancel", STATISTICS_CONTROL_COLUMN_STATISTICS:"Statistics", STATISTICS_CONTROL_COLUMN_PREMIUM_DISCOUNT:"Premium/Discount", 
-FOCUS_STOCK_FINANCIALS:"Focus Stock (Financials: {{currencyId}})", FOCUS_STOCK_PRICING:"Focus Stock (Pricing: {{currencyId}})", PRESS_REFRESH_TO_DISPLAY_NUMBER_OF_FIELDS:"Press refresh button to display number of fields.", SECURITY_ALREADY_ADDED:'The security "{{ric}}" already presents in the grid', SECURITIES_ALREADY_ADDED:'The securities "{{rics}}" already present in the grid', ADD_RANK:"Add Rank", SHOW_FACTOR_RANKS:"Show Factor Ranks", FIELD_DEFINITION:"Field Definition", THOMSON_REUTERS_EIKON_EXCEL_FUNCTION:"Thomson Reuters Eikon Excel Function", 
-SUM_SYMBOL:"\u03a3", EXCLUDED:"Excluded", INCLUDE_ALL:"Include All", COMPANY_NAME:"Company Name", EXPAND_ALL:"Expand All", COLLAPSE_ALL:"Collapse All", NATIVE_CURRENCY:"Native Currency", MULTIPLE_VALUES:"Multiple values", COLUMNS_RETURN_MULTIPLE_VALUES:"The column chosen returns multiple values that cannot be rendered in a grid format", DATA_ITEM_IS_NO_LONGER_SUPPORTED:"This data item is no longer supported.", PREMIUM_DISCOUNT_TITLE:"vs. {{statisticsName}}", DISPLAY_OPTIONS:"Display Options", SMALL:"Small", 
-LARGE:"Large", MEDIUM:"Medium", FONT_SIZE_AND_ROW_HEIGHT:"Font Size and Row Height", CURRENCY:"Currency", SELECT_UP_TO_MAX_GROUPS_COUNT:"Select up to {{maxGroupsCount}} items", HIGH:"High", LOW:"Low", FIRST_QAURTILE:"1st Quartile", THIRD_QAURTILE:"3rd Quartile", DISPLAYING_FACTOR_RANKS:"Displaying Factor Ranks", ADD_ALL_TO_EXISTING_LIST:"Add All to Existing List", ADD_SELECTED_TO_EXISTING_LIST:"Add Selected to Existing List", WATCHLIST_WAS_SUCCESSFULLY_UPDATED:'The watchlist "{{watchlistName}}" was successfully updated.', 
-WATCHLIST_FAILED_UPDATE:'The watchlist "{{watchlistName}}" update failed.', PERSONAL_WATCHLIST_SHOULD_BE_SELECTED:"A personal watchlist should be selected.", CLEAR_ALL:"Clear All", SHOW_FACTOR_RANK:"Show Factor Rank", ADD_FIELD:"Add Field", TRANSPOSE:"Transpose", SUMMARY:"Summary", SUMMARY_STATISTICS:"Summary Statistics", VECTOR_NOT_SUPPORTED:"Is not supported in Transposed View", EXCLUDE_ALL_SELECTED:"Exclude All Selected", ENABLE_TRANSPOSE:"Enable Transpose", DISABLE_TRANSPOSE:"Disable Transpose", 
-ALL:"All", SAMPLE_TEMPLATES:"Sample Templates", VIEW_MORE:"View {{count}} more", VIEW_AND_MANAGE_ALL_TEMPLATES:"View and Manage all Templates", CREATE_NEW_TEMPLATE:"Create New Template", ADVANCED_SORT:"Advanced Sort", ENABLE_ADVANCED_SORT:"Enable Advanced Sort", SORT_BY:"Sort by", ASCENDING:"Ascending", DESCENDING:"Descending", SUMMARY_ROW:"Summary Row", ELLIPSIS:"...", HEAT_MAP:"Highlight Top/Bottom Values", ADD_RANK_FOR_THIS_COLUMN:"Add rank for this column", PERCENTILE:"Percentile", DECILE:"Decile", 
-QUINTILE:"Quintile", QUARTILE:"Quartile", RANK:"Rank", ZSCORE:"Z-Score", SORTING_TYPE:"Sorting Type", BY_VALUE:"By Value", BY_ABSOLUTE_VALUE:"By Absolute Value", TIME_SERIES_CHART:"Time Series Chart", TORNADO_CHART:"Tornado Chart", EXCLUDE_FROM_STATISTICS:"Exclude from Statistics", EXCLUDED_FROM_STATISTICS:"Excluded from Statistics", EXCLUDE_ALL_SELECTED_FROM_STATISTICS:"Exclude All Selected from Statistics", IMPORT_TEMPLATE:"Import Template", EXPORT_TEMPLATE:"Export Template", APPLY:"Apply", REMOVE_ALL_FILTERS:"Remove All Filters", 
-UNIQUE_VALUE:"Unique Value", DEFINE_RANGE:"Define Range", TOP_BOTTOM:"Top/Bottom", CLEAR:"Clear", FROM:"From", TO:"To", NUMBER_OF_ROWS:"# of Rows", KEYWORD_SEARCH:"Keyword Search", FILTER_RESULTS:"Filter Results", INPUT_DATE:"Input date", INPUT_NUMBER:"Input number", FREEZE_FOCUS_STOCK_ON_TOP:"Freeze Focus Stock on Top", CLICK_ON_ANY_COLUMN:"Click on any column in the report to reference it in the formula", ADD_FORMULA:"Add Column Using Formula", FORMULA_EDITOR:"Formula Editor", COLUMN_N:"Column {{columnNumber}}", 
-FACTOR:"Factor", LANDSCAPE:"Landscape", PORTRAIT:"Portrait", TR_COPYRIGHT:"\u00a9 {{year}} Thomson Reuters. All rights reserved.", FORMAT_CELLS:"Format Cells", DATE:"Date", NUMBER:"Number", PERCENTAGE:"Percentage", THOUSANDS_SEPARATOR:"Thousands separator", DAY_MONTHDATE_YEAR:"Day, Month Date, Year", DATE_ABBREVIATEDMONTH:"Date - Abbreviated Month", DATE_ABBREVIATEDMONYH_YEARE:"Date - Abbreviated Month - Year", MONTH_YEAR:"Month - Year", ABBREVIATEMONYH_ABBREVIATEDYEAR:"Abbreviated Month - Abbreviated Year", 
-EXPORT_PDF_LANDSCAPE:"Export To PDF (Landscape)", EXPORT_PDF_PORTRAIT:"Export To PDF (Portrait)", EXPORT_PDF_FAILED:"Export to PDF failed", SHOW_ABBREVIATIONS:"true", DD_MM_YYYY:"DD/MM/YYYY", DD_MM_YYYY_F:"dd/MM/yyyy", DD_MM_YY:"DD/MM/YY", DD_MM_YY_F:"dd/MM/yy", DD_MM:"DD/MM", DD_MM_F:"dd/MM", MM_DD_YYYY:"MM/DD/YYYY", MM_DD_YYYY_F:"MM/dd/yyyy", MM_DD_YY:"MM/DD/YY", MM_DD_YY_F:"MM/dd/yy", MM_DD:"MM/DD", MM_DD_F:"MM/dd", MM_YYYY:"MM/YYYY", MM_YYYY_F:"MM/yyyy", MM_YY:"MM/YY", MM_YY_F:"MM/yy", COPY_TO_CLIPBOARD:"Copy to clipboard", 
-ERROR_MESSAGE_HAS_BEEN_COPIED:"Error message has been copied to clipboard", NOTIFY_PRINT_MESSAGE:"You will also need to set your printer's local settings in order to define the layout orientation when printing.", SHARE:"Share", SHARE_WITH:"Share with", SHARED_TEMPLATES:"Shared Templates", UNABLE_TO_LOAD_SHARED_TEMPLATES:"Unable to load shared templates.", AUTHOR:"Author", SHARED_TO:"Shared to", INSER_BLANK_ROW:"Insert Blank Row", NUMBER_INPUT_VALIDATION_MESSAGE:"Value must be a number", NUMBER_OUT_OF_RANGE_VALIDATION_MESSAGE:"Value must be a number in range 0 - 100", 
-T_B_FILTER_TOP_VALUE:"In Top #", T_B_FILTER_BOTTOM_VALUE:"In Bottom #", T_B_FILTER_TOP_PER:"In Top %", T_B_FILTER_BOTTOM_PER:"In Bottom %", T_B_FILTER_DEFAULT_FIELD:"Choose filter type"};
 goog.provide("gridReport.templates");
 angular.module("gridReport").run(["$templateCache", function($templateCache) {
   $templateCache.put("scripts/directives/adcGrid/ADCGrid.html", '<div><div ng-transclude></div><div style="height:100%" class="gf-grid-report-container"><grid-report grid-instance-id="gridInstanceId" grid-report-settings="viewModel.gridReportSettings" all-parameters-visible="allParametersVisible" is-working="viewModel.isWorking" selected-rows="selectedRows" grid-rows-count="viewModel.gridRowsCount" identifiers="identifiers" hidden-identifiers="hiddenIdentifiers" theme="theme" state-change-causes="resolvedStateChangeCauses" primary-row-key="primaryRowKey" enable-browser-selection="true" column-context-menu-options="columnContextMenuOptions" is-transposed="isTransposed" bar-chart-in-transpose-off="barChartInTransposeOff" enable-rows-dragging="enableRowsDragging" show-timeseries-chart-button="showTimeseriesChartButton" heat-map-state="heatMapState" highlighted-row-key="highlightedRowKey" enable-primary-row-freezing="enablePrimaryRowFreezing" enable-audit="enableAudit"><grid-column-context-menu grid-instance-id="gridInstanceId"></grid-column-context-menu><grid-context-menu is-any-row-selected="selectedRows && selectedRows.length"></grid-context-menu></grid-report></div><div class="grid-bottom-toolbar">\x3c!-- Grouping --\x3e<div style="margin-bottom:2px"><gf-grouping-toolbar grid-instance-id="gridInstanceId"></gf-grouping-toolbar></div>\x3c!-- Exclusions --\x3e<div ng-if="!disableExclusionsToolbar"><gf-exclusions-toolbar identifiers="identifiers" is-enabled="enableExclusions" is-auto-save-state="isAutoSaveState" grid-instance-id="gridInstanceId" exclusions-type="exclusionsType"></gf-exclusions-toolbar></div></div></div>');
@@ -23084,8 +23742,6 @@ gridReport.Module.directive("onBlur", ["$parse", function($parse) {
     });
   };
 }]);
-goog.provide("gridReport.constants.CurrencySymbols");
-gridReport.Module.constant("gfCurrencySymbols", {USD:"$", GBP:"\u00a3", JPY:"\u00a5", EUR:"\u20ac"});
 goog.provide("gridReport.directives.ExportToQuoteContextMenuOptions");
 gridReport.directives.ExportToQuoteContextMenuOptions = function(options) {
   gridReport.jsUtils.mergeProperties(this, options, ["canOpenAllInQuoteObject", "canOpenSelectedInQuoteObject", "canAddAllToList", "canAddSelectedToList", "canAddAllToExistingList", "canAddSelectedToExistingList"]);
@@ -23249,389 +23905,20 @@ gridReport.Module.directive("gfExportToQuoteList", [function() {
     }
   }};
 }]);
-goog.provide("gridReport.directives.focusMeDirective");
-gridReport.Module.directive("focusMe", ["$timeout", "$parse", function($timeout, $parse) {
-  return{link:function(scope, element, attrs) {
-    var model = $parse(attrs.focusMe);
-    var needSelect = attrs.selected;
-    scope.$watch(model, function(value) {
-      if (value === true) {
-        $timeout(function() {
-          element[0].focus();
-          if (needSelect && element.select) {
-            element.select();
-          }
-        });
+goog.provide("gridReport.directives.AddRowDirective");
+gridReport.Module.directive("gfAddRow", [function() {
+  return{replace:true, template:'<div style="padding:0 2px;">' + '<input type="text" ' + 'size="30" ' + 'is-enabled="values.toolbar.isTickerSearchEnabled" ' + 'ticker-selected="onTickerSelected(ticker)" ' + 'more-search-selected="onMoreSearchSelected(event)" ' + 'placeholder-text="placeholderText" ' + 'style="width:100%;" ' + "gf-ticker-autosuggest />" + "</div>", restrict:"E", scope:{gridInstanceId:"=", placeholderText:"="}, controller:["$scope", "gfGridManagementService", "gfEventsAggregator", 
+  function($scope, gfGridManagementService, gfEventsAggregator) {
+    $scope.onTickerSelected = function(ticker) {
+      if (ticker) {
+        gfGridManagementService.addIdentifiers($scope.gridInstanceId, [ticker]);
       }
-    });
-  }};
-}]);
-goog.provide("gridReport.directives.AdvancedControlsContextMenuOptions");
-gridReport.directives.AdvancedControlsContextMenuOptions = function(options) {
-  gridReport.jsUtils.mergeProperties(this, options);
-};
-gridReport.directives.AdvancedControlsContextMenuOptions.prototype.canSeeStatistics = true;
-gridReport.directives.AdvancedControlsContextMenuOptions.prototype.canSeeCurrency = true;
-gridReport.directives.AdvancedControlsContextMenuOptions.prototype.canSeeDisplayOptions = true;
-gridReport.directives.AdvancedControlsContextMenuOptions.prototype.canSeeTotalsRowSwitch = true;
-gridReport.directives.AdvancedControlsContextMenuOptions.prototype.canSeeTransposeSwitch = true;
-gridReport.directives.AdvancedControlsContextMenuOptions.prototype.canSeeAdvancedSortingManager = true;
-gridReport.directives.AdvancedControlsContextMenuOptions.prototype.canSeeHeatMapSwitch = true;
-gridReport.directives.AdvancedControlsContextMenuOptions.prototype.canSeeRemoveAllFilters = true;
-goog.provide("gridReport.model.CustomAdvancedMenuOption");
-gridReport.model.CustomAdvancedMenuOptionType = {switchBtn:"switch", mainBtn:"main", menuBtn:"menu"};
-gridReport.model.CustomAdvancedMenuOption = function(options) {
-  _.extend(this, options);
-};
-gridReport.model.CustomAdvancedMenuOption.prototype.type = gridReport.model.CustomAdvancedMenuOptionType.switchBtn;
-gridReport.model.CustomAdvancedMenuOption.prototype.label = "";
-gridReport.model.CustomAdvancedMenuOption.prototype.inEnabledState = false;
-gridReport.model.CustomAdvancedMenuOption.prototype.visible = true;
-gridReport.model.CustomAdvancedMenuOption.prototype.action = null;
-gridReport.model.CustomAdvancedMenuOption.prototype.bottomDelimiter = false;
-gridReport.model.CustomAdvancedMenuOption.prototype.disabled = false;
-goog.provide("gridReport.directives.CurrencyDialogController");
-gridReport.Module.controller("gfCurrencyDialogController", ["$scope", "$timeout", "$modalInstance", "gfGridManagementService", "gridInstanceId", "options", function($scope, $timeout, $modalInstance, gfGridManagementService, gridInstanceId, options) {
-  $scope.gridInstanceId = gridInstanceId;
-  $scope.model = {customCurrencies:options.customCurrencies};
-  $scope.model.currency = getSelectedCurrencyFromGrid();
-  $scope.closeDialog = function() {
-    $modalInstance.close();
-    $scope.$destroy();
-  };
-  $scope.ok = function() {
-    $scope.closeDialog();
-    $timeout(function() {
-      updateCurrency($scope.model.currency);
-    });
-  };
-  function updateCurrency(currency) {
-    var globalParams = gfGridManagementService.getGlobalParameters($scope.gridInstanceId) || [];
-    globalParams = _.filter(globalParams, function(p) {
-      return p.name != "curn";
-    });
-    if (currency) {
-      globalParams.push({name:"curn", value:currency.id, uid:currency.uid, displayName:currency.name});
-    }
-    gfGridManagementService.setGlobalParameters($scope.gridInstanceId, globalParams);
-    gfGridManagementService.loadData($scope.gridInstanceId, true);
-  }
-  function getSelectedCurrencyFromGrid() {
-    var globalParams = gfGridManagementService.getGlobalParameters($scope.gridInstanceId) || [];
-    var currencyParameter = _.findWhere(globalParams, {name:"curn"});
-    return currencyParameter ? {id:currencyParameter.value, uid:currencyParameter.uid} : null;
-  }
-}]);
-goog.provide("gridReport.directives.CurrencyDialogService");
-goog.require("gridReport.directives.CurrencyDialogController");
-gridReport.Module.service("gfCurrencyDialogService", ["$modal", function($modal) {
-  var service = {};
-  service.openDialog = function(gridInstanceId, options) {
-    return $modal.open({templateUrl:"scripts/directives/advancedControls/currencyDialog/CurrencyDialog.html", controller:"gfCurrencyDialogController", windowClass:"gf-modal", resolve:{gridInstanceId:function() {
-      return gridInstanceId;
-    }, options:function() {
-      return options;
-    }}});
-  };
-  return service;
-}]);
-goog.provide("gridReport.directives.Themes");
-gridReport.Module.factory("gfThemes", ["$translate", function($translate) {
-  var themes = [{name:$translate.instant("SMALL"), value:new gridReport.model.GridTheme({theme:"solar-small", rowsHeight:18})}, {name:$translate.instant("MEDIUM"), value:new gridReport.model.GridTheme({theme:"solar-medium", rowsHeight:27})}, {name:$translate.instant("LARGE"), value:new gridReport.model.GridTheme({theme:"solar-large", rowsHeight:32})}];
-  var service = {};
-  service.getThemes = function() {
-    return themes;
-  };
-  service.setThemes = function(th) {
-    themes = th;
-  };
-  return service;
-}]);
-goog.provide("gridReport.directives.DisplayOptionsDialogController");
-goog.require("gridReport.directives.Themes");
-gridReport.Module.controller("gfDisplayOptionsDialogController", ["$scope", "$timeout", "$modalInstance", "gridInstanceId", "gfGridManagementService", "gfThemes", "gfEventsAggregator", function($scope, $timeout, $modalInstance, gridInstanceId, gfGridManagementService, gfThemes, gfEventsAggregator) {
-  $scope.model = {theme:gfGridManagementService.getTheme(gridInstanceId), themes:gfThemes.getThemes()};
-  $scope.closeDialog = function() {
-    $modalInstance.close();
-    $scope.$destroy();
-  };
-  $scope.ok = function() {
-    $scope.closeDialog();
-    $timeout(function() {
-      gfGridManagementService.setTheme(gridInstanceId, $scope.model.theme);
-      gfEventsAggregator.getChildAggregator(gridInstanceId).raiseEvent(gridReport.model.GridEvents.displayOptionsChanged);
-    }, 200);
-  };
-  $scope.selectTheme = function(theme) {
-    $scope.model.theme = theme;
-  };
-}]);
-goog.provide("gridReport.directives.DisplayOptionsDialogService");
-goog.require("gridReport.directives.DisplayOptionsDialogController");
-gridReport.Module.service("gfDisplayOptionsDialogService", ["$modal", function($modal) {
-  var service = {};
-  service.openDialog = function(gridInstanceId) {
-    return $modal.open({templateUrl:"scripts/directives/advancedControls/displayOptionsDialog/DisplayOptionsDialog.html", controller:"gfDisplayOptionsDialogController", windowClass:"gf-modal", resolve:{gridInstanceId:function() {
-      return gridInstanceId;
-    }}});
-  };
-  return service;
-}]);
-goog.provide("gridReport.directives.StatisticsDialogController");
-gridReport.Module.controller("gfStatisticsDialogController", ["$scope", "$timeout", "$modalInstance", "gridInstanceId", "options", "gfGridManagementService", function($scope, $timeout, $modalInstance, gridInstanceId, options, gfGridManagementService) {
-  $scope.gridInstanceId = gridInstanceId;
-  $scope.model = {algorithms:null, showPremiumDiscount:options.showPremiumDiscount};
-  function getSelectedAlgorithms(algorithms) {
-    var result = [];
-    angular.forEach(algorithms, function(algorithm) {
-      if (algorithm.selected) {
-        result.push(algorithm);
-      }
-    });
-    return result;
-  }
-  function updateStatistics(algorithms) {
-    gfGridManagementService.setStatistics($scope.gridInstanceId, algorithms);
-  }
-  $scope.ok = function() {
-    $scope.closeDialog();
-    $timeout(function() {
-      updateStatistics(getSelectedAlgorithms($scope.model.algorithms));
-    });
-  };
-  $scope.closeDialog = function() {
-    $modalInstance.close();
-    $scope.$destroy();
-  };
-}]);
-goog.provide("gridReport.directives.StatisticsDialogService");
-goog.require("gridReport.directives.StatisticsDialogController");
-gridReport.Module.service("gfStatisticsDialogService", ["$modal", function($modal) {
-  var service = {};
-  service.openDialog = function(gridInstanceId, options) {
-    return $modal.open({templateUrl:"scripts/directives/advancedControls/statisticsDialog/StatisticsDialog.html", controller:"gfStatisticsDialogController", windowClass:"gf-modal", resolve:{gridInstanceId:function() {
-      return gridInstanceId;
-    }, options:function() {
-      return options;
-    }}});
-  };
-  return service;
-}]);
-goog.provide("gridReport.directives.AdvancedControlsController");
-goog.require("gridReport.Module");
-goog.require("gridReport.services.AggregatesAlgorithmsService");
-goog.require("gridReport.directives.CurrencyDialogService");
-goog.require("gridReport.directives.StatisticsDialogService");
-goog.require("gridReport.directives.DisplayOptionsDialogService");
-goog.require("gridReport.model.CustomAdvancedMenuOption");
-gridReport.Module.controller("gfAdvancedControlsController", ["$scope", "$translate", "gfCurrencyDialogService", "gfDisplayOptionsDialogService", "gfStatisticsDialogService", "gfGridManagementService", "gfEventsAggregator", "gfAdvancedSortingManagerService", "$timeout", function($scope, $translate, gfCurrencyDialogService, gfDisplayOptionsDialogService, gfStatisticsDialogService, gfGridManagementService, gfEventsAggregator, gfAdvancedSortingManagerService, $timeout) {
-  $scope.menuItemOptions = {openDirection:"left"};
-  $scope.statisticsMenuItemClicked = function() {
-    gfStatisticsDialogService.openDialog($scope.gridInstanceId, {showPremiumDiscount:$scope.showPremiumDiscount});
-  };
-  $scope.currencyMenuItemClicked = function() {
-    gfCurrencyDialogService.openDialog($scope.gridInstanceId, {customCurrencies:$scope.customCurrencies});
-  };
-  $scope.displayOptionsMenuItemClicked = function() {
-    gfDisplayOptionsDialogService.openDialog($scope.gridInstanceId);
-  };
-  $scope.getResultOrValue = function(f) {
-    return gridReport.jsUtils.getResultOrValue(f);
-  };
-  var menuBtns = getMenuMainButtons().concat(getMenuSwitches(), getMenuButtons());
-  if ($scope.beforeItemsAppliedCallback && $scope.beforeItemsAppliedCallback()) {
-    $scope.beforeItemsAppliedCallback()(menuBtns);
-  }
-  $scope.menuButtons = menuBtns;
-  $scope.executeItemAction = executeItemAction;
-  function executeItemAction($event, item, isSwitch) {
-    if (gridReport.jsUtils.getResultOrValue(item.disabled)) {
-      $event.stopPropagation();
-    } else {
-      if (isSwitch && item.inEnabledState) {
-        item.action(!item.inEnabledState());
-      } else {
-        item.action();
-      }
-      if ($scope.isMenuOpened()) {
-        $timeout(function() {
-          $(document.body).click();
-        });
-      }
-    }
-  }
-  function isTotalsRowVisible() {
-    return gfGridManagementService.totalsRowVisible($scope.gridInstanceId);
-  }
-  function isTransposed() {
-    return gfGridManagementService.isTransposed($scope.gridInstanceId);
-  }
-  function transposeGrid() {
-    gfEventsAggregator.getChildAggregator($scope.gridInstanceId).raiseEvent(gridReport.model.GridEvents.beginTranspose);
-    $timeout(function() {
-      gfGridManagementService.transpose($scope.gridInstanceId);
-    });
-  }
-  function openAdvancedSortingManager() {
-    gfAdvancedSortingManagerService.openDialog($scope.gridInstanceId);
-  }
-  function getMenuSwitches() {
-    var res = [];
-    res.push({label:$translate.instant("SUMMARY_ROW"), inEnabledState:isTotalsRowVisible, disabled:function() {
-      return!$scope.options.canSeeTotalsRowSwitch;
-    }, visible:function() {
-      return $scope.options.canSeeTotalsRowSwitch;
-    }, action:function(value) {
-      gfGridManagementService.totalsRowVisible($scope.gridInstanceId, value);
-    }, bottomDelimiter:!$scope.options.canSeeHeatMapSwitch && !$scope.options.canSeeTransposeSwitch});
-    res.push({label:$translate.instant("TRANSPOSE"), inEnabledState:isTransposed, disabled:false, visible:$scope.options.canSeeTransposeSwitch, action:transposeGrid, bottomDelimiter:!$scope.options.canSeeHeatMapSwitch});
-    res.push({label:$translate.instant("HEAT_MAP"), inEnabledState:isHeatMapEnabled, disabled:false, visible:function() {
-      return $scope.options.canSeeHeatMapSwitch;
-    }, action:switchHeatMap, bottomDelimiter:$scope.options.canSeeHeatMapSwitch && !$scope.options.canSeeRemoveAllFilters});
-    res.push({label:$translate.instant("REMOVE_ALL_FILTERS"), disabled:isRemoveAllFiltersDisabled, visible:function() {
-      return $scope.options.canSeeRemoveAllFilters;
-    }, action:removeAllFilters, bottomDelimiter:$scope.options.canSeeRemoveAllFilters});
-    return res;
-  }
-  function isHeatMapEnabled() {
-    var heatMapState = gfGridManagementService.heatMapState($scope.gridInstanceId);
-    return heatMapState && heatMapState.isEnabled;
-  }
-  function isRemoveAllFiltersDisabled() {
-    return!_.any(gfGridManagementService.getColumns($scope.gridInstanceId), function(column) {
-      return column.isFilterApplied();
-    });
-  }
-  function switchHeatMap(value) {
-    var state = gfGridManagementService.heatMapState($scope.gridInstanceId);
-    if (state) {
-      state.isEnabled = value;
-    }
-    gfGridManagementService.heatMapState($scope.gridInstanceId, state);
-    gfEventsAggregator.getChildAggregator($scope.gridInstanceId).raiseEvent(gridReport.model.GridEvents.heatMapChanged, state);
-  }
-  function removeAllFilters() {
-    $timeout(function() {
-      gfGridManagementService.removeAllFilters($scope.gridInstanceId);
-    });
-  }
-  function traslateWithEllipsis(key) {
-    return $translate.instant(key) + $translate.instant("ELLIPSIS");
-  }
-  function getMenuButtons() {
-    var menuButtons = [];
-    menuButtons.push({label:traslateWithEllipsis("STATISTICS"), action:$scope.statisticsMenuItemClicked, disabled:function() {
-      return $scope.isStatisticsDisabled;
-    }, visible:function() {
-      return $scope.options.canSeeStatistics;
-    }});
-    menuButtons.push({label:traslateWithEllipsis("CURRENCY"), action:$scope.currencyMenuItemClicked, disabled:function() {
-      return $scope.isCurrencyDisabled;
-    }, visible:function() {
-      return $scope.options.canSeeCurrency;
-    }});
-    menuButtons.push({label:traslateWithEllipsis("DISPLAY_OPTIONS"), action:$scope.displayOptionsMenuItemClicked, disabled:function() {
-      return $scope.isDisplayOptionsDisabled;
-    }, visible:function() {
-      return $scope.options.canSeeDisplayOptions;
-    }});
-    return menuButtons;
-  }
-  function getMenuMainButtons() {
-    var menuMainButtons = [];
-    menuMainButtons.push({label:traslateWithEllipsis("ADVANCED_SORT"), action:openAdvancedSortingManager, disabled:function() {
-      return isTransposed() || !$scope.options.canSeeAdvancedSortingManager;
-    }, visible:function() {
-      return $scope.options.canSeeAdvancedSortingManager;
-    }, bottomDelimiter:true});
-    return menuMainButtons;
-  }
-}]);
-goog.provide("gridReport.directives.AdvancedControls");
-goog.require("gridReport.Module");
-goog.require("gridReport.directives.AdvancedControlsController");
-goog.require("gridReport.directives.AdvancedControlsContextMenuOptions");
-gridReport.Module.directive("gfAdvancedControls", [function() {
-  return{restrict:"E", replace:true, scope:{gridInstanceId:"=", customCurrencies:"=", showPremiumDiscount:"=", isEnabled:"=", beforeItemsAppliedCallback:"&", options:"="}, templateUrl:"scripts/directives/advancedControls/AdvancedControls.html", controller:"gfAdvancedControlsController", link:function(scope, element) {
-    scope.isMenuOpened = function() {
-      return $(element).find(".dropdown").hasClass("open");
     };
-  }};
+    $scope.onMoreSearchSelected = function(event) {
+      gfEventsAggregator.getChildAggregator($scope.gridInstanceId).raiseEvent(gridReport.model.GridEvents.showMoreSearchResultsSelected, {event:event});
+    };
+  }]};
 }]);
-goog.provide("gridReport.directives.MenuController");
-gridReport.Module.controller("MenuController", ["$scope", "$timeout", function($scope, $timeout) {
-  var DEFAULT_OPTIONS = {width:null, position:{x:0, y:0}};
-  function executeMenuAction($event, item) {
-    if (!$scope.getResultOrValue(item.isDisabled) && (item.action && item.action != angular.noop)) {
-      item.action($event);
-      $scope.isVisible = false;
-    }
-    $event.stopPropagation();
-  }
-  function _onClickOutside() {
-    $scope.isVisible = false;
-    $scope.$apply($scope.onClickOutside);
-  }
-  function tryCollapseAll() {
-    var widget = getWidget();
-    if (widget) {
-      var initialDelay = widget.delay;
-      widget.delay = 0;
-      widget.collapseAll(null, true);
-      $timeout(function() {
-        widget.delay = initialDelay;
-      });
-    }
-  }
-  function getWidget() {
-    return $scope.menuElement.data("ui-menu");
-  }
-  function init() {
-    $scope.$watch("isVisible", function(value) {
-      if (value) {
-        tryCollapseAll();
-        $timeout(function() {
-          $scope.menuElement.menu();
-          $scope.menuElement.show();
-          $(document).on("click", _onClickOutside);
-        });
-      } else {
-        $scope.menuElement.hide();
-        $(document).off("click", _onClickOutside);
-      }
-    });
-    $scope.$on("$destroy", function() {
-      $(document).off("click", _onClickOutside);
-      getWidget() && $scope.menuElement.menu("destroy");
-    });
-  }
-  $scope.options = $.extend({}, DEFAULT_OPTIONS, $scope.options);
-  $scope.executeMenuAction = executeMenuAction;
-  $scope.getResultOrValue = gridReport.jsUtils.getResultOrValue;
-  $scope.onClickOutside = $scope.onClickOutside || angular.noop;
-  init();
-}]);
-goog.provide("gridReport.directives.MenuDirective");
-goog.require("gridReport.directives.MenuController");
-gridReport.Module.directive("gfMenu", [function() {
-  return{restrict:"E", scope:{options:"=", items:"=", isVisible:"=", onClickOutside:"="}, controller:"MenuController", templateUrl:"scripts/directives/menu/Menu.html", link:function(scope, element) {
-    scope.menuElement = $(element).find(".gf-menu");
-  }};
-}]);
-goog.provide("gridReport.directives.onEscapeDirective");
-gridReport.Module.directive("onEscape", function() {
-  return{link:function(scope, element, attrs) {
-    element.bind("keydown", function(event) {
-      if (event.which === 27) {
-        scope.$apply(function() {
-          scope.$eval(attrs.onEscape);
-        });
-        event.preventDefault();
-        event.stopPropagation();
-      }
-    });
-  }};
-});
 goog.provide("gridReport.directives.FactorRanksManagerController");
 goog.require("gridReport.services.GridManagementService");
 goog.require("gridReport.model.RankOutputTypes");
@@ -23824,300 +24111,36 @@ gridReport.Module.directive("gfFactorRanksButton", ["gfFactorRanksManagerDialogS
     };
   }};
 }]);
-goog.provide("gridReport.directives.ObjectNameDirective");
-gridReport.Module.directive("gfObjectName", ["$compile", "gfDapsService", "gfConfig", function($compile, gfDapsService, gfConfig) {
-  return{restrict:"AC", require:"ngModel", link:function(scope, elm, attrs, ctrl) {
-    var forbiddenNames = gfConfig.reservedTemplateNames || [];
-    function checkValue(viewValue) {
-      var errMsg = "";
-      if (!_.isString(viewValue)) {
-        viewValue = "";
-      }
-      var lcText = viewValue.toLowerCase();
-      var fn = $.extend([], forbiddenNames);
-      for (var i = 0;i < fn.length;++i) {
-        var fname = fn[i].toLowerCase();
-        if (lcText == fname) {
-          errMsg = "Name" + " '" + viewValue + "' is a reserved name.";
-        }
-      }
-      if (!errMsg) {
-        errMsg = gfDapsService.getNameValidationMessage(viewValue);
-      }
-      if (errMsg) {
-        ctrl.$setValidity("objectName", false);
-        ctrl.errorMsg = errMsg;
-        return undefined;
-      }
-      ctrl.$setValidity("objectName", true);
-      return viewValue;
-    }
-    ctrl.$parsers.unshift(function(viewValue) {
-      return checkValue(viewValue);
-    });
-    ctrl.$formatters.push(function(value) {
-      var result = checkValue(value);
-      if (result == undefined) {
-        return value;
-      }
-      return result;
-    });
-  }};
-}]);
-goog.provide("gridReport.directives.StatisticsControlController");
-gridReport.Module.controller("gfStatisticsControlController", ["$scope", "gfStatisticsAlgorithms", "gfGridManagementService", function($scope, gfStatisticsAlgorithms, gfGridManagementService) {
-  function toDictionary(array, uniqueFieldName) {
-    var dictionary = {};
-    angular.forEach(array, function(item) {
-      var key = item[uniqueFieldName];
-      if (key) {
-        dictionary[key] = item;
-      }
-    });
-    return dictionary;
-  }
-  function mergeAlgorithms(algorithms, selectedAlgorithms) {
-    var algorithmsDictionary = toDictionary(selectedAlgorithms, "name");
-    angular.forEach(algorithms, function(algorith) {
-      var selectedAlgorith = algorithmsDictionary[algorith.name];
-      algorith.selected = selectedAlgorith && selectedAlgorith.selected;
-      algorith.isPremium = selectedAlgorith && selectedAlgorith.isPremium;
-    });
-    return algorithms;
-  }
-  function selectAlgorithm(algorithm) {
-    if (!algorithm.selected) {
-      algorithm.selected = true;
-    }
-  }
-  function removePremiumStatusInOtherAlgorithms(premiumAlgorithm, allAlgorithms) {
-    angular.forEach(allAlgorithms, function(algorithm) {
-      algorithm.isPremium = algorithm.name === premiumAlgorithm.name;
-    });
-  }
-  function init() {
-    var selectedStatistics = gfGridManagementService.getStatistics($scope.gridInstanceId);
-    _.forEach(selectedStatistics, function(s) {
-      s.selected = true;
-    });
-    $scope.algorithms = mergeAlgorithms(gfStatisticsAlgorithms.getAll(), selectedStatistics);
-  }
-  $scope.markAsPremium = function(algorithm) {
-    algorithm.isPremium = true;
-    selectAlgorithm(algorithm);
-    removePremiumStatusInOtherAlgorithms(algorithm, $scope.algorithms);
-  };
-  $scope.unmarkPremium = function(algorithm) {
-    algorithm.isPremium = false;
-  };
-  init();
-}]);
-goog.provide("gridReport.directives.StatisticsControlDirective");
-goog.require("gridReport.Module");
-goog.require("gridReport.directives.StatisticsControlController");
-gridReport.Module.directive("gfStatisticsControl", [function() {
-  return{restrict:"E", replace:true, scope:{algorithms:"=", isEnabled:"=", showPremiumDiscount:"=", gridInstanceId:"="}, templateUrl:"scripts/directives/statistics/StatisticsControl.html", controller:"gfStatisticsControlController"};
-}]);
-goog.provide("gridReport.model.CommandParameter");
-gridReport.model.CommandParameter = function(options) {
-  if (options) {
-    if (options.hasOwnProperty("id")) {
-      this.id = options.id;
-    }
-    if (options.hasOwnProperty("name")) {
-      this.name = options.name;
-    }
-    if (options.hasOwnProperty("value")) {
-      this.value = options.value;
-    }
-    if (options.hasOwnProperty("defaultValue")) {
-      this.defaultValue = options.defaultValue;
-    }
-    if (options.hasOwnProperty("isVisible")) {
-      this.isVisible = options.isVisible;
-    }
-    if (options.hasOwnProperty("isMultiSelect")) {
-      this.isMultiSelect = options.isMultiSelect;
-    }
-    if (options.hasOwnProperty("values")) {
-      this.values = options.values;
-    }
-  }
-};
-gridReport.model.CommandParameter.prototype.id = null;
-gridReport.model.CommandParameter.prototype.name = null;
-gridReport.model.CommandParameter.prototype.value = null;
-gridReport.model.CommandParameter.prototype.isVisible = true;
-gridReport.model.CommandParameter.prototype.defaultValue = null;
-gridReport.model.CommandParameter.prototype.isMultiSelect = false;
-gridReport.model.CommandParameter.prototype.values = null;
-gridReport.model.CommandParameter.prototype.getValues = function() {
-  return this.values;
-};
-gridReport.model.CommandParameter.prototype.getValue = function() {
-  return this.value;
-};
-gridReport.model.CommandParameter.prototype.getDefaultValue = function() {
-  return this.defaultValue;
-};
-gridReport.model.CommandParameter.prototype.getValueOrDefault = function() {
-  return this.value != undefined && this.value != "" ? this.value : this.defaultValue;
-};
-gridReport.model.CommandParameter.convertAdcParameter = function(adcParameter) {
-  if (!adcParameter) {
-    throw "adcParameter should be provided.";
-  }
-  var isMultiSelect = !adcParameter.metadata ? false : adcParameter.metadata.isMultiSelection;
-  var getSelectedValues = function(adcParameter, isMultiSelect) {
-    if (!isMultiSelect) {
-      return null;
-    }
-    if (_.isEmpty(adcParameter.getValue())) {
-      return[];
-    }
-    var values = [];
-    var valIds = adcParameter.getValue().split(",");
-    for (var i = 0;i < valIds.length;i++) {
-      values.push({id:valIds[i], value:_.findWhere(adcParameter.getValues(), {id:valIds[i]}).name});
-    }
-    return values;
-  };
-  return new gridReport.model.CommandParameter({id:adcParameter.id, name:adcParameter.name, value:adcParameter.getValue(), defaultValue:adcParameter.getDefault(), isMultiSelect:isMultiSelect, values:getSelectedValues(adcParameter, isMultiSelect)});
-};
-gridReport.model.CommandParameter.convertAdcParameters = function(adcParameters) {
-  if (!adcParameters) {
-    throw "adcParameters should be provided.";
-  }
-  var commandParameters = [];
-  angular.forEach(adcParameters, function(parameter) {
-    commandParameters.push(gridReport.model.CommandParameter.convertAdcParameter(parameter));
-  });
-  return commandParameters;
-};
-goog.provide("gridReport.model.RowSectorData");
-gridReport.model.RowSectorData = function(classificationId, sectorId) {
-  this.classificationId = classificationId;
-  this.sectorId = sectorId;
-};
-goog.provide("gridReport.model.ColumnValue");
-goog.require("gridReport.model.RowSectorData");
-gridReport.model.ColumnValue = function(rowKey, value, sectors, curn, properties, isPublic) {
-  this.rowKey = rowKey;
-  this.value = value;
-  this.sectors = sectors || [];
-  this.curn = curn;
-  this.properties = properties;
-  this.isPublic = isPublic;
-};
-gridReport.model.ColumnValue.prototype.rowKey = undefined;
-gridReport.model.ColumnValue.prototype.value = undefined;
-gridReport.model.ColumnValue.prototype.sectors = undefined;
-gridReport.model.ColumnValue.prototype.curn = undefined;
-gridReport.model.ColumnValue.prototype.properties = undefined;
-gridReport.model.ColumnValue.prototype.isPublic = undefined;
-goog.provide("gridReport.directives.AutosuggestDirective");
-goog.require("gridReport.services.AutoSuggestServiceFactory");
-goog.require("gridReport.services.CategoryServiceFactory");
-gridReport.Module.directive("gfAutosuggest", ["$translate", "gfCategoryServiceFactory", "gfAutosuggestServiceFactory", "gfEventsAggregator", "gfDataCloudCommandService", "gfConfig", function($translate, gfCategoryServiceFactory, gfAutosuggestServiceFactory, gfEventsAggregator, gfDataCloudCommandService, gfConfig) {
-  return{restrict:"E", replace:true, template:"<div></div>", scope:{isEnabled:"=", universeContext:"=", gridInstanceId:"=", attachToBody:"=?", onGetFocus:"&?", onLostFocus:"&?"}, link:function(scope, element, attrs) {
-    function getCurrentUniverseContext() {
-      return scope.universeContext == scr.UniverseType.Private ? "&u=PVT" : scr.UniverseType.Public ? "&u=PUB" : "&u=PUB&u=PVT";
-    }
-    var categoryService = gfCategoryServiceFactory.createInstance();
-    var autosuggestService = gfAutosuggestServiceFactory.createInstance(getCurrentUniverseContext);
-    var control = new scr.control.GroupComboBox({showItemsOnButtonClick:false, width:167, placeHolderText:attrs.placeHolderText || $translate.instant("ADD_COLUMN"), dataRequestOnEveryKey:true, popUpOffsetY:6, popUpHeight:100, popUpWidth:300, showEllipsis:true, emptyMessage:$translate.instant("NO_MATCHING_DATA_ITEMS"), renderAsSibling:!scope.attachToBody});
-    control.isScreenFilterCombo = true;
-    control.render(element);
-    element.addClass(attrs["class"]);
-    control.getDataRequestEvent().listen(function() {
-      autosuggestService.search(control.getText(), function(data) {
-        control.setData(data, true);
-      });
-    }, this);
-    var throttledFieldSelection = _.throttle(function() {
-      var selecteItem = control.getSelectedItem().originalItem;
-      var addField = function(currentField) {
-        if (currentField.isBrokerWithoutValue && currentField.isBrokerWithoutValue()) {
-          gfEventsAggregator.getChildAggregator(scope.gridInstanceId).raiseEvent(gridReport.model.CommandEvents.showPicker, {mode:"search", universeContext:scope.universeContext, initialCommand:gridReport.model.Command.convert(currentField, gfConfig.enableAudit), openAddWithCommand:true, gridInstanceId:scope.gridInstanceId});
-          return;
-        }
-        gfEventsAggregator.getChildAggregator(scope.gridInstanceId).raiseEvent(gridReport.model.InternalEvents.addCommand, {command:gridReport.model.Command.convert(currentField, gfConfig.enableAudit), isUserTriggered:true, isFromUDIP:false});
-      };
-      switch(selecteItem.dataType) {
-        case scr.ObjectType.Expression:
-          gfDataCloudCommandService.get(scope.gridInstanceId).getExpressionByName(selecteItem.value).then(function(field) {
-            addField(new scr.output.Custom(field));
-          });
-          break;
-        case scr.ObjectType.MultiFactorRank:
-          gfDataCloudCommandService.get(scope.gridInstanceId).getSavedMultiFactorRankById(selecteItem.value).then(function(field) {
-            addField(field);
-          });
-          break;
-        default:
-          var code = selecteItem.value;
-          categoryService.getField(code, function(fieldMetadata) {
-            var field = new scr.output.Field(fieldMetadata);
-            if (scope.universeContext === scr.UniverseType.PublicPrivate) {
-              (scr.output.Item.applyAvailTransform || angular.noop)(field);
-            }
-            addField(field);
-          });
-      }
-      control.clearSearch();
-    }, 2E3);
-    control.getSelectedIndexChangedEvent().listen(function() {
-      throttledFieldSelection();
-    }, this);
-    control.getButtonClickedEvent().listen(function() {
-      gfEventsAggregator.getChildAggregator(scope.gridInstanceId).raiseEvent(gridReport.model.CommandEvents.showPicker, {mode:"search", text:control.getText(), universeContext:scope.universeContext, gridInstanceId:scope.gridInstanceId});
-    }, this);
-    control.getInputClickedEvent().listen(function() {
-      control.focusInput();
-    }, this);
-    control.getInputFocusedEvent().listen(function() {
-      control.hidePopUp();
-      (scope.onGetFocus || angular.noop)({});
-    }, this);
-    control.getCancelEditEvent().listen(function() {
-      control.clearSearch();
-      control.clearError();
-    }, this);
-    control.getBluredEvent().listen(function() {
-      control.clearSearch();
-      control.clearError();
-      (scope.onLostFocus || angular.noop)({});
-    });
-    control.getTextChangedEvent().listen(function() {
-      gfEventsAggregator.getChildAggregator(scope.gridInstanceId).raiseEvent(gridReport.model.GridEvents.qdipTextChanged);
-    });
-    scope.$on("$destroy", function() {
-      control.dispose();
-    });
-    scope.$watch("isEnabled", function(newValue) {
-      control.setIsEnabled(newValue);
-    });
-    element.css("float", "initial");
-  }};
-}]);
-goog.provide("gridReport.model.Currency");
-gridReport.model.Currency = function(currencyId, format, uid) {
-  var self = this, curId = currencyId, formatCurrency = format || function(id) {
-    return id;
-  }, isDisabled = function(id) {
-    return!id || id.length === 0;
-  };
-  this.disabled = isDisabled(curId);
-  this.displayText = formatCurrency(curId);
-  this.uid = uid;
-  Object.defineProperty(this, "id", {get:function() {
-    return curId;
-  }, set:function(value) {
-    curId = value;
-    self.disabled = isDisabled(curId);
-    self.displayText = formatCurrency(curId);
-  }});
-};
+goog.provide("gridReport.localization.zh");
+gridReport.localization = gridReport.localization || {};
+gridReport.localization.zh = {TOGGLE:"\u5207\u6362", GROUPING:"\u5206\u7ec4", PRECISION:"\u7cbe\u786e\u5ea6", DEFAULT:"\u9ed8\u8ba4\u503c", FORMAT_NO_SYMBOLS:"0", FORMAT_ONE_SYMBOLS:"0.0", FORMAT_TWO_SYMBOLS:"0.00", FORMAT_THREE_SYMBOLS:"0.000", FORMAT_FOUR_SYMBOLS:"0.0000", STATISTICS:"\u7edf\u8ba1\u6570\u636e", ADD_COLUMN:"\u6dfb\u52a0\u5217", EDIT_COLUMN:"\u7f16\u8f91", REMOVE_COLUMN:"\u5220\u9664", RENAME_COLUMN:"\u91cd\u547d\u540d", REVERT_RENAMING:"\u64a4\u9500\u91cd\u547d\u540d", PIN:"\u9501\u5b9a\u5217", 
+UNPIN:"\u89e3\u9664\u5217\u9501\u5b9a", HIDE_PARAMETERS:"\u9690\u85cf\u53c2\u6570", SHOW_PARAMETERS:"\u663e\u793a\u53c2\u6570", SELECT_ALL:"\u5168\u9009", DESELECT_ALL:"\u53d6\u6d88\u5168\u9009", UNGROUP:"\u89e3\u9664\u5206\u7ec4", NEW:"\u65b0\u5efa", OBJECT_MANAGER:"\u5bf9\u8c61\u7ba1\u7406\u5668", SAVE:"\u4fdd\u5b58", REVERT:"\u64a4\u9500", EXCLUDE:"\u4e0d\u5305\u62ec", INCLUDE:"\u5305\u62ec", ADDITIONAL_ACTIONS:"\u5176\u4ed6\u64cd\u4f5c", ACTIONS:"\u64cd\u4f5c", ADD_ALL_TO_LIST:"\u5c06\u6240\u6709\u6dfb\u52a0\u5230\u5217\u8868", 
+ADD_SELECTED_TO_LIST:"\u5c06\u9009\u4e2d\u6dfb\u52a0\u5230\u5217\u8868", WARNING:"\u8b66\u544a", OK:"\u786e\u5b9a", CANCEL:"\u53d6\u6d88", DONT_ASK_AGAIN:"\u4e0d\u518d\u8be2\u95ee", RECALL:"\u53d6\u6d88", CLOSE:"\u5173\u95ed", PERSONAL:"\u4e2a\u4eba\u6a21\u677f", GLOBAL:"Thomson Reuters \u6a21\u677f", RECENT:"\u6700\u8fd1\u7684\u6a21\u677f", CUSTOM_EXPRESSIONS:"\u81ea\u5b9a\u4e49\u8868\u8fbe\u5f0f", FORMAT_WAS_CHANGED_CONFIRMATION:"\u60a8\u8981\u4fdd\u5b58\u5bf9'{{name}}'\u7684\u66f4\u6539\u5417\uff1f", 
+RESULTS_WITH_COUNT:"\u7ed3\u679c ({{count}})", EXCLUDED_WITH_COUNT:"\u5df2\u6392\u9664 ({{count}})", ALL_SECURITIES_WITH_COUNT:"\u6240\u6709\u8bc1\u5238\u6570 ({{count}})", IDENTIFIERS_ADDED_WITH_COUNT_INFO_MSG:"\u6dfb\u52a0\u5230\u4f8b\u5916\u7684 {{count}}\u4e2a\u6807\u8bc6\u7b26\u3002", IDENTIFIERS_REMOVED_WITH_COUNT_INFO_MSG:"\u4ece\u4f8b\u5916\u4e2d\u5220\u9664\u7684 {{count}} \u4e2a\u6807\u8bc6\u7b26\u3002", FORMAT_WILL_BE_REVERTED_CONFIRMATION:"\u683c\u5f0f\u5c06\u6062\u590d\u81f3\u5176\u521d\u59cb\u72b6\u6001\u3002", 
+SEARCH:"\u641c\u7d22", NAME:"\u540d\u79f0", NUMBER_OF_FIELDS:"\u5b57\u6bb5\u6570", SHARP:"\u6570\u91cf", FIELD_NAME:"\u5b57\u6bb5\u540d\u79f0", PREVIEW:"\u9884\u89c8", LAST_MODIFIED:"\u6700\u65b0\u4fee\u6539\u65f6\u95f4", IDENTIFIER:"\u6807\u8bc6\u7b26", ERROR:"\u9519\u8bef", INFORMATION:"\u4fe1\u606f", GROUPED_BY:"\u5206\u7ec4\u65b9\u5f0f\uff1a", SUM:"\u603b\u503c", AVERAGE:"\u5e73\u5747\u503c", MEDIAN:"\u4e2d\u4f4d\u6570", SERVER_SIDE:"\u670d\u52a1\u5668\u7aef", NONE:"\u65e0", TEMPLATE_MANAGER:"\u6a21\u677f\u7ba1\u7406\u5668", 
+REPORT_TEMPLATE_MANAGER:"\u62a5\u544a\u6a21\u677f\u7ba1\u7406\u5668", SERVICE_UNAVAILABLE:"\u670d\u52a1\u4e0d\u53ef\u7528\u3002", UNABLE_TO_LOAD_TEMPLATE:"\u65e0\u6cd5\u52a0\u8f7d\u6a21\u677f\u3002", UNABLE_TO_LOAD_GLOBAL_TEMPLATES:"\u65e0\u6cd5\u52a0\u8f7d\u5168\u7403\u6a21\u677f\u3002", UNABLE_TO_SAVE_TEMPLATE:"\u65e0\u6cd5\u4fdd\u5b58\u6a21\u677f\u3002", UNABLE_TO_LOAD_PERSONAL_TEMPLATES:"\u65e0\u6cd5\u52a0\u8f7d\u4e2a\u4eba\u6a21\u677f\u3002", UNABLE_TO_DELETE_TEMPLATE:"\u65e0\u6cd5\u5220\u9664\u6a21\u677f\u3002", 
+UNABLE_TO_RENAME_TEMPLATE:"\u65e0\u6cd5\u91cd\u547d\u540d\u6a21\u677f\u3002", UNABLE_TO_COPY_TEMPLATE:"\u65e0\u6cd5\u590d\u5236\u6a21\u677f\u3002", INVALID_CHARACTER:"\u65e0\u6548\u5b57\u7b26", NAME_IS_REQUIRED:"\u540d\u79f0\u4e3a\u5fc5\u586b\u9879\u3002", NEW_TEMPLATE:"\u65b0\u5efa\u6a21\u677f", SAVE_TEMPLATE:"\u4fdd\u5b58\u6a21\u677f", SERVICE_UNAVAILABLE_RESUBMIT_YOUR_REQUEST:"\u670d\u52a1\u4e0d\u53ef\u7528\uff0c\u8bf7\u91cd\u65b0\u63d0\u4ea4\u60a8\u7684\u8bf7\u6c42\u3002", FAILED_TO_RESOLVE_UNIVERSE:"\u89e3\u6790\u6837\u672c\u5931\u8d25\u3002", 
+THERE_ARE_NO_ITEMS_TO_DISPLAY:"\u6ca1\u6709\u8981\u663e\u793a\u7684\u9879\u76ee\u3002", MAX_ROWS_COUNT_EXCEEDED_INDUSTRY_MESSAGE:"\u9009\u5b9a\u7684\u6837\u672c\u5305\u542b\u7684\u8bc1\u5238\u8d85\u8fc7 {{maxRowsCount}} \u4e2a\u3002\u4e3a\u4e86\u67e5\u770b\u5176\u5b83\u6d4b\u8bc4\u6807\u51c6\u8bf7\u9009\u5b9a\u66f4\u8be6\u7ec6\u7684\u6837\u672c\u53c2\u6570\u3002", RENAME:"\u91cd\u547d\u540d", DUPLICATE:"\u91cd\u590d", DELETE:"\u5220\u9664", COLUMN_ALREADY_EXISTS:'\u5217 "{{name}}" \u65e0\u6cd5\u4f7f\u7528\uff0c\u56e0\u4e3a\u5b83\u4e0e\u67d0\u4e2a\u73b0\u6709\u5217\u76f8\u540c\u3002', 
+NOT_AVAILABLE:"\u4e0d\u53ef\u7528", NOT_AVAILABLE_ABBREVIATION:"N/A", NO_MATCHING_DATA_ITEMS:"\u65e0\u5339\u914d\u6570\u636e\u9879", SEARCH_RESULTS:"\u641c\u7d22\u7ed3\u679c", PRINT:"\u6253\u5370", LOAD:"\u52a0\u8f7d", CREATE_TEMPLATE:"\u521b\u5efa\u6a21\u677f", MANAGE_TEMPLATES:"\u7ba1\u7406\u6a21\u677f", UNSAVED_TEMPLATE:"\u672a\u4fdd\u5b58\u7684\u6a21\u677f", CLICK_TO_VIEW_FIELDS_IN_TEMPLATE:"\u70b9\u51fb\u67e5\u770b\u6a21\u677f\u4e2d\u7684\u5b57\u6bb5", SEARCH_FOR_TEMPLATES:"\u641c\u7d22\u6a21\u677f", 
+TEMPLATE_NAME:"\u6a21\u677f\u540d\u79f0", NAME_ALREADY_EXISTS:"\u540d\u79f0\u5df2\u5b58\u5728", DO_NOT_SAVE:"\u4e0d\u4fdd\u5b58", EXPORT_ALL_AS_VALUES:"\u5c06\u6240\u6709\u5bfc\u51fa\u4e3a\u503c", EXPORT_ALL_AS_FORMULAS:"\u5c06\u6240\u6709\u5bfc\u51fa\u4e3a\u516c\u5f0f", EXPORT_SELECTED_AS_VALUES:"\u5c06\u9009\u4e2d\u5bfc\u51fa\u4e3a\u503c", EXPORT_SELECTED_AS_FORMULAS:"\u5c06\u9009\u4e2d\u5bfc\u51fa\u4e3a\u516c\u5f0f", OPEN_ALL_IN_QUOTE_OBJECT:"\u5728\u62a5\u4ef7\u5bf9\u8c61\u4e2d\u6253\u5f00\u5168\u90e8", 
+OPEN_SELECTED_IN_QUOTE_OBJECT:"\u5728\u62a5\u4ef7\u5bf9\u8c61\u4e2d\u6253\u5f00\u9009\u4e2d", SAVE_AS:"\u53e6\u5b58\u4e3a", TEMPLATE_ALREADY_EXISTS_CONFIRMATION:"\u540d\u4e3a'{{name}}'\u7684\u6a21\u677f\u5df2\u5b58\u5728\uff0c\u60a8\u8981\u66ff\u6362\u62a5\u544a\u6a21\u677f\u5417\uff1f", REPORT_TEMPLATE:"\u62a5\u544a\u6a21\u677f", SEE_ERROR_DETAILS:"\u67e5\u770b\u9519\u8bef\u8be6\u7ec6\u4fe1\u606f", REPORT_TEMPLATE_SUCCESSFULLY_SAVED_INFO_MSG:"\u62a5\u544a\u6a21\u677f\u5df2\u6210\u529f\u4fdd\u5b58\u3002", 
+MAX_LENGTH_EXCEEDED:"\u8d85\u8fc7\u6700\u5927\u957f\u5ea6\u3002", ADD_SECURITY:"\u6dfb\u52a0\u8bc1\u5238", TEMPLATE_DETAILS:"\u6a21\u677f\u8be6\u7ec6\u4fe1\u606f", CRITERIA_FOR_GROUPING_ROWS:"\u884c\u5206\u7ec4\u6807\u51c6", ORDER:"\u6392\u5e8f", CRITERIA:"\u6807\u51c6", ENABLE_GROUPING:"\u542f\u7528\u5206\u7ec4", REGION:"\u533a\u57df", COUNTRY:"\u56fd\u5bb6/\u5730\u533a", INDUSTRY:"\u884c\u4e1a", GICS:"GICS", TRBC:"TRBS", BUSINESS_SECTOR:"\u4e1a\u52a1\u90e8\u95e8", ECONOMIC_SECTROR:"\u7ecf\u6d4e\u90e8\u95e8", 
+INDUSTRY_GROUP:"\u884c\u4e1a\u7ec4", INDUSTRY_NAME:"\u884c\u4e1a\u540d\u79f0", SECTOR_NAME:"\u90e8\u95e8\u540d\u79f0", SUBINDUSTRY_NAME:"\u5b50\u884c\u4e1a\u540d\u79f0", COUNTRY_OF_EXCHANGE:"\u4ea4\u6613\u6240\u6240\u5728\u56fd\u5bb6/\u5730\u533a", COUNTRY_OF_HEADQURTERS:"\u603b\u90e8\u6240\u5728\u56fd\u5bb6/\u5730\u533a", SELECT_FIELD:"\u9009\u62e9\u5b57\u6bb5", EDIT:"\u7f16\u8f91", GROUP_ROWS:"\u7ec4", REMOVE_ROW:"\u5220\u9664", ADVANCED_SETTINGS_BUTTON_TITLE:"\u9ad8\u7ea7\u8bbe\u7f6e", ADVANCED_SETTINGS_DEFAULT_CURRENCY:"\u9ed8\u8ba4\u8d27\u5e01", 
+ADVANCED_SETTINGS_NO_DEFAULT_CURRENCY:"\u65e0", ADVANCED_SETTINGS_UPDATE:"\u66f4\u65b0\u62a5\u544a", ADVANCED_SETTINGS_CANCEL:"\u53d6\u6d88", STATISTICS_CONTROL_COLUMN_STATISTICS:"\u7edf\u8ba1\u6570\u636e", STATISTICS_CONTROL_COLUMN_PREMIUM_DISCOUNT:"\u6ea2\u4ef7/\u6298\u4ef7", FOCUS_STOCK_FINANCIALS:"\u5173\u6ce8\u80a1\u7968 (\u91d1\u878d\uff1a{{currencyId}})", FOCUS_STOCK_PRICING:"\u5173\u6ce8\u80a1\u7968 (\u5b9a\u4ef7\uff1a{{currencyId}})", PRESS_REFRESH_TO_DISPLAY_NUMBER_OF_FIELDS:"\u6309\u5237\u65b0\u6309\u94ae\u663e\u793a\u5b57\u6bb5\u6570\u3002", 
+SECURITY_ALREADY_ADDED:'\u8bc1\u5238"{{ric}}"\u5df2\u51fa\u73b0\u5728\u7f51\u683c\u4e2d', SECURITIES_ALREADY_ADDED:'\u8bc1\u5238"{{rics}}"\u5df2\u51fa\u73b0\u5728\u7f51\u683c\u4e2d', ADD_RANK:"\u6dfb\u52a0\u6392\u540d", SHOW_FACTOR_RANKS:"\u663e\u793a\u56e0\u5b50\u6392\u540d", FIELD_DEFINITION:"\u5b57\u6bb5\u5b9a\u4e49", THOMSON_REUTERS_EIKON_EXCEL_FUNCTION:"Thomson Reuters Eikon Excel \u51fd\u6570", SUM_SYMBOL:"\u03a3", EXCLUDED:"\u5df2\u6392\u9664", INCLUDE_ALL:"\u5305\u542b\u6240\u6709", COMPANY_NAME:"\u516c\u53f8\u540d\u79f0", 
+EXPAND_ALL:"\u5168\u90e8\u5c55\u5f00", COLLAPSE_ALL:"\u5168\u90e8\u6536\u8d77", NATIVE_CURRENCY:"\u672c\u56fd\u8d27\u5e01", MULTIPLE_VALUES:"\u591a\u503c", COLUMNS_RETURN_MULTIPLE_VALUES:"\u9009\u5b9a\u7684\u5217\u8fd4\u56de\u591a\u4e2a\u503c\uff0c\u4e0d\u80fd\u4ee5\u7f51\u683c\u683c\u5f0f\u8868\u793a", DATA_ITEM_IS_NO_LONGER_SUPPORTED:"\u4e0d\u518d\u53d7\u652f\u6301\u7684\u6570\u636e\u9879\u3002", PREMIUM_DISCOUNT_TITLE:"vs. {{statisticsName}}", DISPLAY_OPTIONS:"\u663e\u793a\u9009\u9879", SMALL:"\u5c0f", 
+LARGE:"\u5927", MEDIUM:"\u4e2d", FONT_SIZE_AND_ROW_HEIGHT:"\u5b57\u4f53\u5927\u5c0f\u548c\u884c\u9ad8", CURRENCY:"\u8d27\u5e01", SELECT_UP_TO_MAX_GROUPS_COUNT:"\u9009\u62e9\u8d85\u8fc7 {{maxGroupsCount}} \u9879", HIGH:"\u9ad8", LOW:"\u4f4e", FIRST_QAURTILE:"\u7b2c 1 \u4e2a\u56db\u5206\u4f4d\u6570", THIRD_QAURTILE:"\u7b2c 3 \u4e2a\u56db\u5206\u4f4d\u6570", DISPLAYING_FACTOR_RANKS:"\u663e\u793a\u56e0\u5b50\u6392\u540d", ADD_ALL_TO_EXISTING_LIST:"\u6dfb\u52a0\u6240\u6709\u5230\u5df2\u6709\u5217\u8868", 
+ADD_SELECTED_TO_EXISTING_LIST:"\u6dfb\u52a0\u9009\u4e2d\u5230\u5df2\u6709\u5217\u8868", WATCHLIST_WAS_SUCCESSFULLY_UPDATED:'\u5df2\u6210\u529f\u66f4\u65b0\u89c2\u5bdf\u5217\u8868 "{{watchlistName}}"\u3002', WATCHLIST_FAILED_UPDATE:'\u89c2\u5bdf\u5217\u8868 "{{watchlistName}}"\u66f4\u65b0\u5931\u8d25\u3002', PERSONAL_WATCHLIST_SHOULD_BE_SELECTED:"\u5e94\u9009\u62e9\u4e00\u4e2a\u4e2a\u4eba\u7684\u89c2\u5bdf\u5217\u8868\u3002", CLEAR_ALL:"\u6e05\u9664\u5168\u90e8", SHOW_FACTOR_RANK:"\u663e\u793a\u56e0\u5b50\u6392\u540d", 
+ADD_FIELD:"\u6dfb\u52a0\u5b57\u6bb5", TRANSPOSE:"\u8f6c\u7f6e", SUMMARY:"\u6458\u8981", SUMMARY_STATISTICS:"\u6458\u8981\u7edf\u8ba1\u6570\u636e", VECTOR_NOT_SUPPORTED:"\u5728\u8f6c\u7f6e\u89c6\u56fe\u4e2d\u4e0d\u652f\u6301", EXCLUDE_ALL_SELECTED:"\u6392\u9664\u6240\u6709\u9009\u5b9a", ENABLE_TRANSPOSE:"\u542f\u7528\u8f6c\u7f6e", DISABLE_TRANSPOSE:"\u7981\u7528\u8f6c\u7f6e", ALL:"\u5168\u90e8", SAMPLE_TEMPLATES:"\u6a21\u677f\u8303\u4f8b", VIEW_MORE:"\u67e5\u770b {{count}} \u4e2a\u4ee5\u4e0a\u6a21\u677f", 
+VIEW_AND_MANAGE_ALL_TEMPLATES:"\u67e5\u770b\u5e76\u7ba1\u7406\u6240\u6709\u6a21\u677f", CREATE_NEW_TEMPLATE:"\u521b\u5efa\u65b0\u7684\u6a21\u677f", ADVANCED_SORT:"\u9ad8\u7ea7\u6392\u5e8f", ENABLE_ADVANCED_SORT:"\u542f\u7528\u9ad8\u7ea7\u6392\u5e8f", SORT_BY:"\u6392\u5e8f\u6807\u51c6", ASCENDING:"\u5347\u5e8f", DESCENDING:"\u964d\u5e8f", SUMMARY_ROW:"\u6458\u8981\u884c", ELLIPSIS:"...", HEAT_MAP:"\u9ad8\u4eae\u663e\u793a\u6392\u540d\u9760\u524d/\u6392\u540d\u9760\u540e\u503c", ADD_RANK_FOR_THIS_COLUMN:"\u4e3a\u6b64\u5217\u6dfb\u52a0\u6392\u540d", 
+PERCENTILE:"\u767e\u5206\u4f4d", DECILE:"\u5341\u5206\u4f4d", QUINTILE:"\u4e94\u5206\u4f4d", QUARTILE:"\u56db\u5206\u4f4d", RANK:"\u6392\u540d", ZSCORE:"Z - \u8bc4\u5206", SORTING_TYPE:"\u6392\u5e8f\u7c7b\u578b", BY_VALUE:"\u6309\u503c", BY_ABSOLUTE_VALUE:"\u6309\u7edd\u5bf9\u503c", TIME_SERIES_CHART:"\u65f6\u95f4\u5e8f\u5217\u56fe\u8868", TORNADO_CHART:"\u9f99\u5377\u98ce\u56fe", EXCLUDE_FROM_STATISTICS:"\u4ece\u7edf\u8ba1\u6570\u636e\u4e2d\u6392\u9664", EXCLUDED_FROM_STATISTICS:"\u5df2\u4ece\u7edf\u8ba1\u6570\u636e\u4e2d\u6392\u9664", 
+EXCLUDE_ALL_SELECTED_FROM_STATISTICS:"\u4ece\u7edf\u8ba1\u6570\u636e\u4e2d\u6392\u51fa\u6240\u6709\u5df2\u9009\u9879", IMPORT_TEMPLATE:"\u5bfc\u5165\u6a21\u677f", EXPORT_TEMPLATE:"\u5bfc\u51fa\u6a21\u677f", APPLY:"\u5e94\u7528", REMOVE_ALL_FILTERS:"\u5220\u9664\u6240\u6709\u7b5b\u9009", UNIQUE_VALUE:"\u552f\u4e00\u503c", DEFINE_RANGE:"\u5b9a\u4e49\u8303\u56f4", CLEAR:"\u6e05\u9664", FROM:"\u4ece", TO:"\u5230", NUMBER_OF_ROWS:"\u884c\u6570", KEYWORD_SEARCH:"\u5173\u952e\u5b57\u641c\u7d22", FILTER_RESULTS:"\u7b5b\u9009\u7ed3\u679c", 
+INPUT_DATE:"\u8f93\u5165\u65e5\u671f", INPUT_NUMBER:"\u8f93\u5165\u6570\u5b57", FREEZE_FOCUS_STOCK_ON_TOP:"\u5c06\u5173\u6ce8\u80a1\u7968\u51bb\u7ed3\u5728\u9876\u90e8", CLICK_ON_ANY_COLUMN:"\u70b9\u51fb\u62a5\u544a\u4e2d\u7684\u4efb\u4e00\u5217\uff0c\u5c06\u5176\u5f15\u7528\u5230\u516c\u5f0f", ADD_FORMULA:"\u4f7f\u7528\u516c\u5f0f\u6dfb\u52a0\u5217", FORMULA_EDITOR:"\u516c\u5f0f\u7f16\u8f91\u5668", COLUMN_N:"\u5217 {{columnNumber}}", FACTOR:"\u98ce\u9669\u56e0\u7d20", LANDSCAPE:"\u6a2a\u5411", PORTRAIT:"\u7eb5\u5411", 
+TR_COPYRIGHT:"\u00a9 {{year}} Thomson Reuters. \u4fdd\u7559\u6240\u6709\u6743\u5229\u3002", FORMAT_CELLS:"\u683c\u5f0f\u5316\u5355\u5143\u683c", DATE:"\u65e5\u671f", NUMBER:"\u6570\u5b57", PERCENTAGE:"\u767e\u5206\u6bd4", THOUSANDS_SEPARATOR:"\u5343\u5206\u4f4d\u7b26", DAY_MONTHDATE_YEAR:"Day, Month Date, Year", DATE_ABBREVIATEDMONTH:"Date - Abbreviated Month", DATE_ABBREVIATEDMONYH_YEARE:"Date - Abbreviated Month - Year", MONTH_YEAR:"Month - Year", ABBREVIATEMONYH_ABBREVIATEDYEAR:"Abbreviated Month - Abbreviated Year", 
+EXPORT_PDF_LANDSCAPE:"\u5bfc\u51fa\u4e3a PDF (\u6a2a\u5411)", EXPORT_PDF_PORTRAIT:"\u5bfc\u51fa\u4e3a PDF (\u7eb5\u5411)", EXPORT_PDF_FAILED:"\u65e0\u6cd5\u5bfc\u51fa\u4e3a PDF", MAX_ROWS_COUNT_EXCEEDED:"\u8d85\u8fc7\u4e86\u6700\u5927\u884c\u6570 {{maxRowsCount}}\u3002", SHOW_ABBREVIATIONS:"false", DD_MM_YYYY:"YYYY/MM/DD", DD_MM_YYYY_F:"yyyy/MM/dd", DD_MM_YY:"YY/MM/DD", DD_MM_YY_F:"yy/MM/dd", DD_MM:"MM/DD", DD_MM_F:"MM/dd", MM_DD_YYYY:"", MM_DD_YYYY_F:"", MM_DD_YY:"", MM_DD_YY_F:"", MM_DD:"", MM_DD_F:"", 
+MM_YYYY:"YYYY/MM", MM_YYYY_F:"yyyy/MM", MM_YY:"YY/MM", MM_YY_F:"yy/MM", COPY_TO_CLIPBOARD:"\u590d\u5236\u5230\u526a\u8d34\u677f", ERROR_MESSAGE_HAS_BEEN_COPIED:"\u9519\u8bef\u6d88\u606f\u5df2\u590d\u5236\u5230\u526a\u8d34\u677f", NOTIFY_PRINT_MESSAGE:"\u82e5\u8981\u5728\u6253\u5370\u65f6\u5b9a\u4e49\u5e03\u5c40\u65b9\u5411\uff0c\u8fd8\u9700\u8bbe\u7f6e\u6253\u5370\u673a\u7684\u672c\u5730\u8bbe\u7f6e\u3002", SHARE:"\u5171\u4eab", SHARE_WITH:"\u5171\u4eab\u5230\uff1a", SHARED_TEMPLATES:"\u5171\u4eab\u6a21\u677f", 
+UNABLE_TO_LOAD_SHARED_TEMPLATES:"\u65e0\u6cd5\u52a0\u8f7d\u5171\u4eab\u6a21\u677f\u3002", AUTHOR:"\u4f5c\u8005", SHARED_TO:"\u5171\u4eab\u5230\uff1a", INSER_BLANK_ROW:"\u63d2\u5165\u7a7a\u767d\u884c", NUMBER_INPUT_VALIDATION_MESSAGE:"\u503c\u5fc5\u987b\u4e3a\u6570\u5b57", NUMBER_OUT_OF_RANGE_VALIDATION_MESSAGE:"\u503c\u5fc5\u987b\u4e3a\u8303\u56f4 0 - 100 \u7684\u6570\u5b57", T_B_FILTER_TOP_VALUE:"\u6392\u540d\u9760\u524d\u4f4d\u6570", T_B_FILTER_BOTTOM_VALUE:"\u6392\u540d\u9760\u540e\u4f4d\u6570", 
+T_B_FILTER_TOP_PER:"\u6392\u540d\u9760\u524d %", T_B_FILTER_BOTTOM_PER:"\u6392\u540d\u9760\u540e %", T_B_FILTER_DEFAULT_FIELD:"\u9009\u62e9\u7b5b\u9009\u7c7b\u578b"};
 goog.provide("gridReport.directives.PrintContextMenuOptions");
 gridReport.directives.PrintContextMenuOptions = function(options) {
   gridReport.jsUtils.mergeProperties(this, options, ["canPrintLandscape", "canPrintPortrait"]);
@@ -24299,6 +24322,7 @@ goog.require("gridReport.directives.StatisticsControlDirective");
 goog.require("gridReport.directives.AdvancedControls");
 goog.require("gridReport.directives.AddRowDirective");
 goog.require("gridReport.directives.AdvancedSortingManagerService");
+goog.require("gridReport.directives.Select2Directive");
 goog.require("gridReport.directives.onBlurDirective");
 goog.require("gridReport.directives.focusMeDirective");
 goog.require("gridReport.directives.onEnterDirective");
